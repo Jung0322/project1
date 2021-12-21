@@ -1,126 +1,105 @@
 	<%@ include file="./includes/header.jsp" %>
+<body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page">
+		<div id="content" class="site-content">
+			<div id="primary" class="content-area column full">
+				<main id="main" class="site-main" role="main">
+				<p class="woocommerce-result-count">
+					 Showing 1–8 of 12 results
+				</p>
+				<form class="woocommerce-ordering" method="get">
+					<select name="orderby" class="orderby">
+						<option value="menu_order" selected="selected">Default sorting</option>
+						<option value="popularity">Sort by popularity</option>
+						<option value="rating">Sort by average rating</option>
+						<option value="date">Sort by newness</option>
+						<option value="price">Sort by price: low to high</option>
+						<option value="price-desc">Sort by price: high to low</option>
+					</select>
+				</form>
+				<ul class="products">
+				
+					<li class="first product">
+					<a href="single-project">
+					<span class="onsale">Sale!</span>
+					<img src="/resources/images/portfolio-img1.jpg" alt="">
+					<h3>Cool Fedora</h3>
+					<span class="price"><span class="amount">$34.00</span></span>
+					</a><a href="#" class="button">Add to cart</a>
+					</li>
 
-    <!-- Portfolio Section -->
+					<li class="product">
+					<a href="single-project">
+					<img src="/resources/images/portfolio-img1.jpg" alt="">
+					<h3>Beige Blouse</h3>
+					<span class="price"><span class="amount">$66.00</span></span>
+					</a><a href="#" class="button">Add to cart</a>
+					</li>
+					
+					<li class="product">
+					<a href="single-project">
+					<img src="/resources/images/portfolio-img1.jpg" alt="">
+					<h3>Black Jacket</h3>
+					<span class="price"><span class="amount">$125.00</span></span>
+					</a><a href="#" class="button">Add to cart</a>
+					</li>
+					
+					<li class="last product">
+					<a href="single-project">
+					<img src="/resources/images/portfolio-img1.jpg" alt="">
+					<h3>Brown Jacket</h3>
+					<span class="price"><span class="amount">$28.00</span></span>
+					</a><a href="#" class="button">Add to cart</a>
+					</li>
+					
+					<li class="first product">
+					<a href="single-project">
+					<img src="/resources/images/portfolio-img1.jpg" alt="">
+					<h3>Gray Blouse</h3>
+					<span class="price"><span class="amount">$15.00</span></span>
+					</a><a href="#" class="button">Add to cart</a>
+					</li>
+					
+					<li class="product">
+					<a href="single-project">
+					<img src="/resources/images/portfolio-img1.jpg" alt="">
+					<h3>Male Bag</h3>
+					<span class="price"><span class="amount">$16.00</span></span>
+					</a><a href="#" class="button">Add to cart</a>
+					</li>
+					
+					<li class="product">
+					<a href="single-project">
+					<img src="/resources/images/portfolio-img1.jpg" alt="">
+					<h3>Hugo Jeans</h3>
+					<span class="price"><span class="amount">$36.00</span></span>
+					</a><a href="#" class="button">Add to cart</a>
+					</li>
+					
+					<li class="last product">
+					<a href="single-project">
+					<img src="/resources/images/portfolio-img1.jpg" alt="">
+					<h3>Male T-Shirt</h3>
+					<span class="price"><span class="amount">$49.00</span></span>
+					</a><a href="#" class="button">Add to cart</a>
+					</li>
+					
+				</ul>
+				<nav class="woocommerce-pagination">
+				<ul class="page-numbers">
+					<li><span class="page-numbers current">1</span></li>
+					<li><a class="page-numbers" href="#">2</a></li>
+					<li><a class="next page-numbers" href="#">→</a></li>
+				</ul>
+				</nav>
+				</main>
+				<!-- #main -->
+			</div>
+			<!-- #primary -->
+		</div>
 
-    <section id="portfolio">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 col-sm-6">
-            <a href="single-project.html">
-              <div class="portfolio-thumb">
-                <img
-                  src="images/portfolio-img1.jpg"
-                  class="img-responsive"
-                  alt="Portfolio"
-                />
-                <div class="portfolio-overlay">
-                  <div class="portfolio-item">
-                    <h3>Project Name</h3>
-                    <small>Brand Identity</small>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-4 col-sm-6">
-            <a href="single-project.html">
-              <div class="portfolio-thumb">
-                <img
-                  src="images/portfolio-img2.jpg"
-                  class="img-responsive"
-                  alt="Portfolio"
-                />
-                <div class="portfolio-overlay">
-                  <div class="portfolio-item">
-                    <h3>Project Name</h3>
-                    <small>Web Development</small>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-4 col-sm-6">
-            <a href="single-project.html">
-              <div class="portfolio-thumb">
-                <img
-                  src="images/portfolio-img3.jpg"
-                  class="img-responsive"
-                  alt="Portfolio"
-                />
-                <div class="portfolio-overlay">
-                  <div class="portfolio-item">
-                    <h3>Project Name</h3>
-                    <small>Mobile App</small>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-4 col-sm-6">
-            <a href="single-project.html">
-              <div class="portfolio-thumb">
-                <img
-                  src="images/portfolio-img4.jpg"
-                  class="img-responsive"
-                  alt="Portfolio"
-                />
-                <div class="portfolio-overlay">
-                  <div class="portfolio-item">
-                    <h3>Project Name</h3>
-                    <small>Logo Design</small>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-4 col-sm-6">
-            <a href="single-project.html">
-              <div class="portfolio-thumb">
-                <img
-                  src="images/portfolio-img5.jpg"
-                  class="img-responsive"
-                  alt="Portfolio"
-                />
-                <div class="portfolio-overlay">
-                  <div class="portfolio-item">
-                    <h3>Project Name</h3>
-                    <small>Social marketing</small>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-4 col-sm-6">
-            <a href="single-project.html">
-              <div class="portfolio-thumb">
-                <img
-                  src="images/portfolio-img6.jpg"
-                  class="img-responsive"
-                  alt="Portfolio"
-                />
-                <div class="portfolio-overlay">
-                  <div class="portfolio-item">
-                    <h3>Project Name</h3>
-                    <small>Fyler Design</small>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-12 col-sm-12 text-center">
-            <h3>
-              hello, if you interest working together. just send message
-              <a href="contact.html">contact page</a>
-            </h3>
-          </div>
-        </div>
-      </div>
-    </section>
-
+<!-- #page -->
+<script src='/resources/js/shopjs.js'></script>
+<script src='/resources/js/plugins.js'></script>
+<script src='/resources/js/scripts.js'></script>
+<script src='/resources/js/masonry.pkgd.min.js'></script>
     <%@ include file="./includes/footer.jsp" %>
