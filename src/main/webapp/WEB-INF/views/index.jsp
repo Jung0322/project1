@@ -1,3 +1,5 @@
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 	<%@ include file="./includes/header.jsp" %>
 <body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page">
 		<div id="content" class="site-content">
