@@ -45,20 +45,13 @@ public class HomeController {
 		public void blog() {
 		System.out.println("Aaaaaaa");
 	}
-	@RequestMapping(value = "/contact", method = RequestMethod.GET)
-		public void contact() {
-		System.out.println("Aaaaaaa");
-	}
+	
 	@RequestMapping(value = "/single-post", method = RequestMethod.GET)
 		public void single_post() {
 		System.out.println("Aaaaaaa");
 	}
 	@RequestMapping(value = "/single-project", method = RequestMethod.GET)
 	public void single_project() {
-		System.out.println("Aaaaaaa");
-	}
-	@RequestMapping(value = "/about", method = RequestMethod.GET)
-	public void about() {
 		System.out.println("Aaaaaaa");
 	}
 	
