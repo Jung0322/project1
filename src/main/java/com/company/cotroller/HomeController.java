@@ -54,9 +54,5 @@ public class HomeController {
 	public void single_project() {
 		System.out.println("Aaaaaaa");
 	}
-	@RequestMapping(value = "/myPlace", method = RequestMethod.GET)
-	public void about() {
-		System.out.println("Aaaaaaa");
-	}
 	
 }
