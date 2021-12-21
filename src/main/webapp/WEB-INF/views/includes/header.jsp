@@ -57,7 +57,7 @@
             <li class="active"><a href="/index">상품</a></li>
             <li><a href="/myPlace">내동네</a></li>
             <li><a href="/blog">경매</a></li>
-            <li><a href="/contact">로그인</a></li>
+            <li><a href="/signIn">로그인</a></li>
           </ul>
         </div>
       </div>

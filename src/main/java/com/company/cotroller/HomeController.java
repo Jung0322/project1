@@ -45,11 +45,7 @@ public class HomeController {
 		public void blog() {
 		System.out.println("Aaaaaaa");
 	}
-	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
-		public String contact() {
-		System.out.println("Aaaaaaa");
-		return "/member/signUp";
-	}
+	
 	@RequestMapping(value = "/single-post", method = RequestMethod.GET)
 		public void single_post() {
 		System.out.println("Aaaaaaa");
