@@ -8,37 +8,30 @@
      <div class="container">
           <div class="row">
 
-               <div class="col-md-offset-1 col-md-10 col-sm-12">
+               <!-- <div class="col-md-offset-1 col-md-10 col-sm-12"> -->
+               <div>
                     <div class="section-title">
-                         <h3>get in touch</h3>
-                         <h2>The creative web & mobile studio and focused on brand identity, web development and social marketing.</h2>
+                         <h3>브로콜리 마켓</h3>
+                         <h2>콜리님, 어서오세요. 브로콜리 마켓입니다.</h2>
                     </div>
 
                     <form action="#" method="post">
-                         <div class="col-md-6 col-sm-6">
-                              <input type="text" class="form-control" placeholder="Name">
+                         <div>
+                         	  <label for="userid">아이디</label>
+                              <input type="text" class="form-control" placeholder="아이디">
                          </div>
-                         <div class="col-md-6 col-sm-6">
-                              <input type="email" class="form-control" placeholder="Email">
+                         <div>
+                         	  <label for="password">비밀번호</label>
+                              <input type="password" class="form-control" placeholder="비밀번호">
                          </div>
-                         <div class="col-md-6 col-sm-6">
-                              <input type="telephone" class="form-control" placeholder="Phone Number">
-                         </div>
-                         <div class="col-md-6 col-sm-6">
-                              <select class="form-control">
-                                   <option>Budget Select</option>
-                                   <option>$1200 to $1600</option>
-                                   <option>$2200 to $2400</option>
-                                   <option>$2500 to $3800</option>
-                              </select>
-                         </div>
-                         <div class="col-md-12 col-sm-12"> 
-                              <textarea class="form-control" rows="5" placeholder="Project Details"></textarea>
-                         </div>
-                         <div class="col-md-3 col-sm-4">
-                              <input type="submit" class="form-control" value="Send Message">
+                         <div>
+                              <input type="submit" class="form-control" value="로그인">
                          </div>
                     </form>
+                    <div>
+                    	<label for="signUp">아직 회원이 아니신가요?</label>
+                        <a href="/signUp">회원가입</a>
+                    </div>
                </div>
 
           </div>
