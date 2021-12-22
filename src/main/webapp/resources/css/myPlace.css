@@ -1,5 +1,14 @@
-.pagination {
-	display: block;
-	text-align: center;
+.upload,
+.write {
+	background-color: #9BB460;
+	color: white;
+	float: right;
+}
 
+.writeBoard{
+	padding-bottom: 20px;
+}
+
+.editor {
+	padding-bottom: 100px
 }
