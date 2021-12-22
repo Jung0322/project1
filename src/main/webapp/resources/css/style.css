@@ -11,6 +11,11 @@ body {
     Typorgraphy              
 -----------------------------------------*/
 
+
+html {
+	border:12px solid #111;
+}
+
 h1,h2,h3,h4,h5,h6 {
   font-style: normal;
   font-weight: 300;
@@ -682,6 +687,14 @@ a:hover {
 a:active,a:focus {
 	text-decoration: none;
 }
+
+.zoom{
+	  display: inline-block;
+	  width: 400px;
+  	  height: 400px;
+  	  margin-left:10px
+}
+
 
 
 

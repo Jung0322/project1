@@ -1,6 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<link rel='stylesheet' href='/resources/css/woocommerce-layout.css' type='text/css' media='all'/>
+<link rel='stylesheet' href='/resources/css/woocommerce.css' type='text/css' media='all'/>
 <%@ include file="./includes/header.jsp" %>
+<body class="single single-product woocommerce woocommerce-page">
 		<!-- #masthead -->
-		<div id="content" class="site-content">
+	 <div class="container">
+       <div class="row">	
+		<div  class="col-md-offset-1 col-md-10 col-sm-12">
 			<div id="primary" class="content-area column full">
 				<main id="main" class="site-main" role="main">
 				<div id="container">
@@ -9,7 +16,7 @@
 						<div itemscope itemtype="http://schema.org/Product" class="product">
 							<div class="images">
 								<a href="" itemprop="image" class="woocommerce-main-image zoom" title="" data-rel="prettyPhoto">								
-								<img src="http://s3.amazonaws.com/caymandemo/wp-content/uploads/sites/10/2015/09/10175658/j10-520x780-520x600.jpg" alt=""></img></a>
+								<img src="/resources/images/portfolio-img1.jpg" alt=""></img></a>
 							</div>
 							<div class="summary entry-summary">
 								<h1 itemprop="name" class="product_title entry-title">Beige Jacket</h1>
@@ -134,7 +141,7 @@
 									<li class="first product">
 									<a href="shop-single.html">
 									<span class="onsale">Sale!</span>									
-									<img src="http://s3.amazonaws.com/caymandemo/wp-content/uploads/sites/10/2015/09/10175658/j4-520x520.jpg" alt=""></img>
+									<img src="/resources/images/portfolio-img1.jpg" alt=""></img>
 									<h3>Beige Fedora</h3>
 									<span class="price"><del><span class="amount">$35.00</span></del><ins><span class="amount">&#36;14.00</span></ins></span>
 									</a>
@@ -143,7 +150,7 @@
 									
 									<li class="product">
 									<a href="shop-single.html">								
-									<img src="http://s3.amazonaws.com/caymandemo/wp-content/uploads/sites/10/2015/09/10175658/j6-520x779-520x600.jpg" alt=""></img>
+									<img src="/resources/images/portfolio-img1.jpg" alt=""></img>
 									<h3>Male Jeans</h3>
 									<span class="price"><span class="amount">$35.00</span></span>
 									</a>
@@ -152,7 +159,7 @@
 									
 									<li class="product">
 									<a href="shop-single.html">								
-									<img src="http://s3.amazonaws.com/caymandemo/wp-content/uploads/sites/10/2015/09/10175658/j7-520x780-520x600.jpg" alt=""></img>
+									<img src="/resources/images/portfolio-img1.jpg" alt=""></img>
 									<h3>Slim Jeans</h3>
 									<span class="price"><span class="amount">$20.00</span></span>
 									</a>
@@ -162,7 +169,7 @@
 									
 									<li class="product last">
 									<a href="shop-single.html">									
-									<img src="http://s3.amazonaws.com/caymandemo/wp-content/uploads/sites/10/2015/09/10175658/j3-320x320.jpg" alt=""></img>
+									<img src="/resources/images/portfolio-img1.jpg" alt=""></img>
 									<h3>Summer Blouse</h3>
 									<span class="price"><span class="amount">$35.00</span></span>
 									</a>
@@ -180,6 +187,9 @@
 		</div>
 		<!-- #content -->
 	</div>
+	<!-- .container -->
+</div>
+
 <!-- #page -->
 <script src='/resources/js/shopjs.js'></script>
 <script src='/resources/js/plugins.js'></script>

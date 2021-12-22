@@ -1,5 +1,7 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<link rel='stylesheet' href='/resources/css/woocommerce-layout.css' type='text/css' media='all'/>
+<link rel='stylesheet' href='/resources/css/woocommerce.css' type='text/css' media='all'/>
 	<%@ include file="./includes/header.jsp" %>
 <body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page">
 		<div id="content" class="site-content">
@@ -19,6 +21,7 @@
 					</select>
 				</form>
 				<ul class="products">
+				
 				
 					<li class="first product">
 					<a href="single-project">
