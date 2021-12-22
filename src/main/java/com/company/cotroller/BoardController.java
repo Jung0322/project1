@@ -18,4 +18,9 @@ public class BoardController {
 		return "/board/myPlaceRead";
 	}
 
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public String modify() {
+		System.out.println("Aaaaaaa");
+		return "/board/myPlaceModify";
+	}
 }

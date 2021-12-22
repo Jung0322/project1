@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+
+.memberForm {
+	display: block;
+	width: 80%;
+	margin-left: 70px;
+}
+
+#btnCancel {
+	border-radius: 100px;
+	width: 300px;
+}
+
+#btnSubmit {
+	margin-left: 70px;
+	width: 300px;
+}
+
+#divSignIn {
+	margin-left: 120px;
+}
+
+#changeSignUp {
+	margin-left: 240px;
+}

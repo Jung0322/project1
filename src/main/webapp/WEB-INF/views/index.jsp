@@ -102,6 +102,7 @@
 			<!-- #primary -->
 		</div>
 
+
 <!-- #page -->
 <script src='/resources/js/shopjs.js'></script>
 <script src='/resources/js/plugins.js'></script>
