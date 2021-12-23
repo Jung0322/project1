@@ -10,7 +10,9 @@ body {
 /*---------------------------------------
     Typorgraphy              
 -----------------------------------------*/
-
+#shopDetail {
+	 position: static;
+}
 
 html {
 	border:12px solid #111;
