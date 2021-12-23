@@ -6,10 +6,13 @@
 
 #writeButton,
 #listButton,
-#replyButton{
+#replyButton,
+#successButton {
 	float: right;
 	border-radius: 100px;
 	background-color: #9BB460;
 	width: 200px;
 	
 }
+
+
