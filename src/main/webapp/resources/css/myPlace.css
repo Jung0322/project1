@@ -1,18 +1,20 @@
-#replyButton {
-	border-radius: 2em;
-	background-color: #9BB460;
-	
-}
-
 #writeButton,
 #listButton,
 #replyButton,
 #successButton {
-	float: right;
-	border-radius: 100px;
-	background-color: #9BB460;
-	width: 200px;
-	
+	  background: #9BB460;
+	  border-radius: 100px;
+	  border: none;
+	  color: #ffffff;
+	  font-weight: 400;
+	  transition: all 0.4s ease-in-out;
+	  height: 40px;
+	  width: 150px;
+	  float: right	
+}
+
+.woocommerce-pagination {
+	margin-bottom: 50px
 }
 
 
