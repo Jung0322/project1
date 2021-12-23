@@ -4,9 +4,9 @@
 <script src="resources/ckeditor/ckeditor.js"></script>
 <%@ include file="../includes/header.jsp" %>
 
-<body>
 <!-- Contact Section -->
 
+<body>
 <section id="contact">
      <div class="container">
           <div class="row">
@@ -40,7 +40,7 @@
 								</script>
                          </div>
                          <div>
-                              <input type="submit" class="form-control"  id="successButton" value="Send Message">
+                              <input type="submit" class="form-control"  id="successButton" value="글 올리기">
                          </div>
                     </form>
                </div>
