@@ -3,9 +3,7 @@
 create table member (
     userid varchar2(50) not null,
     password varchar2(50) not null,
-    name varchar2(50) not null,
     nickname varchar2(50) not null,
-    birthday DATE,
     email varchar2(50) not null,
     phone varchar2(50) not null,
     mytown varchar2(50) not null,
