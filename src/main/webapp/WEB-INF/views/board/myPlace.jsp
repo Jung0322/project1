@@ -4,7 +4,7 @@
 <%@ include file="../includes/header.jsp" %>
 
 <!-- Blog Section -->
-<body>
+<body>		
 <section id="blog">
      <div class="container">
           <div class="row">
@@ -48,7 +48,8 @@
 			<div class="writeButton">
 				 <input type="submit" class="form-control" id="writeButton" value="글 작성" onclick="location.href='/write'">
 			</div>
-     </div>
+			</div>
+
 </section>
 
 <!-- pagination -->
@@ -60,14 +61,5 @@
 	</ul>
 	</nav>
 
-<!-- SCRIPTS -->
-
-<script src="/resources/js/jquery.js"></script>
-<script src="/resources/js/bootstrap.min.js"></script>
-<script src="/resources/js/custom.js"></script>
-
-</body>
-
-  
 
 <%@ include file="../includes/footer.jsp" %>

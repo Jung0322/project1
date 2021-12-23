@@ -31,7 +31,7 @@
                               <h3>2 Comments</h3>
                                    <div class="media">
                                         <div class="media-object pull-left">
-                                             <img src="images/comment-image1.jpg" class="img-responsive img-circle" alt="Blog Image">
+                                             <img src="/resources/images/heart.png"class="img-responsive img-circle" alt="Blog Image">
                                         </div>
                                         	<div class="media-body">
                                                   <span>Omar Larus</span>
@@ -41,7 +41,7 @@
                                    </div>
                                    <div class="media">
                                         <div class="media-object pull-left">
-                                             <img src="images/comment-image2.jpg" class="img-responsive img-circle" alt="Blog Image">
+                                             <img src="/resources/images/heart.png" class="img-responsive img-circle" alt="Blog Image">
                                         </div>
                                         <div class="media-body">
                                                   <span>Omar Larus</span>
@@ -68,11 +68,4 @@
      	</div>
 </section>
 
-<!-- SCRIPTS -->
-
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/custom.js"></script>
-
-</body>
 <%@ include file="../includes/footer.jsp" %>
