@@ -3,14 +3,18 @@ package com.company.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class MemberDTO {
-	private String userid;   	//	userid varchar2(50) not null,
-	private String password; 	//  password varchar2(50) not null,
-	private String nickname;	//  nickname varchar2(50) not null,
-	private String email;		//  email varchar2(50) not null,
-	private String phone;		//  phone varchar2(50) not null,
-	private String mytown;		//  mytown varchar2(50) not null,
+	private String userid; // 회원 아이디
+    private String password; // 비밀번호
+    private String nickname; // 닉네임
+    private String email; // 이메일
+    private String phone; // 휴대전화
+    private String mytown; // 내 동네
 }

@@ -128,7 +128,27 @@ create table auctionimg (
 
 
 
-
+-- 회원 더미 데이터 삽입
+insert into 
+    member(userid, password, nickname, email, phone, mytown)
+values(
+    'haha', '123', '하하', 'ha12@ccoli.com', '1234', '서울시 종로구 종로3가'
+);
+insert into 
+    member(userid, password, nickname, email, phone, mytown)
+values(
+    'haha1', '123', '하하', 'ha12@ccoli.com', '1234', '서울시 종로구 종로3가'
+);
+insert into 
+    member(userid, password, nickname, email, phone, mytown)
+values(
+    'haha2', '123', '하하', 'ha12@ccoli.com', '1234', '서울시 종로구 종로3가'
+);
+insert into 
+    member(userid, password, nickname, email, phone, mytown)
+values(
+    'haha2', '123', '하하', 'ha12@ccoli.com', '1234', '서울시 종로구 종로3가'
+);
 
  
 

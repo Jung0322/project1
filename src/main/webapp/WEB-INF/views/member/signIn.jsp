@@ -15,14 +15,14 @@
                          <h2>콜리님, 어서오세요. 브로콜리 마켓입니다.</h2>
                     </div>
 
-                    <form action="#" method="post">
+                    <form action="/signIn" method="post">
                          <div class="memberForm">
                          	  <label for="userid">아이디</label>
-                              <input type="text" class="form-control" placeholder="아이디">
+                              <input type="text" name="userid" class="form-control" placeholder="아이디">
                          </div>
                          <div class="memberForm">
                          	  <label for="password">비밀번호</label>
-                              <input type="password" class="form-control" placeholder="비밀번호">
+                              <input type="password" name="password" class="form-control" placeholder="비밀번호">
                          </div>
                          <div class="col-md-8" id="divSignIn">
                               <input type="submit" class="form-control" value="로그인">
