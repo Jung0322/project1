@@ -1,26 +1,36 @@
 package com.company.cotroller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @Controller
 public class BoardController {
-	@RequestMapping(value = "/myPlace", method = RequestMethod.GET)
+	@GetMapping("/myPlace")
 	public String about() {
-		System.out.println("Aaaaaaa");
+		log.info("내 동내 페이지 요청");
 		return "/board/myPlace";
 	}
 	
-	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	@GetMapping("/read")
 	public String read() {
-		System.out.println("Aaaaaaa");
+		log.info("내 동내 게시물 읽기 페이지 요청");
 		return "/board/myPlaceRead";
 	}
 
-	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	@GetMapping("/modify")
 	public String modify() {
-		System.out.println("Aaaaaaa");
+		log.info("내 동내 게시물 수정 페이지 요청");
 		return "/board/myPlaceModify";
+	}
+	
+	@GetMapping("/write")
+	public String write() {
+		log.info("내 동내 게시물 작성 페이지 요청");
+		return "/board/myPlaceWrite";
 	}
 }

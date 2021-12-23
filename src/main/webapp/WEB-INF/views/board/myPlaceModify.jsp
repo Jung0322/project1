@@ -33,7 +33,6 @@
 			<button type="button" class="write">글 작성</button>
 	</form>
 </div>
-</body>
-                				
+        				
 
 <%@ include file="../includes/footer.jsp" %>
