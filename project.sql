@@ -1,5 +1,6 @@
---1. user Å×ÀÌºí
-create table member(
+-- íšŒì›
+--1.  user í…Œì´ë¸”
+create table member (
     userid varchar2(50) not null,
     password varchar2(50) not null,
     name varchar2(50) not null,
@@ -7,30 +8,66 @@ create table member(
     birthday DATE,
     email varchar2(50) not null,
     phone varchar2(50) not null,
-    mytown varchar2(50) not null
+    mytown varchar2(50) not null,
+    CONSTRAINT pk_member PRIMARY KEY (userid)
 );
---2. ´ñ±Û Å×ÀÌºí
-create table reply(
-	rno number(10) not null,
-	mno number(10) not null,
+
+-- 2. í”„ë¡œí•„ ì´ë¯¸ì§€ í…Œì´ë¸”
+create table profileimg (
+	pfuuid varchar2(50) not null,
 	userid varchar2(50) not null,
-	content varchar2(2000) not null,
-	regdate DATE default sysdate,
-	updatedate DATE,
-	good number(10)
+	profileloadPath varchar2(50) not null,
+	profileimgname varchar2(50) not null,
+	CONSTRAINT pk_profileImg PRIMARY KEY (pfuuid)
 );
---3. °Ô½ÃÆÇ Å×ÀÌºí
-create table myPlace(
+
+-- 3. ì¥ë°”êµ¬ë‹ˆ 
+create table basket (
+	bno number(10) not null,
+	userid varchar2(50) not null,
+	pno number(10) not null,
+	CONSTRAINT pk_basket PRIMARY KEY (bno)
+);
+
+
+-- ë™ë„¤ìƒí™œ
+-- 4. ê²Œì‹œíŒ(ë™ë„¤ìƒí™œ) í…Œì´ë¸”
+create table myPlace (
 	mno number(10) not null,
 	userid varchar2(50) not null,
 	title varchar2(100) not null,
 	content varchar2(2000) not null,
 	regdate DATE default sysdate,
-	updatedate DATE,
-	mcount number(100) not null
+	updatedate DATE default sysdate,
+	mcount number(100) default 0,
+	CONSTRAINT pk_myPlace PRIMARY KEY (mno)
 );
---4. »óÇ° Å×ÀÌºí
-create table product(
+
+-- 5. ê²Œì‹œíŒ(ë™ë„¤ìƒí™œ) ëŒ“ê¸€ í…Œì´ë¸”
+create table myPlaceReply (
+	mrno number(10) not null,
+	mno number(10) not null,
+	userid varchar2(50) not null,
+	content varchar2(2000) not null,
+	regdate DATE default sysdate,
+	updatedate DATE default sysdate,
+	good number(10) default 0,
+	CONSTRAINT pk_myPlaceReply PRIMARY KEY (mrno)
+);
+
+-- 6. ê²Œì‹œíŒ(ë™ë„¤ìƒí™œ) ì´ë¯¸ì§€ í…Œì´ë¸”
+create table myPlaceImg (
+	muuid varchar2(50) not null,
+	mno number(10) not null,
+	mloadPath varchar2(50) not null,
+	mimgname varchar2(50) not null,
+	CONSTRAINT pk_myPlaceImg PRIMARY KEY (muuid)
+);
+
+
+-- ìƒí’ˆ
+-- 7. ìƒí’ˆ í…Œì´ë¸”
+create table product (
 	pno number(10) not null,
 	category varchar2(20) not null,
 	title varchar2(100) not null,
@@ -38,71 +75,65 @@ create table product(
 	content varchar2(2000) not null,
 	delivery number(2) default 0,
 	discount number(2) default 0 ,
-	reservation number(2) default 0 not null,
+	reservation number(2) default 0,
 	soldout number(2) default 0,
-	userid varchar2(50) not null
+	userid varchar2(50) not null,
+	CONSTRAINT pk_product PRIMARY KEY (pno)
 );
---5. °æ¸Å Å×ÀÌºí
-create table auction(
+
+-- 8. ìƒí’ˆ ì´ë¯¸ì§€ í…Œì´ë¸”
+create table productimg (
+	puuid varchar2(50) not null,
+	pno number(10) not null,
+	puploadPath varchar2(50) not null,
+	pimgname varchar2(50) not null,
+	CONSTRAINT pk_productImg PRIMARY KEY (puuid)
+);
+
+
+
+
+-- ê²½ë§¤
+-- 9. ê²½ë§¤ í…Œì´ë¸”
+create table auction (
 	ano number(10) not null,
 	userid varchar2(50) not null,
 	category varchar2(30) not null,
 	startdate DATE not null,
 	enddate DATE not null,
 	startprice number(10) not null,
-	soldout number(2) default 0
+	soldout number(2) default 0,
+	CONSTRAINT pk_Auction PRIMARY KEY (ano)
 );
---6. °æ¸Å ÀÌ¹ÌÁö Å×ÀÌºí
-create table auctionimg(
+
+-- 10. ê²½ë§¤ì¥ ëŒ“ê¸€ í…Œì´ë¸”
+CREATE TABLE auctionreply (
+    arno number(10)   NOT NULL,
+    ano number(10)   NOT NULL,
+    userid varchar2(50)   NOT NULL,
+    content varchar2(2000)   NOT NULL,
+    regdate date   NOT NULL,
+    updatedate date   NOT NULL,
+    CONSTRAINT pk_AuctionReply PRIMARY KEY (arno)
+);
+
+-- 11. ê²½ë§¤ ì´ë¯¸ì§€ í…Œì´ë¸”
+create table auctionimg (
 	auuid varchar2(50) not null,
 	ano number(10) not null,
 	auploadPath varchar2(50) not null,
-	aimgname varchar2(50) not null
-);
---7.»óÇ° ÀÌ¹ÌÁö Å×ÀÌºí
-
-create table productimg(
-	puuid varchar2(50) not null,
-	pno number(10) not null,
-	puploadPath varchar2(50) not null,
-	pimgname varchar2(50) not null
-);
---8. ÇÁ·ÎÇÊ ÀÌ¹ÌÁö Å×ÀÌºí
-create table profileimg(
-	pfuuid varchar2(50) not null,
-	userid varchar2(50) not null,
-	profileloadPath varchar2(50) not null,
-	profileimgname varchar2(50) not null
-);
---9. °Ô½ÃÆÇ ÀÌ¹ÌÁö Å×ÀÌºí
-create table myPlaceimg(
-	muuid varchar2(50) not null,
-	mno number(10) not null,
-	mloadPath varchar2(50) not null,
-	mimgname varchar2(50) not null
-);
---10. Àå¹Ù±¸´Ï 
-create table basket(
-	bno number(10) not null,
-	userid varchar2(50) not null,
-	pno number(10) not null
+	aimgname varchar2(50) not null,
+	CONSTRAINT pk_AuctionImg PRIMARY KEY (auuid)
 );
 
--- Âü°í primary key /foreign key ÀÛ¼º 
+
+
+
+
+ 
+
+
+-- ì°¸ê³  primary key /foreign key ì‘ì„± 
 --alter table spring_attach add constraint pk_attach primary key(uuid);
 --alter table spring_attach add constraint fk_board_attach foreign key(bno)
 --references spring_board(bno);
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -23,15 +23,12 @@
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet"/>
     <!-- Main css -->
     
-    <!-- Shop css -->
-    <link rel='stylesheet' href='/resources/css/ShopStyle.css' type='text/css' media='all'/>
-    <link rel='stylesheet' href='/resources/css/woocommerce-layout.css' type='text/css' media='all'/>
-	<link rel='stylesheet' href='/resources/css/woocommerce-smallscreen.css' type='text/css' media='only screen and (max-width: 768px)'/>
-	<link rel='stylesheet' href='/resources/css/woocommerce.css' type='text/css' media='all'/>
-	<link rel='stylesheet' href='/resources/css/font-awesome.min.css' type='text/css' media='all'/>
-	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700' type='text/css' media='all'/>
-	<link rel='stylesheet' href='/resources/css/easy-responsive-shortcodes.css' type='text/css' media='all'/>
+	
+  	
+ 
+	
   	<!-- Shop css -->
+  	
   </head>
   <body>
     <!-- PRE LOADER -->
@@ -56,15 +53,15 @@
             <span class="icon icon-bar"></span>
             <span class="icon icon-bar"></span>
           </button>
-          <a href="/index" class="navbar-brand"
-            ><i class="fa fa-magnet"></i
-          ></a>
+          <a href="/index" class="navbar-brand">
+          	 <i class="fa fa-magnet"></i>
+          </a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li class="active"><a href="/index">상품</a></li>
             <li><a href="/myPlace">내동네</a></li>
-            <li><a href="/blog">경매</a></li>
+            <li><a href="/auction">경매</a></li>
             <li><a href="/signIn">로그인</a></li>
           </ul>
         </div>
