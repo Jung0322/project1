@@ -21,4 +21,14 @@ public class MemberController {
 	public String SignIn() {
 		return "/member/signIn";
 	}
+	
+	@GetMapping("/modifyMember")
+	public String modifyMember() {
+		return "/member/modifyMember";
+	}
+	
+	@GetMapping("/myBasket")
+	public String myBasket() {
+		return "/member/myBasket";
+	}
 }
