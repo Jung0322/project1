@@ -20,10 +20,9 @@
 							</div>
 							<div class="summary entry-summary">
 								<h1 itemprop="name" class="product_title entry-title">Beige Jacket</h1>
-								<div class="woocommerce-product-rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-									<a href="#reviews" class="woocommerce-review-link" rel="nofollow">(<span itemprop="reviewCount" class="count">2</span> customer reviews)</a>
-								</div>
+									<div itemprop="reviewCount">
+										<p>지역명 (인천광역시 서구)</p>
+									</div>
 								<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 									<p class="price">
 										<span class="amount">$35.00</span>
@@ -32,16 +31,13 @@
 									<meta itemprop="priceCurrency" content="USD"/>
 									<link itemprop="availability" href="http://schema.org/InStock"/>
 								</div>
-								<div itemprop="description">
-									<p>
-										Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
-									</p>
+								<div id="description">
+									<p>	내고여부 : </p>
+									<p>	택배가능여부 : </p>
+									<p>	예약여부 : </p>
 								</div>
-								<form class="cart" method="post" enctype='multipart/form-data'>
-									<div class="quantity">
-										<input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4"/>
-									</div>									
-									<button type="submit" class="single_add_to_cart_button button alt">Add to cart</button>
+								<form class="cart" method="post" enctype='multipart/form-data'>							
+									<button type="submit" class="single_add_to_cart_button button alt">채팅 하기</button>
 								</form>
 								<div class="product_meta">
 									<span class="posted_in">Categories: 
@@ -70,7 +66,7 @@
 								<ul class="products">
 									<li class="first product">
 									<a href="shop-single.html">
-									<span class="onsale">Sale!</span>									
+									<span class="onsale">예약</span>									
 									<img src="/resources/images/portfolio-img1.jpg" alt=""></img>
 									<h3>Beige Fedora</h3>
 									<span class="price"><del><span class="amount">$35.00</span></del><ins><span class="amount">&#36;14.00</span></ins></span>

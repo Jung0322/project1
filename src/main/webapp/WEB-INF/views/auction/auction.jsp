@@ -25,11 +25,11 @@
 				
 					<li class="first product">
 					<a href="auction-single-project">
-					<span class="onsale">Sale!</span>
+					<span class="onsale">예약</span>
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Cool Fedora</h3>
 					<span class="price"><span class="amount">$34.00</span></span>
-					</a><a href="#" class="button">Add to cart</a>
+					<button type="button"><img id="asd" src="/resources/images/NotGood.png" alt=""></button>
 					</li>
 
 					<li class="product">
@@ -37,7 +37,7 @@
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Beige Blouse</h3>
 					<span class="price"><span class="amount">$66.00</span></span>
-					</a><a href="#" class="button">Add to cart</a>
+					</a><a href="#" class="button"><img id="asd" src="/resources/images/NotGood.png" alt=""></a>
 					</li>
 					
 					<li class="product">
@@ -45,7 +45,7 @@
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Black Jacket</h3>
 					<span class="price"><span class="amount">$125.00</span></span>
-					</a><a href="#" class="button">Add to cart</a>
+					</a><a href="#" id="asd"><i class="fa fa-magnet"></i></a>
 					</li>
 					
 					<li class="last product">

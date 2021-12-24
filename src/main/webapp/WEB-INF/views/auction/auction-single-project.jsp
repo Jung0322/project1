@@ -20,35 +20,28 @@
 							</div>
 							<div class="summary entry-summary">
 								<h1 itemprop="name" class="product_title entry-title">Beige Jacket</h1>
-								<div class="woocommerce-product-rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-									<a href="#reviews" class="woocommerce-review-link" rel="nofollow">(<span itemprop="reviewCount" class="count">2</span> customer reviews)</a>
+									<div itemprop="reviewCount">
+										<p>지역명 (인천광역시 서구)</p>
+									</div>
+									<div class="product_meta">
+									<span class="posted_in">Categories: 
+									<a href="#" rel="tag">Clothing</a>, 
+									<a href="#" rel="tag">Hoodies</a>
+									</span>
 								</div>
-								<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+							<div id="auctionDetail">
+								<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">					
 									<p class="price">
+										<span class="priceText">시작가격 : </span>
 										<span class="amount">$35.00</span>
 									</p>
 									<meta itemprop="price" content="35"/>
 									<meta itemprop="priceCurrency" content="USD"/>
 									<link itemprop="availability" href="http://schema.org/InStock"/>
 								</div>
-								<div itemprop="description">
-									<p>
-										Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
-									</p>
-								</div>
-								<form class="cart" method="post" enctype='multipart/form-data'>
-									<div class="quantity">
-										<input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4"/>
-									</div>									
-									<button type="submit" class="single_add_to_cart_button button alt">Add to cart</button>
-								</form>
-								<div class="product_meta">
-									<span class="posted_in">Categories: 
-									<a href="#" rel="tag">Clothing</a>, 
-									<a href="#" rel="tag">Hoodies</a>
-									</span>
-								</div>
+									<p id="time"> 시작시간 : </p>
+									<p id="time"> 마감시간 : </p>
+							</div>
 							</div>
 							<!-- .summary -->
 							<div class="woocommerce-tabs wc-tabs-wrapper">
@@ -102,25 +95,8 @@
 												<div id="respond" class="comment-respond">
 													<h3 style="margin-bottom:10px;" id="reply-title" class="comment-reply-title">Add a review <small><a rel="nofollow" id="cancel-comment-reply-link" href="/demo-moschino/product/woo-logo-2/#respond" style="display:none;">Cancel reply</a></small></h3>
 													<form action="#" method="post" id="commentform" class="comment-form" novalidate>
-														<p class="comment-form-rating">
-															<label for="rating">Your Rating</label>
-															<select name="rating" id="rating">
-																<option value="">Rate&hellip;</option>
-																<option value="5">Perfect</option>
-																<option value="4">Good</option>
-																<option value="3">Average</option>
-																<option value="2">Not that bad</option>
-																<option value="1">Very Poor</option>
-															</select>
-														</p>
 														<p class="comment-form-comment">
-															<label for="comment">Your Review</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
-														</p>
-														<p class="comment-form-author">
-															<label for="author">Name <span class="required">*</span></label><input id="author" name="author" type="text" value="" size="30" aria-required="true"/>
-														</p>
-														<p class="comment-form-email">
-															<label for="email">Email <span class="required">*</span></label><input id="email" name="email" type="text" value="" size="30" aria-required="true"/>
+															<label for="comment">Your Price</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
 														</p>
 														<p class="form-submit">
 															<input name="submit" type="submit" id="submit" class="submit" value="Submit"/><input type='hidden' name='comment_post_ID' value='60' id='comment_post_ID'/>															
@@ -140,7 +116,7 @@
 								<ul class="products">
 									<li class="first product">
 									<a href="shop-single.html">
-									<span class="onsale">Sale!</span>									
+									<span class="onsale">예약</span>									
 									<img src="/resources/images/portfolio-img1.jpg" alt=""></img>
 									<h3>Beige Fedora</h3>
 									<span class="price"><del><span class="amount">$35.00</span></del><ins><span class="amount">&#36;14.00</span></ins></span>

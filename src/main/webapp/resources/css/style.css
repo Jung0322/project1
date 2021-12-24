@@ -10,9 +10,34 @@ body {
 /*---------------------------------------
     Typorgraphy              
 -----------------------------------------*/
+
+#priceTextl {
+	color:  gray;
+}
+
+#asd {
+	width: 25px;
+	height: 25px;
+	border-color:white;
+	
+	background-color: white;
+}
+
 #shopDetail {
 	 position: static;
 }
+
+#auctionDetail {
+	margin-top: 50px;
+}
+#auctionDetail p{
+	padding-bottom: 30px;
+}
+
+#time{
+	font-size: 18px;
+}
+
 
 html {
 	border:12px solid #111;
