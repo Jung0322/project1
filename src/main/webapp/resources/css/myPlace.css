@@ -1,14 +1,20 @@
-.upload,
-.write {
-	background-color: #9BB460;
-	color: white;
-	float: right;
+#writeButton,
+#listButton,
+#replyButton,
+#successButton {
+	  background: #9BB460;
+	  border-radius: 100px;
+	  border: none;
+	  color: #ffffff;
+	  font-weight: 400;
+	  transition: all 0.4s ease-in-out;
+	  height: 40px;
+	  width: 150px;
+	  float: right	
 }
 
-.writeBoard{
-	padding-bottom: 20px;
+.woocommerce-pagination {
+	margin-bottom: 50px
 }
 
-.editor {
-	padding-bottom: 100px
-}
+
