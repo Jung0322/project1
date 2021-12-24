@@ -25,7 +25,7 @@
 				
 					<li class="first product">
 					<a href="single-project">
-					<span class="onsale">Sale!</span>
+					<span class="onsale">예약</span>
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Cool Fedora</h3>
 					<span class="price"><span class="amount">$34.00</span></span>
