@@ -1,5 +1,4 @@
 #writeButton,
-#listButton,
 #replyButton,
 #successButton {
 	  background: #9BB460;
@@ -12,9 +11,87 @@
 	  width: 150px;
 	  float: right	
 }
+#modifyButton,
+#deleteButton {
+	  background : #549145;
+	  border-radius: 100px;
+	  border: none;
+	  color: #ffffff;
+	  font-weight: 400;
+	  transition: all 0.4s ease-in-out;
+	  height: 40px;
+	  width: 80px;
+	  float: right;
+	
+}
+#modifyButton,
+#deleteButton {
+	margin-right: 5px;
+	
+}
 
+#contextOptionButton {
+	float: right;
+	margin-top: 15px;
+	margin-left: 20px;
+}
+
+#replyOptionButton {
+	float: right;
+	margin-top: 60px;
+	margin-left: 20px;
+}
+
+#listButton {
+	 background: #9BB460;
+	  border-radius: 100px;
+	  border: none;
+	  color: #ffffff;
+	  font-weight: 400;
+	  transition: all 0.4s ease-in-out;
+	  height: 40px;
+	  width: 150px;
+	  float: right;
+	  margin-left: 500px;
+}
+
+
+
+#replyButton {
+	margin-top: 15px;
+}
+
+#successButton {
+	margin-left: 10px;
+}
 .woocommerce-pagination {
 	margin-bottom: 50px
 }
+
+.blog-context {
+	border-top: 1px solid #f0f0f0;
+	border-bottom: 1px solid #f0f0f0;
+	margin-top: 55px;
+	padding-top: 42px;
+	padding-bottom: 42px;
+	margin-bottom: 15px;
+	
+}
+.blog-good {
+	border-bottom: 1px solid #f0f0f0;
+	padding-bottom: 15px;
+	margin-bottom: 42px;
+}
+
+.blog-good input {
+	margin-top: 45px;
+}
+
+.blog-reply-form {
+	border-top: 1px solid #f0f0f0;
+	margin-top: 42px;
+	padding-top: 42px;
+}
+
 
 
