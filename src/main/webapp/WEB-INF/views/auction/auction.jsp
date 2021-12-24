@@ -3,6 +3,7 @@
 <link rel='stylesheet' href='/resources/css/woocommerce-layout.css' type='text/css' media='all'/>
 <link rel='stylesheet' href='/resources/css/woocommerce.css' type='text/css' media='all'/>
 	<%@ include file="../includes/header.jsp" %>
+
 <body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page">
 		<div id="content" class="site-content">
 			<div id="primary" class="content-area column full">
@@ -28,64 +29,64 @@
 					<span class="onsale">예약</span>
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Cool Fedora</h3>
-					<span class="price"><span class="amount">$34.00</span></span>
-					<button type="button"><img id="asd" src="/resources/images/NotGood.png" alt=""></button>
+					<span class="price"><span class="amount">시작가격: $34.00</span></span>
+					</a>
 					</li>
 
 					<li class="product">
 					<a href="auction-single-project">
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Beige Blouse</h3>
-					<span class="price"><span class="amount">$66.00</span></span>
-					</a><a href="#" class="button"><img id="asd" src="/resources/images/NotGood.png" alt=""></a>
+					<span class="price"><span class="amount">시작가격: $66.00</span></span>
+					</a>
 					</li>
 					
 					<li class="product">
 					<a href="auction-single-project">
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Black Jacket</h3>
-					<span class="price"><span class="amount">$125.00</span></span>
-					</a><a href="#" id="asd"><i class="fa fa-magnet"></i></a>
+					<span class="price"><span class="amount">시작가격: $125.00</span></span>
+					</a>
 					</li>
 					
 					<li class="last product">
 					<a href="auction-single-project">
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Brown Jacket</h3>
-					<span class="price"><span class="amount">$28.00</span></span>
-					</a><a href="#" class="button">Add to cart</a>
+					<span class="price"><span class="amount">시작가격: $28.00</span></span>
+					</a>
 					</li>
 					
 					<li class="first product">
 					<a href="auction-single-project">
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Gray Blouse</h3>
-					<span class="price"><span class="amount">$15.00</span></span>
-					</a><a href="#" class="button">Add to cart</a>
+					<span class="price"><span class="amount">시작가격: $15.00</span></span>
+					</a>
 					</li>
 					
 					<li class="product">
 					<a href="auction-single-project">
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Male Bag</h3>
-					<span class="price"><span class="amount">$16.00</span></span>
-					</a><a href="#" class="button">Add to cart</a>
+					<span class="price"><span class="amount">시작가격: $16.00</span></span>
+					</a>
 					</li>
 					
 					<li class="product">
 					<a href="auction-single-project">
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Hugo Jeans</h3>
-					<span class="price"><span class="amount">$36.00</span></span>
-					</a><a href="#" class="button">Add to cart</a>
+					<span class="price"><span class="amount">시작가격: $36.00</span></span>
+					</a>
 					</li>
 					
 					<li class="last product">
 					<a href="auction-single-project">
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Male T-Shirt</h3>
-					<span class="price"><span class="amount">$49.00</span></span>
-					</a><a href="#" class="button">Add to cart</a>
+					<span class="price"><span class="amount">시작가격: $49.00</span></span>
+					</a>
 					</li>
 					
 				</ul>

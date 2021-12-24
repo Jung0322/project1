@@ -20,4 +20,10 @@ public class AuctionController {
 		log.info("single-project");
 		return "/auction/auction-single-project";
 	}
+	
+	@RequestMapping(value = "/auction-product-registration", method = RequestMethod.GET)
+	public String auction_project_registration() {
+		log.info("single-project");
+		return "/auction/auction-product-registration";
+	}
 }

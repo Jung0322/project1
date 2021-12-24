@@ -15,13 +15,19 @@ body {
 	color:  gray;
 }
 
-#asd {
-	width: 25px;
-	height: 25px;
-	border-color:white;
-	
-	background-color: white;
+#registration{
+	margin-left: 120px;
 }
+
+#asd {
+	width: 30px;
+	height: 30px;
+}
+
+#local{
+	display: inline-block;
+}
+
 
 #shopDetail {
 	 position: static;
