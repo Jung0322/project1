@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel='stylesheet' href='/resources/css/woocommerce-layout.css'
-	type='text/css' media='all' />
-<link rel='stylesheet' href='/resources/css/woocommerce.css'
-	type='text/css' media='all' />
 <link rel="stylesheet" href="/resources/css/myPlace.css" />
+<link rel='stylesheet' href='/resources/css/woocommerce-layout.css' type='text/css' media='all' />
+<link rel='stylesheet' href='/resources/css/woocommerce.css' type='text/css' media='all' />
+<script src="https://kit.fontawesome.com/84524c7dde.js" crossorigin="anonymous"></script>
 <%@ include file="../includes/header.jsp"%>
 
 <!-- Blog Section -->
@@ -26,7 +25,7 @@
 						<div class="blog-post-format">
 							<span><a href="#"><img src="/resources/images/ccoli.png" class="img-responsive img-circle"> Jen Lopez</a></span> 
 							<span>서울시 종로구 관철동</span> 
-							<span><i class="fa fa-date"></i> Jan 30, 2016</span>
+							<span> Jan 30, 2016</span>
 						</div>
 						<div class="blog-post-des">
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -35,6 +34,9 @@
 								ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
 								aute irure dolor in reprehenderit in voluptate velit esse cillum
 								dolore eu fugiat nulla pariatur.</p>
+						</div>
+						<div class="blog-post-format">
+							<span><i class="far fa-grin"></i> 궁금해요</span> 
 						</div>
 					</div>
 					<div class="blog-post-thumb">
@@ -46,7 +48,8 @@
 						</div>
 						<div class="blog-post-format">
 							<span><a href="#"><img src="/resources/images/ccoli.png" class="img-responsive img-circle"> Jen Lopez</a></span> 
-							<span>서울시 종로구 관철동</span> <span><i class="fa fa-date"></i> Jan 30, 2016</span>
+							<span>서울시 종로구 관철동</span> 
+							<span><i class="fa fa-date"></i> Jan 30, 2016</span>
 						</div>
 						<div class="blog-post-des">
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
