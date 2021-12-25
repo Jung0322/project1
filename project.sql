@@ -26,7 +26,8 @@ create table basket (
 	pno number(10) not null, -- 동네생활 글번호
 	CONSTRAINT pk_basket PRIMARY KEY (bno) -- pk
 );
-
+-- 장바구니 테이블 글번호 시퀀스
+CREATE SEQUENCE basket_seq INCREMENT BY 1 START WITH 1;
 
 -- 동네생활
 -- 4. 게시판(동네생활) 테이블
@@ -40,6 +41,8 @@ create table myPlace (
 	mcount number(100) default 0, -- 조회수
 	CONSTRAINT pk_myPlace PRIMARY KEY (mno) -- pk
 );
+-- 동네생활 테이블 글번호 시퀀스
+CREATE SEQUENCE myPlace_seq INCREMENT BY 1 START WITH 1;
 
 -- 5. 게시판(동네생활) 댓글 테이블
 create table myPlaceReply (
@@ -52,6 +55,8 @@ create table myPlaceReply (
 	good number(10) default 0, -- 좋아요 갯수
 	CONSTRAINT pk_myPlaceReply PRIMARY KEY (mrno) -- pk
 );
+-- 동네생활 댓글 테이블 글번호 시퀀스
+CREATE SEQUENCE myPlaceReply_seq INCREMENT BY 1 START WITH 1;
 
 -- 6. 게시판(동네생활) 이미지 테이블
 create table myPlaceImg (
@@ -61,7 +66,6 @@ create table myPlaceImg (
 	mimgname varchar2(50) not null, -- 동네생활 이미지 이름
 	CONSTRAINT pk_myPlaceImg PRIMARY KEY (muuid) -- pk
 );
-
 
 -- 상품
 -- 7. 상품 테이블
@@ -80,6 +84,8 @@ create table product (
 	userid varchar2(50) not null, -- 아이디
 	CONSTRAINT pk_product PRIMARY KEY (pno) -- pk
 );
+-- 상품 테이블 글번호 시퀀스
+CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1;
 
 -- 8. 상품 이미지 테이블
 create table productimg (
@@ -105,6 +111,8 @@ create table auction (
 	soldout number(2) default 0, -- 판매(완료) 여부  / 0 : 미판매, 1 : 판매완료, 2 : 낙찰 후 합의 중?
 	CONSTRAINT pk_Auction PRIMARY KEY (ano) -- pk
 );
+-- 경매 테이블 글번호 시퀀스
+CREATE SEQUENCE auction_seq INCREMENT BY 1 START WITH 1;
 
 -- 10. 경매장 댓글 테이블
 CREATE TABLE auctionreply (
@@ -116,6 +124,8 @@ CREATE TABLE auctionreply (
     updatedate date   NOT NULL, -- 수정날짜
     CONSTRAINT pk_AuctionReply PRIMARY KEY (arno) -- pk
 );
+-- 경매장 댓글 테이블 글번호 시퀀스
+CREATE SEQUENCE auctionreply_seq INCREMENT BY 1 START WITH 1;
 
 -- 11. 경매 이미지 테이블
 create table auctionimg (
