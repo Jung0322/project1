@@ -3,20 +3,6 @@
 
 <link rel="stylesheet" href="/resources/css/member.css" />
 
-<!-- 나중에 옮기기 -->
-<style>
-	img {
-		width: 120px;
-  		height: 120px;
-  		object-fit: cover;
-  		border-radius: 100px;
-	}
-	
-	.image_upload {
-		margin-left: 100px;
-	}
-</style>
-
 <%@ include file="../includes/header.jsp" %>
 
 
@@ -33,39 +19,85 @@
                     </div>
 
                     <form action="#" method="post">
-                    	<div class="image_upload">
-                    		<label for="profile_img">
-                    			<img src="/resources/images/author-image1.jpg" alt="" />
-                    		</label>
-                    	</div>
-                    	 <div class="memberForm">
-                         	  <label for="userId">ID</label>
-                              <input type="text" name="userId" class="form-control" placeholder="아이디" readonly="readonly">
+                    	 <div class="member-info-area">
+	                    	 <div class="modify-profile" id="profile-area">
+	                    	 	<input type="file" name="profileimgname" id="" class="profile-file"/>
+	                    	 	<label for="profile-label">
+		                    	 	<img src="/resources/images/portfolio-img1.jpg" alt="" class="profile-img" />
+		                    	 	<img src="/resources/images/ccoli.png" alt="" class="icon-camera" />
+	                    	 	</label>
+	                    	 </div> <!-- modify-profile end -->
+	                         <div class="member-info-id">
+	                              <p>아이디</p>
+	                              <input type="text" name="userid" class="form-control" readonly="readonly">
+	                              <p>가입일 : 2021-12-25</p>
+	                              <input type="button" class="modify-profile-btn" value="사진 변경" />
+	                              <input type="button" class="modify-profile-btn" value="사진 삭제" />	                              
+	                         </div> <!-- member-info-id end -->
+                         </div> <!-- member-info-id end -->
+                         
+                         <div class="modify-form">
+                         	  <div class="modify-label">
+	                              <!-- <label for="nickname">닉네임</label> -->
+	                              <p>닉네임</p>
+	                              <input type="button" class="modify-btn" value="수정" />
+                              </div>
+                              
+                              <input type="text" name="nickname" id="nickname" class="form-control" placeholder="닉네임">
                          </div>
-                         <div class="memberForm">
-                         	  <label for="password">비밀번호</label>
-                              <input type="password" name="password" class="form-control" placeholder="비밀번호">
-                         </div>	
-                         <div class="memberForm">
-                         	  <label for="password">비밀번호 재확인</label>
-                              <input type="password" name="passwordCheck" class="form-control" placeholder="비밀번호 재확인">
-                         </div>	
-                         <div class="memberForm">
-                         	  <label for="nickname">닉네임</label>
-                              <input type="text" name="nickname" class="form-control" placeholder="닉네임">
+                         <div class="modify-form">
+                         	<div class="modify-label">
+		                         <p>비밀번호</p>
+		                         <input type="button" class="modify-btn" value="수정" />
+	                         </div>
+	                         
+	                         <div class="div-pwd-hide"></div>
+	                         <div class="div-pwd-form">
+		                         <!-- <div class="col-md-8"> -->
+		                         <div class="div-pwd">
+		                              <label for="password">현재 비밀번호</label>
+		                              <input type="password" name="password" id="password" class="form-control" placeholder="현재 비밀번호">
+		                         </div>
+		                         <div class="div-pwd">
+		                              <label for="new-password">새 비밀번호</label>
+		                              <input type="password" name="newPassword" id="new-password" class="form-control" placeholder="새 비밀번호">
+		                         </div>
+		                         <div class="div-pwd">
+		                              <input type="password" name="passwordCheck" id="password-check" class="form-control" placeholder="새 비밀번호 확인">
+		                         </div>
+	                         </div> <!-- div-pwd-form end -->
+                         </div> <!-- modify-form end -->
+                         <div class="modify-form">
+                         	<div class="modify-label">                              
+                           		<p>이메일</p>
+                            	<input type="button" class="modify-btn" value="수정" />
+                             </div>
+                             
+                             <input type="text" name="email" id="email" class="form-control" placeholder="이메일">
                          </div>
-                         <div class="memberForm">
-                         	  <label for="email">이메일</label>
-                              <input type="text" name="email" class="form-control" placeholder="이메일">
+                         <div class="modify-form">
+                         	<div class="modify-label">
+	                         	<p>휴대전화</p>
+	                         	<input type="button" class="modify-btn" value="수정" />
+                         	</div>
+                        
+                            <input type="text" name="phone" id="phone" class="form-control" placeholder="휴대전화">
                          </div>
-                         <div class="memberForm">
-                         	  <label for="phone">휴대전화</label>
-                              <input type="text" name="phone" class="form-control" placeholder="휴대전화">
+                         <div class="modify-form">
+                         	<div class="modify-label">
+							 	<p>내 동네</p>
+							 	<input type="button" class="modify-btn" value="수정" />
+						 	</div>
+                          
+                            <input type="text" name="mytown" id="mytown" class="form-control" placeholder="내 동네">
                          </div>
-                         <div class="memberForm">
-                         	  <label for="phone">내 동네</label>
-                              <input type="text" name="myTown" class="form-control" placeholder="동까지만 입력">
+                         
+                         <!-- <div class="col-md-4">
+                              <input type="submit" class="form-control" value="회원가입">
                          </div>
+                         <div class="col-md-4">
+                              <input type="button" class="form-control" value="쥐소">
+                         </div> -->
                     </form>
                </div>
 

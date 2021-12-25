@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
-/* 회원정보 수정 페이지 - 프로필 이미지 */
+/* modify-info.jsp */
+/* 프로필 이미지 */
 .profile-img {
 	border-radius: 50%;
 	height: 90%;
@@ -26,11 +27,81 @@
 	cursor: pointer;
 	width: 100%;
 	height: 100%;
+	opacity: 0;
 	z-index: 1;
-	background-color: black;
 	top: 0;
 	left: 0;
 }
+/* 프로필 이미지, 아이디 요소 정렬 */
+.member-info-area {
+	margin: 0 20px 20px 205px;
+	position: relative;
+}
+.member-info-id {
+	position: absolute;
+	width: 350px;
+	left: 200;
+	top: 0;
+}
+/* 프로필 이미지 수정, 삭제 버튼 */
+.modify-profile-btn {
+	border: 1px solid #9BB460;
+	color: #9BB460;
+	font-weight: 400;
+	transition: all 0.4s ease-in-out;
+	
+	/* .form-control style 가져옴 */
+    width: 80px;
+    height: 25px;
+    padding: 3px 8px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    background-image: none;
+} 
+
+/* 정렬 */
+.modify-form {
+	width: 550px;
+	margin: 0 50px 0 205px;
+}
+.modify-label {
+	position: relative;
+}
+.modify-btn {
+	border: 1px solid #9BB460;
+	color: #9BB460;
+	font-weight: 400;
+	transition: all 0.4s ease-in-out;
+	
+	/* .form-control style 가져옴 */
+	display: block;
+    width: 80px;
+    height: 25px;
+    padding: 3px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    background-image: none;
+    
+    /* 오른쪽으로 정렬 */
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 0 0 5px 0;
+}
+/* 비밀번호 */
+.div-pwd {
+	width: 100%;
+}
+.div-pwd-hide {
+	border-top: 1px solid #808080;
+	height: 20px
+}
+.div-pwd-form {
+	display: none;
+}
+
 
 
 /* signIn.jsp 가운데 정렬 */
@@ -47,7 +118,6 @@
 	width: 220px;
 	margin: 0 50px 0 370px;
 }
-
 /* input:submit */
 #login-btn {
 	 background: #9BB460;
@@ -56,20 +126,38 @@
      color: #ffffff;
      font-weight: 400;
      transition: all 0.4s ease-in-out;
-}
-
-/* div */
-/* memberModify.jsp */
-.div-userid, .div-nickname {
-	margin-left: 50px;
+     height: 40px;
 }
 
 
-
-
-
-
-
-
-
-
+/* signUp.jsp 가운데 정렬 */
+/* input:text가 들어간 div 요소는 signIn.jsp의 .login-form과 공유 */
+.insert-btn-area { 
+	margin: 0 0 0 245px;
+}
+#insert-btn {
+	 background: #9BB460;
+	 border-radius: 100px;
+	 border: none;
+	 color: #ffffff;
+     font-weight: 400;
+     transition: all 0.4s ease-in-out;
+     height: 40px;
+}
+.cancel-btn {
+	border: 1px solid #9BB460;
+	color: #9BB460;
+	border-radius: 100px;
+	font-weight: 400;
+	transition: all 0.4s ease-in-out;
+	
+	display: block;
+    width: 100%;
+    height: 40px;
+    padding: 6px 12px;
+    margin: 10px 0 10px 0;
+    font-size: 14px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    background-image: none;
+}
