@@ -30,7 +30,7 @@
                     </form>
                     <div class="col-md-10" id="changeSignUp">
                     	<label for="signUp">아직 회원이 아니신가요?</label>
-                        <a href="/signUp">회원가입</a>
+                        <a href="/member/signUp">회원가입</a>
                     </div>
                </div>
 

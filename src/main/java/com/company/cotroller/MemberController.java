@@ -22,7 +22,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/signUp", method = RequestMethod.GET)
 	public String contact() {
 		System.out.println("Aaaaaaa");
 		return "/member/signUp";
@@ -60,5 +60,15 @@ public class MemberController {
 	@GetMapping("/myBasket")
 	public String myBasket() {
 		return "/member/myBasket";
+	}
+	
+	// 주소 api
+	@GetMapping("/Sample")
+	public String addressGet() {
+		return "/member/Sample";
+	}
+	@GetMapping("/jusoPopup")
+	public String jusoGet() {
+		return "/member/jusoPopup";
 	}
 }

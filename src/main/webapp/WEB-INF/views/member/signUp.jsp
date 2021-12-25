@@ -34,6 +34,12 @@
                               <input type="text" name="nickname" class="form-control" placeholder="닉네임">
                          </div>
                          <div class="memberForm">
+                         	  <button style="color:white; background-color: black; border-radius: 12px;	font-family:'Nanum Gothic';"
+                         	  onclick="goPopup();">
+                         	  주소검색</button>
+                              <input type="text" name="address" class="form-control" placeholder="주소">
+                         </div>
+                         <div class="memberForm">
                          	  <label for="email">이메일</label>
                               <input type="text" name="email" class="form-control" placeholder="이메일">
                          </div>
@@ -57,5 +63,22 @@
           </div>
      </div>
 </section>
+<script>
+function goPopup(){
+	// 주소검색을 수행할 팝업 페이지를 호출합니다.
+	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+	var pop = window.open("/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	
+	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+}
 
+
+function jusoCallBack(roadFullAddr,jibunAddr){
+		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+		document.form.roadFullAddr.value = roadFullAddr;
+		document.form.jibunAddr.value = jibunAddr;
+		
+}
+</script>
 <%@ include file="../includes/footer.jsp" %>
