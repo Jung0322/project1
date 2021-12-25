@@ -1,8 +1,8 @@
 body {
-		background: #ffffff;
+	background: #ffffff;
     font-family: 'Work Sans', sans-serif;
     font-style: normal;
-		font-weight: 300;
+	font-weight: 300;
     overflow-x: hidden;
 }
 
@@ -460,9 +460,11 @@ a:hover, a:active, a:focus {
 }
 
 
+/* input:submit 에 마우스 올리면 배경이 검은색으로 변함 
 #contact input[type="submit"]:hover {
   background: #000;
 }
+*/
 
 
 

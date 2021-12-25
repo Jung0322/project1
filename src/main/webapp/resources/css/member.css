@@ -1,26 +1,75 @@
 @charset "UTF-8";
 
-
-.memberForm {
-	display: block;
-	width: 80%;
-	margin-left: 70px;
+/* 회원정보 수정 페이지 - 프로필 이미지 */
+.profile-img {
+	border-radius: 50%;
+	height: 90%;
+	width: 100%;
+}
+.icon-camera {
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	right: 10;
+	bottom: 15;
+}
+#profile-area {
+	position: relative;
+	height: 150px;
+	width: 150px;
+	padding: 0;
+}
+/* input:file */
+.profile-file {
+	position: absolute;
+	cursor: pointer;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	background-color: black;
+	top: 0;
+	left: 0;
 }
 
-#btnCancel {
-	border-radius: 100px;
-	width: 300px;
+
+/* signIn.jsp 가운데 정렬 */
+/* div */
+.login-form {
+	width: 550px;
+	margin: 0 50px 0 205px;
+}
+.login-btn {
+	width: 330px;
+	margin: 0 50px 0 318px;
+}
+.change-signUp {
+	width: 220px;
+	margin: 0 50px 0 370px;
 }
 
-#btnSubmit {
-	margin-left: 70px;
-	width: 300px;
+/* input:submit */
+#login-btn {
+	 background: #9BB460;
+     border-radius: 100px;
+     border: none;
+     color: #ffffff;
+     font-weight: 400;
+     transition: all 0.4s ease-in-out;
 }
 
-#divSignIn {
-	margin-left: 120px;
+/* div */
+/* memberModify.jsp */
+.div-userid, .div-nickname {
+	margin-left: 50px;
 }
 
-#changeSignUp {
-	margin-left: 240px;
-}
+
+
+
+
+
+
+
+
+
