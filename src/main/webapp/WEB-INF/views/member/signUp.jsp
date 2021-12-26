@@ -31,7 +31,7 @@
                               <input type="password" name="passwordCheck" id="password-check" class="form-control" placeholder="비밀번호 재확인">
                          </div>
                          <div class="login-form">
-                         	  <button style="color:white; background-color: black; border-radius: 12px;	font-family:'Nanum Gothic';"
+                         	  <button type= "button" style="color:white; background-color: black; border-radius: 12px;	font-family:'Nanum Gothic';"
                          	  onclick="goPopup();">
                          	  주소검색</button>
                               <input type="text" id="address" name="address" class="form-control" placeholder="주소" readonly>
@@ -43,10 +43,6 @@
                          <div class="login-form">
                               <label for="nickname">닉네임</label>
                               <input type="text" name="nickname" id="nickname" class="form-control" placeholder="닉네임">
-                         </div>
-                         <div class="login-form">
-                              <label for="email">이메일</label>
-                              <input type="text" name="email" id="email" class="form-control" placeholder="이메일">
                          </div>
                          <div class="login-form">
                               <label for="phone">휴대전화</label>
