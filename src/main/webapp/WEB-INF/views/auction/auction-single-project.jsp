@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <link rel='stylesheet' href='/resources/css/woocommerce-layout.css' type='text/css' media='all'/>
 <link rel='stylesheet' href='/resources/css/woocommerce.css' type='text/css' media='all'/>
+<link rel='stylesheet' href='/resources/css/slide.css'/>
 <%@ include file="../includes/header.jsp" %>
 <body class="single single-product woocommerce woocommerce-page">
 		<!-- #masthead -->
@@ -14,9 +15,31 @@
 					<div id="content" role="main">
 						<nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="#">Home</a> / <a href="#">Clothing</a> / Beige Jacket</nav>
 						<div itemscope itemtype="http://schema.org/Product" class="product">
-							<div class="images">
-								<a href="" itemprop="image" class="woocommerce-main-image zoom" title="" data-rel="prettyPhoto">								
-								<img src="/resources/images/portfolio-img1.jpg" alt=""></img></a>
+							<div class="images ">
+								<div class="mySlides fade2">
+
+								<img class="main_slideImg" src="/resources/images/portfolio-img1.jpg">
+								
+								
+								</div>
+								
+								<div class="mySlides fade2">
+								
+								<img class="main_slideImg" src="/resources/images/portfolio-img2.jpg">
+								
+								
+								</div>
+								
+								<div class="mySlides fade2">
+								
+								<img class="main_slideImg" src="/resources/images/portfolio-img3.jpg">
+								
+								
+								</div>
+								
+								<a class="prev" onclick="plusSlides(-1)">❮</a>
+								
+								<a class="next"onclick="plusSlides(1)">❯</a>
 							</div>
 							<div class="summary entry-summary">
 								<h1 itemprop="name" class="product_title entry-title">Beige Jacket</h1>
@@ -45,6 +68,14 @@
 							</div>
 							<!-- .summary -->
 							<div class="woocommerce-tabs wc-tabs-wrapper">
+								<div>
+								<span class="imagedot" onclick="currentSlide(1)"></span> 
+								
+								<span class="imagedot" onclick="currentSlide(2)"></span>
+								
+								<span class="imagedot" onclick="currentSlide(3)"></span>
+								
+								</div>
 									<div class="panel entry-content wc-tab" id="tab-description">
 									<h2>Product Description</h2>
 									<p>
@@ -121,7 +152,6 @@
 									<h3>Beige Fedora</h3>
 									<span class="price"><del><span class="amount">$35.00</span></del><ins><span class="amount">&#36;14.00</span></ins></span>
 									</a>
-									<a href="#" class="button">Add to cart</a>
 									</li>
 									
 									<li class="product">
@@ -130,7 +160,6 @@
 									<h3>Male Jeans</h3>
 									<span class="price"><span class="amount">$35.00</span></span>
 									</a>
-									<a href="#" class="button">Add to cart</a>
 									</li>
 									
 									<li class="product">
@@ -139,7 +168,6 @@
 									<h3>Slim Jeans</h3>
 									<span class="price"><span class="amount">$20.00</span></span>
 									</a>
-									<a href="#" class="button">Add to cart</a>
 									</li>
 									
 									
@@ -149,7 +177,6 @@
 									<h3>Summer Blouse</h3>
 									<span class="price"><span class="amount">$35.00</span></span>
 									</a>
-									<a href="#" class="button">Add to cart</a>
 									</li>
 								</ul>
 							</div>
@@ -167,6 +194,7 @@
 </div>
 
 <!-- #page -->
+<script src='/resources/js/slide.js'></script>
 <script src='/resources/js/shopjs.js'></script>
 <script src='/resources/js/plugins.js'></script>
 <script src='/resources/js/scripts.js'></script>
