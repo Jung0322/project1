@@ -15,7 +15,7 @@
 	right: 10;
 	bottom: 15;
 }
-#profile-area {
+.profile-area {
 	position: relative;
 	height: 150px;
 	width: 150px;
@@ -40,7 +40,7 @@
 .member-info-id {
 	position: absolute;
 	width: 350px;
-	left: 200;
+	left: 200px;
 	top: 0;
 }
 /* 프로필 이미지 수정, 삭제 버튼 */
@@ -61,10 +61,6 @@
 } 
 
 /* 정렬 */
-.modify-form {
-	width: 550px;
-	margin: 0 50px 0 205px;
-}
 .modify-label {
 	position: relative;
 }
@@ -130,6 +126,7 @@
 }
 
 
+
 /* signUp.jsp 가운데 정렬 */
 /* input:text가 들어간 div 요소는 signIn.jsp의 .login-form과 공유 */
 .insert-btn-area { 
@@ -151,6 +148,7 @@
 	font-weight: 400;
 	transition: all 0.4s ease-in-out;
 	
+	/* .form-control style 가져옴 */
 	display: block;
     width: 100%;
     height: 40px;
@@ -160,4 +158,45 @@
     line-height: 1.42857143;
     background-color: #fff;
     background-image: none;
+}
+
+
+
+/* profile-page.jsp */
+/* 정렬 */
+.member-profile-area {
+	margin: 0 20px 20px 300px; 
+	position: relative;
+}
+.profile-form {
+	width: 500px;
+	margin: 10px 50px 10px 230px;
+	padding: 20px 50px;
+	border-bottom: 1px solid #808080;	
+}
+/* 버튼 */
+.modify-info-btn {
+	border: 1px solid #9BB460;
+	color: #9BB460;
+	font-weight: 400;
+	transition: all 0.4s ease-in-out;
+	
+	/* .form-control style 가져옴 */
+	display: block;
+    width: 170px;
+    height: 25px;
+    padding: 3px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    background-image: none;
+}
+/* 재거래 희망률, 응답률 정렬 */
+.user-assessment-result {
+	position: relative;
+}
+.answer-info {
+	position: absolute;
+	left: 200px;
+	top: 0;
 }
