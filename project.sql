@@ -42,7 +42,7 @@ create table myPlace (
 	content varchar2(2000) not null, -- 내용
 	regdate DATE default sysdate, -- 작성날짜
 	updatedate DATE default sysdate, -- 수정날짜
-	mcount number(100) default 0, -- 조회수
+	mcount number(10) default 0, -- 조회수
 	curious number(10) default 0, -- 궁금해요/공감해요 갯수
 	CONSTRAINT pk_myPlace PRIMARY KEY (mno) -- pk
 );
