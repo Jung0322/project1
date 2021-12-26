@@ -20,8 +20,9 @@
 							</div>
 							<div class="summary entry-summary">
 								<h1 itemprop="name" class="product_title entry-title">Beige Jacket</h1>
-									<div itemprop="reviewCount">
-										<p>지역명 (인천광역시 서구)</p>
+									<div>
+										<p id="local">지역명 (인천광역시 서구)</p>
+										<button class="heart"><img id="asd" src="/resources/images/NotGood.png" alt=""></button>
 									</div>
 								<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 									<p class="price">

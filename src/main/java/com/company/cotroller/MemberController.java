@@ -13,6 +13,7 @@ import com.company.domain.MemberDTO;
 import com.company.service.MemberService;
 
 import lombok.extern.log4j.Log4j2;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Log4j2
 @Controller
@@ -67,8 +68,13 @@ public class MemberController {
 	public String addressGet() {
 		return "/member/Sample";
 	}
-	@GetMapping("/jusoPopup")
+	@GetMapping("/member/jusoPopup")
 	public String jusoGet() {
 		return "/member/jusoPopup";
 	}
+	@PostMapping("/member/jusoPopup")
+	public String jusoPost() {
+		return "/member/signUp";
+	}
+	
 }

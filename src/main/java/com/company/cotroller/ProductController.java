@@ -28,4 +28,10 @@ public class ProductController {
 		log.info("single-project");
 		return "/product/single-project";
 	}
+	
+	@RequestMapping(value = "/product-registration", method = RequestMethod.GET)
+	public String product_registration() {
+		log.info("product-registration");
+		return "/product/product-registration";
+	}
 }

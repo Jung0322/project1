@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/resources/css/myPlace.css" />
+<script src="https://kit.fontawesome.com/84524c7dde.js" crossorigin="anonymous"></script>
 <%@ include file="../includes/header.jsp"%>
 
 <!-- Blog Single Post Section -->
@@ -19,18 +20,28 @@
 						<span><i class="fa fa-date"></i> Jan 30, 2016</span>
 					</div>
 				</div>
-				<div class="listButton">
+				<div>
+					<span id="contextOptionButton">
+						<i class="fas fa-ellipsis-v"></i>
+					</span>
 					<input type="button" class="form-control" id="listButton" value="목록보기" onclick="location.href='/myPlace'">
 				</div>
+			
 
-				<div class="blog-author">
+				<div class="blog-context">
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
 						do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 						eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-				</div>
+				<div>
 
-				<div class="">
+				</div>
+				</div>
+				<div class="blog-good">
+					<span><i class="far fa-grin"></i> 궁금해요</span>
+					<span id="replyOptionButton"><i class="fas fa-ellipsis-v"></i></span>
+				</div>
+				<div class="blog-reply">
 					<h3>2 Comments</h3>
 					<div class="media">
 						<div class="media-object pull-left">
@@ -43,20 +54,8 @@
 								curabitur.</p>
 						</div>
 					</div>
-					<div class="media">
-						<div class="media-object pull-left">
-							<img src="/images/heart.png" class="img-responsive img-circle" alt="Blog Image">
-						</div>
-						<div class="media-body">
-							<span>Omar Larus</span> <span>7 months ago</span>
-							<p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo
-								imperdiet, wisi risus purus augue vulputate voluptate neque,
-								curabitur.</p>
-						</div>
-					</div>
 				</div>
-				<div class="blog-comment-form">
-
+				<div class="blog-reply-form">
 					<h3>댓글 쓰기</h3>
 					<form action="#" method="post">
 						<textarea class="form-control" placeholder="댓글을 입력하세요." rows="5" name"Your Comments" required></textarea>

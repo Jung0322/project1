@@ -29,7 +29,7 @@
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Cool Fedora</h3>
 					<span class="price"><span class="amount">$34.00</span></span>
-					</a><a href="#" class="button">Add to cart</a>
+					</a><span>❤ : </span>
 					</li>
 
 					<li class="product">
@@ -37,7 +37,7 @@
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Beige Blouse</h3>
 					<span class="price"><span class="amount">$66.00</span></span>
-					</a><a href="#" class="button">Add to cart</a>
+					</a><span>❤ : </span>
 					</li>
 					
 					<li class="product">
@@ -45,7 +45,7 @@
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Black Jacket</h3>
 					<span class="price"><span class="amount">$125.00</span></span>
-					</a><a href="#" class="button">Add to cart</a>
+					</a><span>❤ : </span>
 					</li>
 					
 					<li class="last product">
@@ -53,7 +53,7 @@
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Brown Jacket</h3>
 					<span class="price"><span class="amount">$28.00</span></span>
-					</a><a href="#" class="button">Add to cart</a>
+					</a><span>❤ : </span>
 					</li>
 					
 					<li class="first product">
@@ -61,7 +61,7 @@
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Gray Blouse</h3>
 					<span class="price"><span class="amount">$15.00</span></span>
-					</a><a href="#" class="button">Add to cart</a>
+					</a><span>❤ : </span>
 					</li>
 					
 					<li class="product">
@@ -69,7 +69,7 @@
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Male Bag</h3>
 					<span class="price"><span class="amount">$16.00</span></span>
-					</a><a href="#" class="button">Add to cart</a>
+					</a><span>❤ : </span>
 					</li>
 					
 					<li class="product">
@@ -77,7 +77,7 @@
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Hugo Jeans</h3>
 					<span class="price"><span class="amount">$36.00</span></span>
-					</a><a href="#" class="button">Add to cart</a>
+					</a><span>❤ : </span>
 					</li>
 					
 					<li class="last product">
@@ -85,7 +85,7 @@
 					<img src="/resources/images/portfolio-img1.jpg" alt="">
 					<h3>Male T-Shirt</h3>
 					<span class="price"><span class="amount">$49.00</span></span>
-					</a><a href="#" class="button">Add to cart</a>
+					</a><span>❤ : </span>
 					</li>
 					
 				</ul>
