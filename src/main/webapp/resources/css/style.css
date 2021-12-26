@@ -16,7 +16,10 @@ body {
 }
 
 #registration{
-	margin-left: 120px;
+position: absolute; left: 50%; margin-left: -200px;
+
+	background-color: black;
+	color: white;
 }
 
 #asd {
