@@ -20,13 +20,14 @@
 
                     <form action="#" method="post">
                     	 <div class="member-info-area">
-	                    	 <div class="modify-profile" id="profile-area">
+	                    	 <!-- <div class="modify-profile" id="profile-area"> -->
+	                    	 <div class="profile-area">
 	                    	 	<input type="file" name="profileimgname" id="" class="profile-file"/>
 	                    	 	<label for="profile-label">
 		                    	 	<img src="/resources/images/portfolio-img1.jpg" alt="" class="profile-img" />
 		                    	 	<img src="/resources/images/ccoli.png" alt="" class="icon-camera" />
 	                    	 	</label>
-	                    	 </div> <!-- modify-profile end -->
+	                    	 </div> <!-- profile-area end -->
 	                         <div class="member-info-id">
 	                              <p>아이디</p>
 	                              <input type="text" name="userid" class="form-control" readonly="readonly">
@@ -34,9 +35,9 @@
 	                              <input type="button" class="modify-profile-btn" value="사진 변경" />
 	                              <input type="button" class="modify-profile-btn" value="사진 삭제" />	                              
 	                         </div> <!-- member-info-id end -->
-                         </div> <!-- member-info-id end -->
+                         </div> <!-- member-info-area end -->
                          
-                         <div class="modify-form">
+                         <div class="login-form">
                          	  <div class="modify-label">
 	                              <!-- <label for="nickname">닉네임</label> -->
 	                              <p>닉네임</p>
@@ -45,7 +46,7 @@
                               
                               <input type="text" name="nickname" id="nickname" class="form-control" placeholder="닉네임">
                          </div>
-                         <div class="modify-form">
+                         <div class="login-form">
                          	<div class="modify-label">
 		                         <p>비밀번호</p>
 		                         <input type="button" class="modify-btn" value="수정" />
@@ -67,7 +68,7 @@
 		                         </div>
 	                         </div> <!-- div-pwd-form end -->
                          </div> <!-- modify-form end -->
-                         <div class="modify-form">
+                         <div class="login-form">
                          	<div class="modify-label">                              
                            		<p>이메일</p>
                             	<input type="button" class="modify-btn" value="수정" />
@@ -75,7 +76,7 @@
                              
                              <input type="text" name="email" id="email" class="form-control" placeholder="이메일">
                          </div>
-                         <div class="modify-form">
+                         <div class="login-form">
                          	<div class="modify-label">
 	                         	<p>휴대전화</p>
 	                         	<input type="button" class="modify-btn" value="수정" />
@@ -83,7 +84,7 @@
                         
                             <input type="text" name="phone" id="phone" class="form-control" placeholder="휴대전화">
                          </div>
-                         <div class="modify-form">
+                         <div class="login-form">
                          	<div class="modify-label">
 							 	<p>내 동네</p>
 							 	<input type="button" class="modify-btn" value="수정" />

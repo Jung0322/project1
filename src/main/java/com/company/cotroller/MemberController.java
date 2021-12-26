@@ -58,7 +58,7 @@ public class MemberController {
 			return "redirect:/index";
 		}
 		
-		return "redirect:/signIn";
+		return "redirect:/member/signIn";
 	}
 	
 	// 프로필
