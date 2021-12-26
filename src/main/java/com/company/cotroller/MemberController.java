@@ -22,18 +22,27 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	// 회원가입 & 회원정보 수정
+	// 회원가입 화면
 	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
-	public String contact() {
-		System.out.println("Aaaaaaa");
+	public String signUp() {
+		log.info("회원가입 화면");
+		
+		
 		return "/member/signUp";
 	}
+
+	// 회원정보 수정 화면
+	@GetMapping("/modify-info")
+	public void modifyMember() {
+		
+	}
 	
+	// 로그인 
 	// 로그인 화면
 	@GetMapping("/signIn")
-	public String signIn() {
+	public void signIn() {
 		log.info("로그인 폼");
-		
-		return "/member/signIn";
 	}
 	
 	// 로그인 처리
@@ -52,13 +61,15 @@ public class MemberController {
 		return "redirect:/signIn";
 	}
 	
-	@GetMapping("/modifyMember")
-	public String modifyMember() {
-		return "/member/modifyMember";
+	// 프로필
+	// 프로필 화면
+	@GetMapping("/profile-page")
+	public void profilePage() {
+		
 	}
 	
-	@GetMapping("/myBasket")
+	@GetMapping("/my-basket")
 	public String myBasket() {
-		return "/member/myBasket";
+		return "/member/my-basket";
 	}
 }
