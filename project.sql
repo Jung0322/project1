@@ -32,11 +32,11 @@ CREATE SEQUENCE basket_seq INCREMENT BY 1 START WITH 1;
 
 
 
-
 -- 동네생활
 -- 4. 게시판(동네생활) 테이블
 create table myPlace (
 	mno number(10) not null, -- 글번호(pk)
+	mcategory varchar2(20) not null, -- 카테고리
 	userid varchar2(50) not null, -- 아이디
 	title varchar2(100) not null, -- 제목
 	content varchar2(2000) not null, -- 내용
