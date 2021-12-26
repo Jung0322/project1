@@ -1,8 +1,8 @@
 body {
-		background: #ffffff;
+	background: #ffffff;
     font-family: 'Work Sans', sans-serif;
     font-style: normal;
-		font-weight: 300;
+	font-weight: 300;
     overflow-x: hidden;
 }
 
@@ -16,7 +16,10 @@ body {
 }
 
 #registration{
-	margin-left: 120px;
+position: absolute; left: 50%; margin-left: -200px;
+
+	background-color: black;
+	color: white;
 }
 
 #asd {
@@ -454,15 +457,17 @@ a:hover, a:active, a:focus {
   border-color: #777;
 }
 
-#contact input,
+/* #contact input,
 #contact select {
   height: 40px;
-}
+} */
 
 
+/* input:submit 에 마우스 올리면 배경이 검은색으로 변함 
 #contact input[type="submit"]:hover {
   background: #000;
 }
+*/
 
 
 
