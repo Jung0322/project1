@@ -29,6 +29,10 @@ create table basket (
 -- 장바구니 테이블 글번호 시퀀스
 CREATE SEQUENCE basket_seq INCREMENT BY 1 START WITH 1;
 
+
+
+
+
 -- 동네생활
 -- 4. 게시판(동네생활) 테이블
 create table myPlace (
@@ -39,6 +43,7 @@ create table myPlace (
 	regdate DATE default sysdate, -- 작성날짜
 	updatedate DATE default sysdate, -- 수정날짜
 	mcount number(100) default 0, -- 조회수
+	curious number(10) default 0, -- 궁금해요/공감해요 갯수
 	CONSTRAINT pk_myPlace PRIMARY KEY (mno) -- pk
 );
 -- 동네생활 테이블 글번호 시퀀스
@@ -66,6 +71,11 @@ create table myPlaceImg (
 	mimgname varchar2(50) not null, -- 동네생활 이미지 이름
 	CONSTRAINT pk_myPlaceImg PRIMARY KEY (muuid) -- pk
 );
+
+
+
+
+
 
 -- 상품
 -- 7. 상품 테이블
