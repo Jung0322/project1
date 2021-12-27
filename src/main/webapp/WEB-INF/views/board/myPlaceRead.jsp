@@ -3,6 +3,10 @@
 <link rel="stylesheet" href="/resources/css/myPlace.css" />
 <script src="https://kit.fontawesome.com/84524c7dde.js"
 	crossorigin="anonymous"></script>
+	
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
+
 <%@ include file="../includes/header.jsp"%>
 
 <!-- Blog Single Post Section -->
@@ -12,15 +16,15 @@
 			<div class="col-md-offset-1 col-md-10 col-sm-12">
 				<div class="blog-single-post-thumb">
 					<div class="blog-post-title">
-						<span>동네질문</span>
-						<h2>은평구에서 수선 잘하는 곳 아시는 분 있나요?</h2>
+						<span>${dto.mcategory}</span>
+						<h2>${dto.title}</h2>
 					</div>
 					<div class="blog-post-format">
 						<span>
-							<a href="/member/profile-page"><img src="/resources/images/ccoli.png" class="img-responsive img-circle"> Jen Lopez</a>
+							<a href="/member/profile-page"><img src="/resources/images/ccoli.png" class="img-responsive img-circle">${dto.userid}</a>
 						</span> 
 						<span>서울시 은평구 신사동</span> 
-						<span><i class="fa fa-date"></i> Jan 30, 2016</span>
+						<span><i class="fa fa-date"></i>${dto.regdate}</span>
 					</div>
 				</div>
 				<div>
@@ -30,10 +34,7 @@
 						<input type="button" class="form-control" id="listButton" value="목록보기" onclick="location.href='/myPlace'">
 				</div>
 				<div class="blog-context">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-						do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-						eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<p>${dto.content}</p>
 				</div>
 				<div class="blog-good">
 					<span><i class="far fa-grin"></i> 궁금해요</span> 
@@ -67,4 +68,5 @@
 	</div>
 </section>
 
+<script src="/resources/js/myPlace.js"></script> 
 <%@ include file="../includes/footer.jsp"%>
