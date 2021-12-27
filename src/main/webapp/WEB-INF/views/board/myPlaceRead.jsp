@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/resources/css/myPlace.css" />
-<script src="https://kit.fontawesome.com/84524c7dde.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/84524c7dde.js"
+	crossorigin="anonymous"></script>
 <%@ include file="../includes/header.jsp"%>
 
 <!-- Blog Single Post Section -->
@@ -15,30 +16,27 @@
 						<h2>은평구에서 수선 잘하는 곳 아시는 분 있나요?</h2>
 					</div>
 					<div class="blog-post-format">
-						<span><a href="#"><img src="/resources/images/ccoli.png" class="img-responsive img-circle"> Jen Lopez</a></span> 
+						<span>
+							<a href="#"><img src="/resources/images/ccoli.png" class="img-responsive img-circle"> Jen Lopez</a>
+						</span> 
 						<span>서울시 은평구 신사동</span> 
 						<span><i class="fa fa-date"></i> Jan 30, 2016</span>
 					</div>
 				</div>
 				<div>
-					<span id="contextOptionButton">
+					<span id="contextOptionButton"> 
 						<i class="fas fa-ellipsis-v"></i>
-					</span>
-					<input type="button" class="form-control" id="listButton" value="목록보기" onclick="location.href='/myPlace'">
+					</span> 
+						<input type="button" class="form-control" id="listButton" value="목록보기" onclick="location.href='/myPlace'">
 				</div>
-			
-
 				<div class="blog-context">
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
 						do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 						eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-				<div>
-
-				</div>
 				</div>
 				<div class="blog-good">
-					<span><i class="far fa-grin"></i> 궁금해요</span>
+					<span><i class="far fa-grin"></i> 궁금해요</span> 
 					<span id="replyOptionButton"><i class="fas fa-ellipsis-v"></i></span>
 				</div>
 				<div class="blog-reply">
@@ -63,12 +61,9 @@
 							<input type="button" class="form-control" id="replyButton" value="댓글입력">
 						</div>
 					</form>
-
 				</div>
-
 			</div>
 		</div>
-
 	</div>
 </section>
 
