@@ -28,7 +28,7 @@
 						</div>
 						<div class="blog-post-format">
 							<span>
-								<a href="/member/profile-page">
+								<a href="#">
 									<img src="/resources/images/ccoli.png" class="img-responsive img-circle"> Jen Lopez
 								</a>
 							</span> 
