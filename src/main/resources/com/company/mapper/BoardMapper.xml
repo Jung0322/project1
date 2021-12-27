@@ -12,7 +12,7 @@
 		where mno>0 order by mno desc, regdate desc
 	</select>
 	
-	<select id="read">
+	<select id="read" resultType="com.company.domain.BoardDTO">
 		select mno, mcategory, title, userid, content from myplace
 		where mno = #{mno}
 	</select>

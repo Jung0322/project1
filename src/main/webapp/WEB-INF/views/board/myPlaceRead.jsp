@@ -31,7 +31,7 @@
 					<span id="contextOptionButton"> 
 						<i class="fas fa-ellipsis-v"></i>
 					</span> 
-						<input type="button" class="form-control" id="listButton" value="목록보기" onclick="location.href='/myPlace'">
+						<input type="button" class="form-control" id="listButton" value="목록보기" onclick="location.href='/board/myPlace'">
 				</div>
 				<div class="blog-context">
 					<p>${dto.content}</p>
