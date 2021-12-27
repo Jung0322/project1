@@ -37,11 +37,11 @@
                               <input type="text" class="form-control" placeholder="글 작성자" >
                          </div>
                          <div class="col-md-12 col-sm-6">
-                              <input type="text" class="form-control" placeholder="글 제목" id="writeTitle">
+                              <input type="text" class="form-control" placeholder="글 제목" >
                          </div>
                    <div>
                    </div>
-                         <div class="col-md-12 col-sm-6"> 
+                    <div class="col-md-12 col-sm-6" id="textArea"> 
                      <div id="summernote"></div>
                          <script>
                            $('#summernote').summernote({
@@ -65,8 +65,8 @@
                          </script>
                          </div>
                          <div>
+                              <input type="button" class="form-control"  id="listButton2" onclick="location.href='/myPlace'" value="목록보기">  
                               <input type="submit" class="form-control"  id="successButton" value="글 올리기">
-                              <input type="button" class="form-control"  id="listButton" onclick="location.href='/myPlace'" value="목록보기">  
                          </div>
                     </form>
                </div>

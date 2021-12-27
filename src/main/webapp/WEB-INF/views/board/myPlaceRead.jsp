@@ -17,7 +17,7 @@
 					</div>
 					<div class="blog-post-format">
 						<span>
-							<a href="#"><img src="/resources/images/ccoli.png" class="img-responsive img-circle"> Jen Lopez</a>
+							<a href="/member/profile-page"><img src="/resources/images/ccoli.png" class="img-responsive img-circle"> Jen Lopez</a>
 						</span> 
 						<span>서울시 은평구 신사동</span> 
 						<span><i class="fa fa-date"></i> Jan 30, 2016</span>
