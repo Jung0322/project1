@@ -3,12 +3,12 @@
 /* modify-info.jsp */
 /* 프로필 이미지 */
 .profile-img {
-	border-radius: 50%;
-	height: 90%;
+	border-radius: 100%;
+	height: 100%;
 	width: 100%;
 }
 .icon-camera {
-	border-radius: 50%;
+	border-radius: 100%;
 	width: 30px;
 	height: 30px;
 	position: absolute;

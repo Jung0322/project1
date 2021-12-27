@@ -24,8 +24,8 @@
 	                    	 <div class="profile-area">
 	                    	 	<input type="file" name="profileimgname" id="" class="profile-file"/>
 	                    	 	<label for="profile-label">
-		                    	 	<img src="/resources/images/portfolio-img1.jpg" alt="" class="profile-img" />
-		                    	 	<img src="/resources/images/ccoli.png" alt="" class="icon-camera" />
+		                    	 	<img src="/resources/images/temp-profile.png" alt="" class="profile-img" />
+		                    	 	<img src="/resources/images/add-img.png" alt="" class="icon-camera" />
 	                    	 	</label>
 	                    	 </div> <!-- profile-area end -->
 	                         <div class="member-info-id">

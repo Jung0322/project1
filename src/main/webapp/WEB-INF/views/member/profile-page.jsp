@@ -78,10 +78,8 @@
 					</div>
 					<div class="profile-form"> <!-- 임시로 만든 div. 곧 지울 예정. -->
 						temp - 다른 이미지 파일 찾아보기 
-						<div style="border-radius: 100%; border: 1px solid #808080; width: 90px; height: 90px; position: relative;">
-							<span style="position: absolute; left: 15px; top: 18px;">
-								<i class="fa fa-magnet fa-4x"></i>
-							</span>
+						<div style="width: 90px; height: 90px;">
+							<img src="/resources/images/temp-profile.png" class="profile-img" alt="" />
 						</div>
 					</div>
 					              
