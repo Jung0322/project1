@@ -102,17 +102,23 @@
 
 /* signIn.jsp 가운데 정렬 */
 /* div */
-.login-form {
-	width: 550px;
-	margin: 0 50px 0 205px;
+@media (min-width: 550px) {
+	.login-form {
+		width: 55%;
+		margin: 0 23%;
+	}
 }
-.login-btn {
-	width: 330px;
-	margin: 0 50px 0 318px;
+@media (min-width: 330px) {
+	.login-btn {
+		width: 34%;
+		margin: 0 34%;
+	}
 }
-.change-signUp {
-	width: 220px;
-	margin: 0 50px 0 370px;
+@media (min-width: 220px) {
+	.change-signUp {
+		width: 25%;
+		margin: 0 39%;
+	}
 }
 /* input:submit */
 #login-btn {
@@ -198,5 +204,26 @@
 .answer-info {
 	position: absolute;
 	left: 200px;
+	top: 0;
+}
+
+/* cashbook-page.jsp */
+/* 상단 닉네임 및 프사 부분 정렬 */
+.cashbook-member-info {
+	position: relative;
+}
+.cashbook-profile {
+	position: absolute;
+	top: 0;
+	left: 460px;
+	width: 90px;
+	height: 90px;
+}
+/* 중간 날짜부분 정렬 */
+.cashbook-icon {
+	position: relative;
+}
+.cashbook-trade-date {
+	position: absolute;
 	top: 0;
 }

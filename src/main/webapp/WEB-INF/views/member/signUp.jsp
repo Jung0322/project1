@@ -37,7 +37,7 @@
                          <div class="login-form">
                          	  <div class="modify-label">
 	                         	  <label for="mytown">내 동네</label>
-                         	  	  <input type="button" value="수정" class="modify-btn" onclick="goPopup();" />
+                         	  	  <input type="button" value="선택" class="modify-btn" onclick="goPopup();" />
                          	  </div>
                               <input type="text" id="mytown" name="mytown" class="form-control" placeholder="내 동네" readonly>
                          </div>
