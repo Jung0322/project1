@@ -179,8 +179,18 @@ values(
 );
 
 
- 
+-- 내 동네 더미데이터 삽입
+insert into myPlace(mno, userid, mcategory, title, content, regdate)
+values (myPlace_seq.nextval, '콜리', '동네생활', '산책 친구 구합니다.', '평일 오후에 불광천 산책할 친구구해요! 일주일에 2-3번 정도 같이 산책하면 좋을 것 같아요. 편하게 연락주세요');
 
+insert into myPlace(mno, userid, mcategory, title, content, regdate)
+values (myPlace_seq.nextval, '안경', '동네사건사고', '안경찾습니다.', '종각역 1번출구에서 떨어뜨린 것 같은데 아무리 찾아봐도 안보여요 ㅠㅠ 혹시 보신 분 연락부탁드립니다. 사례할께요!');
+
+insert into myPlace(mno, userid, mcategory, title, content, regdate)
+values (myPlace_seq.nextval, '지갑', '동네생활', '산책 친구 구합니다.', '평일 오후에 불광천 산책할 친구구해요! 일주일에 2-3번 정도 같이 산책하면 좋을 것 같아요. 편하게 연락주세요');
+
+insert into myPlace(mno, userid, mcategory, title, content, regdate)
+values (myPlace_seq.nextval, '마테차', '동네사건사고', '안경찾습니다.', '종각역 1번출구에서 떨어뜨린 것 같은데 아무리 찾아봐도 안보여요 ㅠㅠ 혹시 보신 분 연락부탁드립니다. 사례할께요!');
 
 -- 참고 primary key /foreign key 작성 
 --alter table spring_attach add constraint pk_attach primary key(uuid);
