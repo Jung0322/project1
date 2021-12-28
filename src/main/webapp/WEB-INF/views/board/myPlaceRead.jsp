@@ -24,7 +24,7 @@
 							<a href="/member/profile-page"><img src="/resources/images/ccoli.png" class="img-responsive img-circle">${dto.userid}</a>
 						</span> 
 						<span>서울시 은평구 신사동</span> 
-						<span><i class="fa fa-date"></i>${dto.regdate}</span>
+						<span><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></span>
 					</div>
 				</div>
 				<div>
@@ -52,10 +52,10 @@
 								imperdiet, wisi risus purus augue vulputate voluptate neque,
 								curabitur.</p>
 						</div>
+
 					</div>
 				</div>
 				<div class="blog-reply-form">
-					<h3>댓글 쓰기</h3>
 					<form action="#" method="post">
 						<textarea class="form-control" placeholder="댓글을 입력하세요." rows="5" name"Your Comments" required></textarea>
 						<div>

@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="read" resultType="com.company.domain.BoardDTO">
-		select mno, mcategory, title, userid, content from myplace
+		select mno, mcategory, title, userid, content, regdate from myplace
 		where mno = #{mno}
 	</select>
 </mapper>
