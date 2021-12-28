@@ -8,24 +8,24 @@
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <meta name="author" content="" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 <title>Magnet - Minimal Portfolio Template</title>
 
+<!-- 부트스트랩 -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/resources/css/font-awesome.min.css" />
 
-<!-- Main css -->
+<!-- fontawesome -->
+<!-- <link rel="stylesheet" href="/resources/css/font-awesome.min.css" /> -->
+<script src="https://kit.fontawesome.com/84524c7dde.js" crossorigin="anonymous"></script>
+
+<!-- 공통css -->
 <link rel="stylesheet" href="/resources/css/style.css" />
+
+<!-- 폰트(글자 종류) api -->
 <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet" />
-<!-- Main css -->
 
 
-
-
-
-<!-- Shop css -->
 
 </head>
 <body>
@@ -53,7 +53,7 @@
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="active"><a href="/index">상품</a></li>
-					<li><a href="/myPlace">내동네</a></li>
+					<li><a href="/board/myPlace">내동네</a></li>
 					<li><a href="/auction">경매</a></li>
 					<li><a href="/member/signIn">로그인</a></li>
 				</ul>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.mapper.BoardMapper">
+	
+	<insert id="insert">
+		insert into myPlace(mno, userid, mcategory, title, content)
+		values (myPlace_seq.nextval, #{userid}, #{mcategory}, #{title}, #{content})
+	</insert>
+
+	<select id="listAll" resultType="com.company.domain.BoardDTO">
+		select mno, mcategory, title, userid, content, regdate, updatedate from myPlace
+		where mno>0 order by mno desc, regdate desc
+	</select>
+	
+	<select id="read" resultType="com.company.domain.BoardDTO">
+		select mno, mcategory, title, userid, content from myplace
+		where mno = #{mno}
+	</select>
+</mapper>

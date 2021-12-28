@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="/resources/css/myPlace.css" />
 <link rel='stylesheet' href='/resources/css/woocommerce-layout.css'
 	type='text/css' media='all' />
@@ -8,8 +7,6 @@
 	type='text/css' media='all' />
 <script src="https://kit.fontawesome.com/84524c7dde.js"
 	crossorigin="anonymous"></script>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
 <%@ include file="../includes/header.jsp"%>
 
 <!-- Blog Section -->
@@ -20,33 +17,36 @@
 			<div class="row">
 				<div class="col-md-offset-1 col-md-10 col-sm-12">
 					<div class="writeButton">
-						<input type="submit" class="form-control" id="writeButton" value="글 작성" onclick="location.href='/board/write'">
+						<input type="submit" class="form-control" id="writeButton" value="글 작성" onclick="location.href='/write'">
 					</div>
-					<c:forEach var="dto" items="${list}">
-					<div class="blog-post">
+					<div class="blog-post-thumb">
 						<div class="blog-post-title">
-							<span>${dto.mcategory}</span>
+							<span>동네질문</span>
 							<h3>
-								<a href="${dto.mno}" class="move">${dto.title}</a>
+								<a href="/read">We Help You Create Perfect Modern Design</a>
 							</h3>
 						</div>
 						<div class="blog-post-format">
 							<span>
-								<a href="/member/profile-page">
-									<img src="/resources/images/ccoli.png" class="img-responsive img-circle"> ${dto.userid}
+								<a href="#">
+									<img src="/resources/images/ccoli.png" class="img-responsive img-circle"> Jen Lopez
 								</a>
 							</span> 
 							<span>서울시 종로구 관철동</span> 
-							<span><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></span>
+							<span> Jan 30, 2016</span>
 						</div>
 						<div class="blog-post-des">
-							<p>${dto.content}</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+								sed do eiusmod tempor incididunt ut labore et dolore magna
+								aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+								ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+								aute irure dolor in reprehenderit in voluptate velit esse cillum
+								dolore eu fugiat nulla pariatur.</p>
 						</div>
 						<div class="blog-post-format" id="ques">
 							<span><i class="far fa-grin"></i> 궁금해요</span>
 						</div>
 					</div>
-					</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -61,9 +61,5 @@
 		</ul>
 	</nav>
 
-<form action="" method="get" id="actionForm">
-	<input type="hidden" name="mno" value=""/>
-</form>
 
-<script src="/resources/js/myPlace.js"></script>
-<%@ include file="../includes/footer.jsp"%>
+	<%@ include file="../includes/footer.jsp"%>

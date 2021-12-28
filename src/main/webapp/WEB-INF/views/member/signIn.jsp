@@ -16,7 +16,7 @@
                          <h2>콜리님, 어서오세요. 브로콜리 마켓입니다.</h2>
                     </div>
 
-                    <form action="signIn" method="post">
+                    <form action="/member/signIn" method="post">
                          <!-- <div class="col-md-8"> --> 
                          <div class="login-form"> 
                          	  <label for="userid">아이디</label>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	
+   pageEncoding="UTF-8"%>
+   
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -24,7 +24,7 @@
           <div class="row">
 
                <div class="col-md-offset-1 col-md-10 col-sm-12">
-                    <form action="#" method="post">
+                    <form action="" method="post" role="form">
                          <div class="col-md-6 col-sm-6">
                               <select class="form-control">
                                    <option>동네질문</option>
@@ -34,39 +34,39 @@
                               </select>
                          </div>
                          <div class="col-md-6 col-sm-6">
-                              <input type="text" class="form-control" placeholder="글 작성자" readonly="readonly">
+                              <input type="text" class="form-control" placeholder="글 작성자" >
                          </div>
                          <div class="col-md-12 col-sm-6">
-                              <input type="text" class="form-control" placeholder="글 제목" id="writeTitle">
+                              <input type="text" class="form-control" placeholder="글 제목" >
                          </div>
-						 <div>
-						 </div>
-                         <div class="col-md-12 col-sm-6"> 
-							<div id="summernote"></div>
-							    <script>
-							      $('#summernote').summernote({
-							    	  height: 300,                 // 에디터 높이
-									  minHeight: null,             // 최소 높이
-									  maxHeight: null,             // 최대 높이
-									  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-									  lang: "ko-KR",					// 한글 설정
-									  placeholder: "내용을 작성해주세요",
-									  toolbar: [
-										  ['fontname', ['fontname']],
-										  ['fontsize', ['fontsize']],
-										  ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-										  ['color', ['forecolor','color']],
-										  ['para', ['ul', 'ol', 'paragraph']],
-										  ['height', ['height']],
-										  ['insert',['picture','link']],
-										  ['view', ['fullscreen', 'help']]
-									  ]
-							      });
-							    </script>
+                   <div>
+                   </div>
+                    <div class="col-md-12 col-sm-6" id="textArea"> 
+                     <div id="summernote"></div>
+                         <script>
+                           $('#summernote').summernote({
+                              height: 300,                 // 에디터 높이
+                             minHeight: null,             // 최소 높이
+                             maxHeight: null,             // 최대 높이
+                             focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+                             lang: "ko-KR",               // 한글 설정
+                             placeholder: "내용을 작성해주세요",
+                             toolbar: [
+                                ['fontname', ['fontname']],
+                                ['fontsize', ['fontsize']],
+                                ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+                                ['color', ['forecolor','color']],
+                                ['para', ['ul', 'ol', 'paragraph']],
+                                ['height', ['height']],
+                                ['insert',['picture','link']],
+                                ['view', ['fullscreen', 'help']]
+                             ]
+                           });
+                         </script>
                          </div>
                          <div>
+                              <input type="button" class="form-control"  id="listButton2" onclick="location.href='/board/myPlace'" value="목록보기">  
                               <input type="submit" class="form-control"  id="successButton" value="글 올리기">
-                              <input type="button" class="form-control"  id="listButton" onclick="location.href='/myPlace'" value="목록보기">  
                          </div>
                     </form>
                </div>
@@ -74,5 +74,5 @@
           </div>
      </div>
 </section>
-
+<script src="/resources/js/upload.js"></script>  
 <%@ include file="../includes/footer.jsp"%>

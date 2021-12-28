@@ -27,22 +27,19 @@
                               <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호">
                          </div>
                          <div class="login-form">
-                              <label for="password-check">비밀번호 확인</label>
+                              <label for="password-check">비밀번호 재확인</label>
                               <input type="password" name="passwordCheck" id="password-check" class="form-control" placeholder="비밀번호 재확인">
-                         </div>
-                         <div class="login-form">
-                         	  <button style="color:white; background-color: black; border-radius: 12px;	font-family:'Nanum Gothic';"
-                         	  onclick="goPopup();">
-                         	  주소검색</button>
-                              <input type="text" id="address" name="address" class="form-control" placeholder="주소" readonly>
-                         </div>
-                         <div class="login-form">
-                         	  <label for="email">이메일</label>
-                              <input type="text" name="email" class="form-control" placeholder="이메일">
                          </div>
                          <div class="login-form">
                               <label for="nickname">닉네임</label>
                               <input type="text" name="nickname" id="nickname" class="form-control" placeholder="닉네임">
+                         </div>
+                         <div class="login-form">
+                         	  <div class="modify-label">
+	                         	  <label for="mytown">내 동네</label>
+                         	  	  <input type="button" value="선택" class="modify-btn" onclick="goPopup();" />
+                         	  </div>
+                              <input type="text" id="mytown" name="mytown" class="form-control" placeholder="내 동네" readonly>
                          </div>
                          <div class="login-form">
                               <label for="email">이메일</label>
@@ -52,16 +49,14 @@
                               <label for="phone">휴대전화</label>
                               <input type="text" name="phone" id="phone" class="form-control" placeholder="휴대전화">
                          </div>
-                         <div class="login-form">
-                              <label for="mytwon">내 동네</label>
-                              <input type="text" name="mytown" id="mytown" class="form-control" placeholder="내 동네">
-                         </div>
                          
                          <div class="col-md-3 insert-btn-area">
                               <input type="submit" class="form-control" id="insert-btn" value="회원가입">
                          </div>
                          <div class="col-md-3">
-                              <input type="button" class="cancel-btn" value="취소">
+                         	  <a href="/member/signIn">
+                              	<input type="button" class="cancel-btn" value="취소">
+                              </a>
                          </div>
                     </form>
                </div>
@@ -69,6 +64,7 @@
           </div>
      </div>
 </section>
+
 <script>
 function goPopup(e){
 	// 주소검색을 수행할 팝업 페이지를 호출합니다.
@@ -82,7 +78,7 @@ function goPopup(e){
 
 function jusoCallBack(roadFullAddr,jibunAddr){
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-		var addressEl =  document.querySelector("#address");
+		var addressEl =  document.querySelector("#mytown");
 		addressEl.value = roadFullAddr;
 		
 		/* document.form.roadFullAddr.value = roadFullAddr;

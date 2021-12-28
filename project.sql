@@ -1,4 +1,5 @@
 -- 회원
+select *from basket;
 --1.  user 테이블
 create table member (
     userid varchar2(50) not null, -- 아이디(pk)
@@ -24,6 +25,8 @@ create table basket (
 	bno number(10) not null, -- 글번호(pk)
 	userid varchar2(50) not null, -- 아이디
 	pno number(10) not null, -- 동네생활 글번호
+	CONSTRAINT fk_userid FOREIGN KEY(userid)
+         REFERENCES member(userid) ON DELETE CASCADE,
 	CONSTRAINT pk_basket PRIMARY KEY (bno) -- pk
 );
 -- 장바구니 테이블 글번호 시퀀스
@@ -32,11 +35,11 @@ CREATE SEQUENCE basket_seq INCREMENT BY 1 START WITH 1;
 
 
 
-
 -- 동네생활
 -- 4. 게시판(동네생활) 테이블
 create table myPlace (
 	mno number(10) not null, -- 글번호(pk)
+	mcategory varchar2(20) not null, -- 카테고리
 	userid varchar2(50) not null, -- 아이디
 	title varchar2(100) not null, -- 제목
 	content varchar2(2000) not null, -- 내용
@@ -92,8 +95,8 @@ create table product (
 	reservation number(2) default 0, -- 예약 여부
 	soldout number(2) default 0, -- 판매 여부
 	userid varchar2(50) not null, -- 아이디
-	CONSTRAINT fk_userid FOREIGN KEY(userid)
-         REFERENCES member(userid) ON DELETE CASCADE
+	CONSTRAINT Pfk_userid FOREIGN KEY(userid)
+         REFERENCES member(userid) ON DELETE CASCADE,
 	CONSTRAINT pk_product PRIMARY KEY (pno) -- pk
 );
 -- 상품 테이블 글번호 시퀀스
@@ -105,8 +108,8 @@ create table productimg (
 	pno number(10) not null, -- 상품 테이블 글번호
 	puploadPath varchar2(50) not null, -- 상품 파일 업로드 경로
 	pimgname varchar2(50) not null, -- 상품 이미지 이름
-	CONSTRAINT fk_pno FOREIGN KEY(pno)
-         REFERENCES product(pno) ON DELETE CASCADE
+	CONSTRAINT PIfk_pno FOREIGN KEY(pno)
+         REFERENCES product(pno) ON DELETE CASCADE,
 	CONSTRAINT pk_productImg PRIMARY KEY (puuid) -- pk
 );
 
@@ -123,8 +126,8 @@ create table auction (
 	enddate DATE not null, -- 끝나는 시간(날짜)
 	startprice number(10) not null, -- 시작 가격
 	soldout number(2) default 0, -- 판매(완료) 여부  / 0 : 미판매, 1 : 판매완료, 2 : 낙찰 후 합의 중?
-	CONSTRAINT fk_userid FOREIGN KEY(userid)
-         REFERENCES member(userid) ON DELETE CASCADE
+	CONSTRAINT Afk_userid FOREIGN KEY(userid)
+         REFERENCES member(userid) ON DELETE CASCADE,
 	CONSTRAINT pk_Auction PRIMARY KEY (ano) -- pk
 );
 -- 경매 테이블 글번호 시퀀스
@@ -138,8 +141,8 @@ CREATE TABLE auctionreply (
     content varchar2(2000)   NOT NULL, -- 댓글 내용
     regdate date   NOT NULL, -- 작성날짜
     updatedate date   NOT NULL, -- 수정날짜
-    CONSTRAINT fk_ano FOREIGN KEY(ano)
-         REFERENCES auction(ano) ON DELETE CASCADE
+    CONSTRAINT ARfk_ano FOREIGN KEY(ano)
+         REFERENCES auction(ano) ON DELETE CASCADE,
     CONSTRAINT pk_AuctionReply PRIMARY KEY (arno) -- pk
 );
 -- 경매장 댓글 테이블 글번호 시퀀스
@@ -151,12 +154,12 @@ create table auctionimg (
 	ano number(10) not null, -- 경매장 테이블 글번호
 	auploadPath varchar2(50) not null, -- 경매장 파일 업로드 경로
 	aimgname varchar2(50) not null, -- 경매장 이미지 이름
-	CONSTRAINT fk_ano FOREIGN KEY(ano)
-         REFERENCES auction(ano) ON DELETE CASCADE
+	CONSTRAINT AIfk_ano FOREIGN KEY(ano)
+         REFERENCES auction(ano) ON DELETE CASCADE,
 	CONSTRAINT pk_AuctionImg PRIMARY KEY (auuid) -- pk
 );
 
-
+select* from  member;
 
 -- 회원 더미 데이터 삽입
 insert into 
@@ -174,11 +177,7 @@ insert into
 values(
     'haha2', '123', '하하', 'ha12@ccoli.com', '1234', '서울시 종로구 종로3가'
 );
-insert into 
-    member(userid, password, nickname, email, phone, mytown)
-values(
-    'haha2', '123', '하하', 'ha12@ccoli.com', '1234', '서울시 종로구 종로3가'
-);
+
 
  
 
