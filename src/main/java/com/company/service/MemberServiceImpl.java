@@ -17,4 +17,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.login(loginDto) > 0 ? true : false;
 	}
 
+	@Override
+	public boolean insertMember(MemberDTO insertDto) {
+		return memberMapper.insertMember(insertDto) > 0 ? true : false;
+	}
+
 }

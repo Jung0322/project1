@@ -76,10 +76,11 @@ function goPopup(e){
 }
 
 
-function jusoCallBack(roadFullAddr,jibunAddr){
+/* function jusoCallBack(roadFullAddr,jibunAddr){ */
+function jusoCallBack(siNm, sggNm, emdNm, liNm){
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
 		var addressEl =  document.querySelector("#mytown");
-		addressEl.value = roadFullAddr;
+		addressEl.value = siNm+" "+sggNm+" "+emdNm+" "+liNm;
 		
 		/* document.form.roadFullAddr.value = roadFullAddr;
 		document.form.jibunAddr.value = jibunAddr; */

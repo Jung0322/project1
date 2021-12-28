@@ -7,8 +7,12 @@
 <% 
 	request.setCharacterEncoding("UTF-8");  //한글깨지면 주석제거
 	String inputYn = request.getParameter("inputYn"); 
-	String roadFullAddr = request.getParameter("roadFullAddr"); 
-	String jibunAddr = request.getParameter("jibunAddr"); 
+	//String roadFullAddr = request.getParameter("roadFullAddr"); // 도로명 주소
+	//String jibunAddr = request.getParameter("jibunAddr"); // 지번 주소
+	String siNm  = request.getParameter("siNm"); // 시도명
+	String sggNm  = request.getParameter("sggNm"); // 시군구
+	String emdNm  = request.getParameter("emdNm"); // 읍면동
+	String liNm  = request.getParameter("liNm"); // 법정리
 
 %>
 </head>
@@ -24,7 +28,7 @@
 function init(){
 	var url = location.href;
 	var confmKey = "U01TX0FVVEgyMDIxMTIyNDE3MDg1MjExMjA2NTk=";
-	var resultType = "4"; // 도로명주소 검색결과 화면 출력내용, 1 : 도로명, 2 : 도로명+지번+상세보기(관련지번, 관할주민센터), 3 : 도로명+상세보기(상세건물명), 4 : 도로명+지번+상세보기(관련지번, 관할주민센터, 상세건물명)
+	var resultType = "1"; // 도로명주소 검색결과 화면 출력내용, 1 : 도로명, 2 : 도로명+지번+상세보기(관련지번, 관할주민센터), 3 : 도로명+상세보기(상세건물명), 4 : 도로명+지번+상세보기(관련지번, 관할주민센터, 상세건물명)
 	var inputYn= "<%=inputYn%>";
 	if(inputYn != "Y"){
 		document.form.confmKey.value = confmKey;
@@ -34,7 +38,8 @@ function init(){
 		//document.form.action="https://www.juso.go.kr/addrlink/addrMobileLinkUrl.do"; //모바일 웹인 경우, 인터넷망
 		document.form.submit();
 	}else{
-		opener.jusoCallBack("<%=roadFullAddr%>","<%=jibunAddr%>");
+		<%-- opener.jusoCallBack("<%=roadFullAddr%>","<%=jibunAddr%>"); --%>
+		opener.jusoCallBack("<%=siNm%>","<%=sggNm%>","<%=emdNm%>","<%=liNm%>");
 		window.close();  // 막히는 부분 
 		}
 }
