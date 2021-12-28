@@ -26,7 +26,7 @@
 					<div class="blog-post">
 						<div class="blog-post-title">
 							<span>${dto.mcategory}</span>
-							<h3>
+							<h3 id="listTitle">
 								<a href="${dto.mno}" class="move">${dto.title}</a>
 							</h3>
 						</div>

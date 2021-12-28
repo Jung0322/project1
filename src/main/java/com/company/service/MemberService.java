@@ -4,4 +4,5 @@ import com.company.domain.MemberDTO;
 
 public interface MemberService {
 	public boolean login(MemberDTO loginDto);
+	public boolean insertMember(MemberDTO insertDto);
 }

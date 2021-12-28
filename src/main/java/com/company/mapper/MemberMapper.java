@@ -4,4 +4,5 @@ import com.company.domain.MemberDTO;
 
 public interface MemberMapper {
 	public int login(MemberDTO loginDto);
+	public int insertMember(MemberDTO insertDto);
 }

@@ -70,7 +70,7 @@
 
 
 .woocommerce-pagination {
-	margin-bottom: 50px
+	margin-bottom: 50px 	
 }
 
 .blog-context {
@@ -93,9 +93,8 @@
 }
 
 .blog-reply-form {
-	border-top: 1px solid #f0f0f0;
-	margin-top: 42px;
-	padding-top: 42px;
+	margin-top: 15px;
+	padding-top: 15px;
 }
 
 .blog-post-des {
@@ -103,7 +102,23 @@
 	overflow: hidden; /* 지정된 라인 수를 넘어갈 경우 */
 	display: -webkit-box; /* 해당 영역을 box 형태로 관리 */
 	-webkit-line-clamp: 2; /* 컨텐츠의 최대 라인수 지정*/
-	-webkit-box-orient: vertical; /* box내의 정렬을 수직으로 하도록 함 */
+	-webkit-box-orient: vertical; /* box내의 정렬을 수직으로 하도록 함 */ 
+}
+
+.blog-post {
+	  border-bottom: 1px solid #f0f0f0;
+	  padding-top: 12px; /* 게시물과 구분선 상단 간격*/
+	  padding-bottom: 12px; /* 게시물과 구분선 하단 간격*/
+	  margin-bottom: 32px;	 
+}
+
+.blog-post-title h2{
+	font-size: 25px;
+	
+}
+
+.move {
+	font-size: 20px;
 }
 
 #ques {
@@ -114,10 +129,4 @@
 	margin-top: 15px;
 }
 
-.blog-post {
-	border-bottom: 1px solid #f0f0f0;
-	  padding-top: 12px; /* 게시물과 구분선 하단 간격*/
-	  padding-bottom: 12px; /* 게시물과 구분선 하단 간격*/
-	  margin-bottom: 32px;	
-}
 
