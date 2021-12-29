@@ -1,12 +1,19 @@
 package com.company.domain;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
-@Data
 @AllArgsConstructor
 @ToString
+@Getter
+@Setter
+@NoArgsConstructor
 public class ProductDTO {
 	private int pno;		//	pno number(10) not null,
 	private String category;//	category varchar2(20) not null,
@@ -20,4 +27,7 @@ public class ProductDTO {
 	
 	
 	private String userid;	//	userid varchar2(50) not null,
+	
+	//첨부파일 정보 받기
+	private List<AttachProductDTO> attachList;
 }

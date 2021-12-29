@@ -99,6 +99,8 @@ create table product (
          REFERENCES member(userid) ON DELETE CASCADE,
 	CONSTRAINT pk_product PRIMARY KEY (pno) -- pk
 );
+
+
 -- 상품 테이블 글번호 시퀀스
 CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1;
 
@@ -130,6 +132,10 @@ create table auction (
          REFERENCES member(userid) ON DELETE CASCADE,
 	CONSTRAINT pk_Auction PRIMARY KEY (ano) -- pk
 );
+
+-- 경매 테이블 내용 칼럼 추가
+ALTER TABLE auction  ADD content varchar2(2000) not null;
+
 -- 경매 테이블 글번호 시퀀스
 CREATE SEQUENCE auction_seq INCREMENT BY 1 START WITH 1;
 
@@ -159,7 +165,7 @@ create table auctionimg (
 	CONSTRAINT pk_AuctionImg PRIMARY KEY (auuid) -- pk
 );
 
-select* from  member;
+select* from  productimg;
 
 -- 회원 더미 데이터 삽입
 insert into 

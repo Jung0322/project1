@@ -21,23 +21,30 @@
                          <h2>중고거래 상품 등록</h2>
                     </div>
 
-                    <form action="/product/product-registration" method="post">
+                    <form action="/product/product-registration" method="post" role="form">
                          <div class="col-md-6 col-sm-6">
-                              <input type="text" class="form-control" placeholder="제목">
+                              <input type="text" class="form-control" placeholder="제목" name="title" required />
                          </div>
                          <div class="col-md-6 col-sm-6">
-                              <input type="number" class="form-control" placeholder="가격">
+                              <input type="number" class="form-control" placeholder="가격" name="price" required />
                          </div>
-                         <div class="col-md-6 col-sm-6">
-                              <select class="form-control">
-                                   <option>택배가능 여부</option>
+                         <div class="col-md-4 col-sm-4">
+                              <select class="form-control" name="delivery">
+                                   <option value="" >택배가능 여부</option>
                                    <option value=1>가능</option>
                                    <option value=0>불가능</option>
                               </select>
                          </div>
-                         <div class="col-md-6 col-sm-6">
-                              <select class="form-control">
-                                   <option value="카테고리">카테고리</option>
+                          <div class="col-md-4 col-sm-4">
+                              <select class="form-control" name="discount">
+                                   <option value="" >내고가능 여부</option>
+                                   <option value=1>가능</option>
+                                   <option value=0>불가능</option>
+                              </select>
+                         </div>
+                         <div class="col-md-4 col-sm-4">
+                              <select class="form-control" name="category">
+                                   <option value="">카테고리</option>
                                    <option value="디지털기기">디지털기기</option>
                                    <option value="생활가전">생활가전</option>
                                    <option value="가구/인테리어">가구/인테리어</option>
@@ -48,7 +55,7 @@
                               </select>
                          </div>
                          <div class="col-md-12 col-sm-12"> 
-                              <textarea class="form-control" rows="5" placeholder="상품 상세정보를 입력해주세요."></textarea>
+                              <textarea class="form-control" rows="5" placeholder="상품 상세정보를 입력해주세요." name="content" required></textarea>
                          </div>
                          <div class="row">
 							<div class="col-md-12 col-sm-12">

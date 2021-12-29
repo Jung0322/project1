@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel='stylesheet' href='/resources/css/woocommerce-layout.css' type='text/css' media='all'/>
 <link rel='stylesheet' href='/resources/css/woocommerce.css' type='text/css' media='all'/>
 	<%@ include file="../includes/header.jsp" %>
@@ -17,12 +21,12 @@
                          <h2>중고 경매거래 상품 등록</h2>
                     </div>
 
-                    <form action="#" method="post">
+                    <form action="#" method="post" role="form">
                          <div class="col-md-6 col-sm-6">
-                              <input type="text" class="form-control" placeholder="제목">
+                              <input type="text" class="form-control" placeholder="제목" name="title">
                          </div>
                          <div class="col-md-6 col-sm-6">
-                              <select class="form-control">
+                              <select class="form-control" name="category">
                                    <option>카테고리</option>
                                    <option>디지털기기</option>
                                    <option>생활가전</option>
@@ -34,16 +38,16 @@
                               </select>
                          </div>
                          <div class="col-md-4 col-sm-4">
-                              <input type="datetime-local" class="form-control" placeholder="시작시간">
+                              <input type="datetime-local" class="form-control" placeholder="시작시간" name="startdate">
                          </div>
                          <div class="col-md-4 col-sm-4">
-                              <input type="datetime-local" class="form-control" placeholder="마감시간">
+                              <input type="datetime-local" class="form-control" placeholder="마감시간" name="enddate">
                          </div>
                          <div class="col-md-4 col-sm-4">
-                              <input type="number" class="form-control" placeholder="시작가격">
+                              <input type="number" class="form-control" placeholder="시작가격" name="startprice">
                          </div>
                          <div class="col-md-12 col-sm-12"> 
-                              <textarea class="form-control" rows="5" placeholder="상품 상세정보를 입력해주세요."></textarea>
+                              <textarea class="form-control" rows="5" placeholder="상품 상세정보를 입력해주세요." name="content"></textarea>
                          </div>
                          <div class="row">
 							<div class="col-md-12 col-sm-12">
@@ -60,7 +64,9 @@
 								</div>
 							</div>
 						</div>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                          <div class="col-md-8">
+                         
                               <input id="registration" type="submit" class="form-control" value="등록">
                          </div>
                     </form>
@@ -72,11 +78,16 @@
 	
 	
 	
-	
+<script>
+	//ajax 동작시 헤더 값에 포함해서 보낼 csrf 토큰 값 설정
+	let csrfHeaderName = "${_csrf.headerName}";
+	let csrfTokenValue= "${_csrf.token}";
+</script>	
 	
 	
 	
 <!-- #page -->
+<script src='/resources/js/auction-product-registration.js'></script>
 <script src='/resources/js/shopjs.js'></script>
 <script src='/resources/js/plugins.js'></script>
 <script src='/resources/js/scripts.js'></script>

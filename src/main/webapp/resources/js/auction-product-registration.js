@@ -12,9 +12,9 @@ $(function(){
 		$(".uploadResult ul li").each(function(i,obj){
 			var ele = $(obj);
 			
-			str +="<input type='hidden' name='attachList["+i+"].puuid' value='"+ele.data('uuid')+"'>";
-			str +="<input type='hidden' name='attachList["+i+"].puploadPath' value='"+ele.data('path')+"'>";
-			str +="<input type='hidden' name='attachList["+i+"].pimgname' value='"+ele.data('filename')+"'>";
+			str +="<input type='hidden' name='attachList["+i+"].auuid' value='"+ele.data('uuid')+"'>";
+			str +="<input type='hidden' name='attachList["+i+"].auploadPath' value='"+ele.data('path')+"'>";
+			str +="<input type='hidden' name='attachList["+i+"].aimgname' value='"+ele.data('filename')+"'>";
 		})
 		
 		console.log("form");
@@ -22,12 +22,6 @@ $(function(){
 		
 		if($("select[name='category']").val()==''){
 			alert("카테고리를 입력하세요");
-			return;
-		}else if($("select[name='delivery']").val()==''){
-			alert("택배가능 여부를 입력하세요");
-			return;
-		}else if($("select[name='discount']").val()==''){
-			alert("내고가능 여부를 입력하세요");
 			return;
 		}else if(str==""){
 			alert("상품사진을 첨부하세요");
@@ -72,7 +66,7 @@ $(function(){
 		//contentType:false (application/x-www-form-urlencoded 로 보낼 것인가?)
 		
 		$.ajax({
-			url:'/uploadAjax',
+			url:'/AuploadAjax',
 			type:'post',
 			processData:false,
 			contentType:false,
@@ -104,17 +98,17 @@ $(function(){
 				//썸네일 이미지 경로 생성
 				//encodeURIComponent(): 영어,숫자랑 입부 특수문자는 인코딩 하지 않음
 				//encodURI(): 영어,숫자,특수문자 인코딩 안함(공백은 인코딩 ) 
- 				 var fileCallPath = encodeURIComponent(obj.puploadPath+"\\s_"+obj.puuid+"_"+obj.pimgname);
+ 				 var fileCallPath = encodeURIComponent(obj.auploadPath+"\\s_"+obj.auuid+"_"+obj.aimgname);
                
 			   //원본 이미지 경로 생성
-				var originPath = obj.puploadPath+"\\"+obj.puuid+"_"+obj.pimgname;
+				var originPath = obj.auploadPath+"\\"+obj.auuid+"_"+obj.aimgname;
 				originPath = originPath.replace(new RegExp(/\\/g),"/");
 				
 				
-               str+="<li data-path='"+obj.puploadPath+"' data-uuid='"+obj.puuid+"'";
-			   str+=" data-filename='"+obj.pimgname+"'>";
-               str+="<img src='/display?fileName="+fileCallPath+"'>";
-			   str+="<div>"+obj.pimgname+"</a> ";
+               str+="<li data-path='"+obj.auploadPath+"' data-uuid='"+obj.auuid+"'";
+			   str+=" data-filename='"+obj.aimgname+"'>";
+               str+="<img src='/Adisplay?fileName="+fileCallPath+"'>";
+			   str+="<div>"+obj.aimgname+"</a> ";
 			   str+="<button type='button' class='btn btn-warning btn-circle btn-sm' data-file='"+fileCallPath+"'><i class='fa fa-times'></i></button>";
       		   str+="</div></li>";            
          })   
@@ -149,7 +143,7 @@ $(function(){
 		var targetLi = $(this).closest("li");
 		
 		$.ajax({
-			url:'/deleteFile',
+			url:'/AdeleteFile',
 			type:'post',
 			/*beforeSend:function(xhr){
 				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue)
