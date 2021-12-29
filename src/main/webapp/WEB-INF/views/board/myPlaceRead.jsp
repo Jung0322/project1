@@ -21,9 +21,9 @@
 					</div>
 					<div class="blog-post-format">
 						<span>
-							<a href="/member/profile-page"><img src="/resources/images/ccoli.png" class="img-responsive img-circle">${dto.userid}</a>
+							<a href="/member/profile-page"><img src="/resources/images/ccoli.png" class="img-responsive img-circle">${dto.nickname}</a>
 						</span> 
-						<span>서울시 은평구 신사동</span> 
+						<span>${dto.mytown}</span> 
 						<span><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></span>
 					</div>
 				</div>
@@ -47,8 +47,10 @@
 							<img src="/images/heart.png" class="img-responsive img-circle" alt="Blog Image">
 						</div>
 						<div class="media-body">
-							<span>Omar Larus</span> <span>7 months ago</span>
-							<p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo
+							<span name="nickname">Omar Larus</span> 
+							<span name="mytown">서울시 은평구 신사동</span>
+							<span name="regdate">7 months ago</span>
+							<p name="content">Lorem ipsum dolor sit amet, maecenas eget vestibulum justo
 								imperdiet, wisi risus purus augue vulputate voluptate neque,
 								curabitur.</p>
 						</div>
@@ -57,9 +59,9 @@
 				</div>
 				<div class="blog-reply-form">
 					<form action="#" method="post">
-						<textarea class="form-control" placeholder="댓글을 입력하세요." rows="5" name"Your Comments" required></textarea>
+						<textarea class="form-control" placeholder="댓글을 입력하세요." rows="5" id="replyContent"></textarea>
 						<div>
-							<input type="button" class="form-control" id="replyButton" value="댓글입력">
+							<input type="submit" class="form-control" id="replyButton" value="댓글입력">
 						</div>
 					</form>
 				</div>
@@ -68,5 +70,6 @@
 	</div>
 </section>
 
+<script src="/resources/js/reply.js"></script> 
 <script src="/resources/js/myPlace.js"></script> 
 <%@ include file="../includes/footer.jsp"%>

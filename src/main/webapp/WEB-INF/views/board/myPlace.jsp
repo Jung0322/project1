@@ -33,10 +33,10 @@
 						<div class="blog-post-format">
 							<span>
 								<a href="/member/profile-page">
-									<img src="/resources/images/ccoli.png" class="img-responsive img-circle"> ${dto.userid}
+									<img src="/resources/images/ccoli.png" class="img-responsive img-circle"> ${dto.nickname}
 								</a>
 							</span> 
-							<span>서울시 종로구 관철동</span> 
+							<span>${dto.mytown}</span> 
 							<span><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></span>
 						</div>
 						<div class="blog-post-des">
@@ -63,6 +63,7 @@
 
 <form action="" method="get" id="actionForm">
 	<input type="hidden" name="mno" value=""/>
+
 </form>
 
 <script src="/resources/js/myPlace.js"></script>

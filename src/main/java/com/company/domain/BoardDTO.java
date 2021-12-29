@@ -23,5 +23,8 @@ public class BoardDTO {
 	private int curious; // 궁금해요/공감해요 갯수
 	
 	private String userid;
+	private String nickname;
+	private String mytown;
+
 
 }

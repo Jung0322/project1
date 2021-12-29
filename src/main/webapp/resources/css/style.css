@@ -502,7 +502,7 @@ a:hover, a:active, a:focus {
 }
 
 .blog-post-format {
-  padding-bottom: 22px;
+  padding-bottom: 12px;
 }
 
 .blog-post-format span {
@@ -516,7 +516,7 @@ a:hover, a:active, a:focus {
 
 .blog-post-format span img {
   display: inline-block;
-  width: 42px;
+  width: 32px;
   margin-right: 4px;
 }
 
