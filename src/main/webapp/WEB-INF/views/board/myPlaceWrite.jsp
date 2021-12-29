@@ -35,7 +35,7 @@
                               </select>
                          </div>
                          <div class="col-md-6 col-sm-6">
-                              <input type="text" class="form-control" name="userid" placeholder="글 작성자" >
+                              <input type="text" class="form-control" name="userid" placeholder="글 작성자"  readonly="readonly">
                          </div>
                          <div class="col-md-12 col-sm-6">
                               <input type="text" class="form-control" name="title" placeholder="글 제목" >

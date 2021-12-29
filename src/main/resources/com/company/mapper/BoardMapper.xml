@@ -8,12 +8,14 @@
 	</insert>
 
 	<select id="listAll" resultType="com.company.domain.BoardDTO">
-		select mno, mcategory, title, userid, content, regdate, updatedate from myPlace
+		select mno,myPlace.userid,title,content,regdate,mcount,mcategory,nickname, mytown 
+		from myPlace right outer join member on member.userid = myPlace.userid
 		where mno>0 order by mno desc, regdate desc
 	</select>
 	
 	<select id="read" resultType="com.company.domain.BoardDTO">
-		select mno, mcategory, title, userid, content, regdate from myplace
+		select mno,myPlace.userid,title,content,regdate,mcount,mcategory,nickname, mytown 
+		from myPlace right outer join member on member.userid = myPlace.userid
 		where mno = #{mno}
 	</select>
 </mapper>

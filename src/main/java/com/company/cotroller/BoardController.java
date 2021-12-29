@@ -64,8 +64,13 @@ public class BoardController {
 	}
 
 	@PostMapping("/write")
-	public String writePost(BoardDTO insertDTO, Model model) {
+	public String writePost(BoardDTO insertDTO, HttpSession session) {
 		log.info("글 작성하기" + insertDTO);
+
+//		MemberDTO memberDTO = (MemberDTO) session.getAttribute("loginDto");
+//		insertDTO.setUserid(memberDTO.getUserid());
+
+		
 		
 		service.register(insertDTO);
 		
