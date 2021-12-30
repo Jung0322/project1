@@ -1,13 +1,13 @@
 -- 회원
-select *from basket;
 --1.  user 테이블
 create table member (
     userid varchar2(50) not null, -- 아이디(pk)
-    password varchar2(50) not null, -- 비밀번호
+    password varchar2(100) not null, -- 비밀번호
     nickname varchar2(50) not null, -- 닉네임
     email varchar2(50) not null, -- 이메일
     phone varchar2(50) not null, -- 휴대전화
     mytown varchar2(50) not null, -- 내 동네
+    enabled char(1) default '1', -- 계정 사용 정보 
     CONSTRAINT pk_member PRIMARY KEY (userid) -- pk
 );
 
@@ -20,17 +20,14 @@ create table profileimg (
 	CONSTRAINT pk_profileImg PRIMARY KEY (pfuuid) -- pk
 );
 
--- 3. 장바구니 (찜목록)
-create table basket (
-	bno number(10) not null, -- 글번호(pk)
-	userid varchar2(50) not null, -- 아이디
-	pno number(10) not null, -- 동네생활 글번호
-	CONSTRAINT fk_userid FOREIGN KEY(userid)
-         REFERENCES member(userid) ON DELETE CASCADE,
-	CONSTRAINT pk_basket PRIMARY KEY (bno) -- pk
+-- 3. 유저 권한 테이블
+create table sp_member_authority(
+	userid varchar2(50) not null,
+	authority varchar2(50) not null
 );
--- 장바구니 테이블 글번호 시퀀스
-CREATE SEQUENCE basket_seq INCREMENT BY 1 START WITH 1;
+-- 외래키 제약 조건 생성
+alter table sp_member_authority add constraint fk_sp_member_authority
+foreign key(userid) references member(userid) ON DELETE CASCADE;
 
 
 
@@ -99,8 +96,6 @@ create table product (
          REFERENCES member(userid) ON DELETE CASCADE,
 	CONSTRAINT pk_product PRIMARY KEY (pno) -- pk
 );
-
-
 -- 상품 테이블 글번호 시퀀스
 CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1;
 
@@ -115,11 +110,21 @@ create table productimg (
 	CONSTRAINT pk_productImg PRIMARY KEY (puuid) -- pk
 );
 
-
+-- 9. 장바구니 (찜목록)
+create table basket (
+	bno number(10) not null, -- 글번호(pk)
+	userid varchar2(50) not null, -- 아이디
+	pno number(10) not null, -- 동네생활 글번호
+	CONSTRAINT fk_userid FOREIGN KEY(userid)
+         REFERENCES member(userid) ON DELETE CASCADE,
+	CONSTRAINT pk_basket PRIMARY KEY (bno) -- pk
+);
+-- 장바구니 테이블 글번호 시퀀스
+CREATE SEQUENCE basket_seq INCREMENT BY 1 START WITH 1;
 
 
 -- 경매
--- 9. 경매 테이블
+-- 10. 경매 테이블
 create table auction (
 	ano number(10) not null, -- 경매 글번호(pk)
 	userid varchar2(50) not null, -- 아이디
@@ -132,14 +137,10 @@ create table auction (
          REFERENCES member(userid) ON DELETE CASCADE,
 	CONSTRAINT pk_Auction PRIMARY KEY (ano) -- pk
 );
-
--- 경매 테이블 내용 칼럼 추가
-ALTER TABLE auction  ADD content varchar2(2000) not null;
-
 -- 경매 테이블 글번호 시퀀스
 CREATE SEQUENCE auction_seq INCREMENT BY 1 START WITH 1;
 
--- 10. 경매장 댓글 테이블
+-- 11. 경매장 댓글 테이블
 CREATE TABLE auctionreply (
     arno number(10)   NOT NULL, -- 경매장 댓글 글번호(pk)
     ano number(10)   NOT NULL, -- 경매장 테이블 글번호
@@ -154,7 +155,7 @@ CREATE TABLE auctionreply (
 -- 경매장 댓글 테이블 글번호 시퀀스
 CREATE SEQUENCE auctionreply_seq INCREMENT BY 1 START WITH 1;
 
--- 11. 경매 이미지 테이블
+-- 12. 경매 이미지 테이블
 create table auctionimg (
 	auuid varchar2(50) not null, -- uuid(pk)
 	ano number(10) not null, -- 경매장 테이블 글번호
@@ -165,9 +166,9 @@ create table auctionimg (
 	CONSTRAINT pk_AuctionImg PRIMARY KEY (auuid) -- pk
 );
 
-select* from  productimg;
+select* from  member;
 
--- 회원 더미 데이터 삽입
+-- 회원 더미 데이터 삽입 -> 시큐리티 적용 후에는 회원가입을 하셔야합니다
 insert into 
     member(userid, password, nickname, email, phone, mytown)
 values(
@@ -183,6 +184,11 @@ insert into
 values(
     'haha2', '123', '하하', 'ha12@ccoli.com', '1234', '서울시 종로구 종로3가'
 );
+-- 회원 더미 데이터의 권한 삽입
+insert into sp_member_authority(userid,authority) values ('haha','ROLE_USER');
+insert into sp_member_authority(userid,authority) values ('haha1','ROLE_USER');
+insert into sp_member_authority(userid,authority) values ('haha2','ROLE_USER');
+
 
 
 -- 내 동네 더미데이터 삽입
