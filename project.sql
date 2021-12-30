@@ -39,7 +39,7 @@ create table myPlace (
 	mcategory varchar2(20) not null, -- 카테고리
 	userid varchar2(50) not null, -- 아이디
 	title varchar2(100) not null, -- 제목
-	content varchar2(2000) not null, -- 내용
+	content varchar2(6000) not null, -- 내용
 	regdate DATE default sysdate, -- 작성날짜
 	updatedate DATE default sysdate, -- 수정날짜
 	mcount number(10) default 0, -- 조회수
@@ -54,7 +54,7 @@ create table myPlaceReply (
 	mrno number(10) not null, -- 댓글번호(pk)
 	mno number(10) not null, -- 동네생활 글번호
 	userid varchar2(50) not null, -- 아이디
-	content varchar2(2000) not null, -- 댓글 내용
+	content varchar2(5000) not null, -- 댓글 내용
 	regdate DATE default sysdate, -- 작성날짜
 	updatedate DATE default sysdate, -- 수정날짜
 	good number(10) default 0, -- 좋아요 갯수
