@@ -11,6 +11,8 @@ create table member (
     CONSTRAINT pk_member PRIMARY KEY (userid) -- pk
 );
 
+drop table member;
+
 -- 2. 프로필 이미지 테이블
 create table profileimg (
 	pfuuid varchar2(50) not null, -- uuid(pk)
@@ -32,14 +34,17 @@ foreign key(userid) references member(userid) ON DELETE CASCADE;
 
 
 
+
 -- 동네생활
 -- 4. 게시판(동네생활) 테이블
 create table myPlace (
 	mno number(10) not null, -- 글번호(pk)
 	mcategory varchar2(20) not null, -- 카테고리
+	nickname varchar2(50) not null, --닉네임
 	userid varchar2(50) not null, -- 아이디
+	mytown varchar2(50) not null, --내 동네
 	title varchar2(100) not null, -- 제목
-	content varchar2(6000) not null, -- 내용
+	content varchar2(4000) not null, -- 내용
 	regdate DATE default sysdate, -- 작성날짜
 	updatedate DATE default sysdate, -- 수정날짜
 	mcount number(10) default 0, -- 조회수
@@ -60,6 +65,8 @@ create table myPlaceReply (
 	good number(10) default 0, -- 좋아요 갯수
 	CONSTRAINT pk_myPlaceReply PRIMARY KEY (mrno) -- pk
 );
+
+
 -- 동네생활 댓글 테이블 글번호 시퀀스
 CREATE SEQUENCE myPlaceReply_seq INCREMENT BY 1 START WITH 1;
 
@@ -71,8 +78,6 @@ create table myPlaceImg (
 	mimgname varchar2(50) not null, -- 동네생활 이미지 이름
 	CONSTRAINT pk_myPlaceImg PRIMARY KEY (muuid) -- pk
 );
-
-
 
 
 
@@ -190,19 +195,11 @@ insert into sp_member_authority(userid,authority) values ('haha1','ROLE_USER');
 insert into sp_member_authority(userid,authority) values ('haha2','ROLE_USER');
 
 
-
 -- 내 동네 더미데이터 삽입
-insert into myPlace(mno, userid, mcategory, title, content)
-values (myPlace_seq.nextval, '콜리', '동네생활', '산책 친구 구합니다.', '평일 오후에 불광천 산책할 친구구해요! 일주일에 2-3번 정도 같이 산책하면 좋을 것 같아요. 편하게 연락주세요');
+insert into myPlace(mno, userid, nickname, mytown, mcategory, title, content)
+values (myPlace_seq.nextval, 'ccoli1', '콜리', '서울시 종로구 관철동', '동네생활', '산책 친구 구합니다.', '평일 오후에 불광천 산책할 친구구해요! 일주일에 2-3번 정도 같이 산책하면 좋을 것 같아요. 편하게 연락주세요');
 
-insert into myPlace(mno, userid, mcategory, title, content)
-values (myPlace_seq.nextval, '안경', '동네사건사고', '안경찾습니다.', '종각역 1번출구에서 떨어뜨린 것 같은데 아무리 찾아봐도 안보여요 ㅠㅠ 혹시 보신 분 연락부탁드립니다. 사례할께요!');
-
-insert into myPlace(mno, userid, mcategory, title, content)
-values (myPlace_seq.nextval, '지갑', '동네생활', '산책 친구 구합니다.', '평일 오후에 불광천 산책할 친구구해요! 일주일에 2-3번 정도 같이 산책하면 좋을 것 같아요. 편하게 연락주세요');
-
-insert into myPlace(mno, userid, mcategory, title, content)
-values (myPlace_seq.nextval, '마테차', '동네사건사고', '안경찾습니다.', '종각역 1번출구에서 떨어뜨린 것 같은데 아무리 찾아봐도 안보여요 ㅠㅠ 혹시 보신 분 연락부탁드립니다. 사례할께요!');
+select * from myPlace;
 
 -- 참고 primary key /foreign key 작성 
 --alter table spring_attach add constraint pk_attach primary key(uuid);
