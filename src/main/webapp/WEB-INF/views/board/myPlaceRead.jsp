@@ -3,8 +3,7 @@
 <link rel="stylesheet" href="/resources/css/myPlace.css" />
 <script src="https://kit.fontawesome.com/84524c7dde.js"
 	crossorigin="anonymous"></script>
-	
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+	 
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
 
 <%@ include file="../includes/header.jsp"%>

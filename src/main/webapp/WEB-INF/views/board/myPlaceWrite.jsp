@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="/resources/css/myPlace.css" />
 <link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
     
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 
 <%@ include file="../includes/header.jsp"%>
 

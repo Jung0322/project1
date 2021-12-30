@@ -27,7 +27,13 @@
 <!-- 폰트(글자 종류) api -->
 <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet" />
 
-
+<style>
+.profile-menu {
+	border-radius: 100%;
+	height: 100%;
+	width: 100%;
+}
+</style>
 
 </head>
 <body>
@@ -64,9 +70,9 @@
 					</sec:authorize>
 					<!-- 로그인 된 상태 -->
 					<sec:authorize access="isAuthenticated()">
-						<li style="margin-left: 15px;">
-							<div class="dropdown" style="height: 50px; width: 50px; margin:auto;">
-								<img class="dropdown-toggle profile-img" data-toggle="dropdown" aria-expanded="false" src="/resources/images/temp-profile.png"/>
+						<li style="margin-left: 15px; margin-top: 5px;">
+							<div class="dropdown" style="height: 40px; width: 40px; margin:auto;">
+								<img class="dropdown-toggle profile-menu" data-toggle="dropdown" aria-expanded="false" src="/resources/images/temp-profile.png"/>
 								
 								
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="width: ">
