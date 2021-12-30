@@ -17,7 +17,6 @@
                     </div>
 
                     <form action="#" method="post">
-                         <!-- <div class="col-md-8"> -->
                          <div class="login-form">
                               <label for="userid">아이디</label>
                               <input type="text" name="userid" id="userid" class="form-control" placeholder="아이디">
@@ -39,7 +38,7 @@
 	                         	  <label for="mytown">내 동네</label>
                          	  	  <input type="button" value="선택" class="modify-btn" onclick="goPopup();" />
                          	  </div>
-                              <input type="text" id="mytown" name="mytown" class="form-control" placeholder="내 동네" readonly>
+                              <input type="text" id="mytown" name="mytown" class="form-control" placeholder="내 동네" >
                          </div>
                          <div class="login-form">
                               <label for="email">이메일</label>
@@ -49,6 +48,8 @@
                               <label for="phone">휴대전화</label>
                               <input type="text" name="phone" id="phone" class="form-control" placeholder="휴대전화">
                          </div>
+                         
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                          
                          <div class="col-md-3 insert-btn-area">
                               <input type="submit" class="form-control" id="insert-btn" value="회원가입">

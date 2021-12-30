@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <head>
@@ -55,7 +57,26 @@
 					<li class="active"><a href="/index">상품</a></li>
 					<li><a href="/board/myPlace">내동네</a></li>
 					<li><a href="/auction">경매</a></li>
-					<li><a href="/member/signIn">로그인</a></li>
+					
+					<!-- 로그인 안된 상태 -->					
+					<sec:authorize access="isAnonymous()">
+						<li><a href="/member/signIn">로그인</a></li>
+					</sec:authorize>
+					<!-- 로그인 된 상태 -->
+					<sec:authorize access="isAuthenticated()">
+						<li style="margin-left: 15px;">
+							<div class="dropdown" style="height: 50px; width: 50px; margin:auto;">
+								<img class="dropdown-toggle profile-img" data-toggle="dropdown" aria-expanded="false" src="/resources/images/temp-profile.png"/>
+								
+								
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="width: ">
+								    <a class="dropdown-item" href="#">Action</a>
+								    <a class="dropdown-item" href="#">Another action</a>
+								    <a class="dropdown-item" href="#">Something else here</a>
+								  </div>
+							</div>
+						</li>
+					</sec:authorize>
 				</ul>
 			</div>
 		</div>
