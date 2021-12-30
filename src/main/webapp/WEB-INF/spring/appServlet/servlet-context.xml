@@ -31,13 +31,13 @@
 	</beans:bean>
 	<!-- websocket -->
 	<websocket:handlers>
-        <websocket:mapping handler="echoHandler" path="/chat" />
+        <websocket:mapping handler="webSocketHandler" path="/chat" />
         	<websocket:handshake-interceptors>
         		<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
        	  	</websocket:handshake-interceptors>
         <websocket:sockjs websocket-enabled="true" />
     </websocket:handlers>
-	<beans:bean id="echoHandler" class="com.company.handler.EchoHandler"></beans:bean>
+	<beans:bean id="webSocketHandler" class="com.company.handler.WebSocketHandler"></beans:bean>
 	
 	
 </beans:beans>
