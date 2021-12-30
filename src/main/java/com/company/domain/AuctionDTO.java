@@ -9,7 +9,7 @@ public class AuctionDTO {
 	private Date enddate;		//	enddate DATE not null,
 	private int startprice;		//	startprice number(10) not null,
 	private int soldout;		//	soldout number(2) default 0,
-
+	private String content;
 	
 	private String userid;//	userid varchar2(50) not null,
 }

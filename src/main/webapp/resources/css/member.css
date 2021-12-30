@@ -3,19 +3,19 @@
 /* modify-info.jsp */
 /* 프로필 이미지 */
 .profile-img {
-	border-radius: 50%;
-	height: 90%;
+	border-radius: 100%;
+	height: 100%;
 	width: 100%;
 }
 .icon-camera {
-	border-radius: 50%;
+	border-radius: 100%;
 	width: 30px;
 	height: 30px;
 	position: absolute;
 	right: 10;
 	bottom: 15;
 }
-#profile-area {
+.profile-area {
 	position: relative;
 	height: 150px;
 	width: 150px;
@@ -40,7 +40,7 @@
 .member-info-id {
 	position: absolute;
 	width: 350px;
-	left: 200;
+	left: 200px;
 	top: 0;
 }
 /* 프로필 이미지 수정, 삭제 버튼 */
@@ -61,10 +61,6 @@
 } 
 
 /* 정렬 */
-.modify-form {
-	width: 550px;
-	margin: 0 50px 0 205px;
-}
 .modify-label {
 	position: relative;
 }
@@ -106,17 +102,23 @@
 
 /* signIn.jsp 가운데 정렬 */
 /* div */
-.login-form {
-	width: 550px;
-	margin: 0 50px 0 205px;
+@media (min-width: 550px) {
+	.login-form {
+		width: 55%;
+		margin: 0 23%;
+	}
 }
-.login-btn {
-	width: 330px;
-	margin: 0 50px 0 318px;
+@media (min-width: 330px) {
+	.login-btn {
+		width: 34%;
+		margin: 0 34%;
+	}
 }
-.change-signUp {
-	width: 220px;
-	margin: 0 50px 0 370px;
+@media (min-width: 250px) {
+	.change-signUp {
+		width: 25%;
+		margin: 0 39%;
+	}
 }
 /* input:submit */
 #login-btn {
@@ -128,6 +130,7 @@
      transition: all 0.4s ease-in-out;
      height: 40px;
 }
+
 
 
 /* signUp.jsp 가운데 정렬 */
@@ -151,6 +154,7 @@
 	font-weight: 400;
 	transition: all 0.4s ease-in-out;
 	
+	/* .form-control style 가져옴 */
 	display: block;
     width: 100%;
     height: 40px;
@@ -160,4 +164,66 @@
     line-height: 1.42857143;
     background-color: #fff;
     background-image: none;
+}
+
+
+
+/* profile-page.jsp */
+/* 정렬 */
+.member-profile-area {
+	margin: 0 20px 20px 300px; 
+	position: relative;
+}
+.profile-form {
+	width: 500px;
+	margin: 10px 50px 10px 230px;
+	padding: 20px 50px;
+	border-bottom: 1px solid #808080;	
+}
+/* 버튼 */
+.modify-info-btn {
+	border: 1px solid #9BB460;
+	color: #9BB460;
+	font-weight: 400;
+	transition: all 0.4s ease-in-out;
+	
+	/* .form-control style 가져옴 */
+	display: block;
+    width: 170px;
+    height: 25px;
+    padding: 3px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    background-image: none;
+}
+/* 재거래 희망률, 응답률 정렬 */
+.user-assessment-result {
+	position: relative;
+}
+.answer-info {
+	position: absolute;
+	left: 200px;
+	top: 0;
+}
+
+/* cashbook-page.jsp */
+/* 상단 닉네임 및 프사 부분 정렬 */
+.cashbook-member-info {
+	position: relative;
+}
+.cashbook-profile {
+	position: absolute;
+	top: 0;
+	left: 460px;
+	width: 90px;
+	height: 90px;
+}
+/* 중간 날짜부분 정렬 */
+.cashbook-icon {
+	position: relative;
+}
+.cashbook-trade-date {
+	position: absolute;
+	top: 0;
 }

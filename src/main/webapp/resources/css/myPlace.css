@@ -1,4 +1,4 @@
-#writeButton, #replyButton, #successButton {
+#writeButton, #replyButton, #listButton {
 	background: #9BB460;
 	border-radius: 100px;
 	border: none;
@@ -26,6 +26,36 @@
 	margin-right: 5px;
 }
 
+#listButton2 {
+	border-radius: 100px;
+	border: 1px solid #9BB460;
+	color: #9BB460;
+	font-weight: 400;
+	transition: all 0.4s ease-in-out;
+	height: 40px;
+	width: 150px;
+	float: right;
+	margin-right: 320px;
+}
+
+#successButton {
+	background: #9BB460;
+	border-radius: 100px;
+	border: none;
+	color: #ffffff;
+	font-weight: 400;
+	transition: all 0.4s ease-in-out;
+	height: 40px;
+	width: 150px;
+	float: right;
+	margin-right: 20px;
+}
+
+#replyButton {
+	margin-top: 15px;
+}
+
+
 #contextOptionButton {
 	float: right;
 	margin-top: 15px;
@@ -38,29 +68,9 @@
 	margin-left: 20px;
 }
 
-#listButton {
-	background: #9BB460;
-	border-radius: 100px;
-	border: none;
-	color: #ffffff;
-	font-weight: 400;
-	transition: all 0.4s ease-in-out;
-	height: 40px;
-	width: 150px;
-	float: right;
-	margin-left: 500px;
-}
-
-#replyButton {
-	margin-top: 15px;
-}
-
-#successButton {
-	margin-left: 10px;
-}
 
 .woocommerce-pagination {
-	margin-bottom: 50px
+	margin-bottom: 50px 	
 }
 
 .blog-context {
@@ -83,19 +93,45 @@
 }
 
 .blog-reply-form {
-	border-top: 1px solid #f0f0f0;
-	margin-top: 42px;
-	padding-top: 42px;
+	margin-top: 15px;
+	padding-top: 15px;
 }
 
 .blog-post-des {
 	text-overflow: ellipsis; /* 말 줄임 적용 */
-	overflow: hidden;
+	overflow: hidden; /* 지정된 라인 수를 넘어갈 경우 */
 	display: -webkit-box; /* 해당 영역을 box 형태로 관리 */
 	-webkit-line-clamp: 2; /* 컨텐츠의 최대 라인수 지정*/
-	-webkit-box-orient: vertical; /* box내의 정렬을 수직으로 하도록 함 */
+	-webkit-box-orient: vertical; /* box내의 정렬을 수직으로 하도록 함 */ 
+}
+
+.blog-post {
+	  border-bottom: 1px solid #f0f0f0;
+	  padding-top: 12px; /* 게시물과 구분선 상단 간격*/
+	  padding-bottom: 12px; /* 게시물과 구분선 하단 간격*/
+	  margin-bottom: 32px;	 
+}
+
+.blog-post-title h2{
+	font-size: 25px;
+	
+}
+
+.move {
+	font-size: 20px;
 }
 
 #ques {
 	margin-top: 20px;
 }
+
+#textArea {
+	margin-top: 15px;
+}
+
+.media-body span {
+	letter-spacing: 0.5px;
+  	padding-right: 10px;
+}
+
+

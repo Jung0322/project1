@@ -12,6 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @ToString
 public class AddressDTO {
-	private String roadFullAddr;
-	private String jibunAddr;
+	private String roadFullAddr; // 도로명 주소(전부)
+	private String jibunAddr; // 지번 주소
+	private String siNm; // 시도명
+	private String sggNm; // 시군구
+	private String emdNm; // 읍면동
+	private String liNm; // 법정리
 }

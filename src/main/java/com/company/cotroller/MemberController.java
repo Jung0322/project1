@@ -3,6 +3,7 @@ package com.company.cotroller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,13 +29,26 @@ public class MemberController {
 	// 회원가입 & 회원정보 수정
 	// 회원가입 화면
 	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
-	public String signUp() {
+	public String signUp(HttpSession session) {
 		log.info("회원가입 화면");
-		
-		
+				
 		return "/member/signUp";
 	}
 
+	// 회원가입 처리
+	@PostMapping("/signUp")
+	public String signUpPost(MemberDTO insertDto) {
+		log.info("회원가입 처리");
+		System.out.println("=== 회원가입 처리"+insertDto);
+		
+		boolean newMember = memberService.insertMember(insertDto);
+		
+		if(newMember) {
+			return "redirect:/member/signIn";
+		}
+		return "redirect:/member/signUp";
+	}
+	
 	// 회원정보 수정 화면
 	@GetMapping("/modify-info")
 	public void modifyMember() {
@@ -46,23 +60,23 @@ public class MemberController {
 	@GetMapping("/signIn")
 	public void signIn() {
 		log.info("로그인 폼");
-	}
-	
+	}	
 	// 로그인 처리
-	@PostMapping("/signIn")
-	public String signInPost(MemberDTO loginDto, HttpSession session) {
-		System.out.println("로그인 처리"+loginDto);
-		log.info("로그인 처리"+loginDto);
-		
-		boolean login = memberService.login(loginDto);
-		System.out.println(login);
-		if(login) {
-			session.setAttribute("loginDto", loginDto);
-			return "redirect:/index";
-		}
-		
-		return "redirect:/signIn";
-	}
+//	@PostMapping("/signIn")
+//	public String signInPost(MemberDTO loginDto, HttpSession session) {
+//		System.out.println("=== 로그인 처리"+loginDto);
+//		log.info("로그인 처리"+loginDto);
+//		
+//		boolean login = memberService.login(loginDto);
+//
+//		if(login) {
+//			session.setAttribute("loginDto", loginDto);
+//			return "redirect:/index";
+//		}
+//		
+//		return "redirect:/member/signIn";
+//	}
+	
 	
 	// 프로필
 	// 프로필 화면
@@ -76,25 +90,24 @@ public class MemberController {
 		return "/member/my-basket";
 	}
 	
+	// 가계부
+	@GetMapping("/cashbook-page")
+	public void cashbookPage() {
+
+	}
+	
+	
+	
 	// 주소 api
-	@GetMapping("/Sample")
-	public String addressGet() {
-		return "/member/Sample";
-	}
-	@GetMapping("/member/jusoPopup")
+	@GetMapping("/jusoPopup")
 	public void jusoGet() {
-		log.info("이게 작동돼?");
+		log.info("주소 API");
 	}
-	@PostMapping("/member/jusoPopup")
+	@PostMapping("/jusoPopup")
 	public void jusoPost(Model model, MemberDTO memberDto, AddressDTO addDto) {
 		
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("addDto", addDto);
 		
 	}
-	@PostMapping("/signUp")
-	public String signUpPost() {
-		return "/member/signUp";
-	}
-	
 }
