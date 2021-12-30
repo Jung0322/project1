@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="/resources/css/myPlace.css" />
 <link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
     
-
 <%@ include file="../includes/header.jsp"%>
 
 <!-- Contact Section -->
@@ -34,7 +33,7 @@
                               </select>
                          </div>
                          <div class="col-md-6 col-sm-6">
-                              <input type="text" class="form-control" name="userid" placeholder="글 작성자"  readonly="readonly">
+                              <input type="text" class="form-control" name="nickname" value="${dto.nickname}" placeholder="글 작성자" readonly="readonly">
                          </div>
                          <div class="col-md-12 col-sm-6">
                               <input type="text" class="form-control" name="title" placeholder="글 제목" >
@@ -52,9 +51,10 @@
                              lang: "ko-KR",               // 한글 설정
                              placeholder: "내용을 작성해주세요",
                              toolbar: [
+                            	['font',['sans-serif','Arial']],
                                 ['fontname', ['fontname']],
                                 ['fontsize', ['fontsize']],
-                                ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+                                ['style', ['bold']],
                                 ['color', ['forecolor','color']],
                                 ['para', ['ul', 'ol', 'paragraph']],
                                 ['height', ['height']],
@@ -68,11 +68,15 @@
                               <input type="button" class="form-control"  id="listButton2" onclick="location.href='/board/myPlace'" value="목록보기" style="border:1px solid #9BB460;">  
                               <input type="submit" class="form-control"  id="successButton" value="글 올리기">
                          </div>
+                         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+                         	<input type="hidden" name="userid" value="${dto.userid}"/> 
+                         	<input type="hidden" name="mytown" value="${dto.mytown}"/>                        	                     	
                     </form>
                </div>
-
           </div>
      </div>
 </section>
+
+
 <script src="/resources/js/upload.js"></script>  
 <%@ include file="../includes/footer.jsp"%>

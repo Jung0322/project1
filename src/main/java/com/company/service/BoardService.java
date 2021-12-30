@@ -8,5 +8,8 @@ public interface BoardService {
 	public boolean register(BoardDTO insertDTO);
 	public List<BoardDTO> getList();
 	public BoardDTO getRow(int mno);
+	public boolean modify(BoardDTO updateDto);
+	
+	public BoardDTO readMemberInfo(String userid);
 
 }

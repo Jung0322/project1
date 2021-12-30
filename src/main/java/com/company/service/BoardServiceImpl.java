@@ -27,6 +27,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardDTO getRow(int mno) {
 		return mapper.read(mno);
+	}
+
+	@Override
+	public boolean modify(BoardDTO updateDto) {
+		return mapper.update(updateDto) > 0 ? true : false;
+	}
+
+	@Override
+	public BoardDTO readMemberInfo(String userid) {
+		return mapper.readMemberInfo(userid);
 	}	
 	
 

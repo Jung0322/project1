@@ -2,9 +2,9 @@
  * 
  */
 
-// myPlace 게시글 읽기
 $(function() {
 	
+	// myPlace 게시글 읽기
 	$(".move").click(function(e) {
 
 	let actionForm = $("#actionForm");
@@ -24,8 +24,14 @@ $(function() {
 		actionForm.submit();
 	})
 	
-	//댓글 입력창 영역 가져오기
-	let replyContent = $("#replycontent");
+	// myPlace 게시글 수정하기
+	let formObj = $("#actionForm");
+	
+	$("#hiddenBtn").click(function(e){
+		e.preventDefault();
+		
+		
+	})
 	
 	
 	
