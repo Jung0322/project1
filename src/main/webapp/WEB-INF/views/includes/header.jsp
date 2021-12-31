@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <head>
@@ -31,6 +33,12 @@
 	border-radius: 100%;
 	height: 100%;
 	width: 100%;
+}
+.dropdown-menu {
+	width: 250px;
+}
+.dropdown-item {
+	display: block;
 }
 </style>
 
@@ -69,16 +77,24 @@
 					</sec:authorize>
 					<!-- 로그인 된 상태 -->
 					<sec:authorize access="isAuthenticated()">
-						<li style="margin-left: 15px; margin-top: 5px;">
+						<li style="margin-left: 13px; margin-top: 5px;">
 							<div class="dropdown" style="height: 40px; width: 40px; margin:auto;">
 								<img class="dropdown-toggle profile-menu" data-toggle="dropdown" aria-expanded="false" src="/resources/images/temp-profile.png"/>
 								
-								
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="width: ">
-								    <a class="dropdown-item" href="#">Action</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<div class="dropdown-item">
+									    <a href="/member/profile-page">프로필</a>
+									</div>
+									<div class="dropdown-item">
+										<form action="/member/logout" method="post">
+											<button type="submit">로그아웃</button>
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+										</form>
+									</div>
 								    <a class="dropdown-item" href="#">Another action</a>
 								    <a class="dropdown-item" href="#">Something else here</a>
-								  </div>
+								    
+								</div>
 							</div>
 						</li>
 					</sec:authorize>
