@@ -7,11 +7,13 @@ create table member (
     email varchar2(50) not null, -- 이메일
     phone varchar2(50) not null, -- 휴대전화
     mytown varchar2(50) not null, -- 내 동네
-    enabled char(1) default '1', -- 계정 사용 정보 
+    enabled char(1) default '1', -- 계정 사용 정보
+    regdate DATE default sysdate, 
     CONSTRAINT pk_member PRIMARY KEY (userid) -- pk
 );
 
-drop table member;
+-- 가입날짜 컬럼 추가(기존 테이블이 있는 경우에 사용)
+alter table member add regdate date default sysdate;
 
 -- 2. 프로필 이미지 테이블
 create table profileimg (
