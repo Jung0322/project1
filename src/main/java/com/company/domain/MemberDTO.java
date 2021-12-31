@@ -19,6 +19,10 @@ public class MemberDTO {
     private String email; // 이메일
     private String phone; // 휴대전화
     private String mytown; // 내 동네
+    private boolean enabled; // 사용 여부
     
-    private List<AddressDTO> address;
+    // 권한 정보
+    List<MemberAuthorityDTO> authList;
+    
+    
 }

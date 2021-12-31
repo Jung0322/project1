@@ -1,15 +1,27 @@
 -- 회원
-select *from basket;
 --1.  user 테이블
 create table member (
     userid varchar2(50) not null, -- 아이디(pk)
-    password varchar2(50) not null, -- 비밀번호
+    password varchar2(100) not null, -- 비밀번호
     nickname varchar2(50) not null, -- 닉네임
     email varchar2(50) not null, -- 이메일
     phone varchar2(50) not null, -- 휴대전화
     mytown varchar2(50) not null, -- 내 동네
+    enabled char(1) default '1', -- 계정 사용 정보
+    regdate DATE default sysdate, 
     CONSTRAINT pk_member PRIMARY KEY (userid) -- pk
 );
+ALTER TABLE member MODIFY  password varchar2(100);
+
+ALTER TABLE member  ADD  regdate DATE default sysdate;
+
+ALTER TABLE member  ADD  enabled char(1) default '1';
+
+select *  from sp_member_authority; 
+
+
+-- 가입날짜 컬럼 추가(기존 테이블이 있는 경우에 사용)
+alter table member add regdate date default sysdate;
 
 -- 2. 프로필 이미지 테이블
 create table profileimg (
@@ -20,17 +32,15 @@ create table profileimg (
 	CONSTRAINT pk_profileImg PRIMARY KEY (pfuuid) -- pk
 );
 
--- 3. 장바구니 (찜목록)
-create table basket (
-	bno number(10) not null, -- 글번호(pk)
-	userid varchar2(50) not null, -- 아이디
-	pno number(10) not null, -- 동네생활 글번호
-	CONSTRAINT fk_userid FOREIGN KEY(userid)
-         REFERENCES member(userid) ON DELETE CASCADE,
-	CONSTRAINT pk_basket PRIMARY KEY (bno) -- pk
+-- 3. 유저 권한 테이블
+create table sp_member_authority(
+	userid varchar2(50) not null,
+	authority varchar2(50) not null
 );
--- 장바구니 테이블 글번호 시퀀스
-CREATE SEQUENCE basket_seq INCREMENT BY 1 START WITH 1;
+-- 외래키 제약 조건 생성
+alter table sp_member_authority add constraint fk_sp_member_authority
+foreign key(userid) references member(userid) ON DELETE CASCADE;
+
 
 
 
@@ -40,9 +50,11 @@ CREATE SEQUENCE basket_seq INCREMENT BY 1 START WITH 1;
 create table myPlace (
 	mno number(10) not null, -- 글번호(pk)
 	mcategory varchar2(20) not null, -- 카테고리
+	nickname varchar2(50) not null, --닉네임
 	userid varchar2(50) not null, -- 아이디
+	mytown varchar2(50) not null, --내 동네
 	title varchar2(100) not null, -- 제목
-	content varchar2(2000) not null, -- 내용
+	content varchar2(4000) not null, -- 내용
 	regdate DATE default sysdate, -- 작성날짜
 	updatedate DATE default sysdate, -- 수정날짜
 	mcount number(10) default 0, -- 조회수
@@ -57,12 +69,14 @@ create table myPlaceReply (
 	mrno number(10) not null, -- 댓글번호(pk)
 	mno number(10) not null, -- 동네생활 글번호
 	userid varchar2(50) not null, -- 아이디
-	content varchar2(2000) not null, -- 댓글 내용
+	content varchar2(5000) not null, -- 댓글 내용
 	regdate DATE default sysdate, -- 작성날짜
 	updatedate DATE default sysdate, -- 수정날짜
 	good number(10) default 0, -- 좋아요 갯수
 	CONSTRAINT pk_myPlaceReply PRIMARY KEY (mrno) -- pk
 );
+
+
 -- 동네생활 댓글 테이블 글번호 시퀀스
 CREATE SEQUENCE myPlaceReply_seq INCREMENT BY 1 START WITH 1;
 
@@ -74,8 +88,6 @@ create table myPlaceImg (
 	mimgname varchar2(50) not null, -- 동네생활 이미지 이름
 	CONSTRAINT pk_myPlaceImg PRIMARY KEY (muuid) -- pk
 );
-
-
 
 
 
@@ -99,6 +111,7 @@ create table product (
          REFERENCES member(userid) ON DELETE CASCADE,
 	CONSTRAINT pk_product PRIMARY KEY (pno) -- pk
 );
+<<<<<<< HEAD
 -- 이게 맞음(rn pno 안맞음)
 select * 
 	from (select /*+INDEX_DESC(product pk_product)*/ rownum rn,pno, price, title, good, puuid, puploadpath, pimgname
@@ -147,6 +160,8 @@ select * from PRODUCTIMG;
 -- 상품 좋아요 개수 칼럼 추가
 ALTER TABLE product  ADD good number(10) default 0;
 
+=======
+>>>>>>> branch 'master' of https://github.com/Jung0322/project1.git
 -- 상품 테이블 글번호 시퀀스
 CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1;
 
@@ -161,11 +176,21 @@ create table productimg (
 	CONSTRAINT pk_productImg PRIMARY KEY (puuid) -- pk
 );
 
-
+-- 9. 장바구니 (찜목록)
+create table basket (
+	bno number(10) not null, -- 글번호(pk)
+	userid varchar2(50) not null, -- 아이디
+	pno number(10) not null, -- 동네생활 글번호
+	CONSTRAINT fk_userid FOREIGN KEY(userid)
+         REFERENCES member(userid) ON DELETE CASCADE,
+	CONSTRAINT pk_basket PRIMARY KEY (bno) -- pk
+);
+-- 장바구니 테이블 글번호 시퀀스
+CREATE SEQUENCE basket_seq INCREMENT BY 1 START WITH 1;
 
 
 -- 경매
--- 9. 경매 테이블
+-- 10. 경매 테이블
 create table auction (
 	ano number(10) not null, -- 경매 글번호(pk)
 	userid varchar2(50) not null, -- 아이디
@@ -178,6 +203,7 @@ create table auction (
          REFERENCES member(userid) ON DELETE CASCADE,
 	CONSTRAINT pk_Auction PRIMARY KEY (ano) -- pk
 );
+<<<<<<< HEAD
 
 ALTER TABLE auction MODIFY startdate VARCHAR2(25);
 ALTER TABLE auction MODIFY enddate VARCHAR2(25);
@@ -214,10 +240,12 @@ ALTER TABLE auction  ADD content varchar2(2000) not null;
 -- 경매 테이블 제목 칼럼 추가
 ALTER TABLE auction  ADD title varchar2(100) not null;
 
+=======
+>>>>>>> branch 'master' of https://github.com/Jung0322/project1.git
 -- 경매 테이블 글번호 시퀀스
 CREATE SEQUENCE auction_seq INCREMENT BY 1 START WITH 1;
 
--- 10. 경매장 댓글 테이블
+-- 11. 경매장 댓글 테이블
 CREATE TABLE auctionreply (
     arno number(10)   NOT NULL, -- 경매장 댓글 글번호(pk)
     ano number(10)   NOT NULL, -- 경매장 테이블 글번호
@@ -236,7 +264,7 @@ CREATE TABLE auctionreply (
 -- 경매장 댓글 테이블 글번호 시퀀스
 CREATE SEQUENCE auctionreply_seq INCREMENT BY 1 START WITH 1;
 
--- 11. 경매 이미지 테이블
+-- 12. 경매 이미지 테이블
 create table auctionimg (
 	auuid varchar2(50) not null, -- uuid(pk)
 	ano number(10) not null, -- 경매장 테이블 글번호
@@ -247,8 +275,12 @@ create table auctionimg (
 	CONSTRAINT pk_AuctionImg PRIMARY KEY (auuid) -- pk
 );
 
+<<<<<<< HEAD
+=======
+select* from  member;
+>>>>>>> branch 'master' of https://github.com/Jung0322/project1.git
 
--- 회원 더미 데이터 삽입
+-- 회원 더미 데이터 삽입 -> 시큐리티 적용 후에는 회원가입을 하셔야합니다
 insert into 
     member(userid, password, nickname, email, phone, mytown)
 values(
@@ -264,20 +296,17 @@ insert into
 values(
     'haha2', '123', '하하', 'ha12@ccoli.com', '1234', '서울시 종로구 종로3가'
 );
+-- 회원 더미 데이터의 권한 삽입
+insert into sp_member_authority(userid,authority) values ('haha','ROLE_USER');
+insert into sp_member_authority(userid,authority) values ('haha1','ROLE_USER');
+insert into sp_member_authority(userid,authority) values ('haha2','ROLE_USER');
 
 
 -- 내 동네 더미데이터 삽입
-insert into myPlace(mno, userid, mcategory, title, content)
-values (myPlace_seq.nextval, '콜리', '동네생활', '산책 친구 구합니다.', '평일 오후에 불광천 산책할 친구구해요! 일주일에 2-3번 정도 같이 산책하면 좋을 것 같아요. 편하게 연락주세요');
+insert into myPlace(mno, userid, nickname, mytown, mcategory, title, content)
+values (myPlace_seq.nextval, 'ccoli1', '콜리', '서울시 종로구 관철동', '동네생활', '산책 친구 구합니다.', '평일 오후에 불광천 산책할 친구구해요! 일주일에 2-3번 정도 같이 산책하면 좋을 것 같아요. 편하게 연락주세요');
 
-insert into myPlace(mno, userid, mcategory, title, content)
-values (myPlace_seq.nextval, '안경', '동네사건사고', '안경찾습니다.', '종각역 1번출구에서 떨어뜨린 것 같은데 아무리 찾아봐도 안보여요 ㅠㅠ 혹시 보신 분 연락부탁드립니다. 사례할께요!');
-
-insert into myPlace(mno, userid, mcategory, title, content)
-values (myPlace_seq.nextval, '지갑', '동네생활', '산책 친구 구합니다.', '평일 오후에 불광천 산책할 친구구해요! 일주일에 2-3번 정도 같이 산책하면 좋을 것 같아요. 편하게 연락주세요');
-
-insert into myPlace(mno, userid, mcategory, title, content)
-values (myPlace_seq.nextval, '마테차', '동네사건사고', '안경찾습니다.', '종각역 1번출구에서 떨어뜨린 것 같은데 아무리 찾아봐도 안보여요 ㅠㅠ 혹시 보신 분 연락부탁드립니다. 사례할께요!');
+select * from myPlace;
 
 -- 참고 primary key /foreign key 작성 
 --alter table spring_attach add constraint pk_attach primary key(uuid);

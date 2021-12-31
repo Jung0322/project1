@@ -41,14 +41,14 @@ function init(){
 		<%-- opener.jusoCallBack("<%=roadFullAddr%>","<%=jibunAddr%>"); --%>
 		opener.jusoCallBack("<%=siNm%>","<%=sggNm%>","<%=emdNm%>","<%=liNm%>");
 		window.close();  // 막히는 부분 
-		}
+	}
 }
 </script>
 <body onload="init();">
 	<form id="form" name="form" method="post">
 		<input type="hidden" id="confmKey" name="confmKey" value=""/>
 		<input type="hidden" id="returnUrl" name="returnUrl" value=""/>
-		<input type="hidden" id="resultType" name="resultType" value=""/>
+		<input type="hidden" id="resultType" name="resultType" value=""/>	
 	</form>
 </body>
 </html>
