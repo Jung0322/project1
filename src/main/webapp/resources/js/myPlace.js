@@ -24,18 +24,7 @@ $(function() {
 		actionForm.submit();
 	})
 	
-	// myPlace 게시글 수정하기
-	let formObj = $("#actionForm");
-	
-	$("#hiddenBtn").click(function(e){
-		e.preventDefault();
 		
-		
-	})
-	
-	
-	
-	
 })
 
 

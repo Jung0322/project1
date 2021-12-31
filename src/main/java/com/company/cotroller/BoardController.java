@@ -57,8 +57,20 @@ public class BoardController {
 		
 		return "/board/myPlaceRead";
 	}
-
+	
 	@GetMapping("/modify")
+	public String modifyGet() {
+		log.info("내 동내 게시물 수정 페이지 요청");
+		
+//		BoardDTO dto = service.getRow(mno);
+//		
+//		model.addAttribute("dto",dto);
+		
+		return "/board/myPlaceModify";
+	}
+	
+	
+	@PostMapping("/modify")
 	public String modify(int mno, Model model) {
 		log.info("내 동내 게시물 수정 페이지 요청");
 		
@@ -74,6 +86,7 @@ public class BoardController {
 		log.info("글 작성 페이지 요청");
         System.out.println(principal.getName());
         
+        //세션에 담긴 아이디 가져오기
         String userid = principal.getName();
         BoardDTO dto = service.readMemberInfo(userid);
         
