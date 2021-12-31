@@ -59,20 +59,19 @@ public class BoardController {
 	}
 	
 	@GetMapping("/modify")
-	public String modifyGet() {
+	public String modifyGet(int mno, Model model) {
 		log.info("내 동내 게시물 수정 페이지 요청");
 		
-//		BoardDTO dto = service.getRow(mno);
-//		
-//		model.addAttribute("dto",dto);
-		
+		BoardDTO dto = service.getRow(mno);
+		model.addAttribute("dto",dto);
+			
 		return "/board/myPlaceModify";
 	}
 	
 	
 	@PostMapping("/modify")
 	public String modify(int mno, Model model) {
-		log.info("내 동내 게시물 수정 페이지 요청");
+		log.info("내 동내 게시물 수정 요청");
 		
 		BoardDTO dto = service.getRow(mno);
 		

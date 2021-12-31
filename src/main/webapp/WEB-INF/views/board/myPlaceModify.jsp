@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-   
-<!-- include libraries(jQuery, bootstrap) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<%@ include file="../includes/header.jsp"%>
 
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -13,7 +9,6 @@
 <link rel="stylesheet" href="/resources/css/myPlace.css" />
 <link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
     
-<%@ include file="../includes/header.jsp"%>
 
 <!-- Contact Section -->
 
@@ -25,7 +20,7 @@
                <div class="col-md-offset-1 col-md-10 col-sm-12">
                     <form action="" method="post" role="form">
                          <div class="col-md-6 col-sm-6">
-                              <select class="form-control" name="mcategory">
+                              <select class="form-control" name="mcategory" value="${dto.mcategory}">
                                    <option>동네질문</option>
                                    <option>동네사건사고</option>
                                    <option>일상</option>
@@ -36,12 +31,12 @@
                               <input type="text" class="form-control" name="nickname" value="${dto.nickname}" placeholder="글 작성자" readonly="readonly">
                          </div>
                          <div class="col-md-12 col-sm-6">
-                              <input type="text" class="form-control" name="title" placeholder="글 제목" >
+                              <input type="text" class="form-control" name="title"  value="${dto.title}" placeholder="글 제목" >
                          </div>
                    <div>
                    </div>
-                    <div class="col-md-12 col-sm-6" id="textArea" > 
-                    	<textarea id="summernote" name="content"></textarea>
+                    <div class="col-md-12 col-sm-6" id="textArea"> 
+                    	<textarea id="summernote" name="content" value="${dto.content}"></textarea>
                          <script>
                            $('#summernote').summernote({
                              height: 300,                 // 에디터 높이

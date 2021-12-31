@@ -1,18 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="/resources/css/myPlace.css" />
+<%@ include file="../includes/header.jsp"%>  
+
+ <link rel="stylesheet" href="/resources/css/myPlace.css" />
 <link rel='stylesheet' href='/resources/css/woocommerce-layout.css'
 	type='text/css' media='all' />
 <link rel='stylesheet' href='/resources/css/woocommerce.css'
 	type='text/css' media='all' />
-<script src="https://kit.fontawesome.com/84524c7dde.js"
-	crossorigin="anonymous"></script>  
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
-<%@ include file="../includes/header.jsp"%>
 
 <!-- Blog Section -->
-<body
-	class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page">
+<body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page">
 	<section id="blog">
 		<div class="container">
 			<div class="row">
