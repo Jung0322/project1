@@ -1,9 +1,12 @@
 package com.company.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.company.domain.ProductCriteria;
 import com.company.domain.ProductDTO;
 import com.company.mapper.ProductAttachMapper;
 import com.company.mapper.ProductMapper;
@@ -34,6 +37,17 @@ public class ProductServiceImpl implements ProductService {
 		});
 		
 		return true;
+	}
+
+	@Override
+	public List<ProductDTO> getList(ProductCriteria cri) {
+		
+		return mapper.listAll(cri);
+	}
+
+	@Override
+	public int getTotalCount(ProductCriteria cri) {
+		return mapper.totalCnt(cri);
 	}
 
 }

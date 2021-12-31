@@ -21,33 +21,33 @@
                          <h2>중고 경매거래 상품 등록</h2>
                     </div>
 
-                    <form action="#" method="post" role="form">
+                    <form action="/auction/auction-product-registration" method="post" role="form" formvalidate>
                          <div class="col-md-6 col-sm-6">
-                              <input type="text" class="form-control" placeholder="제목" name="title">
+                              <input type="text" class="form-control" placeholder="제목" name="title" required="required"/>
                          </div>
                          <div class="col-md-6 col-sm-6">
                               <select class="form-control" name="category">
-                                   <option>카테고리</option>
-                                   <option>디지털기기</option>
-                                   <option>생활가전</option>
-                                   <option>가구/인테리어</option>
-                                   <option>스포츠/레저</option>
-                                   <option>여성잡화/의류</option>
-                                   <option>남성잡화/의류</option>
+                                   <option value="">카테고리</option>
+                                   <option value="디지털기기">디지털기기</option>
+                                   <option value="생활가전">생활가전</option>
+                                   <option value="가구/인테리어">가구/인테리어</option>
+                                   <option value="스포츠/레저">스포츠/레저</option>
+                                   <option value="여성잡화/의류">여성잡화/의류</option>
+                                   <option value="남성잡화/의류">남성잡화/의류</option>
                                    
                               </select>
                          </div>
                          <div class="col-md-4 col-sm-4">
-                              <input type="datetime-local" class="form-control" placeholder="시작시간" name="startdate">
+                              <input type="datetime-local" class="form-control" placeholder="시작시간" name="startdate"  value="2021-12-11T06:00">
                          </div>
                          <div class="col-md-4 col-sm-4">
-                              <input type="datetime-local" class="form-control" placeholder="마감시간" name="enddate">
+                              <input type="datetime-local" class="form-control" placeholder="마감시간" name="enddate" value="2021-12-11T13:00" maxlength="">
                          </div>
                          <div class="col-md-4 col-sm-4">
                               <input type="number" class="form-control" placeholder="시작가격" name="startprice">
                          </div>
                          <div class="col-md-12 col-sm-12"> 
-                              <textarea class="form-control" rows="5" placeholder="상품 상세정보를 입력해주세요." name="content"></textarea>
+                              <textarea class="form-control" rows="5" placeholder="상품 상세정보를 입력해주세요." name="content" required="required"></textarea>
                          </div>
                          <div class="row">
 							<div class="col-md-12 col-sm-12">
@@ -67,7 +67,7 @@
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                          <div class="col-md-8">
                          
-                              <input id="registration" type="submit" class="form-control" value="등록">
+                              <button  id="registration" type="submit" class="form-control">등록</button>
                          </div>
                     </form>
                </div>

@@ -99,7 +99,53 @@ create table product (
          REFERENCES member(userid) ON DELETE CASCADE,
 	CONSTRAINT pk_product PRIMARY KEY (pno) -- pk
 );
+-- 이게 맞음(rn pno 안맞음)
+select * 
+	from (select /*+INDEX_DESC(product pk_product)*/ rownum rn,pno, price, title, good, puuid, puploadpath, pimgname
+		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname
+			    from product pd, (select * 
+			                      from PRODUCTIMG 
+			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
+				where pd.pno = pdi.pno)
+		  where rownum <=8)
+	where rn>0;	
+	
+	select count(pno) from product;
+	
+	
+select * 
+	from (select rownum rn,pno, price, title, good, puuid, puploadpath, pimgname
+		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname
+			    from product pd, (select * 
+			                      from PRODUCTIMG 
+			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
+				where pd.pno = pdi.pno order by pd.pno desc)
+		  where rownum <=8)
+	where rn>0;	
+	
+	
+-- 이거임
+	
+select /*+INDEX_DESC(product pk_product)*/ rownum,pno, price from product where rownum<=8;
 
+select rn,bno,title,replycnt
+from (select /*+INDEX_DESC(spring_board pk_spring_board)*/ rownum rn,bno,title,replycnt
+	  from spring_board
+	  where rownum <=10)
+where rn>0;
+
+
+
+select pd.pno, price, title, good, puuid, puploadpath, pimgname
+from product pd, (select * from PRODUCTIMG where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
+where pd.pno = pdi.pno order by pd.pno desc;
+
+select * from PRODUCTIMG;
+
+
+
+-- 상품 좋아요 개수 칼럼 추가
+ALTER TABLE product  ADD good number(10) default 0;
 
 -- 상품 테이블 글번호 시퀀스
 CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1;
@@ -133,8 +179,40 @@ create table auction (
 	CONSTRAINT pk_Auction PRIMARY KEY (ano) -- pk
 );
 
+ALTER TABLE auction MODIFY startdate VARCHAR2(25);
+ALTER TABLE auction MODIFY enddate VARCHAR2(25);
+
+
+select * 
+	from (select rownum rn,pno, price, title, good, puuid, puploadpath, pimgname
+		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname
+			    from product pd, (select * 
+			                      from PRODUCTIMG 
+			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
+				where pd.pno = pdi.pno order by pd.pno desc)
+		  where rownum <=8)
+	where rn>0;	
+
+
+select * 
+	from (select rownum rn,ano, title, startdate, enddate, startprice, category, auuid, auploadpath, aimgname
+		  from (select  at.ano, title, startdate, enddate, startprice, category, auuid, auploadpath, aimgname
+			    from auction at, (select * 
+			                      from auctionimg
+			                      where Rowid in (select max(rowid) from auctionimg group by ano)) ati
+				where at.ano = ati.ano order by at.ano desc)
+		  where rownum <=8)
+	where rn>0;	
+	
+	select count(ano) from auction;
+
+select * from auction;
+
 -- 경매 테이블 내용 칼럼 추가
 ALTER TABLE auction  ADD content varchar2(2000) not null;
+
+-- 경매 테이블 제목 칼럼 추가
+ALTER TABLE auction  ADD title varchar2(100) not null;
 
 -- 경매 테이블 글번호 시퀀스
 CREATE SEQUENCE auction_seq INCREMENT BY 1 START WITH 1;
@@ -151,6 +229,10 @@ CREATE TABLE auctionreply (
          REFERENCES auction(ano) ON DELETE CASCADE,
     CONSTRAINT pk_AuctionReply PRIMARY KEY (arno) -- pk
 );
+
+
+
+
 -- 경매장 댓글 테이블 글번호 시퀀스
 CREATE SEQUENCE auctionreply_seq INCREMENT BY 1 START WITH 1;
 
@@ -165,7 +247,6 @@ create table auctionimg (
 	CONSTRAINT pk_AuctionImg PRIMARY KEY (auuid) -- pk
 );
 
-select* from  productimg;
 
 -- 회원 더미 데이터 삽입
 insert into 
@@ -202,3 +283,10 @@ values (myPlace_seq.nextval, '마테차', '동네사건사고', '안경찾습니
 --alter table spring_attach add constraint pk_attach primary key(uuid);
 --alter table spring_attach add constraint fk_board_attach foreign key(bno)
 --references spring_board(bno);
+
+select * from PRODUCT;
+
+
+select to_char(sysdate) from dual;
+
+select sysdate from dual;

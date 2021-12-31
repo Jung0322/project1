@@ -32,6 +32,12 @@ $(function(){
 		}else if(str==""){
 			alert("상품사진을 첨부하세요");
 			return;
+		}else if($("input[name='title']").val()==''){
+			alert("제목을 입력하세요");
+			return;
+		}else if($("input[name='price']").val()==''){
+			alert("가격을 입력하세요");
+			return;
 		}else{
 			//게시글 등록 폼에 추가하기
 			$("form[role='form']").append(str).submit();
