@@ -15,9 +15,12 @@
 
 <title>Magnet - Minimal Portfolio Template</title>
 
+<!-- jquery cdn -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
-
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <!-- fontawesome -->
 <!-- <link rel="stylesheet" href="/resources/css/font-awesome.min.css" /> -->
