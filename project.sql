@@ -11,6 +11,14 @@ create table member (
     regdate DATE default sysdate, 
     CONSTRAINT pk_member PRIMARY KEY (userid) -- pk
 );
+ALTER TABLE member MODIFY  password varchar2(100);
+
+ALTER TABLE member  ADD  regdate DATE default sysdate;
+
+ALTER TABLE member  ADD  enabled char(1) default '1';
+
+select *  from sp_member_authority; 
+
 
 -- 가입날짜 컬럼 추가(기존 테이블이 있는 경우에 사용)
 alter table member add regdate date default sysdate;
@@ -103,6 +111,57 @@ create table product (
          REFERENCES member(userid) ON DELETE CASCADE,
 	CONSTRAINT pk_product PRIMARY KEY (pno) -- pk
 );
+<<<<<<< HEAD
+-- 이게 맞음(rn pno 안맞음)
+select * 
+	from (select /*+INDEX_DESC(product pk_product)*/ rownum rn,pno, price, title, good, puuid, puploadpath, pimgname
+		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname
+			    from product pd, (select * 
+			                      from PRODUCTIMG 
+			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
+				where pd.pno = pdi.pno)
+		  where rownum <=8)
+	where rn>0;	
+	
+	select count(pno) from product;
+	
+	
+select * 
+	from (select rownum rn,pno, price, title, good, puuid, puploadpath, pimgname
+		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname
+			    from product pd, (select * 
+			                      from PRODUCTIMG 
+			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
+				where pd.pno = pdi.pno order by pd.pno desc)
+		  where rownum <=8)
+	where rn>0;	
+	
+	
+-- 이거임
+	
+select /*+INDEX_DESC(product pk_product)*/ rownum,pno, price from product where rownum<=8;
+
+select rn,bno,title,replycnt
+from (select /*+INDEX_DESC(spring_board pk_spring_board)*/ rownum rn,bno,title,replycnt
+	  from spring_board
+	  where rownum <=10)
+where rn>0;
+
+
+
+select pd.pno, price, title, good, puuid, puploadpath, pimgname
+from product pd, (select * from PRODUCTIMG where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
+where pd.pno = pdi.pno order by pd.pno desc;
+
+select * from PRODUCTIMG;
+
+
+
+-- 상품 좋아요 개수 칼럼 추가
+ALTER TABLE product  ADD good number(10) default 0;
+
+=======
+>>>>>>> branch 'master' of https://github.com/Jung0322/project1.git
 -- 상품 테이블 글번호 시퀀스
 CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1;
 
@@ -144,6 +203,45 @@ create table auction (
          REFERENCES member(userid) ON DELETE CASCADE,
 	CONSTRAINT pk_Auction PRIMARY KEY (ano) -- pk
 );
+<<<<<<< HEAD
+
+ALTER TABLE auction MODIFY startdate VARCHAR2(25);
+ALTER TABLE auction MODIFY enddate VARCHAR2(25);
+
+
+select * 
+	from (select rownum rn,pno, price, title, good, puuid, puploadpath, pimgname
+		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname
+			    from product pd, (select * 
+			                      from PRODUCTIMG 
+			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
+				where pd.pno = pdi.pno order by pd.pno desc)
+		  where rownum <=8)
+	where rn>0;	
+
+
+select * 
+	from (select rownum rn,ano, title, startdate, enddate, startprice, category, auuid, auploadpath, aimgname
+		  from (select  at.ano, title, startdate, enddate, startprice, category, auuid, auploadpath, aimgname
+			    from auction at, (select * 
+			                      from auctionimg
+			                      where Rowid in (select max(rowid) from auctionimg group by ano)) ati
+				where at.ano = ati.ano order by at.ano desc)
+		  where rownum <=8)
+	where rn>0;	
+	
+	select count(ano) from auction;
+
+select * from auction;
+
+-- 경매 테이블 내용 칼럼 추가
+ALTER TABLE auction  ADD content varchar2(2000) not null;
+
+-- 경매 테이블 제목 칼럼 추가
+ALTER TABLE auction  ADD title varchar2(100) not null;
+
+=======
+>>>>>>> branch 'master' of https://github.com/Jung0322/project1.git
 -- 경매 테이블 글번호 시퀀스
 CREATE SEQUENCE auction_seq INCREMENT BY 1 START WITH 1;
 
@@ -159,6 +257,10 @@ CREATE TABLE auctionreply (
          REFERENCES auction(ano) ON DELETE CASCADE,
     CONSTRAINT pk_AuctionReply PRIMARY KEY (arno) -- pk
 );
+
+
+
+
 -- 경매장 댓글 테이블 글번호 시퀀스
 CREATE SEQUENCE auctionreply_seq INCREMENT BY 1 START WITH 1;
 
@@ -173,7 +275,10 @@ create table auctionimg (
 	CONSTRAINT pk_AuctionImg PRIMARY KEY (auuid) -- pk
 );
 
+<<<<<<< HEAD
+=======
 select* from  member;
+>>>>>>> branch 'master' of https://github.com/Jung0322/project1.git
 
 -- 회원 더미 데이터 삽입 -> 시큐리티 적용 후에는 회원가입을 하셔야합니다
 insert into 
@@ -207,3 +312,10 @@ select * from myPlace;
 --alter table spring_attach add constraint pk_attach primary key(uuid);
 --alter table spring_attach add constraint fk_board_attach foreign key(bno)
 --references spring_board(bno);
+
+select * from PRODUCT;
+
+
+select to_char(sysdate) from dual;
+
+select sysdate from dual;

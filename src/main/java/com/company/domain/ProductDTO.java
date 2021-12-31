@@ -24,6 +24,7 @@ public class ProductDTO {
 	private int discount;	//	discount number(2) default 0 ,
 	private int reservation;//	reservation number(2) default 0,
 	private int soldout;	//	soldout number(2) default 0,
+	private int good;
 	
 	
 	private String userid;	//	userid varchar2(50) not null,

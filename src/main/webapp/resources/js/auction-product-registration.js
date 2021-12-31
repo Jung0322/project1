@@ -20,13 +20,29 @@ $(function(){
 		console.log("form");
 		console.log("str"+ str);
 		
-		if($("select[name='category']").val()==''){
+	if($("select[name='category']").val()==''){
 			alert("카테고리를 입력하세요");
 			return;
 		}else if(str==""){
 			alert("상품사진을 첨부하세요");
 			return;
-		}else{
+		}else if($("input[name='title']").val()==''){
+			alert("제목을 입력하세요");
+			return;
+		}else if($("input[name='startdate']").val()==''){
+			alert("시작시간을 입력하세요");
+			return;
+		}else if($("input[name='enddate']").val()==''){
+			alert("마감시간을 입력하세요");
+			return;
+		}else if($("input[name='startprice']").val()==''){
+			alert("시작가격을 입력하세요");
+			return;
+		}else if($("textarea[name='content']").val()==''){
+			alert("상세내용을 입력하세요");
+			return;
+		}
+		else{
 			//게시글 등록 폼에 추가하기
 			$("form[role='form']").append(str).submit();
 		}
