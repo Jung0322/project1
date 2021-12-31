@@ -28,16 +28,19 @@
 <!-- 폰트(글자 종류) api -->
 <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet" />
 
+<!-- jquery cdn -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <style>
 .profile-menu {
 	border-radius: 100%;
 	height: 100%;
 	width: 100%;
 }
-.dropdown-menu {
+.dropdown-menu-area {
 	width: 250px;
 }
-.dropdown-item {
+.dropdown-item-area {
 	display: block;
 }
 </style>
@@ -81,18 +84,18 @@
 							<div class="dropdown" style="height: 40px; width: 40px; margin:auto;">
 								<img class="dropdown-toggle profile-menu" data-toggle="dropdown" aria-expanded="false" src="/resources/images/temp-profile.png"/>
 								
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+								<div class="dropdown-menu dropdown-menu-area" aria-labelledby="dropdownMenuLink">
 									<div class="dropdown-item">
 									    <a href="/member/profile-page">프로필</a>
 									</div>
-									<div class="dropdown-item">
+									<div class="dropdown-item-area">
 										<form action="/member/logout" method="post">
 											<button type="submit">로그아웃</button>
 											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 										</form>
 									</div>
-								    <a class="dropdown-item" href="#">Another action</a>
-								    <a class="dropdown-item" href="#">Something else here</a>
+								    <a class="dropdown-item-area" href="#">Another action</a>
+								    <a class="dropdown-item-area" href="#">Something else here</a>
 								    
 								</div>
 							</div>
