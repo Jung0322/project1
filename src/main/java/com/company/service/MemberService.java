@@ -7,4 +7,7 @@ public interface MemberService {
 	
 	// 회원가입
 	public boolean insertMember(MemberDTO insertDto);
+	
+	// 로그인
+	public MemberDTO readMember(String userid);
 }

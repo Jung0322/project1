@@ -61,12 +61,13 @@ public class MemberController {
 	public void signIn() {
 		log.info("로그인 폼");
 	}	
+	
 	// 로그인 처리
-//	@PostMapping("/signIn")
+//	@RequestMapping(value="/signIn", method ={RequestMethod.Get,RequestMethod.POST})
 //	public String signInPost(MemberDTO loginDto, HttpSession session) {
 //		System.out.println("=== 로그인 처리"+loginDto);
 //		log.info("로그인 처리"+loginDto);
-//		
+//		MemberDTO  loginUser = service/*멤버서비스*/.로그인메소드()
 //		boolean login = memberService.login(loginDto);
 //
 //		if(login) {

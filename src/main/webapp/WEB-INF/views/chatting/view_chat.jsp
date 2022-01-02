@@ -24,7 +24,7 @@
 	<body>
 	    <!-- 채팅 아이콘 -->
 	    <div class="chatIcon font_jua">
-	        <img src="/*채팅 아이콘 경로 넣어주는 곳 */" class="iconImg">
+	        <img src="resources/images/ccoli.png" class="iconImg">
 	    </div>
 	    <!-- 채팅 리스트 / 채팅 방 OPEN / CLOSE -->
 	    <script>
@@ -110,7 +110,7 @@
 	             $.ajax({
 	                url:"chatRoomList.do",
 	                data:{
-	                    userEmail:"${loginUser.email}"
+	                    userNickname:"${loginMember.nickname}"
 	                },
 	                dataType:"json",
 	                async:false, // async : false를 줌으로써 비동기를 동기로 처리 할 수 있다.
@@ -149,30 +149,30 @@
 	                        for(var i in data){
 	                        
 	                            // 자신이 구매자 입장일 때
-	                            if(data[i].userEmail == "${loginUser.email}"){
+	                            if(data[i].userNickname == "${loginMember.nickname}"){
 	                                // 현재 판매자가 로그인 상태 일 때
-	                                if(loginList.indexOf(data[i].masterEmail) != -1){
-	                                    $div = $("<div class='chatList_box enterRoomList' onclick='enterRoom(this);'>").attr("id",data[i].roomId).attr("email",data[i].masterEmail);
+	                                if(loginList.indexOf(data[i].masterNickname) != -1){
+	                                    $div = $("<div class='chatList_box enterRoomList' onclick='enterRoom(this);'>").attr("id",data[i].roomId).attr("email",data[i].masterNickname);
 	                                }
 	                                // 현재 판매자가 로그아웃 상태 일 때
 	                                else{
-	                                    $div = $("<div class='chatList_box2 enterRoomList' onclick='enterRoom(this);'>").attr("id",data[i].roomId).attr("email",data[i].masterEmail);
+	                                    $div = $("<div class='chatList_box2 enterRoomList' onclick='enterRoom(this);'>").attr("id",data[i].roomId).attr("email",data[i].masterNickname);
 	                                }
 	                                $img = $("<img class='profile_img'>").attr("src", "resources/masterImg/" + data[i].masterPic);
-	                                $divs = $("<div class='userNameId'>").text(data[i].masterName);
+	                                $divs = $("<div class='userNameId'>").text(data[i].masterId);
 	                            }
 	                            // 자신이 판매자 입장일 때
 	                            else{                        
 	                                // 현재 구매자가 로그인 상태 일 때
-	                                if(loginList.indexOf(data[i].userEmail) != -1){
-	                                    $div = $("<div class='chatList_box enterRoomList' onclick='enterRoom(this);'>").attr("id",data[i].roomId).attr("email",data[i].userEmail);
+	                                if(loginList.indexOf(data[i].userNickname) != -1){
+	                                    $div = $("<div class='chatList_box enterRoomList' onclick='enterRoom(this);'>").attr("id",data[i].roomId).attr("email",data[i].userNickname);
 	                                }
 	                                // 현재 구매자가 로그아웃 상태 일 때
 	                                else{
-	                                    $div = $("<div class='chatList_box2 enterRoomList' onclick='enterRoom(this);'>").attr("id",data[i].roomId).attr("email",data[i].userEmail);
+	                                    $div = $("<div class='chatList_box2 enterRoomList' onclick='enterRoom(this);'>").attr("id",data[i].roomId).attr("email",data[i].userNickname);
 	                                }                                
 	                                $img = $("<img class='profile_img'>").attr("src", "resources/img/" + data[i].userPic);
-	                                $divs = $("<div class='userNameId'>").text(data[i].userName);
+	                                $divs = $("<div class='userNameId'>").text(data[i].userId);
 	                            }
 	                            
 	                            // 읽지 않은 메세지가 0이 아닐 때
@@ -249,7 +249,7 @@
 	              $.ajax({
 	                url:roomId + ".do",
 	                data:{
-	                    userEmail:"${loginUser.email}"
+	                    userNickname:"${loginMember.nickname}"
 	                },
 	                async:false,
 	                dataType:"json",
@@ -307,8 +307,8 @@
 	             // ENTER-CHAT 이라는 메세지를 보내어, Java Map에 session 추가
 	             const data = {
 	                    "roomId" : roomId,
-	                    "name" : "${ loginUser.name }",
-	                    "email" : "${ loginUser.email }",
+	                    "userid" : "${ loginMember.userid }",
+	                    "nickname" : "${ loginMember.nickname }",
 	                 "message" : "ENTER-CHAT"
 	            };
 	            let jsonData = JSON.stringify(data);
@@ -321,8 +321,8 @@
 	            
 	            const data = {
 	                "roomId" : roomId,
-	                "name" : "${ loginUser.name }",
-	                "email" : "${ loginUser.email }",
+	                "userid" : "${ loginMember.userid }",
+	                "nickname" : "${ loginMember.nickname }",
 	                "message"   : message 
 	            };
 	              
@@ -339,12 +339,12 @@
 	            let receive = evt.data.split(",");
 	             
 	            const data = {
-	                    "name" : receive[0],
-	                    "email" : receive[1],
+	                    "userid" : receive[0],
+	                    "nickname" : receive[1],
 	                 "message" : receive[2]
 	            };
 	             
-	             if(data.email != "${ loginUser.email }"){
+	             if(data.nickname != "${ loginMember.nickname }"){
 	                CheckLR(data);
 	             }
 	        }
@@ -352,15 +352,15 @@
 	        // * 2-1 추가 된 것이 내가 보낸 것인지, 상대방이 보낸 것인지 확인하기
 	        function CheckLR(data) {
 	            // email이 loginSession의 email과 다르면 왼쪽, 같으면 오른쪽
-	            const LR = (data.email != "${ loginUser.email }") ? "left" : "right";
+	            const LR = (data.nickname != "${ loginMember.nickname }") ? "left" : "right";
 	             // 메세지 추가
-	            appendMessageTag(LR, data.email, data.message, data.name);
+	            appendMessageTag(LR, data.userid, data.message, data.nickname);
 	        }
 	         
 	        // * 3 메세지 태그 append
-	        function appendMessageTag(LR_className, email, message, name) {
+	        function appendMessageTag(LR_className, nickname, message, userid) {
 	             
-	            const chatLi = createMessageTag(LR_className, email, message, name);
+	            const chatLi = createMessageTag(LR_className, nickname, message, userid);
 	         
 	            $('div.chatMiddle:not(.format) ul').append(chatLi);
 	         
@@ -369,14 +369,14 @@
 	        }
 	         
 	        // * 4 메세지 태그 생성
-	        function createMessageTag(LR_className, email, message, name) {
+	        function createMessageTag(LR_className, nickname, message, userid) {
 	         
 	             // 형식 가져오기
 	             let chatLi = $('div.chatMiddle.format ul li').clone();
 	         
 	             chatLi.addClass(LR_className);              // left : right 클래스 추가
 	             // find() : chatLi의 하위 요소 찾기
-	             chatLi.find('.sender span').text(name);      // 이름 추가
+	             chatLi.find('.sender span').text(nickname);      // 이름 추가
 	             chatLi.find('.message span').text(message); // 메세지 추가
 	         
 	             return chatLi;

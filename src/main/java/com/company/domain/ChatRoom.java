@@ -18,12 +18,12 @@ public class ChatRoom {
 	
     private String roomId;        // 방 번호
     
-    private String userid;    // 사용자 아이디
-    private String usernickname;    // 사용자 이름
+    private String userId;    // 사용자 아이디
+    private String userNickname;    // 사용자 닉네임
     private String userPic;        // 사용자 사진
     
-    private String masterNicname; // 상대방 이메일
-    private String masterName;    // 상대방 이름
+    private String masterId;    // 상대방 아이디
+    private String masterNickname; // 상대방 닉네임
     private String masterPic;    // 상대방 사진
     
     private int unReadCount;    // 안 읽은 메세지 수

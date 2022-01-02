@@ -204,6 +204,12 @@ values (myPlace_seq.nextval, '지갑', '동네생활', '산책 친구 구합니�
 insert into myPlace(mno, userid, mcategory, title, content)
 values (myPlace_seq.nextval, '마테차', '동네사건사고', '안경찾습니다.', '종각역 1번출구에서 떨어뜨린 것 같은데 아무리 찾아봐도 안보여요 ㅠㅠ 혹시 보신 분 연락부탁드립니다. 사례할께요!');
 
+
+create table chatroom(
+	
+);
+
+
 -- 참고 primary key /foreign key 작성 
 --alter table spring_attach add constraint pk_attach primary key(uuid);
 --alter table spring_attach add constraint fk_board_attach foreign key(bno)

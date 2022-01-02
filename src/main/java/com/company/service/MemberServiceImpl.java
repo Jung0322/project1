@@ -35,4 +35,9 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
+	@Override
+	public MemberDTO readMember(String userid) {
+		return memberMapper.readMember(userid);
+	}
+
 }
