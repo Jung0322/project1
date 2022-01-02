@@ -72,16 +72,16 @@ public class ChatController {
      */
     @ResponseBody
     @RequestMapping("createChat.do")
-    public String createChat(ChatRoom room, String userName, String userEmail, String masterNickname){
+    public String createChat(ChatRoom room, String userId, String userNickname, String masterNickname){
         
-        MemberDTO m = pService.getProductDetail(masterNickname); // 상대방 닉네임으로 member service에서 데이터 가져오기 
+        MemberDTO m = pService.readMember(masterNickname); // 상대방 닉네임으로 member service에서 데이터 가져오기 
         
         // 채팅방DTO에 값 저장 
-        room.setUserEmail(userEmail);
-        room.setUserName(userName);
-        room.setMasterEmail(m.getEmail());
-        room.setMasterName(m.getnickname());
-        room.setMasterPic(m.getmProPicRe());
+        room.setUserId(userId);
+        room.setUserNickname(userNickname);
+        room.setMasterId(m.getUserid());
+        room.setMasterNickname(m.getNickname());
+        room.setMasterPic(m.getUserid());
  
         ChatRoom exist  = cService.searchChatRoom(room);
         

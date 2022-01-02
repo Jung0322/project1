@@ -165,7 +165,34 @@ create table auctionimg (
          REFERENCES auction(ano) ON DELETE CASCADE,
 	CONSTRAINT pk_AuctionImg PRIMARY KEY (auuid) -- pk
 );
+-- 13. 채팅 방 테이블
+create table chatroom(
+	roomid varchar2(10) not null,
+	userid varchar2(50) not null, -- 로그인 아이디(pk)
+    usernickname varchar2(20) not null, -- 로그인 유저 닉네임
+    userprofile varchar2(50) -- user 프로필 
+    
+    masterid varchar2(50) not null,
+    masternickname varchar2(20) not null,
+    masterprofile varchar2(50),
+    
+    
+);
+-- 채팅방 테이블 방번 시퀀스
+CREATE SEQUENCE SEQ_CHATROOM_ID;
 
+-- 14. 채팅 메세지 
+CREATE TABLE chatmessage(
+	roomid varchar2(10) not null,  		-- 채팅 방번호
+	messageid varchar2(10) not null, 	-- 메세지 번호 pk
+	message varchar2(1000) not null,	-- 메세지 내용
+	sentid varchar2(50) not null,		-- 보낸이 id
+	sentnickname varchar2(50) not null,	-- 보낸이 닉네임
+	
+	unreadcount number(3) default 1,	-- 안 읽은 메세지 수
+	sessioncount number(3) default 0   	-- 현재 세션 수
+	
+);
 select* from  member;
 
 -- 회원 더미 데이터 삽입 -> 시큐리티 적용 후에는 회원가입을 하셔야합니다
@@ -205,9 +232,6 @@ insert into myPlace(mno, userid, mcategory, title, content)
 values (myPlace_seq.nextval, '마테차', '동네사건사고', '안경찾습니다.', '종각역 1번출구에서 떨어뜨린 것 같은데 아무리 찾아봐도 안보여요 ㅠㅠ 혹시 보신 분 연락부탁드립니다. 사례할께요!');
 
 
-create table chatroom(
-	
-);
 
 
 -- 참고 primary key /foreign key 작성 
