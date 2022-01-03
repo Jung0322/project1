@@ -12,6 +12,9 @@
 <meta name="keywords" content="" />
 <meta name="author" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<!-- csrf 토큰 -->
+<meta name="_csrf_header" content="${_csrf.headerName}" />
+<meta name="_csrf" content="${_csrf.token}" />
 
 <title>Magnet - Minimal Portfolio Template</title>
 
