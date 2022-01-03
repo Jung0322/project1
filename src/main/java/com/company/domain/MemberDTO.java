@@ -1,6 +1,7 @@
 package com.company.domain;
 
 
+import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -20,6 +21,7 @@ public class MemberDTO {
     private String phone; // 휴대전화
     private String mytown; // 내 동네
     private boolean enabled; // 사용 여부
+    private Date regdate; // 가입일
     
     // 권한 정보
     List<MemberAuthorityDTO> authList;
