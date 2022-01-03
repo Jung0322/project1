@@ -37,16 +37,16 @@
 				<div class="blog-good">
 					<span><i class="far fa-grin"></i> 궁금해요</span> 
 				</div>
-				<div class="dropdown" >
-					<i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-expanded="false"></i>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-							<button class="dropdown-item list" type="submit" >수정하기</button>
-							<button class="dropdown-item list" type="submit" >삭제하기</button>
-						</div>
-				</div>
 				<div class="blog-reply">
 					<h3>2 Comments</h3>
 					<div class="media">
+						<div class="dropdown" id="dropdown1">
+							<i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-expanded="false"></i>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<button class="dropdown-item list" type="submit" >수정하기</button>
+									<button class="dropdown-item list" type="submit" >삭제하기</button>
+								</div>
+						</div>
 						<div class="media-object pull-left">
 							<img src="/images/heart.png" class="img-responsive img-circle" alt="Blog Image" >
 						</div>
@@ -54,14 +54,16 @@
 							<span name="nickname">Omar Larus</span> 
 							<span name="mytown">서울시 은평구 신사동</span> 
 							<span name="regdate">7 months ago</span>
-							<p name="content">댓글내용</p>
+							<p style="margin-bottom: 20px; margin-top: 10px;" name="content">댓글내용</p>
 						</div>
 					</div>
 				</div>
 				<!-- 로그인 안된 상태 -->
 				<sec:authorize access="isAnonymous()">
-					<textarea class="form-control" placeholder="댓글을 입력하기 위해선 로그인이 필요합니다." rows="5" name="replyContent" style="margin-top: 20px;"></textarea>				
+					<textarea class="form-control" placeholder="댓글을 입력하기 위해선 로그인이 필요합니다." rows="5" name="replyContent" style="margin-top: 20px;" readonly="readonly"></textarea>				
 				</sec:authorize>
+				
+				<!-- 로그인 된 상태 -->
 				<sec:authorize access="isAuthenticated()">
 				<div class="blog-reply-form">
 					<form action="" method="post" id="replyForm">
@@ -70,27 +72,28 @@
 							<input type="button" class="form-control" id="replyButton" value="댓글입력">
 						</div>
 						    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
-                         	<input type="hidden" name="mno" value="${dto.mno}"/>  						
-                         	<input type="hidden" name="userid" value=""/> 
-                         	<input type="hidden" name="nickname" value=""/>   						
-                         	<input type="hidden" name="nickname" value=""/>   						
+                         	<input type="hidden" name="mno" value="${dto.mno}"/>
+                         	  						 						
 					</form>
 				</div>
 				</sec:authorize>
 			</div>
 		</div>
 	</div>
+	
 </section>
+
 
 <script>
 	//현재 글번호 가져오기
 	let mno = ${dto.mno};
-	
+		
 	let csrfHeaderName = "${_csrf.headerName}";
 	let csrfTokenValue = "${_csrf.token}";	
 	
 </script>
 
-<script src="/resources/js/myPlace.js"></script> 
-<script src="/resources/js/myPlaceReply.js"></script> 
+
+<script src="/resources/js/board/myPlace.js"></script> 
+<script src="/resources/js/board/myPlaceReply.js"></script> 
 <%@ include file="../includes/footer.jsp"%>

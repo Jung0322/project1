@@ -34,4 +34,9 @@ public class MyPlaceReplyServiceImpl implements MyPlaceReplyService {
 		return replyMapper.delete(mrno) > 0 ? true : false;
 	}
 
+	@Override
+	public MyPlaceReplyDTO getInfoReply(String userid) {
+		return replyMapper.getInfoReply(userid);
+	}
+
 }

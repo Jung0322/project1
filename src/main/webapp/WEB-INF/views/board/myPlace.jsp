@@ -76,5 +76,5 @@
 	<input type="hidden" name="mno" value=""/>
 </form>
 
-<script src="/resources/js/myPlace.js"></script>
+<script src="/resources/js/board/list.js"></script>
 <%@ include file="../includes/footer.jsp"%>

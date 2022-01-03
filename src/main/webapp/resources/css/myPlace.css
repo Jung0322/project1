@@ -130,6 +130,11 @@
 	float: right;
 }
 
+#dropdown1 {
+	float: right;
+	margin-right: 14px;
+}
+
 .list {
 	display: block;
 	border: none;

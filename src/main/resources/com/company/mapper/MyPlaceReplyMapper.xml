@@ -26,5 +26,11 @@
 		selete count(mrno) from myPlaceReply where mno=#{mno}
 	</select>
 	
+	<!-- 댓글 작성 시 필요한 정보 가져오기 -->
+	<select id="getInfoReply" resultType="com.company.domain.MyPlaceReplyDTO">
+		select nickname, mytown, userid from member
+		where userid=#{userid}
+	</select>
+	
 	
 </mapper>

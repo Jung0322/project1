@@ -29,7 +29,7 @@ public class MyPlaceReplyController {
 	@Autowired
 	private MyPlaceReplyService service;
 	
-	@GetMapping("/pages/{mno}")
+	@GetMapping("/pages/{mno}/{page}")
 	public ResponseEntity<List<MyPlaceReplyDTO>> readAll(@PathVariable int mno){
 		log.info("댓글 전체 가져오기"+mno);
 		
@@ -40,7 +40,9 @@ public class MyPlaceReplyController {
 	public ResponseEntity<String> create(@RequestBody MyPlaceReplyDTO insertDto, Principal principal){
 		log.info("댓글입력"+insertDto);
 		
+		insertDto = service.getInfoReply(principal.getName());
 		
+		System.out.println(insertDto);
 		
 		return service.insertReply(insertDto)?
 				new ResponseEntity<String>("success",HttpStatus.OK):
