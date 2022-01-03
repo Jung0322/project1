@@ -100,14 +100,14 @@
 .blog-post {
 	  border-bottom: 1px solid #f0f0f0;
 	  padding-top: 12px; /* 게시물과 구분선 상단 간격*/
-	  padding-bottom: 12px; /* 게시물과 구분선 하단 간격*/
-	  margin-bottom: 12px;	 
+	  padding-bottom: 12px; /* 게시물과 구분선 하단 간격*/ 
 }
 
 .blog-post-title h2{
 	font-size: 20px;
 	
 }
+
 
 .move {
 	font-size: 20px;
@@ -132,4 +132,6 @@
 
 .list {
 	display: block;
+	border: none;
+	background-color: white;
 }

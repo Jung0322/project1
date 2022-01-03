@@ -8,14 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.company.domain.AttachFileDTO;
+import com.company.domain.AttachMyPlaceDTO;
 
 import lombok.extern.log4j.Log4j2;
 
 @RestController
 @Log4j2
 public class UploadController {
-	public ResponseEntity<AttachFileDTO> uploadAjaxPost(MultipartFile[] uploadFile) {
+	public ResponseEntity<AttachMyPlaceDTO> uploadAjaxPost(MultipartFile[] uploadFile) {
 		
 //		//서버 폴더에 첨부 파일 저장
 //		String uploadFolder = "e:\\ccoli\\myPlace";

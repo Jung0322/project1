@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="../includes/header.jsp"%>
 <link rel="stylesheet" href="/resources/css/myPlace.css" />
 <script src="https://kit.fontawesome.com/84524c7dde.js"
 	crossorigin="anonymous"></script> 
 
-<%@ include file="../includes/header.jsp"%>
 
 <!-- Blog Single Post Section -->
 <section id="blog-single-post">
@@ -13,8 +13,8 @@
 			<div class="col-md-offset-1 col-md-10 col-sm-12">
 					<div class="blog-single-post-thumb">
 						<div class="blog-post-title">
-							<span>${dto.mcategory}</span>
-							<h2>${dto.title}</h2>
+							<span >${dto.mcategory}</span>
+							<h2 style="line-height: 20px;">${dto.title}</h2>
 						</div>
 						<div class="blog-post-format">
 							<span> <a href="/member/profile-page"><img src="/resources/images/ccoli.png" class="img-responsive img-circle">${dto.nickname}</a></span> 
@@ -26,7 +26,6 @@
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 										<button class="dropdown-item list" type="button" data-oper='list' onclick="location.href='/board/myPlace'">목록보기</button>
 										<button class="dropdown-item list" type="button" id="hiddenBtn" data-oper='modify' onclick="location.href='/board/modify?mno=${dto.mno}'">수정하기</button>
-										<button class="dropdown-item list" type="button" id="hiddenBtn" data-oper='remove'>삭제하기</button>
 									</div>
 								</div>
 							</span>
@@ -44,7 +43,7 @@
 							<button class="dropdown-item list" type="submit" >수정하기</button>
 							<button class="dropdown-item list" type="submit" >삭제하기</button>
 						</div>
-							</div>
+				</div>
 				<div class="blog-reply">
 					<h3>2 Comments</h3>
 					<div class="media">
@@ -55,30 +54,43 @@
 							<span name="nickname">Omar Larus</span> 
 							<span name="mytown">서울시 은평구 신사동</span> 
 							<span name="regdate">7 months ago</span>
-							<p name="content">Lorem ipsum dolor sit amet, maecenas eget
-								vestibulum justo imperdiet, wisi risus purus augue vulputate
-								voluptate neque, curabitur.</p>
+							<p name="content">댓글내용</p>
 						</div>
 					</div>
 				</div>
+				<!-- 로그인 안된 상태 -->
+				<sec:authorize access="isAnonymous()">
+					<textarea class="form-control" placeholder="댓글을 입력하기 위해선 로그인이 필요합니다." rows="5" name="replyContent" style="margin-top: 20px;"></textarea>				
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
 				<div class="blog-reply-form">
-					<form action="#" method="post">
-						<textarea class="form-control" placeholder="댓글을 입력하세요." rows="5" id="replyContent"></textarea>
+					<form action="" method="post" id="replyForm">
+						<textarea class="form-control" placeholder="댓글을 입력하세요." rows="5" name="replyContent"></textarea>
 						<div>
-							<input type="submit" class="form-control" id="replyButton" value="댓글입력">
+							<input type="button" class="form-control" id="replyButton" value="댓글입력">
 						</div>
+						    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+                         	<input type="hidden" name="mno" value="${dto.mno}"/>  						
+                         	<input type="hidden" name="userid" value=""/> 
+                         	<input type="hidden" name="nickname" value=""/>   						
+                         	<input type="hidden" name="nickname" value=""/>   						
 					</form>
 				</div>
+				</sec:authorize>
 			</div>
 		</div>
 	</div>
 </section>
 
 <script>
+	//현재 글번호 가져오기
 	let mno = ${dto.mno};
+	
+	let csrfHeaderName = "${_csrf.headerName}";
+	let csrfTokenValue = "${_csrf.token}";	
 	
 </script>
 
-<script src="/resources/js/reply.js"></script> 
 <script src="/resources/js/myPlace.js"></script> 
+<script src="/resources/js/myPlaceReply.js"></script> 
 <%@ include file="../includes/footer.jsp"%>

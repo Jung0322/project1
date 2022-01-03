@@ -21,7 +21,7 @@
 					<div class="blog-post">
 						<div class="blog-post-title">
 							<span>${dto.mcategory}</span>
-							<h3 id="listTitle">
+							<h3 id="listTitle" style="margin-top: 10px;">
 								<a href="${dto.mno}" class="move">${dto.title}</a>
 							</h3>
 						</div>
@@ -50,13 +50,29 @@
 	<!-- pagination -->
 	<nav class="woocommerce-pagination">
 		<ul class="page-numbers">
-			<li><span class="page-numbers current">1</span></li>
-			<li><a class="page-numbers" href="#">2</a></li>
-			<li><a class="next page-numbers" href="#">→</a></li>
+			<c:if test="${pageDto.prev}">
+				<li class="paginate_button">
+					<a class="next page-numbers" href="${pageDto.startPage-1}">←</a>
+				</li>
+			</c:if>
+			<c:forEach var="idx" begin="${pageDto.startPage}" end="${pageDto.endPage}">
+				<li class="paginate_button">
+					<span class="page-numbers current ${pageDto.cri.pageNum==idx?'active':''}">
+						<a href="${idx}">${idx}</a>
+					</span>
+				</li>
+			</c:forEach>
+			<c:if test="${pageDto.next}">
+				<li class="paginate_button">
+					<a class="next page-numbers" href="${pageDto.endPage+1}">→</a>
+				</li>
+			</c:if>
 		</ul>
 	</nav>
 
 <form action="" method="get" id="actionForm">
+	<input type="hidden" name="pageNum" value="${pageDto.cri.pageNum}" />
+	<input type="hidden" name="amount" value="${pageDto.cri.amount}" />
 	<input type="hidden" name="mno" value=""/>
 </form>
 

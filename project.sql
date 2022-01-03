@@ -62,6 +62,8 @@ create table myPlaceReply (
 	mrno number(10) not null, -- 댓글번호(pk)
 	mno number(10) not null, -- 동네생활 글번호
 	userid varchar2(50) not null, -- 아이디
+	nickname varchar2(50) not null, --닉네임
+	mytown varchar2(50) not null, -- 내동네
 	content varchar2(5000) not null, -- 댓글 내용
 	regdate DATE default sysdate, -- 작성날짜
 	updatedate DATE default sysdate, -- 수정날짜
