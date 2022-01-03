@@ -15,8 +15,13 @@
 
 <title>Magnet - Minimal Portfolio Template</title>
 
+<script src="/resources/js/jquery.js"></script>
+<script src="/resources/js/custom.js"></script>
+
 <!-- jquery cdn -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
+<!-- ajax cdn -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
@@ -66,14 +71,14 @@
 					<span class="icon icon-bar"></span> <span class="icon icon-bar"></span>
 					<span class="icon icon-bar"></span>
 				</button>
-				<a href="/index" class="navbar-brand"> <i class="fa fa-magnet"></i>
+				<a href="/product/index" class="navbar-brand"> <i class="fa fa-magnet"></i>
 				</a>
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="/index">상품</a></li>
+					<li><a href="/product/index">상품</a></li>
 					<li><a href="/board/myPlace">내동네</a></li>
-					<li><a href="/auction">경매</a></li>
+					<li><a href="/auction/auction">경매</a></li>
 					
 					<!-- 로그인 안된 상태 -->					
 					<sec:authorize access="isAnonymous()">
