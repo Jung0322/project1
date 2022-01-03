@@ -8,20 +8,13 @@ create table member (
     phone varchar2(50) not null, -- 휴대전화
     mytown varchar2(50) not null, -- 내 동네
     enabled char(1) default '1', -- 계정 사용 정보
-    regdate DATE default sysdate, 
+    regdate DATE default sysdate, -- 가입일
     CONSTRAINT pk_member PRIMARY KEY (userid) -- pk
 );
 ALTER TABLE member MODIFY  password varchar2(100);
-
-ALTER TABLE member  ADD  regdate DATE default sysdate;
-
 ALTER TABLE member  ADD  enabled char(1) default '1';
-
-select *  from sp_member_authority; 
-
-
 -- 가입날짜 컬럼 추가(기존 테이블이 있는 경우에 사용)
-alter table member add regdate date default sysdate;
+ALTER TABLE member  ADD  regdate DATE default sysdate;
 
 -- 2. 프로필 이미지 테이블
 create table profileimg (
