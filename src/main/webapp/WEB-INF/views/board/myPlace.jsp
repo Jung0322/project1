@@ -1,20 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="/resources/css/myPlace.css" />
+<%@ include file="../includes/header.jsp"%>  
+
+ <link rel="stylesheet" href="/resources/css/myPlace.css" />
 <link rel='stylesheet' href='/resources/css/woocommerce-layout.css'
 	type='text/css' media='all' />
 <link rel='stylesheet' href='/resources/css/woocommerce.css'
 	type='text/css' media='all' />
-<script src="https://kit.fontawesome.com/84524c7dde.js"
-	crossorigin="anonymous"></script>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
-<%@ include file="../includes/header.jsp"%>
 
 <!-- Blog Section -->
-<body
-	class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page">
+<body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page">
 	<section id="blog">
 		<div class="container">
 			<div class="row">
@@ -63,7 +58,6 @@
 
 <form action="" method="get" id="actionForm">
 	<input type="hidden" name="mno" value=""/>
-
 </form>
 
 <script src="/resources/js/myPlace.js"></script>

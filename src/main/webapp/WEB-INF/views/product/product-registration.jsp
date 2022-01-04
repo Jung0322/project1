@@ -53,6 +53,7 @@
                                    <option value="남성잡화/의류">남성잡화/의류</option>
                                    
                               </select>
+                              
                          </div>
                          <div class="col-md-12 col-sm-12"> 
                               <textarea class="form-control" rows="5" placeholder="상품 상세정보를 입력해주세요." name="content" required></textarea>

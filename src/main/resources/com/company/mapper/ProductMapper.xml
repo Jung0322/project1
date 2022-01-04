@@ -12,5 +12,54 @@
 		values(#{pno},#{category},#{title},#{price},#{content},#{delivery},#{discount},'haha')
 	
 	</insert>
+	
+	
+	<resultMap type="com.company.domain.ProductDTO" id="productMap">
+		<id property="pno" column="pno"/> <!-- pk는 id -->
+		<result property="title" column="title"/>
+		<result property="price" column="price"/>
+		<!-- <result property="good" column="good"/> -->
+		<collection property="attachList" resultMap="attachMap"></collection>
+	</resultMap>
+
+	<resultMap type="com.company.domain.AttachProductDTO" id="attachMap">
+		<result property="puuid" column="puuid"/>
+		<result property="pno" column="pno"/>
+		<result property="puploadPath" column="puploadPath"/>
+		<result property="pimgname" column="pimgname"/>
+	</resultMap>
+	
+	
+	
+	
+	<!-- 전체 조회 -->
+	<select id="listAll" resultMap="productMap">
+		
+		<![CDATA[
+		select * 
+		from (select rownum rn,pno, price, title, good, puuid, puploadpath, pimgname
+		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname
+			    from product pd, (select * 
+			                      from PRODUCTIMG 
+			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
+				where pd.pno = pdi.pno order by pd.pno desc)
+		  where
+		]]>
+		
+		 <![CDATA[ 
+		 	rownum <= (#{pageNum} * #{amount}))
+      where rn> (#{pageNum}-1) * #{amount}
+		 ]]>
+	
+	</select>
+	
+		<!-- 전체 게시물 수 -->
+	<select id="totalCnt" resultType="int">
+		select count(*)
+		from
+		product
+		where		
+		 pno > 0
+	</select>
 
 </mapper>

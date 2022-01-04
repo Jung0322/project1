@@ -78,6 +78,12 @@ public class MemberController {
 //		return "redirect:/member/signIn";
 //	}
 	
+	// 로그아웃
+	@PostMapping("/logout")
+	public void logoutPost() {
+		log.info("로그아웃 요청");
+	}
+	
 	
 	// 프로필
 	// 프로필 화면

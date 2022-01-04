@@ -8,7 +8,8 @@ public interface BoardMapper {
 	public int insert(BoardDTO insertDTO);
 	public List<BoardDTO> listAll();
 	public BoardDTO read(int mno);
+	public int update(BoardDTO updateDto);
 
-
+	public BoardDTO readMemberInfo(String userid);
 
 }

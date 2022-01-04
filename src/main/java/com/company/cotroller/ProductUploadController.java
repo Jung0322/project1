@@ -70,7 +70,6 @@ public class ProductUploadController {
 			uploadFileName = uuid.toString()+"_"+multipartFile.getOriginalFilename();
 			
 			File saveFile = new File(uploadPath, uploadFileName);
-			
 			AttachProductDTO attachFileDTO = new AttachProductDTO();
 			attachFileDTO.setPuuid(uuid.toString());
 			attachFileDTO.setPuploadPath(uploadFolderPath);
@@ -78,18 +77,21 @@ public class ProductUploadController {
 			
 			
 			
+		
+			
+			//썸네일 저장
+			try {
+				FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath,"s_"+uploadFileName));
+				InputStream in = multipartFile.getInputStream();
+				Thumbnailator.createThumbnail(in, thumbnail,100,100);
+				in.close();
+				thumbnail.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 				
-				//썸네일 저장
-				try {
-					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath,"s_"+uploadFileName));
-					InputStream in = multipartFile.getInputStream();
-					Thumbnailator.createThumbnail(in, thumbnail,100,100);
-					in.close();
-					thumbnail.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				
 			
 			
 			attachList.add(attachFileDTO);
@@ -114,7 +116,7 @@ public class ProductUploadController {
 	//썸네일 이미지 가져오기
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getFile(String fileName) {
-		log.info("썸네일 요청"+fileName);
+		log.info("이미지 요청   "+fileName);
 		
 		File file = new File("e:\\ccoli\\product",fileName);
 		

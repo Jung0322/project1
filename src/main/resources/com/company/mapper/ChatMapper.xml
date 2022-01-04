@@ -22,7 +22,7 @@
 	</resultMap>
 
 	<!-- 신규 채팅방일 때 채팅 방 생성 -->
-	<insert id="createChat" parameterType="com.company.domain.ChatRoom">
+<!-- 	<insert id="createChat" parameterType="com.company.domain.ChatRoom">
 		insert into CHATROOM
 		values(SEQ_CHATROOM_ID.NEXTVAL, #{userEmail},
 		#{userName}, DEFAULT,
@@ -60,8 +60,8 @@
 
 	<select id="chatRoomList" parameterType="string" resultMap="chatRoomResultSet">
 		SELECT * FROM CHATROOM
-		WHERE USER_EMAIL = #{userEmail} OR
-		MASTER_EMAIL = #{userEmail}
+		WHERE USER_ID = #{userId} OR
+		MASTER_NICKNAME = #{userNickname}
 	</select>
 
 	<select id="selectUnReadCount" parameterType="com.company.domain.ChatMessage" resultType="_int">
@@ -77,5 +77,5 @@
 		WHERE ROOM_ID = #{roomId} AND USER_EMAIL != #{email}
 		AND UNREAD_COUNT = 1
 	</update>
-
+ -->
 </mapper>

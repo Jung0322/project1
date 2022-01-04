@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <head>
@@ -14,8 +15,12 @@
 
 <title>Magnet - Minimal Portfolio Template</title>
 
+<!-- jquery cdn -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <!-- fontawesome -->
 <!-- <link rel="stylesheet" href="/resources/css/font-awesome.min.css" /> -->
@@ -27,7 +32,19 @@
 <!-- 폰트(글자 종류) api -->
 <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet" />
 
-
+<style>
+.profile-menu {
+	border-radius: 100%;
+	height: 100%;
+	width: 100%;
+}
+.dropdown-menu-area {
+	width: 250px;
+}
+.dropdown-item-area {
+	display: block;
+}
+</style>
 
 </head>
 <body>
@@ -64,16 +81,24 @@
 					</sec:authorize>
 					<!-- 로그인 된 상태 -->
 					<sec:authorize access="isAuthenticated()">
-						<li style="margin-left: 15px;">
-							<div class="dropdown" style="height: 50px; width: 50px; margin:auto;">
-								<img class="dropdown-toggle profile-img" data-toggle="dropdown" aria-expanded="false" src="/resources/images/temp-profile.png"/>
+						<li style="margin-left: 13px; margin-top: 5px;">
+							<div class="dropdown" style="height: 40px; width: 40px; margin:auto;">
+								<img class="dropdown-toggle profile-menu" data-toggle="dropdown" aria-expanded="false" src="/resources/images/temp-profile.png"/>
 								
-								
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="width: ">
-								    <a class="dropdown-item" href="#">Action</a>
-								    <a class="dropdown-item" href="#">Another action</a>
-								    <a class="dropdown-item" href="#">Something else here</a>
-								  </div>
+								<div class="dropdown-menu dropdown-menu-area" aria-labelledby="dropdownMenuLink">
+									<div class="dropdown-item dropdown-item-area">
+									    <a href="/member/profile-page">프로필</a>
+									</div>
+									<div class="dropdown-item dropdown-item-area">
+										<form action="/member/logout" method="post">
+											<button type="submit">로그아웃</button>
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+										</form>
+									</div>
+								    <a class="dropdown-item dropdown-item-area" href="#">Another action</a>
+								    <a class="dropdown-item dropdown-item-area" href="#">Something else here</a>
+								    
+								</div>
 							</div>
 						</li>
 					</sec:authorize>

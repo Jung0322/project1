@@ -19,29 +19,29 @@ import com.company.service.MemberService;
 @Controller
 public class UserController {
 	// 채팅
-	@Autowired
-	private ChatSession cSession;
-
-	@Autowired
-	private MemberService uService;
-
-	// 로그인 세션 메소드 ( 암호화 처리 )
-	@RequestMapping(value = "/chat", method = { RequestMethod.GET, RequestMethod.POST })
-	public void memberLogin(String userid, Model model, HttpServletRequest request) {
-
-		MemberDTO loginMember = uService.readMember(userid); /* mapper처리문구 변경 */;
-		// 채팅
-		// 현재 로그인 한 member 채팅 session Arraylist에 추가
-		cSession.addLoginUser(loginMember.getNickname());
-	}
-
-	@RequestMapping("logout.do")
-	public void logout(HttpSession session) {
-		// 채팅
-		MemberDTO m = (MemberDTO) session.getAttribute("loginUser");
-
-		// 채팅
-		// 로그아웃한 User를 채팅 Session ArrayList에서 삭제
-		cSession.removeLoginUser(m.getNickname());
-	}
+//	@Autowired
+//	private ChatSession cSession;
+//
+//	@Autowired
+//	private MemberService uService;
+//
+//	// 로그인 세션 메소드 ( 암호화 처리 )
+//	@RequestMapping(value = "/chat", method = { RequestMethod.GET, RequestMethod.POST })
+//	public void memberLogin(String userid, Model model, HttpServletRequest request) {
+//
+//		MemberDTO loginMember = uService.readMember(userid); /* mapper처리문구 변경 */;
+//		// 채팅
+//		// 현재 로그인 한 member 채팅 session Arraylist에 추가
+//		cSession.addLoginUser(loginMember.getNickname());
+//	}
+//
+//	@RequestMapping("logout.do")
+//	public void logout(HttpSession session) {
+//		// 채팅
+//		MemberDTO m = (MemberDTO) session.getAttribute("loginUser");
+//
+//		// 채팅
+//		// 로그아웃한 User를 채팅 Session ArrayList에서 삭제
+//		cSession.removeLoginUser(m.getNickname());
+//	}
 }

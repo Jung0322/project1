@@ -2,7 +2,16 @@
     pageEncoding="UTF-8"%>
 <link rel='stylesheet' href='/resources/css/woocommerce-layout.css' type='text/css' media='all'/>
 <link rel='stylesheet' href='/resources/css/woocommerce.css' type='text/css' media='all'/>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
 	<%@ include file="../includes/header.jsp" %>
+	
+<script>
+	var pathArr = [];
+</script>
 <body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page">
 		<div id="content" class="site-content">
 			<div id="primary" class="content-area column full">
@@ -12,98 +21,86 @@
 				</p>
 				<form class="woocommerce-ordering" method="get">
 					<select name="orderby" class="orderby">
-						<option value="menu_order" selected="selected">Default sorting</option>
-						<option value="popularity">Sort by popularity</option>
-						<option value="rating">Sort by average rating</option>
-						<option value="date">Sort by newness</option>
-						<option value="price">Sort by price: low to high</option>
-						<option value="price-desc">Sort by price: high to low</option>
+						<option value="" selected="selected">카테고리</option>
+						<option value="디지털기기">디지털기기</option>
+						<option value="생활가전">생활가전</option>
+						<option value="가구/인테리어">가구/인테리어</option>
+						<option value="스포츠/레저">스포츠/레저</option>
+						<option value="여성잡화/의류">여성잡화/의류</option>
+						<option value="남성잡화/의류">남성잡화/의류</option>
 					</select>
 				</form>
 				<ul class="products">
-				
-				
-					<li class="first product">
-					<a href="single-project">
-					<span class="onsale">예약</span>
-					<img src="/resources/images/portfolio-img1.jpg" alt="">
-					<h3>Cool Fedora</h3>
-					<span class="price"><span class="amount">$34.00</span></span>
-					</a><span>❤ : </span>
-					</li>
-
+				<c:forEach var="dto" items="${list}">
 					<li class="product">
-					<a href="single-project">
-					<img src="/resources/images/portfolio-img1.jpg" alt="">
-					<h3>Beige Blouse</h3>
-					<span class="price"><span class="amount">$66.00</span></span>
-					</a><span>❤ : </span>
-					</li>
+					<a href="/single-project">
+					<span class="onsale">예약</span>					
+					<script>
+					uploadPath = '${dto.attachList[0].puploadPath}';
+					fileName = '${dto.attachList[0].pimgname}';
+					uuid = '${dto.attachList[0].puuid}';
 					
-					<li class="product">
-					<a href="single-project">
-					<img src="/resources/images/portfolio-img1.jpg" alt="">
-					<h3>Black Jacket</h3>
-					<span class="price"><span class="amount">$125.00</span></span>
-					</a><span>❤ : </span>
-					</li>
+					originPath = uploadPath+"\\"+uuid+"_"+fileName;	
 					
-					<li class="last product">
-					<a href="single-project">
-					<img src="/resources/images/portfolio-img1.jpg" alt="">
-					<h3>Brown Jacket</h3>
-					<span class="price"><span class="amount">$28.00</span></span>
-					</a><span>❤ : </span>
+					pathArr.push(originPath);
+					</script>
+					<img src="" alt="" class="pimg"> 					
+					<!-- <img src='/display?fileName=javascript:' alt=""> -->
+					<h3>${dto.title}</h3>
+					<span class="price"><span class="amount">${dto.price}</span></span>
+					</a><span>❤ : ${dto.good}</span>
 					</li>
-					
-					<li class="first product">
-					<a href="single-project">
-					<img src="/resources/images/portfolio-img1.jpg" alt="">
-					<h3>Gray Blouse</h3>
-					<span class="price"><span class="amount">$15.00</span></span>
-					</a><span>❤ : </span>
-					</li>
-					
-					<li class="product">
-					<a href="single-project">
-					<img src="/resources/images/portfolio-img1.jpg" alt="">
-					<h3>Male Bag</h3>
-					<span class="price"><span class="amount">$16.00</span></span>
-					</a><span>❤ : </span>
-					</li>
-					
-					<li class="product">
-					<a href="single-project">
-					<img src="/resources/images/portfolio-img1.jpg" alt="">
-					<h3>Hugo Jeans</h3>
-					<span class="price"><span class="amount">$36.00</span></span>
-					</a><span>❤ : </span>
-					</li>
-					
-					<li class="last product">
-					<a href="single-project">
-					<img src="/resources/images/portfolio-img1.jpg" alt="">
-					<h3>Male T-Shirt</h3>
-					<span class="price"><span class="amount">$49.00</span></span>
-					</a><span>❤ : </span>
-					</li>
+				</c:forEach>
 					
 				</ul>
 				<nav class="woocommerce-pagination">
-				<ul class="page-numbers">
-					<li><span class="page-numbers current">1</span></li>
-					<li><a class="page-numbers" href="#">2</a></li>
-					<li><a class="next page-numbers" href="#">→</a></li>
-				</ul>
+				<ul class="pagination">
+                            		<c:if test="${pageDto.prev}">
+                            			<li class="paginate_button previous">
+                            			<a class="pNum" href="${pageDto.startPage-10}">Previous</a></li>
+                            		</c:if>
+                            		<c:forEach var="idx" begin="${pageDto.startPage}" end="${pageDto.endPage}">
+                            			<li class="paginate_button ${pageDto.cri.pageNum==idx?'active':''}">
+                            				<a class="pNum" href="${idx}">${idx}</a>
+                            			</li>
+                            		</c:forEach>
+                            		<c:if test="${pageDto.next}">
+	                            		<li class="paginate_button next">
+	                            		<a class="pNum" href="${pageDto.endPage+1}">Next</a></li>
+                            		</c:if>
+                            	</ul>
 				</nav>
 				</main>
 				<!-- #main -->
 			</div>
 			<!-- #primary -->
+					<form action="" method="get" id="actionForm">
+	<input type="hidden" name="pageNum" value="${pageDto.cri.pageNum}"/>
+	<input type="hidden" name="amount" value="${pageDto.cri.amount}"/>
+	<input type="hidden" name="type" value="${pageDto.cri.type}"/>
+	<input type="hidden" name="keyword" value="${pageDto.cri.keyword}"/>
+	<input type="hidden" name="pno" value=""/>
+	
+	</form>
 		</div>
+	
+<script>
+console.log(pathArr);	
+
+let pimg = $(".pimg");
+
+$(pimg).each(function(i,item){
+	$(this).attr("src","/display?fileName="+encodeURIComponent(pathArr[i]));
+})
+
+
+</script>		
+		
+
 
 
 <!-- #page -->
+<script src='/resources/js/index.js'></script>
 <script src='/resources/js/shopjs.js'></script>
 <script src='/resources/js/plugins.js'></script>
 <script src='/resources/js/scripts.js'></script>

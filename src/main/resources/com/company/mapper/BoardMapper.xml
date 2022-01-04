@@ -3,19 +3,27 @@
 <mapper namespace="com.company.mapper.BoardMapper">
 	
 	<insert id="insert">
-		insert into myPlace(mno, userid, mcategory, title, content)
-		values (myPlace_seq.nextval, #{userid}, #{mcategory}, #{title}, #{content})
+		insert into myPlace(mno, userid, nickname, mcategory, title, content, mytown)
+		values (myPlace_seq.nextval, #{userid}, #{nickname}, #{mcategory}, #{title}, #{content}, #{mytown})
 	</insert>
 
 	<select id="listAll" resultType="com.company.domain.BoardDTO">
-		select mno,myPlace.userid,title,content,regdate,mcount,mcategory,nickname, mytown 
-		from myPlace right outer join member on member.userid = myPlace.userid
+		select * from myplace
 		where mno>0 order by mno desc, regdate desc
 	</select>
 	
 	<select id="read" resultType="com.company.domain.BoardDTO">
-		select mno,myPlace.userid,title,content,regdate,mcount,mcategory,nickname, mytown 
-		from myPlace right outer join member on member.userid = myPlace.userid
+		select mno, mcategory, nickname, title, content, mytown, regdate from myPlace
 		where mno = #{mno}
+	</select>
+	
+	<update id="update">
+		update myPlace set mcategory=#{mcategory}, title=#{title}, content=#{content}, updatedate=sysdate
+		where mno=#{mno}
+	</update>
+	
+	<!-- 글 작성시 필요한 회원정보 -->
+	<select id="readMemberInfo" resultType="com.company.domain.BoardDTO">
+		select nickname, userid, mytown from member where userid=#{userid}
 	</select>
 </mapper>
