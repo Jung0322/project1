@@ -3,12 +3,12 @@
  */
 
 $(function() {
-	
+
+	let actionForm = $("#actionForm");
+
 	// myPlace 게시글 읽기
 	$(".move").click(function(e) {
 
-	let actionForm = $("#actionForm");
-	
 		//a 태그 속성 중지
 		e.preventDefault();
 
@@ -24,8 +24,15 @@ $(function() {
 		actionForm.submit();
 	})
 	
-		
+		$(".paginate_button a").click(function(e) {
+
+		e.preventDefault();
+
+		let pageNum = $(this).attr("href");
+		actionForm.find("input[name='pageNum']").val(pageNum);
+		actionForm.attr("action", "/board/myPlace");
+		actionForm.find("input[name='mno']").remove();
+		actionForm.submit();
+	})
+	
 })
-
-
-

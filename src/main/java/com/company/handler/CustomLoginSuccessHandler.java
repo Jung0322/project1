@@ -9,8 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.company.domain.MemberDTO;
+
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 	@Override
@@ -22,11 +28,14 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			roleNames.add(auth.getAuthority());
 		});
 		
-		
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		userDetails.getUsername();
 		System.out.println(roleNames);
 		
 		if(roleNames.contains("ROLE_USER")) {
-			response.sendRedirect("/index");
+			log.info("회원 로그인 성공");
+			
+			response.sendRedirect("/product/index");
 			return;
 		}
 //		response.sendRedirect("/member/signIn");

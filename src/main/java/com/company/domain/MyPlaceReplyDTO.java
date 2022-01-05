@@ -11,8 +11,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ReplyDTO {
-
+public class MyPlaceReplyDTO {
 	private int mrno;
 	private int mno;
 	private String content;

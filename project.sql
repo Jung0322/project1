@@ -8,20 +8,13 @@ create table member (
     phone varchar2(50) not null, -- 휴대전화
     mytown varchar2(50) not null, -- 내 동네
     enabled char(1) default '1', -- 계정 사용 정보
-    regdate DATE default sysdate, 
+    regdate DATE default sysdate, -- 가입일
     CONSTRAINT pk_member PRIMARY KEY (userid) -- pk
 );
 ALTER TABLE member MODIFY  password varchar2(100);
-
-ALTER TABLE member  ADD  regdate DATE default sysdate;
-
 ALTER TABLE member  ADD  enabled char(1) default '1';
-
-select *  from sp_member_authority; 
-
-
 -- 가입날짜 컬럼 추가(기존 테이블이 있는 경우에 사용)
-alter table member add regdate date default sysdate;
+ALTER TABLE member  ADD  regdate DATE default sysdate;
 
 -- 2. 프로필 이미지 테이블
 create table profileimg (
@@ -69,6 +62,8 @@ create table myPlaceReply (
 	mrno number(10) not null, -- 댓글번호(pk)
 	mno number(10) not null, -- 동네생활 글번호
 	userid varchar2(50) not null, -- 아이디
+	nickname varchar2(50) not null, --닉네임
+	mytown varchar2(50) not null, -- 내동네
 	content varchar2(5000) not null, -- 댓글 내용
 	regdate DATE default sysdate, -- 작성날짜
 	updatedate DATE default sysdate, -- 수정날짜
@@ -200,7 +195,6 @@ create table auction (
          REFERENCES member(userid) ON DELETE CASCADE,
 	CONSTRAINT pk_Auction PRIMARY KEY (ano) -- pk
 );
-<<<<<<< HEAD
 
 ALTER TABLE auction MODIFY startdate VARCHAR2(25);
 ALTER TABLE auction MODIFY enddate VARCHAR2(25);
@@ -285,7 +279,6 @@ create table chatroom(
 -- 채팅방 테이블 방번 시퀀스
 CREATE SEQUENCE SEQ_CHATROOM_ID;
 
-<<<<<<< HEAD
 -- 14. 채팅 메세지 
 CREATE TABLE chatmessage(
 	roomid varchar2(10) not null,  		-- 채팅 방번호

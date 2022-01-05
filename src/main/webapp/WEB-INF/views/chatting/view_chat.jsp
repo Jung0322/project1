@@ -34,10 +34,10 @@
 	            </div>
 	            <div class="name_container font_noto" id="setName"><!-- 이름 동적 생성 --></div>
 	            <div class="floatRight">
-	                <img src="resources/img/chat-close.png" class="btnImg close">
+	                <img src="resources/imgages/chat-close.png" class="btnImg close">
 	            </div>
 	            <div class="floatRight">
-	                <img src="resources/img/chat-minus.png" class="btnImg down">
+	                <img src="resources/imgages/chat-minus.png" class="btnImg down">
 	            </div>
 	        </div>
 	        <div class="chatMiddle">

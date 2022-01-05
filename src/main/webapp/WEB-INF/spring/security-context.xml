@@ -5,10 +5,16 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 	
+	<!-- 비밀번호 암호화를 위한 객체 생성 -->
 	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 	
+	<!-- 데이터베이스에서 로그인 정보 확인하는 클래스 객체 -->
 	<bean id="userDetail" class="com.company.service.CustomUserDetailsService" />
+	<!-- 로그인 성공시 실행되는 클래스 객체 -->
 	<bean id="customLoginSuccessHandler" class="com.company.handler.CustomLoginSuccessHandler" />
+	<!-- 로그인 실패시 실행되는 클래스 객체 -->
+ 	<bean id="customLoginFailHandler" class="com.company.handler.CustomLoginFailHandler" />
+
 
 	<security:http>
 		<!-- 접근 권한이 없는 uri에 접근 시 이동하는 경로 설정 -->
@@ -16,18 +22,18 @@
 	
 		<!-- 원하는 로그인 페이지 출력 -->
 		<!-- default-target-url : 로그인 성공시 이동 페이지, authentication-failure-url : 로그인 실패시 이동 페이지
+			authentication-success-handler-ref : 로그인 성공시 작동 클래스, authentication-failure-url : 로그인 실패시 작동 클래스
 			username-parameter : username 파라미터 이름 설정 -->
-		<!-- <security:form-login authentication-success-handler-ref="customLoginSuccessHandler" authentication-failure-url="/member/signIn"/>	 -->		
-		
-		<security:form-login login-page="/member/signIn" authentication-success-handler-ref="customLoginSuccessHandler" login-processing-url="/member/signIn"
-							authentication-failure-url="/member/signIn"  /> 
+		<security:form-login login-page="/member/signIn" login-processing-url="/member/signIn" 
+							authentication-success-handler-ref="customLoginSuccessHandler" 
+							authentication-failure-handler-ref="customLoginFailHandler" /> 
 							
-		
 		<!-- 로그아웃 -->
-		<security:logout logout-url="/member/logout" invalidate-session="true" delete-cookies="JSSESION" logout-success-url="/index"/>
+		<security:logout logout-url="/member/logout" invalidate-session="true" delete-cookies="JSSESION" logout-success-url="/product/index"/>
 	
 		<!-- url 접근 시 원하는 권한이 있는지 확인 -->
 		<security:intercept-url pattern="/member/modify-info" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/member/profile-page" access="hasRole('ROLE_USER')"/>
 		
 		<!-- csrf 설정 끄기 -->
 		<!-- <security:csrf disabled="true"/> -->

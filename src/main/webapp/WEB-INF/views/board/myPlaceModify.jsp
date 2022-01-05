@@ -20,8 +20,8 @@
                <div class="col-md-offset-1 col-md-10 col-sm-12">
                     <form action="" method="post" role="form">
                          <div class="col-md-6 col-sm-6">
-                              <select class="form-control" name="mcategory" value="${dto.mcategory}">
-                                   <option>동네질문</option>
+                              <select class="form-control" name="mcategory">
+                                   <option>동네생활</option>
                                    <option>동네사건사고</option>
                                    <option>일상</option>
                                    <option>기타</option>
@@ -36,7 +36,7 @@
                    <div>
                    </div>
                     <div class="col-md-12 col-sm-6" id="textArea"> 
-                    	<textarea id="summernote" name="content" value="${dto.content}"></textarea>
+                    	<textarea id="summernote" name="content">${dto.content}</textarea>
                          <script>
                            $('#summernote').summernote({
                              height: 300,                 // 에디터 높이
@@ -60,12 +60,12 @@
                          </script>
                          </div>
                          <div>
-                              <input type="button" class="form-control"  id="listButton2" onclick="location.href='/board/myPlace'" value="목록보기" style="border:1px solid #9BB460;">  
-                              <input type="submit" class="form-control"  id="successButton" value="글 올리기">
+                              <input type="button" class="form-control" id="listButton2" onclick="location.href='/board/myPlace'" value="목록보기" style="border:1px solid #9BB460;">  
+                              <input type="submit" class="form-control" data-oper='modify' id="modifyButton" value="수정하기">
+                              <input type="submit" class="form-control" data-oper='remove' id="deleteButton" value="삭제하기" onclick="javascript: form.action='/board/remove';">
                          </div>
-                         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
-                         	<input type="hidden" name="userid" value="${dto.userid}"/> 
-                         	<input type="hidden" name="mytown" value="${dto.mytown}"/>                        	                     	
+                         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />                       	                     	                      	                     	                        	                       	                     	
+							<input type="hidden" name="mno" value="${dto.mno}">
                     </form>
                </div>
           </div>
@@ -73,5 +73,5 @@
 </section>
 
 
-<script src="/resources/js/upload.js"></script>  
+<script src="/resources/js/myPlace.js"></script>  
 <%@ include file="../includes/footer.jsp"%>

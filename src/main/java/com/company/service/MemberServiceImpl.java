@@ -15,12 +15,8 @@ public class MemberServiceImpl implements MemberService {
 	private MemberMapper memberMapper;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-//	@Override
-//	public boolean login(MemberDTO loginDto) {
-//		return memberMapper.login(loginDto) > 0 ? true : false;
-//	}
 
+	
 	@Override
 	@Transactional
 	public boolean insertMember(MemberDTO insertDto) {
@@ -40,4 +36,26 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.readMember(userid);
 	}
 
+	// 중복 아이디 검사
+	public MemberDTO checkUserid(String userid) {
+		return memberMapper.checkByUserid(userid);
+	}
+
+	@Override
+	// 중복 닉네임 검사
+	public MemberDTO checkNickname(String nickname) {
+		return memberMapper.checkByNickname(nickname);
+	}
+
+	@Override
+	// 회원정보 불러오기
+	public MemberDTO readMemberInfo(String userid) { 
+		return memberMapper.readMemberInfo(userid);
+	}
+
+	@Override
+	// 닉네임 수정
+	public boolean modifyNickname(MemberDTO modifyDto) {
+		return memberMapper.modifyNickname(modifyDto) > 0 ? true : false;
+	}
 }
