@@ -45,6 +45,15 @@ public class BoardController {
 
 		model.addAttribute("pageDto", new MyPlacePageDTO(cri, totalCnt));
 		model.addAttribute("list", list);
+		
+		//로그인 후 동네 게시물만 보여주기
+		
+//		
+//		List<BoardDTO> mytownList = service.getMytown(cri);
+//		int totalCntMytown = service.getTotalCountMytown(cri);
+//		
+//		model.addAttribute("pageDTO", new MyPlacePageDTO(cri, totalCntMytown));
+//		model.addAttribute("mytownList",mytownList);
 
 	}
 

@@ -21,7 +21,7 @@
 							<span>${dto.mytown}</span> 
 							<span><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}" /></span> 
 							<span id="contextOptionButton">
-								<div class="dropdown">
+								<div class="dropdown" id="dropdownContent">
 									<i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-expanded="false"></i>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 										<button class="dropdown-item list" type="button" data-oper='list' onclick="location.href='/board/myPlace'">목록보기</button>
@@ -39,13 +39,18 @@
 				</div>
 				<div class="blog-reply">
 					<h3>2 Comments</h3>
-					<div class="media">
-						<div class="dropdown" id="dropdown1">
-							<i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-expanded="false"></i>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-									<button class="dropdown-item list" type="submit" >수정하기</button>
-									<button class="dropdown-item list" type="submit" >삭제하기</button>
-								</div>
+					<!-- 댓글 보여주는 영역 -->
+					  <div class="media" id="showReply">
+						<!--<div class='dropdown' id='dropdown1'>
+							<i class='fas fa-ellipsis-v' data-toggle='dropdown' aria-expanded='false'></i>
+							<div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>
+							<div style='display:block;'>
+							<button class='dropdown-item list' id='replyModifyBtn' type='button'>수정하기</button>
+							</div>
+							<div style='display:block;'>
+							<button class='dropdown-item list' id='replyDeleteBtn' type='button'>삭제하기</button>
+							</div>
+							</div>
 						</div>
 						<div class="media-object pull-left">
 							<img src="/images/heart.png" class="img-responsive img-circle" alt="Blog Image" >
@@ -56,37 +61,66 @@
 							<span name="regdate">7 months ago</span>
 							<p style="margin-bottom: 20px; margin-top: 10px;" name="content">댓글내용</p>
 						</div>
+						</div>-->
 					</div>
 				</div>
+				
 				<!-- 로그인 안된 상태 -->
 				<sec:authorize access="isAnonymous()">
-					<textarea class="form-control" placeholder="댓글을 입력하기 위해선 로그인이 필요합니다." rows="5" name="replyContent" style="margin-top: 20px;" readonly="readonly"></textarea>				
+					<textarea class="form-control" placeholder="댓글을 입력하기 위해선 로그인이 필요합니다." rows="5" name="replyContent" id="replyContent" style="margin-top: 20px;" readonly="readonly"></textarea>				
 				</sec:authorize>
 				
 				<!-- 로그인 된 상태 -->
 				<sec:authorize access="isAuthenticated()">
 				<div class="blog-reply-form">
 					<form action="" method="post" id="replyForm">
-						<textarea class="form-control" placeholder="댓글을 입력하세요." rows="5" name="replyContent"></textarea>
+						<textarea class="form-control" placeholder="댓글을 입력하세요." rows="5" name="replyContent" id="replyContent"></textarea>
 						<div>
 							<input type="button" class="form-control" id="replyButton" value="댓글입력">
 						</div>
 						    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
                          	<input type="hidden" name="mno" value="${dto.mno}"/>
-                         	  						 						
+                         	                  	  						 						
 					</form>
 				</div>
 				</sec:authorize>
 			</div>
-		</div>
-	</div>
-	
+		</div>	
 </section>
-
-
+            <!-- 댓글작성 폼 -->
+            <!-- modal은 화면에 드러나지 않고, alert 창처럼 띄울 수 있음 -->
+            <div class="modal" tabindex="-1" id="replyModal">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			        <h5 class="modal-title">댓글 수정하기</h5>
+			      </div>
+			      <div class="modal-body">
+			        <div class="modal-user">
+				        <div class="media-object pull-left" style="margin-right: 10px;">
+							<img src="/images/heart.png" class="img-responsive img-circle" alt="Blog Image" >
+						</div>
+			        	<span name="nickname" style="margin-right: 7px;">Omar Larus</span> 
+						<span name="mytown" style="margin-right: 7px;">서울시 은평구 신사동</span> 
+						<span name="regdate" style="margin-right: 7px;">7 months ago</span>
+						<textarea rows="3" cols="" style="width: 100%; margin-top: 10px" name="content">댓글 내용</textarea>       
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="" id="modalModifyBtn">수정</button>
+			        <button type="button" class="" id="modalCloseBtn">종료</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			</div>
 <script>
 	//현재 글번호 가져오기
 	let mno = ${dto.mno};
+	
+	
 		
 	let csrfHeaderName = "${_csrf.headerName}";
 	let csrfTokenValue = "${_csrf.token}";	

@@ -9,7 +9,7 @@ $(function() {
 
 	// 댓글 보여줄 영역 가져오기
 	//댓글 보여줄 영역 가져오기
-	let replyUi = $(".media");
+	let replyDiv = $("#showReply");
 
 
 
@@ -29,37 +29,114 @@ $(function() {
 
 	//댓글 작업
 	//댓글 입력창 영역 가져오기
+	let modal = $("#replyModal");
 	let replyForm = $("#replyForm");
 	let content = replyForm.find("textarea[name='replyContent']");
+
+	//댓글 정보 출력할 영역 가져오기
+	let modalNickname = modal.find("span[name='nickname']");
+	let modalMytown = modal.find("span[name='mytown']");
+	let modalRegdate = modal.find("span[name='regdate']");
+	let modalContent = modal.find("textarea[name='content']");
+
+
 	let replyRegisterBtn = replyForm.find("#replyButton");
+	let replyModifyBtn = replyDiv.find("#replyModifyBtn");
+	let replyDeleteBtn = replyDiv.find("#replyDeleteBtn");
+
+	//모달창 안에 있는 버튼
+	let modalModifyBtn = modal.find("#modalModifyBtn");
 
 	$(document).ajaxSend(function(e, xhr, options) {
 		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 	});
 
-	replyRegisterBtn.click(function(){
-		console.log("컨텐츠 : "+content.val());
-		
+
+	//댓글 입력 버튼이 눌리면
+	replyRegisterBtn.click(function() {
+		console.log("컨텐츠 : " + content.val());
+
 		var reply = {
 			mno: mno,
 			content: content.val()
 		};
-		
-	//댓글 삽입 
-	replyService.add(reply,
-		function(result) {
-			if(result){
-				if(result == 'success'){
-					alert("댓글 등록 성공");
-				}
-				
+
+		//댓글 삽입 
+		replyService.add(reply,
+			function(result) {
+
 				//댓글 보낸 내역 textArea에서 지우기
 				replyForm.find("textarea[name='replyContent']").val("");
 				//댓글 목록 불러오기
 				showList(-1);
+
+			}); //add end
+	}) //replyRegisterBtn end
+
+
+	//나중에 생성되는 댓글의 이벤트 걸기 - 댓글 하나 가져오기
+	replyDiv.on("click", "#replyModifyBtn", function() {
+		let mrno = $(this).data("mrno");
+		//console.log("mrno : "+mrno);
+
+		replyService.get(mrno, function(data) {
+			console.log(data);
+
+			//도착한 데이터를 모달창에 보여주기
+			modalNickname.html(data.nickname);
+			modalMytown.html(data.mytown);
+			modalRegdate.html(replyService.displayTime(data.regdate));
+			modalContent.val(data.content);
+
+			modal.modal("show");
+
+		});//get end
+
+		//모달창 안에 있는 수정 버튼이 눌리면
+		modalModifyBtn.click(function() {
+
+			var reply = {
+				mrno: mrno,
+				content: modalContent.val()
 			}
-		}); //add end
-	})
+
+			console.log("content : "+modalContent.val())
+			
+		 	replyService.update(reply,
+				function(data) {
+					if (data == "success") {
+						modal.modal("hide");
+						showList(1);
+					}
+				},
+				function(msg) {
+					alert(msg);
+				}
+			)
+
+		}) // modalModifyBtn end
+
+	}) //replyDiv modify end
+
+	//나중에 생성되는 댓글의 이벤트 걸기 - 댓글 삭제하기
+	replyDiv.on("click", "#replyDeleteBtn", function() {
+		let mrno = $(this).data("mrno");
+		console.log("mrno : " + mrno);
+
+		//댓글삭제
+		replyService.remove(mrno,
+			function(result) {
+				if (result == "success") {
+					showList(1);
+				}
+			},
+			function(msg) {
+				alert(msg);
+			}
+		);//remove end		
+
+	}) //replyDiv delete end
+
 
 
 	//댓글 전체 가져오기
@@ -68,7 +145,7 @@ $(function() {
 
 			// 댓글이 없는 경우
 			if (data == null || data.length == 0) {
-				replyUi.html("");
+				replyDiv.html("");
 				return;
 			}
 
@@ -78,25 +155,29 @@ $(function() {
 				str += "<div class='dropdown' id='dropdown1'>";
 				str += "<i class='fas fa-ellipsis-v' data-toggle='dropdown' aria-expanded='false'></i>";
 				str += "<div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>";
-				str += "<button class='dropdown-item list' type='submit'>수정하기</button>";
-				str += "<button class='dropdown-item list' type='submit'>삭제하기</button></div></div>";
+				str += "<div style='display:block;'>";
+				str += "<button class='dropdown-item list' id='replyModifyBtn' type='button' data-mrno='" + data[i].mrno + "'>수정하기</button>";
+				str += "</div>";
+				str += "<div style='display:block;'>";
+				str += "<button class='dropdown-item list' id='replyDeleteBtn' type='button' data-mrno='" + data[i].mrno + "'>삭제하기</button></div></div>";
+				str += "</div>";
 				str += "<div class='media-object pull-left'>";
 				str += "<img src='/resources/images/ff.png' class='img-responsive img-circle' alt='Blog Image'>";
 				str += "</div>";
 				str += "<div class='media-body'>";
 				str += "<span name='nickname'>" + data[i].nickname + "</span>";
 				str += "<span name='mytown'>" + data[i].mytown + "</span>";
-				str += "<span name='regdate'>" + replyService.displayTime(data[i].regdate) + "</span>";
+				str += "<span name='regdate'>" + replyService.displayTime(data[i].updatedate) + "</span>";
 				str += "<p style='margin-bottom: 20px; margin-top: 10px;' name='content'>" + data[i].content + "</p>";
 				str += "</div></div>";
 			}
-			replyUi.html(str);
+			replyDiv.html(str);
 
 
 		}); //getList end
 
 	}//showlist end
-	
+
 })
 
 
