@@ -37,6 +37,7 @@
 		    #{userid}, #{password}, #{nickname}, #{email}, #{phone}, #{mytown}
 		)
 	</insert>
+
 	<!-- 회원가입 시 권한정보 삽입 -->
 	<insert id="insertMemberAuth">
 		INSERT INTO
@@ -45,27 +46,61 @@
 			#{userid}, #{authority}
 		)
 	</insert>
+
 	<!-- 중복 아이디 검사 -->
 	<select id="checkByUserid" resultType="com.company.domain.MemberDTO">
 		SELECT * FROM member WHERE userid=#{userid}
 	</select>
-	<!-- 중복 닉네임 검사 -->
+	
+	<!-- 중복 닉네임 검사(전체) -->
 	<select id="checkByNickname" resultType="com.company.domain.MemberDTO">
 		SELECT * FROM member WHERE nickname=#{nickname}
 	</select>
-
+	
+	<!-- 중복 이메일 검사 -->
+	<select id="checkByEmail" resultType="com.company.domain.MemberDTO">
+		SELECT * FROM member WHERE email=#{email}
+	</select>
 
 
 	<!-- 회원정보 -->
 	<!-- 회원정보 불러오기 -->
 	<select id="readMemberInfo" resultType="com.company.domain.MemberDTO">
-		SELECT * FROM
-			member
-		WHERE userid=#{userid}
+		SELECT * FROM member WHERE userid=#{userid}
+	</select>
+	
+	<!-- 동일 닉네임 검사 -->
+	<select id="checkSameNickname" resultType="String">
+		SELECT nickname FROM member WHERE userid=#{userid}
 	</select>
 	
 	<!-- 닉네임 수정 -->
 	<update id="modifyNickname">
 		UPDATE member SET nickname=#{nickname} WHERE userid=#{userid}
+	</update>
+	
+	<!-- 기존 비밀번호 일치 확인 -->
+	<select id="checkOrgPwd" resultType="String">
+		SELECT password FROM member WHERE userid=#{userid}
+	</select>
+	
+	<!-- 비밀번호 수정 -->
+	<update id="modifyPwd">
+		UPDATE member SET password=#{new_password} WHERE userid=#{userid}
+	</update>
+	
+	<!-- 동일 이메일 검사 -->
+	<select id="checkSameEmail" resultType="String">
+		SELECT email FROM member WHERE userid=#{userid}
+	</select>
+	
+	<!-- 이메일 수정 -->
+	<update id="modifyEmail">
+		UPDATE member SET email=#{email} WHERE userid=#{userid}
+	</update>
+	
+	<!-- 휴대전화 수정 -->
+	<update id="modifyPhone">
+		UPDATE member SET phone=#{phone} WHERE userid=#{userid}
 	</update>
 </mapper>

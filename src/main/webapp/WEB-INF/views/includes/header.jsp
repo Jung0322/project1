@@ -89,13 +89,14 @@
 					</sec:authorize>
 					<!-- 로그인 된 상태 -->
 					<sec:authorize access="isAuthenticated()">
+					<sec:authentication property="principal" var="info" />
 						<li style="margin-left: 13px; margin-top: 5px;">
 							<div class="dropdown" style="height: 40px; width: 40px; margin:auto;">
 								<img class="dropdown-toggle profile-menu" data-toggle="dropdown" aria-expanded="false" src="/resources/images/temp-profile.png"/>
 								
 								<div class="dropdown-menu dropdown-menu-area" aria-labelledby="dropdownMenuLink">
 									<div class="dropdown-item dropdown-item-area">
-									    <a href="/member/profile-page">프로필</a>
+									    <a href="/member/profile-page?userid=${info.username}">프로필</a>
 									</div>
 									<div class="dropdown-item dropdown-item-area">
 										<form action="/member/logout" method="post">
