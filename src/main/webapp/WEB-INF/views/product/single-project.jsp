@@ -16,76 +16,52 @@
 						<nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="#">Home</a> / <a href="#">Clothing</a> / Beige Jacket</nav>
 						<div itemscope itemtype="http://schema.org/Product" class="product">
 							<div class="images ">
-								<div class="mySlides fade2">
-
-								<img class="main_slideImg" src="/resources/images/portfolio-img1.jpg">
+								<!-- 이미지 들어갈 곳 -->
 								
-								
-								</div>
-								
-								<div class="mySlides fade2">
-								
-								<img class="main_slideImg" src="/resources/images/portfolio-img2.jpg">
-								
-								
-								</div>
-								
-								<div class="mySlides fade2">
-								
-								<img class="main_slideImg" src="/resources/images/portfolio-img3.jpg">
-								
-								
-								</div>
-								
-								<a class="prev" onclick="plusSlides(-1)">❮</a>
-								
+								<a class="prev" onclick="plusSlides(-1)">❮</a>								
 								<a class="next"onclick="plusSlides(1)">❯</a>
 							</div>
 							<div class="summary entry-summary">
-								<h1 itemprop="name" class="product_title entry-title">Beige Jacket</h1>
+								<h2 itemprop="name" class="product_title entry-title">${row.title}</h2>
 									<div>
-										<p id="local">지역명 (인천광역시 서구)</p>
-										<button class="heart"><img id="asd" src="/resources/images/NotGood.png" alt=""></button>
+										<p id="local">${row.mytown}</p>
+											<sec:authorize access="isAuthenticated()">
+												<button class="heart"><img id="asd" src="c" alt=""></button>
+											</sec:authorize>
 									</div>
 								<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 									<p class="price">
-										<span class="amount">$35.00</span>
+										<span class="amount">${row.price} won</span>
 									</p>
 									<meta itemprop="price" content="35"/>
 									<meta itemprop="priceCurrency" content="USD"/>
 									<link itemprop="availability" href="http://schema.org/InStock"/>
 								</div>
 								<div id="description">
-									<p>	내고여부 : </p>
-									<p>	택배가능여부 : </p>
-									<p>	예약여부 : </p>
+									<p class = "discount"></p>
+									<p class = "delivery"></p>
+									<p class = "reservation"></p>
 								</div>
-								<form class="cart" method="post" enctype='multipart/form-data'>							
+								<form class="cart" method="post" enctype='multipart/form-data'>	
+								<sec:authorize access="isAuthenticated()">						
 									<button type="submit" class="single_add_to_cart_button button alt">채팅 하기</button>
+								</sec:authorize>
 								</form>
 								<div class="product_meta">
-									<span class="posted_in">Categories: 
-									<a href="#" rel="tag">Clothing</a>, 
-									<a href="#" rel="tag">Hoodies</a>
-									</span>
+									<span class="posted_in">Categories: ${row.category}</span>
 								</div>
 							</div>
 
 							<!-- .summary -->
 							<div class="woocommerce-tabs wc-tabs-wrapper">
-								<div>
-								<span class="imagedot" onclick="currentSlide(1)"></span> 
-								
-								<span class="imagedot" onclick="currentSlide(2)"></span>
-								
-								<span class="imagedot" onclick="currentSlide(3)"></span>
+								<div class="imgslide">
 								
 								</div>
 									<div class="panel entry-content wc-tab" id="tab-description">
 
 									<h2>Product Description</h2>
 									<p>
-										Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+										"${row.content}"
 									</p>
 									</div>
 							</div>
@@ -145,8 +121,31 @@
 	</div>
 	<!-- .container -->
 </div>
+<sec:authentication property="principal" var="info"/>
+
+<script>
+
+let csrfHeaderName = "${_csrf.headerName}";
+let csrfTokenValue= "${_csrf.token}";
+
+let pno = ${row.pno};
+let discount1 = ${row.discount};
+let reservation1 = ${row.reservation};
+let delivery1 =  ${row.delivery};
+
+
+let userid = null;
+
+<sec:authorize access="isAuthenticated()">
+	 userid = '${info.username}';
+</sec:authorize>
+
+console.log(userid);
+
+</script>
 
 <!-- #page -->
+<script src='/resources/js/single-product.js'></script>
 <script src='/resources/js/slide.js'></script>
 <script src='/resources/js/shopjs.js'></script>
 <script src='/resources/js/plugins.js'></script>

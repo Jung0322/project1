@@ -14,7 +14,7 @@
 <section id="contact">
      <div class="container">
           <div class="row">
-
+          
                <div class="col-md-offset-1 col-md-10 col-sm-12">
                     <div class="section-title">
                          <h3>상품 등록</h3>
@@ -73,6 +73,8 @@
 								</div>
 							</div>
 						</div>
+						<input type="hidden" name="mytown" value="${dto.mytown}" />
+						<input type="hidden" name="userid" value="${dto.userid}" />
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                          <div class="col-md-8">
                               <input id="registration" type="submit" class="form-control" value="등록">
@@ -90,6 +92,10 @@
 	//ajax 동작시 헤더 값에 포함해서 보낼 csrf 토큰 값 설정
 	let csrfHeaderName = "${_csrf.headerName}";
 	let csrfTokenValue= "${_csrf.token}";
+	
+	
+	
+
 </script>
 	
 	

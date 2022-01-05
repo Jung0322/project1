@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.company.domain.AttachProductDTO;
+import com.company.domain.MemberDTO;
 import com.company.domain.ProductCriteria;
 import com.company.domain.ProductDTO;
 import com.company.mapper.ProductAttachMapper;
@@ -39,15 +41,44 @@ public class ProductServiceImpl implements ProductService {
 		return true;
 	}
 
+	//모든상품 정보 읽어오기
 	@Override
 	public List<ProductDTO> getList(ProductCriteria cri) {
 		
 		return mapper.listAll(cri);
 	}
-
+	
+	//상품 총 개수 구하기
 	@Override
 	public int getTotalCount(ProductCriteria cri) {
 		return mapper.totalCnt(cri);
+	}
+
+	//해당 상품 읽기
+	@Override
+	public ProductDTO getRow(int pno) {
+		// TODO Auto-generated method stub
+		return mapper.getRow(pno);
+	}
+
+	//해딩 상품 이미지 읽기
+	@Override
+	public List<AttachProductDTO> getRowImg(int pno) {
+		// TODO Auto-generated method stub
+		return AttachMapper.getRowImg(pno);
+		
+	}
+
+	@Override
+	public MemberDTO town(String userid) {
+
+		return mapper.town(userid);
+	}
+
+	@Override
+	public boolean goodCount(int num, int pno) {
+		// TODO Auto-generated method stub
+		return mapper.goodcount(num, pno)>0?true:false;
 	}
 
 }

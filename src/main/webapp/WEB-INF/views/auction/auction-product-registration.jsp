@@ -20,7 +20,7 @@
                          <h3>상품 등록</h3>
                          <h2>중고 경매거래 상품 등록</h2>
                     </div>
-
+                    
                     <form action="/auction/auction-product-registration" method="post" role="form" formvalidate>
                          <div class="col-md-6 col-sm-6">
                               <input type="text" class="form-control" placeholder="제목" name="title" required="required"/>

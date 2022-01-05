@@ -2,7 +2,7 @@
  * 
  */
 $(function(){
-	
+
 	//css 화면 비율 때문에 class명 수정
 	$( 'ul li:nth-child(1)' ).attr('class','first product')
 
@@ -41,9 +41,27 @@ $(function(){
 	})
 	
 	
+	$('.orderby').change(function(){
+		let form = $(".woocommerce-ordering");
+		
+		form.find("input[name='pageNum']").val("1");
+		form.submit();
+	});
 	
+	$(".move").click(function(e){
+	//a태그 속성 중지
+	e.preventDefault();
+	//actionForm에 bno값을 추가한다
 						
-						
+	let pno = $(this).attr('href');
+	actionForm.find("input[name='pno']").val(pno);		
+	
+	//actionForm action 설정 /board/read
+	actionForm.attr("action","/single-product");
+	
+	actionForm.submit();
+	
+	})			
 						
 						
 						

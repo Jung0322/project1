@@ -7,4 +7,9 @@
 		values(#{puuid},#{puploadPath},#{pimgname},#{pno})
 </insert>
 
+<select id="getRowImg" resultType="com.company.domain.AttachProductDTO">
+		select pno, puuid, puploadpath, pimgname
+		from PRODUCTIMG  where pno = #{pno}
+</select>
+
 </mapper>

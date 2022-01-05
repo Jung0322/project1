@@ -12,15 +12,16 @@ public class ProductCriteria {
 	private int amount;		//한 페이지당 보여줄 게시물 수
 	
 	private String type;
-	private String keyword;
+	private String cate;
 	
 	public ProductCriteria() {
-		this(1,8);
+		this(1,8,"전체");
 	}
 	
-	public ProductCriteria(int pageNum,int amount) {
+	public ProductCriteria(int pageNum,int amount,String cate) {
 		this.pageNum = pageNum;
 		this.amount = amount;
+		this.cate = cate;
 	}
 	
 	public String[] getTypeArr() {

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.mapper.BasketMapper">
+
+<select id="select" resultType="com.company.domain.BasketDTO">
+ select * from basket where pno = #{pno} and userid = #{userid}
+</select>
+
+<delete id="delete">
+delete from basket where pno = #{pno} and userid = #{userid}
+</delete>
+
+<insert id="insert">
+	insert into basket(pno,userid) values (#{pno},#{userid})
+</insert>
+
+	<resultMap type="com.company.domain.ProductDTO" id="productMap">
+		<id property="pno" column="pno"/> <!-- pk는 id -->
+		<result property="title" column="title"/>
+		<result property="price" column="price"/>
+		<result property="good" column="good"/>
+		<collection property="attachList" resultMap="attachMap"></collection>
+	</resultMap>
+
+	<resultMap type="com.company.domain.AttachProductDTO" id="attachMap">
+		<result property="puuid" column="puuid"/>
+		<result property="pno" column="pno"/>
+		<result property="puploadPath" column="puploadPath"/>
+		<result property="pimgname" column="pimgname"/>
+	</resultMap>
+
+<!-- 전체 조회 -->
+	<select id="listAll" resultMap="productMap">
+		
+		<![CDATA[
+		select * 
+		from (select rownum rn,pno, price, title, good, puuid, puploadpath, pimgname, category, mytown
+		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname, category, mytown
+			    from (select * 
+			    	  from PRODUCT 
+			    	  where pno in (select pno 
+			    	  				from BASKET 
+			    	  				where userid = #{userid})) pd, 
+			    	  (select * 
+			           from PRODUCTIMG 
+			           where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
+				where pd.pno = pdi.pno 
+		 order by pd.pno desc) where rownum <= (#{cri.pageNum} * #{cri.amount}))
+      where rn> (#{cri.pageNum}-1) * #{cri.amount}
+		 ]]>
+	
+	</select>
+	
+		<!-- 전체 게시물 수 -->
+	<select id="totalCnt" resultType="int">
+		select count(*)
+		from
+		product
+		where		
+		 pno > 0 and pno in (select pno from BASKET where userid = 'xx')
+		
+		 
+	</select>
+</mapper>

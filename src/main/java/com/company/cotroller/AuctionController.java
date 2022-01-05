@@ -2,6 +2,7 @@ package com.company.cotroller;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,7 @@ public class AuctionController {
 	public void auction(Model model, ProductCriteria cri) {
 		log.info("auction");
 		
+		
 		List<AuctionDTO> list = serive.getList(cri);
 		
 		
@@ -55,7 +57,7 @@ public class AuctionController {
 		model.addAttribute("list", list);
 	}
 
-	@RequestMapping(value = "/auction-single-project", method = RequestMethod.GET)
+	@RequestMapping(value = "/auction-single-product", method = RequestMethod.GET)
 	public String single_project() {
 		log.info("single-project");
 		return "/auction/auction-single-project";
@@ -75,5 +77,6 @@ public class AuctionController {
 		return "/auction/auction";
 	}
 	
+
 	
 }

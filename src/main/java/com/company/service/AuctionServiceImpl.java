@@ -51,4 +51,6 @@ public class AuctionServiceImpl implements AuctionService {
 		return mapper.totalCnt(cri);
 	}
 
+	
+
 }

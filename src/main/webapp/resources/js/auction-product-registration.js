@@ -86,9 +86,9 @@ $(function(){
 			type:'post',
 			processData:false,
 			contentType:false,
-			/*beforeSend:function(xhr){
+			beforeSend:function(xhr){
 				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue)
-			},*/
+			},
 			data:formData,
 			success:function(result){
 				console.log(result);
@@ -161,9 +161,9 @@ $(function(){
 		$.ajax({
 			url:'/AdeleteFile',
 			type:'post',
-			/*beforeSend:function(xhr){
+			beforeSend:function(xhr){
 				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue)
-			},*/
+			},
 			data:{
 				fileName:targetFile
 			},
