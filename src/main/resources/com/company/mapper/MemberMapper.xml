@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.mapper.MemberMapper">
-		
-	<!-- <select id="login" resultType="int">
-		SELECT count(*) FROM member WHERE userid=#{userid} and password=#{password} 
-	</select> -->
-	
+	<!-- 로그인 -->
 	<!-- security 적용 후 로그인 -->
 	<select id="readMember" resultMap="memberMap">
 		SELECT 
@@ -29,7 +25,11 @@
 		<result property="authority" column="authority" />
 	</resultMap>
 	
+	
+	
+	
 	<!-- 회원가입 -->
+	<!-- 회원가입 처리 -->
 	<insert id="insertMember">
 		INSERT INTO 
 		    member(userid, password, nickname, email, phone, mytown)
@@ -37,7 +37,6 @@
 		    #{userid}, #{password}, #{nickname}, #{email}, #{phone}, #{mytown}
 		)
 	</insert>
-	
 	<!-- 회원가입 시 권한정보 삽입 -->
 	<insert id="insertMemberAuth">
 		INSERT INTO
@@ -46,5 +45,27 @@
 			#{userid}, #{authority}
 		)
 	</insert>
+	<!-- 중복 아이디 검사 -->
+	<select id="checkByUserid" resultType="com.company.domain.MemberDTO">
+		SELECT * FROM member WHERE userid=#{userid}
+	</select>
+	<!-- 중복 닉네임 검사 -->
+	<select id="checkByNickname" resultType="com.company.domain.MemberDTO">
+		SELECT * FROM member WHERE nickname=#{nickname}
+	</select>
+
+
+
+	<!-- 회원정보 -->
+	<!-- 회원정보 불러오기 -->
+	<select id="readMemberInfo" resultType="com.company.domain.MemberDTO">
+		SELECT * FROM
+			member
+		WHERE userid=#{userid}
+	</select>
 	
+	<!-- 닉네임 수정 -->
+	<update id="modifyNickname">
+		UPDATE member SET nickname=#{nickname} WHERE userid=#{userid}
+	</update>
 </mapper>

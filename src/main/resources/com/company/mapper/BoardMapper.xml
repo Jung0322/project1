@@ -8,8 +8,17 @@
 	</insert>
 
 	<select id="listAll" resultType="com.company.domain.BoardDTO">
-		select * from myplace
-		where mno>0 order by mno desc, regdate desc
+	<![CDATA[
+	select *
+	from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,nickname,mytown,title,content,regdate,updatedate
+			from myplace where rownum <=(#{pageNum} * #{amount}))
+	where rn> (#{pageNum}-1) * #{amount}	
+		]]>
+	</select>
+	
+	<!-- 전체 게시물 수 -->
+	<select id="totalCnt" resultType="int">
+		select count(*) from myplace where mno > 0
 	</select>
 	
 	<select id="read" resultType="com.company.domain.BoardDTO">
@@ -21,6 +30,10 @@
 		update myPlace set mcategory=#{mcategory}, title=#{title}, content=#{content}, updatedate=sysdate
 		where mno=#{mno}
 	</update>
+	
+	<delete id="delete">
+		delete from myPlace where mno=#{mno}
+	</delete>
 	
 	<!-- 글 작성시 필요한 회원정보 -->
 	<select id="readMemberInfo" resultType="com.company.domain.BoardDTO">

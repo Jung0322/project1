@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class AttachFileDTO {
+public class AttachMyPlaceDTO {
 	private String muuid;
 	private String muploadPath;
 	private String mimgName;
