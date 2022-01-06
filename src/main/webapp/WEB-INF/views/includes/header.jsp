@@ -99,6 +99,9 @@
 									    <a href="/member/profile-page?userid=${info.username}">프로필</a>
 									</div>
 									<div class="dropdown-item dropdown-item-area">
+										<a href="/product-registration">상품 등록</a>
+									</div>
+									<div class="dropdown-item dropdown-item-area">
 										<a href="/view_chat">메신저</a>
 									</div>
 									<div class="dropdown-item dropdown-item-area">
