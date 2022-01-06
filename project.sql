@@ -15,7 +15,8 @@ ALTER TABLE member MODIFY  password varchar2(100);
 ALTER TABLE member  ADD  enabled char(1) default '1';
 -- 가입날짜 컬럼 추가(기존 테이블이 있는 경우에 사용)
 ALTER TABLE member  ADD  regdate DATE default sysdate;
-
+insert into member values('hong1','qwer12!','honghong','adf@gmail.com','010-1234-5678','경기도 부천시 중동',default,default);
+select * from member;
 -- 2. 프로필 이미지 테이블
 create table profileimg (
 	pfuuid varchar2(50) not null, -- uuid(pk)

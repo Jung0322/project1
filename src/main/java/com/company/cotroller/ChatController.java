@@ -28,19 +28,22 @@ import com.google.gson.GsonBuilder;
  
 @Controller
 public class ChatController {
-    @RequestMapping(value = "/view_chat")
-    public String viewChat() {
-    	return "/chatting/view_chat";
-    }
     @Autowired
     ChatServiceImpl cService;
     
     @Autowired
     MemberService pService;
     
-    @Autowired
-    private ChatSession cSession;
     
+    @RequestMapping(value = "/view_chat")
+    public String viewChat(Principal principal) {
+    	if(principal.getName()!= null) {
+    		return "/chatting/view_chat";
+    	}
+    	else 
+    		return "/product/index";
+    }
+
     /**
      * 해당 채팅방의 채팅 메세지 불러오기
      * @param roomId
@@ -114,31 +117,31 @@ public class ChatController {
      * @throws IOException
      */
     @RequestMapping("chatRoomList.do")
-    public void createChat(ChatRoom room, ChatMessage message, String nickname, HttpServletResponse response) throws /*JsonIOException,*/ IOException{
-        List<ChatRoom> cList = cService.chatRoomList(nickname);
+    public void createChat(ChatRoom room, ChatMessage message, String userid, HttpServletResponse response) throws /*JsonIOException,*/ IOException{
+        List<ChatRoom> cList = cService.chatRoomList(userid);
         
         for(int i = 0; i < cList.size(); i++) {
             message.setRoomId(cList.get(i).getRoomId());
-            message.setNickname(nickname);
+            message.setUserid(userid);
             int count = cService.selectUnReadCount(message);
             cList.get(i).setUnReadCount(count);
         }
         
         response.setContentType("application/json; charset=utf-8");
  
-        /*Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-        gson.toJson(cList,response.getWriter());*/
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        gson.toJson(cList,response.getWriter());
     }
     
-    @RequestMapping("chatSession.do")
-    public void chatSession( HttpServletResponse response) throws /*JsonIOException,*/ IOException{
-        
-        ArrayList<String> chatSessionList = cSession.getLoginUser(); // 현재 로그인된 유저들을 불러서 저장
-        
-        response.setContentType("application/json; charset=utf-8");
- 
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-        gson.toJson(chatSessionList,response.getWriter());
-    }
+//    @RequestMapping("chatSession.do")
+//    public void chatSession(HttpServletResponse response, Principal principal) throws /*JsonIOException,*/ IOException{
+//        principal.getName();
+////        ArrayList<String> chatSessionList = cSession.getLoginUser(); // 현재 로그인된 유저들을 불러서 저장
+//        
+//        response.setContentType("application/json; charset=utf-8");
+// 
+//        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+////        gson.toJson(chatSessionList,response.getWriter());
+//    }
     
 }

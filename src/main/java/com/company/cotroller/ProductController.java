@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.company.domain.AttachProductDTO;
-import com.company.domain.ChatSession;
 import com.company.domain.ProductCriteria;
 import com.company.domain.ProductDTO;
 import com.company.domain.ProductPageDTO;
@@ -28,17 +27,16 @@ public class ProductController {
 
 	@Autowired
 	private ProductService service;
-	@Autowired
-	private ChatSession cSession;
+	
 	
 	@RequestMapping(value = "/product/index", method = RequestMethod.GET)
 		public void index(Principal principal,Model model, ProductCriteria cri) {
 		log.info("index");
 		
 		List<ProductDTO> list = service.getList(cri);
-		if(principal.getName()!=null) {
-			cSession.addLoginUser(principal.getName());
-		}
+//		if(principal.getName()!=null) {
+//			cSession.addLoginUser(principal.getName());
+//		}
 		
 		
 		for(ProductDTO dto:list) {

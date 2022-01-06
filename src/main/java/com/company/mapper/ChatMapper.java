@@ -15,7 +15,7 @@ public interface ChatMapper {
 	
 	public ChatMessage searchChatRoom(ChatRoom searchRoom);
 	
-	public List<ChatRoom> chatRoomList(String userId, String userNickname);
+	public List<ChatRoom> chatRoomList(String userId);
 	
 	
 	

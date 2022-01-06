@@ -22,14 +22,14 @@
 	</resultMap>
 
 	<!-- 신규 채팅방일 때 채팅 방 생성 -->
-<!-- 	<insert id="createChat" parameterType="com.company.domain.ChatRoom">
+ 	<insert id="createChat" parameterType="com.company.domain.ChatRoom">
 		insert into CHATROOM
 		values(SEQ_CHATROOM_ID.NEXTVAL, #{userEmail},
 		#{userName}, DEFAULT,
 		#{masterNicname}, #{masterName}, #{masterPic})
 	</insert>
 
-	<select id="selectChatRoom" parameterType="string" resultMap="chatRoomResultSet">
+	<select id="selectChatRoom" parameterType="string" resultMap="chatRoomResultset">
 		SELECT * FROM CHATROOM
 		WHERE ROOM_ID = #{roomId}
 	</select>
@@ -52,16 +52,16 @@
 		WHERE ROOM_ID = #{rooomId}
 	</select>
 
-	<select id="searchChatRoom" parameterType="com.company.domain.ChatRoom" resultMap="chatRoomResultSet">
+	<select id="searchChatRoom" parameterType="com.company.domain.ChatRoom" resultMap="chatRoomResultset">
 		SELECT * FROM CHATROOM
 		WHERE USER_EMAIL = #{userEmail} AND
 		MASTER_EMAIL = #{masterEmail}
 	</select>
 
-	<select id="chatRoomList" parameterType="string" resultMap="chatRoomResultSet">
+	<select id="chatRoomList" parameterType="string" resultMap="chatRoomResultset">
 		SELECT * FROM CHATROOM
-		WHERE USER_ID = #{userId} OR
-		MASTER_NICKNAME = #{userNickname}
+		WHERE USER_ID = #{userid} OR
+		MASTER_ID= #{userid}
 	</select>
 
 	<select id="selectUnReadCount" parameterType="com.company.domain.ChatMessage" resultType="_int">
@@ -77,5 +77,5 @@
 		WHERE ROOM_ID = #{roomId} AND USER_EMAIL != #{email}
 		AND UNREAD_COUNT = 1
 	</update>
- -->
+ 
 </mapper>

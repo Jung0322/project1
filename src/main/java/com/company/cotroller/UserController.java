@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.company.domain.ChatSession;
 import com.company.domain.MemberDTO;
 import com.company.service.MemberService;
 

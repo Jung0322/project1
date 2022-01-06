@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.company.domain.AddressDTO;
-import com.company.domain.ChatSession;
 import com.company.domain.MemberDTO;
 import com.company.service.MemberService;
 
@@ -31,8 +30,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@Autowired
-	private ChatSession cSession;
+	
 	
 	// 회원가입 & 회원정보 수정
 	// 회원가입 화면

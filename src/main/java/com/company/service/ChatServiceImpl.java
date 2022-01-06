@@ -41,9 +41,9 @@ public class ChatServiceImpl implements ChatService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	// public List<ChatRoom> chatRoomList(String userId, String userNickname);
 	@Override
-	public List<ChatRoom> chatRoomList(String userEmail) {
+	public List<ChatRoom> chatRoomList(String userid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
