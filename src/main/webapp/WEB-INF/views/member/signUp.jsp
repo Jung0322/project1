@@ -60,7 +60,7 @@
                          </div>
                          <div class="login-form">
                               <label for="phone">휴대전화</label>
-                              <input type="text" name="phone" id="phone" class="form-control" placeholder="휴대전화">
+                              <input type="text" name="phone" id="phone" class="form-control" placeholder="휴대전화" maxlength="13">
                               <small id="phone"></small>
                          </div>
                          
