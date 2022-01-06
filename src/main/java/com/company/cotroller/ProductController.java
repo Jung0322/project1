@@ -122,6 +122,7 @@ public class ProductController {
 		return "/product/single-project";
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/product-registration", method = RequestMethod.GET)
 	public String product_registration(Principal principal, Model model) {
 		log.info("product-registration");
@@ -140,7 +141,7 @@ public class ProductController {
 		log.info("register 요청" +dto);
 		service.insert(dto);
 		
-		return "/product/index";
+		return "redirect:/product/Secindex";
 	}
 	
 	@GetMapping("/getAttachList")

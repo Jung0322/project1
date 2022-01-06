@@ -39,9 +39,11 @@
       </div>
     </footer>
     <script>
-
+	let userid = null;
+    
     <sec:authorize access="isAuthenticated()">
     	 $(".pdt").attr("href","/product/Secindex");
+    	 userid = '${info.username}';
     </sec:authorize>
 	</script>
 

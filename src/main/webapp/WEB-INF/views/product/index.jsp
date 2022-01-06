@@ -91,6 +91,7 @@ console.log(pathArr);
 
 let pimg = $(".pimg");
 
+
 $(pimg).each(function(i,item){
 	$(this).attr("src","/display?fileName="+encodeURIComponent(pathArr[i]));
 })
