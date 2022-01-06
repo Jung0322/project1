@@ -233,11 +233,7 @@ public class MemberController {
 		
 		model.addAttribute("dto", memberInfo);
 	}
-	
-	@GetMapping("/my-basket")
-	public String myBasket() {
-		return "/member/my-basket";
-	}
+
 	
 	// 가계부
 	@GetMapping("/cashbook-page")
