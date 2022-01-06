@@ -14,9 +14,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-offset-1 col-md-10 col-sm-12">
+				<!-- 로그인 후 보여질 버튼 -->
+				<sec:authorize access="isAuthenticated()">
 					<div class="writeButton">
 						<input type="submit" class="form-control" id="writeButton" value="글 작성" onclick="location.href='/board/write'">
 					</div>
+				</sec:authorize>
+				
 					<c:forEach var="dto" items="${list}">
 					<div class="blog-post">
 						<div class="blog-post-title">

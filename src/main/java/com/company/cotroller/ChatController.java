@@ -29,11 +29,10 @@ import com.google.gson.GsonBuilder;
 @Controller
 public class ChatController {
     @Autowired
-    ChatServiceImpl cService;
+    private ChatServiceImpl cService;
     
     @Autowired
-    MemberService pService;
-    
+    private MemberService pService;
     
     @RequestMapping(value = "/view_chat")
     public String viewChat(Principal principal) {
@@ -133,15 +132,15 @@ public class ChatController {
         gson.toJson(cList,response.getWriter());
     }
     
-//    @RequestMapping("chatSession.do")
-//    public void chatSession(HttpServletResponse response, Principal principal) throws /*JsonIOException,*/ IOException{
-//        principal.getName();
-////        ArrayList<String> chatSessionList = cSession.getLoginUser(); // 현재 로그인된 유저들을 불러서 저장
-//        
-//        response.setContentType("application/json; charset=utf-8");
-// 
-//        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-////        gson.toJson(chatSessionList,response.getWriter());
-//    }
+    @RequestMapping("chatSession.do")
+    public void chatSession(HttpServletResponse response, Principal principal) throws /*JsonIOException,*/ IOException{
+        principal.getName();
+        ArrayList<String> chatSessionList = ChatSession.getLoginUser(); // 현재 로그인된 유저들을 불러서 저장
+        
+        response.setContentType("application/json; charset=utf-8");
+ 
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        gson.toJson(chatSessionList,response.getWriter());
+    }
     
 }

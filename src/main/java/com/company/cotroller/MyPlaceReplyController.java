@@ -29,6 +29,7 @@ public class MyPlaceReplyController {
 	@Autowired
 	private MyPlaceReplyService service;
 	
+	//댓글 목록 가져오기
 	@GetMapping("/pages/{mno}/{page}")
 	public ResponseEntity<List<MyPlaceReplyDTO>> readAll(@PathVariable int mno){
 		log.info("댓글 전체 가져오기"+mno);
@@ -36,29 +37,46 @@ public class MyPlaceReplyController {
 		return new ResponseEntity<List<MyPlaceReplyDTO>>(service.getList(mno),HttpStatus.OK);
 	}
 	
+	//댓글 하나 가져오기
+	@GetMapping("/{mrno}")
+	public ResponseEntity<MyPlaceReplyDTO> read(@PathVariable int mrno){
+		return new ResponseEntity<MyPlaceReplyDTO>(service.getRow(mrno),HttpStatus.OK);
+	}
+	
+	//댓글 입력하기
 	@PostMapping("/new")
 	public ResponseEntity<String> create(@RequestBody MyPlaceReplyDTO insertDto, Principal principal){
 		log.info("댓글입력"+insertDto);
 		
-		insertDto = service.getInfoReply(principal.getName());
-		
 		System.out.println(insertDto);
+		
+		MyPlaceReplyDTO myPlace = service.getInfoReply(principal.getName());
+		insertDto.setUserid(myPlace.getUserid());
+		insertDto.setNickname(myPlace.getNickname());
+		insertDto.setMytown(myPlace.getMytown());
+		
 		
 		return service.insertReply(insertDto)?
 				new ResponseEntity<String>("success",HttpStatus.OK):
 					new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);
 	}
+	//댓글 수정하기
 	@PutMapping("/{mrno}")
 	public ResponseEntity<String> modify(@RequestBody MyPlaceReplyDTO updateDto, @PathVariable int mrno){
+		
+		
 		updateDto.setMrno(mrno);
+		System.out.println(updateDto);
+		
 		
 		return service.updateReply(updateDto)?
 				new ResponseEntity<String>("success",HttpStatus.OK):
 					new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);
 	}
 	
+	//댓글 삭제하기
 	@DeleteMapping("/{mrno}")
-	public ResponseEntity<String> remove(@PathVariable int mrno, @RequestBody MyPlaceReplyDTO reply){
+	public ResponseEntity<String> remove(@PathVariable int mrno){
 		return service.deleteReply(mrno)?
 				new ResponseEntity<String>("success",HttpStatus.OK):
 					new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);

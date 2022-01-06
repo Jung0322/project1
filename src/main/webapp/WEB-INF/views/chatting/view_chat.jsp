@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../includes/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,25 +8,14 @@
 	<title>웹소켓 채팅</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
-	<script>
-	<audio id='audio_play' src='/*알림음 */'></audio>
-	function play() { 
-	    var audio = document.getElementById('audio_play'); 
-	    if (audio.paused) { 
-	        audio.play(); 
-	    }else{ 
-	        audio.pause(); 
-	        audio.currentTime = 0 
-	    } 
-	} 
-	</script>
+	
 	</head>
 	<body>
-	    <!-- 채팅 아이콘 -->
-	    <div class="chatIcon font_jua">
+	     <!-- 채팅 아이콘 -->
+	    <!-- <div class="chatIcon font_jua">
 	        <img src="resources/images/ccoli.png" class="iconImg">
 	    </div>
-	    
+	     -->
 	    <!-- 채팅 창 -->
 	    <div class="chatContainer display-none">
 	        <div class="chatTop">
@@ -67,7 +57,7 @@
 	    <!-- 채팅 리스트 -->
 	    <div class="chatListContainer font_jua display-none">
 	        <div class="chatTop">
-	            <div style="padding: 10px; margin-left: 4px;">니즈톡 리스트</div>
+	            <div style="padding: 10px; margin-left: 4px;">콜리톡 리스트</div>
 	        </div>
 	        <div class="chatList">
 	            <!-- 동적 생성 -->
@@ -81,5 +71,4 @@
 		});
 	</script>
 	<script src='/resources/js/chat.js'></script>
-</body>
-</html>
+<%@ include file="../includes/footer.jsp" %>

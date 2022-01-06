@@ -41,16 +41,22 @@
 			    from auction at, (select * 
 			                      from auctionimg
 			                      where Rowid in (select max(rowid) from auctionimg group by ano)) ati
-				where at.ano = ati.ano order by at.ano desc)
-		  where
-		]]>
+				where at.ano = ati.ano ]]> 
 		
-		 <![CDATA[ 
-		 	rownum <= (#{pageNum} * #{amount}))
+		<if test='!cate.equals("전체")'>
+		 and category = #{cate}
+		 </if>
+		
+		 <![CDATA[ 	 
+		  order by at.ano desc) where rownum <= (#{pageNum} * #{amount}))
       where rn> (#{pageNum}-1) * #{amount}
 		 ]]>
 	
 	</select>
+	
+	
+
+
 	
 		<!-- 전체 게시물 수 -->
 	<select id="totalCnt" resultType="int">
@@ -58,7 +64,10 @@
 		from
 		auction
 		where		
-		 ano > 0
+		 ano > 0 
+		 <if test='!cate.equals("전체")'>
+		 and category = #{cate}
+		 </if>
 	</select>
 	
 	

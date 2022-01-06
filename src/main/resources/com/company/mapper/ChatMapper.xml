@@ -24,16 +24,16 @@
 	<!-- 신규 채팅방일 때 채팅 방 생성 -->
  	<insert id="createChat" parameterType="com.company.domain.ChatRoom">
 		insert into CHATROOM
-		values(SEQ_CHATROOM_ID.NEXTVAL, #{userEmail},
-		#{userName}, DEFAULT,
-		#{masterNicname}, #{masterName}, #{masterPic})
+		values(SEQ_CHATROOM_ID.NEXTVAL, #{userId},
+		#{usernickname}, DEFAULT,
+		#{masterId}, #{masternickname}, #{masterPic})
 	</insert>
 
 	<select id="selectChatRoom" parameterType="string" resultMap="chatRoomResultset">
 		SELECT * FROM CHATROOM
 		WHERE ROOM_ID = #{roomId}
 	</select>
-
+	
 	<insert id="insertMessage" parameterType="com.company.domain.ChatMessage">
 		<if test="sessionCount == 1">
 			INSERT INTO CHATMESSAGE VALUES(#{roomId},
@@ -47,7 +47,7 @@
 		</if>
 	</insert>
 
-	<select id="messageList" parameterType="string" resultMap="chatMessageResultSet">
+	<select id="messageList"  resultMap="chatMessageResultSet">
 		SELECT * FROM CHATMESSAGE
 		WHERE ROOM_ID = #{rooomId}
 	</select>

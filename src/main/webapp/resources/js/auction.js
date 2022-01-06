@@ -34,13 +34,18 @@ $(function(){
 	  //action 수정
 		actionForm.attr("action","/auction/auction");
 		//pno제거
-		actionForm.find("input[name='pno']").remove();	
+		actionForm.find("input[name='ano']").remove();	
 		
       //폼 전송
       actionForm.submit();
 	})
 	
-	
+	$('.orderby').change(function(){
+		let form = $(".woocommerce-ordering");
+		
+		form.find("input[name='pageNum']").val("1");
+		form.submit();
+	});
 	
 						
 						

@@ -22,7 +22,7 @@ public class ChatServiceImpl implements ChatService{
 
 	@Override
 	public int insertMessage(ChatMessage chatMessage) {
-		return 0;
+		return mapper.insertMessage(chatMessage);
 	}
 
 	@Override
@@ -32,32 +32,27 @@ public class ChatServiceImpl implements ChatService{
 
 	@Override
 	public int createChat(ChatRoom room) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.createChat(room);
 	}
 
 	@Override
 	public ChatRoom searchChatRoom(ChatRoom room) {
-		// TODO Auto-generated method stub
 		return null;
 	}
-	// public List<ChatRoom> chatRoomList(String userId, String userNickname);
+
 	@Override
 	public List<ChatRoom> chatRoomList(String userid) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.chatRoomList(userid);
 	}
 
 	@Override
 	public int selectUnReadCount(ChatMessage message) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.selectUnReadCount(message);
 	}
 
 	@Override
 	public int updateCount(ChatMessage message) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.updateCount(message);
 	}
 
 }

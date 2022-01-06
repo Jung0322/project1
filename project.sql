@@ -36,7 +36,7 @@ alter table sp_member_authority add constraint fk_sp_member_authority
 foreign key(userid) references member(userid) ON DELETE CASCADE;
 
 
-
+select * from product;
 
 
 -- 동네생활
@@ -86,10 +86,15 @@ create table myPlaceImg (
 );
 
 
-
+		select pno, puuid, puploadpath, pimgname
+		from PRODUCTIMG  where pno = 3
+		
+		select pno
+		from PRODUCt;
 
 -- 상품
 -- 7. 상품 테이블
+drop table product;
 create table product (
 	pno number(10) not null, -- 글번호(pk)
 	category varchar2(20) not null, -- 카테고리
@@ -103,10 +108,16 @@ create table product (
 	reservation number(2) default 0, -- 예약 여부
 	soldout number(2) default 0, -- 판매 여부
 	userid varchar2(50) not null, -- 아이디
+	good number(10) default 0, -- 좋아요(찜하기)
+	mytown varchar2(50) not null, -- 동네
+	
 	CONSTRAINT Pfk_userid FOREIGN KEY(userid)
          REFERENCES member(userid) ON DELETE CASCADE,
 	CONSTRAINT pk_product PRIMARY KEY (pno) -- pk
 );
+ALTER TABLE product  ADD mytown varchar2(50) not null;
+select * from product;
+<<<<<<< HEAD
 -- 이게 맞음(rn pno 안맞음)
 select * 
 	from (select /*+INDEX_DESC(product pk_product)*/ rownum rn,pno, price, title, good, puuid, puploadpath, pimgname
@@ -141,9 +152,12 @@ from (select /*+INDEX_DESC(spring_board pk_spring_board)*/ rownum rn,bno,title,r
 	  from spring_board
 	  where rownum <=10)
 where rn>0;
+=======
+>>>>>>> branch 'master' of https://github.com/Jung0322/project1.git
 
 
 
+<<<<<<< HEAD
 select pd.pno, price, title, good, puuid, puploadpath, pimgname
 from product pd, (select * from PRODUCTIMG where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
 where pd.pno = pdi.pno order by pd.pno desc;
@@ -155,8 +169,12 @@ select * from PRODUCTIMG;
 -- 상품 좋아요 개수 칼럼 추가
 ALTER TABLE product  ADD good number(10) default 0;
 
+=======
+>>>>>>> branch 'master' of https://github.com/Jung0322/project1.git
 -- 상품 테이블 글번호 시퀀스
 CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1;
+
+select * from basket;
 
 -- 8. 상품 이미지 테이블
 create table productimg (
@@ -171,13 +189,19 @@ create table productimg (
 
 -- 9. 장바구니 (찜목록)
 create table basket (
-	bno number(10) not null, -- 글번호(pk)
 	userid varchar2(50) not null, -- 아이디
 	pno number(10) not null, -- 동네생활 글번호
 	CONSTRAINT fk_userid FOREIGN KEY(userid)
          REFERENCES member(userid) ON DELETE CASCADE,
-	CONSTRAINT pk_basket PRIMARY KEY (bno) -- pk
+    CONSTRAINT fk_pno FOREIGN KEY(pno)
+         REFERENCES product(pno) ON DELETE CASCADE,
+	CONSTRAINT pk_basket PRIMARY KEY (pno,userid) -- pk
 );
+
+update MEMBER set userid = 'dnrwls' where userid='ㅋㅋ';
+select  *  from basket;
+drop table basket;
+
 -- 장바구니 테이블 글번호 시퀀스
 CREATE SEQUENCE basket_seq INCREMENT BY 1 START WITH 1;
 
@@ -197,34 +221,14 @@ create table auction (
 	CONSTRAINT pk_Auction PRIMARY KEY (ano) -- pk
 );
 
+
+
+
+
+
+-- 경매 테이블 시작시간 끝나는시간 Date에서 String으로 변경
 ALTER TABLE auction MODIFY startdate VARCHAR2(25);
 ALTER TABLE auction MODIFY enddate VARCHAR2(25);
-
-
-select * 
-	from (select rownum rn,pno, price, title, good, puuid, puploadpath, pimgname
-		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname
-			    from product pd, (select * 
-			                      from PRODUCTIMG 
-			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
-				where pd.pno = pdi.pno order by pd.pno desc)
-		  where rownum <=8)
-	where rn>0;	
-
-
-select * 
-	from (select rownum rn,ano, title, startdate, enddate, startprice, category, auuid, auploadpath, aimgname
-		  from (select  at.ano, title, startdate, enddate, startprice, category, auuid, auploadpath, aimgname
-			    from auction at, (select * 
-			                      from auctionimg
-			                      where Rowid in (select max(rowid) from auctionimg group by ano)) ati
-				where at.ano = ati.ano order by at.ano desc)
-		  where rownum <=8)
-	where rn>0;	
-	
-	select count(ano) from auction;
-
-select * from auction;
 
 -- 경매 테이블 내용 칼럼 추가
 ALTER TABLE auction  ADD content varchar2(2000) not null;
@@ -232,6 +236,14 @@ ALTER TABLE auction  ADD content varchar2(2000) not null;
 -- 경매 테이블 제목 칼럼 추가
 ALTER TABLE auction  ADD title varchar2(100) not null;
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> branch 'master' of https://github.com/Jung0322/project1.git
 -- 경매 테이블 글번호 시퀀스
 CREATE SEQUENCE auction_seq INCREMENT BY 1 START WITH 1;
 
@@ -293,6 +305,8 @@ CREATE TABLE chatmessage(
 	CONSTRAINT pk_messageid PRIMARY KEY (messageid) -- pk
 );
 CREATE SEQUENCE SEQ_CHATMESSAGE_ID;
+
+
 -- 회원 더미 데이터 삽입 -> 시큐리티 적용 후에는 회원가입을 하셔야합니다
 insert into 
     member(userid, password, nickname, email, phone, mytown)
@@ -315,6 +329,8 @@ insert into sp_member_authority(userid,authority) values ('haha1','ROLE_USER');
 insert into sp_member_authority(userid,authority) values ('haha2','ROLE_USER');
 
 
+
+
 -- 내 동네 더미데이터 삽입
 insert into myPlace(mno, userid, nickname, mytown, mcategory, title, content)
 values (myPlace_seq.nextval, 'ccoli1', '콜리', '서울시 종로구 관철동', '동네생활', '산책 친구 구합니다.', '평일 오후에 불광천 산책할 친구구해요! 일주일에 2-3번 정도 같이 산책하면 좋을 것 같아요. 편하게 연락주세요');
@@ -330,7 +346,6 @@ select * from myPlace;
 --references spring_board(bno);
 
 select * from PRODUCT;
-
 
 select to_char(sysdate) from dual;
 

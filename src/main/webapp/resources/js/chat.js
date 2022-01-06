@@ -46,7 +46,7 @@ $(function() {
 				let loginList = "";
 
 				// 로그인 된 User들을 가져온다.
-				/*$.ajax({
+				$.ajax({
 					url: "chatSession.do",
 					data: {
 					},
@@ -58,7 +58,7 @@ $(function() {
 						}
 					}
 				});
-*/
+
 				$chatWrap = $(".chatList");
 				$chatWrap.html("");
 
@@ -77,15 +77,26 @@ $(function() {
 						// 자신이 구매자 입장일 때
 						if (data[i].userId == "${loginMember.userId}") {
 							// 현재 판매자가 로그인 상태 일 때
-						
+							if (loginList.indexOf(data[i].masterId) != -1) {
+								$div = $("<div class='chatList_box enterRoomList' onclick='enterRoom(this);'>").attr("id", data[i].roomId).attr("masterId", data[i].masterId);
+							}
+							// 현재 판매자가 로그아웃 상태 일 때
+							else {
 								$div = $("<div class='chatList_box2 enterRoomList' onclick='enterRoom(this);'>").attr("id", data[i].roomId).attr("masterId", data[i].masterId);
+							}
 							$img = $("<img class='profile_img'>").attr("src", "resources/masterImg/" + data[i].masterPic);
 							$divs = $("<div class='userNameId'>").text(data[i].masterId);
 						}
 						// 자신이 판매자 입장일 때
 						else {
+							// 현재 구매자가 로그인 상태 일 때
+							if (loginList.indexOf(data[i].userNickname) != -1) {
 								$div = $("<div class='chatList_box enterRoomList' onclick='enterRoom(this);'>").attr("id", data[i].roomId).attr("userId", data[i].userId);
+							}
+							// 현재 구매자가 로그아웃 상태 일 때
+							else {
 								$div = $("<div class='chatList_box2 enterRoomList' onclick='enterRoom(this);'>").attr("id", data[i].roomId).attr("userId", data[i].userId);
+							}
 							$img = $("<img class='profile_img'>").attr('src', 'resources/img/' + data[i].userPic);
 							$divs = $("<div class='userNameId'>").text(data[i].userId);
 						} // else End
