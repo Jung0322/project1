@@ -29,7 +29,7 @@
 							authentication-failure-handler-ref="customLoginFailHandler" /> 
 							
 		<!-- 로그아웃 -->
-		<security:logout logout-url="/member/logout" invalidate-session="true" delete-cookies="JSSESION" logout-success-url="/product/index"/>
+		<security:logout logout-url="/member/logout" invalidate-session="true" delete-cookies="JSSESION" logout-success-url="/product/Secindex"/>
 	
 		<!-- url 접근 시 원하는 권한이 있는지 확인 -->
 		<security:intercept-url pattern="/member/modify-info" access="hasRole('ROLE_USER')"/>

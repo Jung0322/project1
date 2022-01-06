@@ -110,9 +110,6 @@
 											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 										</form>
 									</div>
-								    <a class="dropdown-item dropdown-item-area" href="#">Another action</a>
-								    <a class="dropdown-item dropdown-item-area" href="#">Something else here</a>
-								    
 								</div>
 							</div>
 						</li>
