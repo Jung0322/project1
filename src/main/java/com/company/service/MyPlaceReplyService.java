@@ -9,6 +9,7 @@ public interface MyPlaceReplyService {
 	public boolean insertReply(MyPlaceReplyDTO insertDto);
 	public boolean updateReply(MyPlaceReplyDTO updateDto);
 	public boolean deleteReply(int mrno);
+	public MyPlaceReplyDTO getRow(int mrno);
 	
 	public MyPlaceReplyDTO getInfoReply(String userid);
 }

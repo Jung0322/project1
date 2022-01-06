@@ -35,17 +35,26 @@ let replyService = (function() {
 			}
 		})
 	} // getList end
+	
+	function get(mrno, callback){
+		
+		$.getJSON({
+			url: '/replies/'+mrno,
+			success: function(data){
+				if (callback){
+					callback(data);
+				}
+			}
+		})
+	} // get end
 
 
-	function remove(mno, callback, error) {
+	function remove(mrno, callback, error) {
 
-		a.jax({
-			url: '/replies/' + mno,
+		$.ajax({
+			url: '/replies/'+ mrno,
 			type: 'delete',
 			contentType: 'application/json',
-			data: JSON.stringify({
-				nickname: nickname
-			}),
 			success: function(result) {
 				if (callback) {
 					callback(result);
@@ -62,11 +71,11 @@ let replyService = (function() {
 
 	function update(reply, callback, error) {
 
-		a.jax({
+		$.ajax({
 			url: '/replies/' + reply.mrno,
 			type: 'put',
 			contentType: 'application/json',
-			data: JSON.stringify(reply.nickname),
+			data: JSON.stringify(reply),
 			success: function(data) {
 				if (callback) {
 					callback(data);
@@ -107,6 +116,7 @@ let replyService = (function() {
 
 	return {
 		add: add,
+		get: get,
 		getList: getList,
 		remove: remove,
 		update: update,

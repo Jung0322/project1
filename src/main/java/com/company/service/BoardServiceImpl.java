@@ -21,6 +21,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public List<BoardDTO> getMytown(MyPlaceCriteria cri) {
+		return mapper.listMytown(cri);
+	}	
+	
+	@Override
 	public List<BoardDTO> getList(MyPlaceCriteria cri) {
 		return mapper.listAll(cri);
 	}
@@ -48,7 +53,13 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int getTotalCount(MyPlaceCriteria cri) {
 		return  mapper.totalCnt(cri);
-	}	
+	}
+
+	@Override
+	public int getTotalCountMytown(MyPlaceCriteria cri) {
+		return mapper.totalCntMytown(cri);
+	}
+
 	
 
 

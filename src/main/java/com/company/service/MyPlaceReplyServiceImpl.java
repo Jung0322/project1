@@ -39,4 +39,9 @@ public class MyPlaceReplyServiceImpl implements MyPlaceReplyService {
 		return replyMapper.getInfoReply(userid);
 	}
 
+	@Override
+	public MyPlaceReplyDTO getRow(int mrno) {
+		return replyMapper.get(mrno);
+	}
+
 }

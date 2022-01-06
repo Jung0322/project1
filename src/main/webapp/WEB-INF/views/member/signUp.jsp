@@ -19,9 +19,9 @@
           <div class="row">
 
                <div class="col-md-offset-1 col-md-10 col-sm-12">
-                    <div class="section-title">
-                         <h3>브로콜리 마켓</h3>
-                         <h2>The creative web \& mobile studio and focused on brand identity, web development and social marketing.</h2>
+                    <div class="section-title" style="padding-bottom: 45px;">
+                         <h3>어서오세요, 브로콜리 마켓입니다.</h3>
+                         <h2>언제나 당신 곁에 이로운, 브로콜리 마켓</h2>
                     </div>
 
                     <form action="#" method="post" id="signupForm">

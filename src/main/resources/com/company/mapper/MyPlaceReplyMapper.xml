@@ -5,11 +5,16 @@
 	<!-- mno가 일치하는 댓글 가져오기 -->
 	<select id="list" resultType="com.company.domain.MyPlaceReplyDTO">
 		select * from myPlaceReply where mno=#{mno} order by mrno asc
-	</select>		
+	</select>	
+	
+	<!-- 댓글 하나 가져오기 -->
+	<select id="get" resultType="com.company.domain.MyPlaceReplyDTO">
+		select * from myPlaceReply where mrno=#{mrno}
+	</select>	
 	
 	<insert id="insert">
-		insert into myPlaceReply(mrno,mno,userid,nickname,content)
-		values(myPlaceReply_seq.nextval,#{mno},#{userid},#{nickname},#{content})
+		insert into myPlaceReply(mrno,mno,userid,nickname,content,mytown)
+		values(myPlaceReply_seq.nextval,#{mno},#{userid},#{nickname},#{content},#{mytown})
 	</insert>
 	
 	<update id="update">

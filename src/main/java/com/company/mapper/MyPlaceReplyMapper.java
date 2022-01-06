@@ -10,6 +10,7 @@ public interface MyPlaceReplyMapper {
 	public int update(MyPlaceReplyDTO updateDto);
 	public int delete(int mno);
 	public int getCountByMno(int mno);
+	public MyPlaceReplyDTO get(int mrno);
 	
 	public MyPlaceReplyDTO getInfoReply(String userid);
 }

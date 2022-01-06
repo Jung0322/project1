@@ -49,8 +49,8 @@ $(function() {
 						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 					},
 					data: {
-						userid: function() {
-							return $("#userid").val();
+						nickname: function() {
+							return $("#nickname").val();
 						}
 					}
 				} // remote end
@@ -60,8 +60,20 @@ $(function() {
 			},
 			email: {
 				required: true,
-        		email: true
-			},
+        		email: true,
+				remote: {
+					url: "/member/checkEmail",
+					type: "post",
+					beforeSend: function(xhr) {
+						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+					},
+					data: {
+						email: function() {
+							return $("#email").val();
+						}
+					}
+				} // remote end
+			}, // email end
 			phone: {
 				required: true,
 				phone: true
@@ -76,7 +88,7 @@ $(function() {
         		required: "비밀번호는 필수 입력 요소입니다."
       		},
       		password_check: {
-        		required: "비밀번호는 필수 입력 요소입니다.",
+        		required: "비밀번호 재입력은 필수 입력 요소입니다.",
         		equalTo:"이전 비밀번호와 다릅니다."
       		},
 			nickname: {
@@ -88,7 +100,8 @@ $(function() {
 				required: "내동네는 필수 입력 요소입니다."
 			},
 			email: {
-				required: "이메일은 필수 입력 요소입니다."
+				required: "이메일은 필수 입력 요소입니다.",
+				remote: "이미 존재하는 이메일입니다."
 			},
 			phone: {
 				required: "휴대전화는 필수 입력 요소입니다."
@@ -146,4 +159,4 @@ $.validator.addMethod(
 		return regPhone.test(value);
 	},
 	"숫자만 입력해 주세요."
-)
+);
