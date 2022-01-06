@@ -21,10 +21,10 @@ $(function(){
 					console.log(data==null);
 					if(data==null||data==""){
 						$("#asd").attr("src","/resources/images/NotGood.png");
-						cc=1;
+						//cc=1;
 					}else{
 						$("#asd").attr("src","/resources/images/Good.png");
-						cc=2;
+						//cc=2;
 					}
 				},
 				error:function(xhr,status,error){
@@ -32,7 +32,7 @@ $(function(){
 				}
 			
 			})
-			setTimeout(function(){
+			/*setTimeout(function(){
 				if(cc==1){
 					$(".heart").click(function(){
 							$.ajax({
@@ -87,9 +87,70 @@ $(function(){
 						})
 					})
 			}
-			}, 1000);
+			}, 1000);*/
 		
 	}
+	
+	$("#asd").click(function(){
+		let heart = $(this).attr('src');
+		console.log(heart);
+		
+		if(heart == "/resources/images/NotGood.png"){
+			//db작업
+			//아이콘 변경
+			$.ajax({
+							url:'/insertgood',
+							type:'post',
+							contentType:'application/json',
+							beforeSend:function(xhr){
+							xhr.setRequestHeader(csrfHeaderName,csrfTokenValue)
+							},
+							data:JSON.stringify({
+							pno:pno,
+							userid:userid
+							}),
+							success:function(data){
+								console.log("확인 : "+data);
+								if(data=='success'){
+									$("#asd").attr("src","/resources/images/Good.png");
+									//heartPlus(1);									
+								}
+							},
+							error:function(xhr,status,error){
+								alert(xhr.responseText);
+							}
+			
+						})
+		}else{
+			//db작업
+			//아이콘 변경
+			$.ajax({
+							url:'/deletegood',
+							type:'post',
+							contentType:'application/json',
+							beforeSend:function(xhr){
+							xhr.setRequestHeader(csrfHeaderName,csrfTokenValue)
+							},
+							data:JSON.stringify({
+							pno:pno,
+							userid:userid
+							}),
+							success:function(data){
+								if(data=='success'){
+									$("#asd").attr("src","/resources/images/NotGood.png");
+									//cc=1;
+									//heartPlus(-1);
+								}
+							},
+							error:function(xhr,status,error){
+								alert(xhr.responseText);
+							}
+			
+						})
+		}
+	})
+	
+	
 	
 	console.log($("#asd").attr("src"));
 
@@ -164,18 +225,17 @@ $(function(){
 				
 
 })
-
-		/*$.ajax({
-							url:'/updategood',
-							type:'post',
-							contentType:'application/json',
+function heartPlus(i){
+	
+		$.ajax({
+							url:'/updategood/'+pno,
+							type:'put',							
 							beforeSend:function(xhr){
 							xhr.setRequestHeader(csrfHeaderName,csrfTokenValue)
 							},
-							data:JSON.stringify({
-							num:1,
-							pno:userid
-							}),
+							data:{
+								"num":i
+							},
 							success:function(data){
 								if(data=='success'){
 									$("#asd").attr("src","/resources/images/NotGood.png");
@@ -189,4 +249,5 @@ $(function(){
 								alert(xhr.responseText);
 							}
 			
-						})*/
+						})
+}

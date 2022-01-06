@@ -13,5 +13,5 @@ public interface BasketMapper {
 	public int insert(BasketDTO dto);
 	public int delete(BasketDTO dto);
 	public List<ProductDTO> listAll(@Param("cri") ProductCriteria cri,@Param("userid") String userid);
-	public int totalCnt(String userid);
+	public int totalCnt(@Param("cate") String cate, @Param("userid") String userid);
 }

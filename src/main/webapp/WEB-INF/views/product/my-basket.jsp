@@ -34,7 +34,9 @@
 				<c:forEach var="dto" items="${list}">
 					<li class="product">
 					<a href="${dto.pno}" class="move">
-					<span class="onsale">예약</span>					
+					<c:if test="${dto.reservation == 1}">
+						<span class="onsale">예약</span>				
+					</c:if>	
 					<script>
 					uploadPath = '${dto.attachList[0].puploadPath}';
 					fileName = '${dto.attachList[0].pimgname}';

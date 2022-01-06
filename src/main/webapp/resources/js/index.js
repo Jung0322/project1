@@ -20,6 +20,8 @@ $(function(){
 	
 	//페이지 나누기 스크립트
    let actionForm = $("#actionForm");
+
+	
    
    //번호 클릭 시 클릭된 번호 값 가져오기
    $(".paginate_button a").click(function(e){
@@ -30,15 +32,20 @@ $(function(){
       
       //가져온 번호를 actionForm 안의 pageNum 값으로 대체
       actionForm.find("input[name='pageNum']").val(pageNum);
-
+		
+		if(userid==null){
 	  //action 수정
 		actionForm.attr("action","/product/index");
+		}else{
+			actionForm.attr("action","/product/Secindex");
+		}
 		//pno제거
 		actionForm.find("input[name='pno']").remove();	
 		
       //폼 전송
       actionForm.submit();
 	})
+	
 	
 	
 	$('.orderby').change(function(){

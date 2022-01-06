@@ -19,6 +19,9 @@
 		<result property="title" column="title"/>
 		<result property="price" column="price"/>
 		<result property="good" column="good"/>
+		<result property="category" column="category"/>
+		<result property="mytown" column="mytown"/>
+		<result property="reservation" column="reservation"/>
 		<collection property="attachList" resultMap="attachMap"></collection>
 	</resultMap>
 
@@ -40,8 +43,8 @@
 		
 		<![CDATA[
 		select * 
-		from (select rownum rn,pno, price, title, good, puuid, puploadpath, pimgname, category, mytown
-		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname, category, mytown
+		from (select rownum rn,pno, price, title, good, puuid, puploadpath, pimgname, category, mytown , reservation
+		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname, category, mytown , reservation
 			    from product pd, (select * 
 			                      from PRODUCTIMG 
 			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
@@ -68,6 +71,42 @@
 		 pno > 0
 		 <if test='!cate.equals("전체")'>
 		 and category = #{cate}
+		 </if>
+	</select>
+	
+		<!--로그인 된 회원 전체 조회 -->
+	<select id="SeclistAll" resultMap="productMap">
+		
+		<![CDATA[
+		select * 
+		from (select rownum rn,pno, price, title, good, puuid, puploadpath, pimgname, category, mytown , reservation
+		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname, category, mytown , reservation
+			    from product pd, (select * 
+			                      from PRODUCTIMG 
+			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
+				where pd.pno = pdi.pno and pd.mytown = (select mytown from member where userid = #{userid})
+		]]>
+		
+		<if test='!cri.cate.equals("전체")'>
+		 and category = #{cri.cate}
+		 </if>
+		
+		 <![CDATA[ 
+		 order by pd.pno desc) where rownum <= (#{cri.pageNum} * #{cri.amount}))
+      where rn> (#{cri.pageNum}-1) * #{cri.amount}
+		 ]]>
+	
+	</select>
+	
+		<!--로그인 된 회원 전체 게시물 수 -->
+	<select id="SectotalCnt" resultType="int">
+		select count(*)
+		from
+		product
+		where		
+		 pno > 0 and mytown = (select mytown from member where userid = #{userid})
+		 <if test='!cate.equals("전체")'>
+		 and category = #{cate} 
 		 </if>
 	</select>
 	

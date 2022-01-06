@@ -41,9 +41,9 @@ public class BasketServiceImpl implements BasketService {
 	}
 
 	@Override
-	public int getTotalCount(String userid) {
+	public int getTotalCount(String cate ,String userid) {
 		// TODO Auto-generated method stub
-		return mapper.totalCnt(userid);
+		return mapper.totalCnt(cate,userid);
 	}
 
 }

@@ -9,7 +9,7 @@
 <script src="/resources/js/member/signup.js"></script>
 
 <sec:authorize access="isAuthenticated()"> <!-- 로그인 된 상태 -->
-	<c:redirect url="/product/index"/> <!-- 메인페이지로 이동 -->
+	<c:redirect url="/product/Secindex"/> <!-- 메인페이지로 이동 -->
 </sec:authorize>
 
 <!-- Contact Section -->

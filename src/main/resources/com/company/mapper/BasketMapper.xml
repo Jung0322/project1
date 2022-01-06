@@ -19,6 +19,9 @@ delete from basket where pno = #{pno} and userid = #{userid}
 		<result property="title" column="title"/>
 		<result property="price" column="price"/>
 		<result property="good" column="good"/>
+		<result property="category" column="category"/>
+		<result property="mytown" column="mytown"/>
+		<result property="reservation" column="reservation"/>
 		<collection property="attachList" resultMap="attachMap"></collection>
 	</resultMap>
 
@@ -34,8 +37,8 @@ delete from basket where pno = #{pno} and userid = #{userid}
 		
 		<![CDATA[
 		select * 
-		from (select rownum rn,pno, price, title, good, puuid, puploadpath, pimgname, category, mytown
-		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname, category, mytown
+		from (select rownum rn,pno, price, title, good, puuid, puploadpath, pimgname, category, mytown, reservation
+		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname, category, mytown, reservation
 			    from (select * 
 			    	  from PRODUCT 
 			    	  where pno in (select pno 
@@ -45,6 +48,13 @@ delete from basket where pno = #{pno} and userid = #{userid}
 			           from PRODUCTIMG 
 			           where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
 				where pd.pno = pdi.pno 
+				]]>
+		
+		<if test='!cri.cate.equals("전체")'>
+		 and category = #{cri.cate}
+		 </if>
+		
+		 <![CDATA[ 
 		 order by pd.pno desc) where rownum <= (#{cri.pageNum} * #{cri.amount}))
       where rn> (#{cri.pageNum}-1) * #{cri.amount}
 		 ]]>
@@ -57,7 +67,10 @@ delete from basket where pno = #{pno} and userid = #{userid}
 		from
 		product
 		where		
-		 pno > 0 and pno in (select pno from BASKET where userid = 'xx')
+		 pno > 0 and pno in (select pno from BASKET where userid = #{userid}) 
+		 <if test='!cate.equals("전체")'>
+		 and category = #{cate}
+		 </if>
 		
 		 
 	</select>
