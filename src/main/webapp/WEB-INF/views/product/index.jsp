@@ -12,7 +12,7 @@
 <script>
 	var pathArr = [];
 </script>
-<body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page">
+<body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page col-md-offset-1 col-md-10 col-sm-12">
 		<div id="content" class="site-content">
 			<div id="primary" class="content-area column full">
 				<main id="main" class="site-main" role="main">
@@ -30,6 +30,7 @@
 						<option value="남성잡화/의류"<c:out value="${pageDto.cri.cate=='남성잡화/의류'?'selected':''}"/>>남성잡화/의류</option>
 					</select>
 				</form>
+				
 				<ul class="products">
 				<c:forEach var="dto" items="${list}">
 					<li class="product">

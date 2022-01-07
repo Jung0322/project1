@@ -18,4 +18,6 @@ public interface ProductMapper {
 	public int goodcount(@Param("num") int num , @Param("pno")int pno);
 	public int SectotalCnt(@Param("cate") String cate , @Param("userid") String userid);
 	public List<ProductDTO> SeclistAll(@Param("cri") ProductCriteria cri,@Param("userid") String userid);
+	public int SelltotalCnt(@Param("cate") String cate , @Param("userid") String userid);
+	public List<ProductDTO> SelllistAll(@Param("cri") ProductCriteria cri,@Param("userid") String userid);
 }

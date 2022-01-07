@@ -151,5 +151,42 @@ public class ProductController {
 		return new ResponseEntity<List<AttachProductDTO>>(service.getRowImg(pno),HttpStatus.OK);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = "/product/sellproduct", method = RequestMethod.GET)
+	public String sellProduct(Model model, ProductCriteria cri,Principal principal) {
+	log.info("로그인 한 회원 전체 보여주기");
 	
+
+	System.out.println("가나다라"+cri);
+	
+	String userid= principal.getName();
+	
+	List<ProductDTO> list = service.SecgetList(cri,userid);
+	
+	
+	
+	for(ProductDTO dto:list) {
+		for(AttachProductDTO attach:dto.getAttachList()) {
+			
+			attach.setPuploadPath(attach.getPuploadPath().replace("\\", "\\\\"));
+		}
+	}
+	
+	//페이지 나누기를 위한 정보 얻기
+	int totalCnt =  service.SecgetTotalCount(cri.getCate(), userid);
+
+	
+	System.out.println("아예이오후"+list);
+	System.out.println("totalCnt "+totalCnt);
+	
+	ProductPageDTO pageDto = new ProductPageDTO(cri, totalCnt);
+	System.out.println("pageDto "+pageDto);
+	model.addAttribute("pageDto", pageDto);
+	
+	
+	model.addAttribute("list", list);
+	
+	return"/product/mysell-product";
+	
+}
 }

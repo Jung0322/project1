@@ -14,7 +14,7 @@
 </script>
 <div class="section-title" style="padding-top: 45px;">
                          <h3>상품</h3>
-                         <h2>장바구니</h2>
+                         <h2>판매목록</h2>
                          <hr />
                     </div>
 <body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page col-md-offset-1 col-md-10 col-sm-12">

@@ -17,4 +17,6 @@ public interface ProductService {
 	public boolean goodCount(int num,int pno);
 	public List<ProductDTO> SecgetList(ProductCriteria cri, String userid);
 	public int SecgetTotalCount(String cate,String userid);
+	public List<ProductDTO> SellgetList(ProductCriteria cri, String userid);
+	public int SellgetTotalCount(String cate,String userid);
 }
