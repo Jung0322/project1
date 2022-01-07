@@ -14,6 +14,8 @@
 	<bean id="customLoginSuccessHandler" class="com.company.handler.CustomLoginSuccessHandler" />
 	<!-- 로그인 실패시 실행되는 클래스 객체 -->
  	<bean id="customLoginFailHandler" class="com.company.handler.CustomLoginFailHandler" />
+ 	<!-- 로그아웃 성공시 실행되는 클래스 객체 -->
+ 	<bean id="customLogoutSuccessHandler" class="com.company.handler.CustomLogoutSuccessHandler" />
 
 
 	<security:http>
@@ -29,7 +31,8 @@
 							authentication-failure-handler-ref="customLoginFailHandler" /> 
 							
 		<!-- 로그아웃 -->
-		<security:logout logout-url="/member/logout" invalidate-session="true" delete-cookies="JSSESION" logout-success-url="/product/Secindex"/>
+		<security:logout logout-url="/member/logout" invalidate-session="true" delete-cookies="JSSESION" 
+						success-handler-ref="customLogoutSuccessHandler" />
 	
 		<!-- url 접근 시 원하는 권한이 있는지 확인 -->
 		<security:intercept-url pattern="/member/modify-info" access="hasRole('ROLE_USER')"/>
