@@ -11,5 +11,5 @@ public interface BasketService {
 	public boolean insert(BasketDTO dto);
 	public boolean delete(BasketDTO dto);
 	public List<ProductDTO> getList(ProductCriteria cri,String userid);
-	public int getTotalCount(String userid);
+	public int getTotalCount(String cate,String userid);
 }

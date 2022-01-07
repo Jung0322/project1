@@ -9,17 +9,15 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.company.domain.AttachProductDTO;
-import com.company.domain.BasketDTO;
-import com.company.domain.ChatSession;
 import com.company.domain.MemberDTO;
 import com.company.domain.ProductCriteria;
 import com.company.domain.ProductDTO;
@@ -67,6 +65,45 @@ public class ProductController {
 		
 	}
 	
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = "/product/Secindex", method = RequestMethod.GET)
+	public String Secindex(Model model, ProductCriteria cri,Principal principal) {
+	log.info("로그인 한 회원 전체 보여주기");
+	
+
+	System.out.println("가나다라"+cri);
+	
+	String userid= principal.getName();
+	
+	List<ProductDTO> list = service.SecgetList(cri,userid);
+	
+	
+	
+	for(ProductDTO dto:list) {
+		for(AttachProductDTO attach:dto.getAttachList()) {
+			
+			attach.setPuploadPath(attach.getPuploadPath().replace("\\", "\\\\"));
+		}
+	}
+	
+	//페이지 나누기를 위한 정보 얻기
+	int totalCnt =  service.SecgetTotalCount(cri.getCate(), userid);
+
+	
+	System.out.println("아예이오후"+list);
+	System.out.println("totalCnt "+totalCnt);
+	
+	ProductPageDTO pageDto = new ProductPageDTO(cri, totalCnt);
+	System.out.println("pageDto "+pageDto);
+	model.addAttribute("pageDto", pageDto);
+	
+	
+	model.addAttribute("list", list);
+	
+	return"/product/index";
+	
+}
+	
 	@RequestMapping(value = "/single-product", method = RequestMethod.GET)
 	public String single_project(int pno, @ModelAttribute("cri") ProductCriteria cri, Model model) {
 		log.info("single-project");
@@ -107,11 +144,5 @@ public class ProductController {
 		return new ResponseEntity<List<AttachProductDTO>>(service.getRowImg(pno),HttpStatus.OK);
 	}
 	
-	@PostMapping("/updategood")
-	public ResponseEntity<String> updategood(int num, int pno){
-		
-		return  service.goodCount(num,pno)?
-				new ResponseEntity<String>("success",HttpStatus.OK):
-					new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);
-	}
+	
 }

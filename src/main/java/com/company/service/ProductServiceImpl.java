@@ -81,4 +81,16 @@ public class ProductServiceImpl implements ProductService {
 		return mapper.goodcount(num, pno)>0?true:false;
 	}
 
+	@Override
+	public List<ProductDTO> SecgetList(ProductCriteria cri, String userid) {
+		// TODO Auto-generated method stub
+		return mapper.SeclistAll(cri, userid);
+	}
+
+	@Override
+	public int SecgetTotalCount(String cate, String userid) {
+		// TODO Auto-generated method stub
+		return mapper.SectotalCnt(cate, userid);
+	}
+
 }

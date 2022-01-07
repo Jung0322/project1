@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.company.domain.AddressDTO;
-import com.company.domain.ChatSession;
 import com.company.domain.MemberDTO;
+import com.company.handler.ChatSession;
 import com.company.service.MemberService;
 
 import lombok.extern.log4j.Log4j2;

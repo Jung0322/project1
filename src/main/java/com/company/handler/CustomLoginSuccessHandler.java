@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import com.company.domain.ChatSession;
 import com.company.domain.MemberDTO;
 import com.company.service.MemberService;
 
@@ -23,8 +22,6 @@ import lombok.extern.log4j.Log4j2;
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 	
 	@Autowired
-	MemberService service;
-
 	ChatSession cSession;
 	
 	@Override
@@ -38,9 +35,8 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		
-		MemberDTO member = service.readMember(userDetails.getUsername()); 
 		System.out.println("로그인한 아이디 아이디아이디 :::: "+userDetails.getUsername());
-		cSession.addLoginUser(member.getUserid());
+		cSession.addLoginUser(userDetails.getUsername());
 		
 		if(roleNames.contains("ROLE_USER")) {
 			log.info("회원 로그인 성공");

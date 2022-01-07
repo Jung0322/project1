@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.company.domain.ChatMessage;
 import com.company.domain.ChatRoom;
-import com.company.domain.ChatSession;
 import com.company.domain.MemberDTO;
+import com.company.handler.ChatSession;
 import com.company.service.ChatService;
 import com.company.service.ChatServiceImpl;
 import com.company.service.MemberService;

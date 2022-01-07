@@ -13,7 +13,7 @@
 				<main id="main" class="site-main" role="main">
 				<div id="container">
 					<div id="content" role="main">
-						<nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="#">Home</a> / <a href="#">Clothing</a> / Beige Jacket</nav>
+						<nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="#">Home</a> / <a href="#">${row.category}</a> / ${row.title}</nav>
 						<div itemscope itemtype="http://schema.org/Product" class="product">
 							<div class="images ">
 								<!-- 이미지 들어갈 곳 -->

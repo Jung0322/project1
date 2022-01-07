@@ -12,7 +12,7 @@
 	<!-- annotation(@Autowired, @Inject, @Component, @Service, @Controller, @Repository) 활성화 -->
 	<!-- 해당 annotation이 사용된 패키지를 스캔하는 구문이 필요 -->
 	<context:component-scan base-package="com.company.service" />
-	
+	<context:component-scan base-package="com.company.handler" />
 	<!-- mybatis 사용하는 Mapper Interface, Mapper xml 활성화 -->
 	<mybatis-spring:scan base-package="com.company.mapper"/>
 	

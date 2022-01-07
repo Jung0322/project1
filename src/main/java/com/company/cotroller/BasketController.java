@@ -18,6 +18,7 @@ import com.company.domain.ProductCriteria;
 import com.company.domain.ProductDTO;
 import com.company.domain.ProductPageDTO;
 import com.company.service.BasketService;
+import com.company.service.ProductService;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -27,6 +28,9 @@ public class BasketController {
 
 	@Autowired
 	private BasketService serive;
+	
+	@Autowired
+	private ProductService pserive;
 	
 	@PostMapping("/selectgood")
 	public ResponseEntity<BasketDTO> select(@RequestBody BasketDTO dto){
@@ -39,6 +43,8 @@ public class BasketController {
 	@PostMapping("/deletegood")
 	public ResponseEntity<String> delete(@RequestBody BasketDTO dto){
 		
+		pserive.goodCount(-1, dto.getPno());
+		
 		return serive.delete(dto)?
 				new ResponseEntity<String>("success",HttpStatus.OK):
 					new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);
@@ -46,6 +52,9 @@ public class BasketController {
 	
 	@PostMapping("/insertgood")
 	public ResponseEntity<String> insert(@RequestBody BasketDTO dto){
+		
+		pserive.goodCount(1, dto.getPno());
+		
 		return serive.insert(dto)?
 				new ResponseEntity<String>("success",HttpStatus.OK):
 					new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);
@@ -53,7 +62,7 @@ public class BasketController {
 	
 	@GetMapping("/my-basket")
 	public String basket(Principal principal,Model model, ProductCriteria cri) {
-log.info("index");
+		log.info("index");
 		
 
 		System.out.println("가나다라"+cri);
@@ -69,7 +78,7 @@ log.info("index");
 			}
 		}
 		//페이지 나누기를 위한 정보 얻기
-		int totalCnt =  serive.getTotalCount(userid);
+		int totalCnt =  serive.getTotalCount(cri.getCate(),userid);
 		
 	System.out.println("아예이오후"+list);
 		System.out.println("totalCnt "+totalCnt);

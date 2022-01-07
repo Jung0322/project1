@@ -15,4 +15,6 @@ public interface ProductService {
 	public List<AttachProductDTO> getRowImg(int pno);
 	public MemberDTO town(String userid);
 	public boolean goodCount(int num,int pno);
+	public List<ProductDTO> SecgetList(ProductCriteria cri, String userid);
+	public int SecgetTotalCount(String cate,String userid);
 }

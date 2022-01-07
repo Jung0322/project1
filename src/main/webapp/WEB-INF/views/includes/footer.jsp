@@ -38,6 +38,12 @@
         </div>
       </div>
     </footer>
+    <script>
+
+    <sec:authorize access="isAuthenticated()">
+    	 $(".pdt").attr("href","/product/Secindex");
+    </sec:authorize>
+	</script>
 
     <!-- SCRIPTS -->
     <!-- <script src="/resources/js/jquery.js"></script>
