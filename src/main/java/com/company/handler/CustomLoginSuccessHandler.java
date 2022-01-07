@@ -41,7 +41,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		if(roleNames.contains("ROLE_USER")) {
 			log.info("회원 로그인 성공");
 			
-			response.sendRedirect("/product/index");
+			response.sendRedirect("/product/Secindex");
 			return;
 		}
 //		response.sendRedirect("/member/signIn");
