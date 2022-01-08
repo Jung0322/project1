@@ -18,22 +18,25 @@
                          <h3>당신 곁에 언제나 이로운, 브로콜리 마켓</h3>
                     </div>
 
-                    <form action="" method="post" id="modifyForm_profile">
+                    <form action="" method="post" id="modifyForm_profile" enctype="multipart/form-data">
                     	<div class="member-info-area">
 	                    	<!-- <div class="modify-profile" id="profile-area"> -->
 	                    	<div class="profile-area">
 	                    		<input type="file" name="profileimgname" id="" class="profile-file"/>
-	                    		<label for="profile-label">
-		                    		<img src="/resources/images/temp-profile.png" alt="" class="profile-img" />
+	                    		<label for="profile-label" class="profile-label">
+		                    		<img src="/resources/images/temp-profile.png" alt="" class="profile-img profile" id="profileImg"/>
 		                    	 	<img src="/resources/images/add-img.png" alt="" class="icon-camera" />
+		                    	 	<%-- <input type="hidden" name="pfuuid" value="${profileImg.pfuuid}" id="pfuuid"/>
+		                    	 	<input type="hidden" name="profileUploadPath" value="${profileImg.profileUploadPath}" id="pfUploadPath"/>
+		                    	 	<input type="hidden" name="profileImgName" value="${profileImg.profileImgName}" id="pfImgName"/> --%>
 	                    	 	</label>
 	                    	</div> <!-- profile-area end -->
 	                        <div class="member-info-id">
 	                        	<p>아이디</p>
 	                            <input type="text" name="userid" class="form-control" value="${dto.userid}" readonly="readonly">
 	                            <p>가입일 : 2021-12-25</p>
-	                            <button type="button" class="modify-profile-btn">사진 변경</button>
-	                            <button type="button" class="modify-profile-btn">사진 삭제</button>	                              
+	                            <button type="button" class="modify-profile-btn" data-oper="profile">사진 저장</button>
+	                            <button type="button" class="modify-profile-btn" data-oper="delete">사진 삭제</button>	                              
 	                        </div> <!-- member-info-id end -->
                          </div> <!-- member-info-area end -->
 					</form>

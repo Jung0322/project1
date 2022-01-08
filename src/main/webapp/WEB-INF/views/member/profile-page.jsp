@@ -13,7 +13,7 @@
                
                     <div class="member-profile-area">
 	                    <div class="profile-area">
-	                         <img src="/resources/images/temp-profile.png" class="profile-img">
+	                         <img src="/resources/images/temp-profile.png" class="profile-img profile">
 	                    </div> <!-- profile-area end -->
 	
 	                    <div class="member-info-id" style="left: 25%;">
