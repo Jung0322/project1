@@ -54,8 +54,13 @@
 					<img src="" alt="" class="pimg"> 					
 					<!-- <img src='/display?fileName=javascript:' alt=""> -->
 					<h3>${dto.title}</h3>
-					<span class="price"><span class="amount">${dto.price}</span></span>
+					<span class="price"><span class="amount">${dto.price}원</span></span>
 					</a><span>❤ : ${dto.good}</span>
+					<div class="modify" style="margin-top: 5px;"> 
+					<a class="mbutton" href="${dto.pno}" style="margin-right: 5px;">수정</a> 
+					<a class="rbutton" style="margin-right: 5px;">판매완료</a>    
+					<a class="sbutton">예약중</a>
+					</div>
 					</li>
 				</c:forEach>
 					
@@ -107,8 +112,9 @@ $(pimg).each(function(i,item){
 
 
 <!-- #page -->
-<script src='/resources/js/index.js'></script>
-<script src='/resources/js/shopjs.js'></script>
+<script src='/resources/js/product/mysell.js'></script>
+<script src='/resources/js/product/index.js'></script>
+<script src='/resources/js/product/shopjs.js'></script>
 <script src='/resources/js/plugins.js'></script>
 <script src='/resources/js/scripts.js'></script>
 <script src='/resources/js/masonry.pkgd.min.js'></script>

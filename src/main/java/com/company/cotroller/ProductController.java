@@ -189,4 +189,16 @@ public class ProductController {
 	return"/product/mysell-product";
 	
 }
+	
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	public String read(int pno, @ModelAttribute("cri") ProductCriteria cri, Model model) {
+		log.info("single-project");
+		
+		ProductDTO row = service.getRow(pno);
+		
+		model.addAttribute("row",row);
+  	
+		
+		return "/product/productModify";
+	}
 }

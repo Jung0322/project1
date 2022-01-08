@@ -54,7 +54,7 @@
 					<img src="" alt="" class="pimg"> 					
 					<!-- <img src='/display?fileName=javascript:' alt=""> -->
 					<h3>${dto.title}</h3>
-					<span class="price"><span class="amount">${dto.price}</span></span>
+					<span class="price"><span class="amount">${dto.price}원</span></span>
 					</a><span>❤ : ${dto.good}</span>
 					</li>
 				</c:forEach>
@@ -107,8 +107,8 @@ $(pimg).each(function(i,item){
 
 
 <!-- #page -->
-<script src='/resources/js/index.js'></script>
-<script src='/resources/js/shopjs.js'></script>
+<script src='/resources/js/product/index.js'></script>
+<script src='/resources/js/product/shopjs.js'></script>
 <script src='/resources/js/plugins.js'></script>
 <script src='/resources/js/scripts.js'></script>
 <script src='/resources/js/masonry.pkgd.min.js'></script>

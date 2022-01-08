@@ -4,13 +4,13 @@
 $(function(){
 
 	//css 화면 비율 때문에 class명 수정
-	$( 'ul li:nth-child(1)' ).attr('class','first product')
+	$( 'ul li:nth-child(1)' ).addClass('first product');
 
-	$( 'ul li:nth-child(4)' ).attr('class','last product')
+	$( 'ul li:nth-child(4)' ).addClass('last product')
 
-	$( 'ul li:nth-child(5)' ).attr('class','first product')
+	$( 'ul li:nth-child(5)' ).addClass('first product')
 
-	$( 'ul li:nth-child(8)' ).attr('class','last product')
+	$( 'ul li:nth-child(8)' ).addClass('last product')
 	
 	
 /*	var fileCallPath = encodeURIComponent(orginPath);

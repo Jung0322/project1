@@ -146,9 +146,9 @@
 		 </if>
 	</select>
 	
-	<!-- read -->
+	<!--  상품상세정보 확인 -->
 	<select id="getRow" resultType="com.company.domain.ProductDTO">
-		select pno, price, title, content, category, delivery, discount, reservation, mytown 
+		select *
 		from product where pno = #{pno}
 	</select>
 	
@@ -157,5 +157,4 @@
 	<update id="goodcount">
 		update product set good = good + #{num} where  pno = #{pno}
 	</update>
-
 </mapper>
