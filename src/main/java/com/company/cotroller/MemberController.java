@@ -1,26 +1,45 @@
 package com.company.cotroller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.company.domain.AddressDTO;
+import com.company.domain.MemberAttachDTO;
 import com.company.domain.MemberDTO;
 import com.company.service.MemberService;
 
 import lombok.extern.log4j.Log4j2;
+import net.coobird.thumbnailator.Thumbnailator;
 import oracle.jdbc.proxy.annotation.Post;
 
 @Log4j2
@@ -118,8 +137,10 @@ public class MemberController {
 		log.info("회원정보 수정 화면"+principal.getName()); 
 
 		MemberDTO memberInfo = memberService.readMemberInfo(principal.getName());
+//		MemberAttachDTO profileInfo = memberService.readProfileInfo(principal.getName());
 			
 		model.addAttribute("dto", memberInfo);
+//		model.addAttribute("profileImg", profileInfo);
 	}
 	
 	// 닉네임 수정
@@ -223,6 +244,217 @@ public class MemberController {
 		}
 		
 		return "fail";
+	}
+	
+//	@ResponseBody
+	@PostMapping("/uploadProfile")
+	public ResponseEntity<MemberAttachDTO> uploadProfile(@RequestParam("profileimgname") MultipartFile profileimgname, Principal principal) {
+		System.out.println("파일 업로드");
+		
+		// 서버 폴더에 첨부 파일 저장
+//		String uploadFolder = "C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member";
+		String uploadFolder = "E:\\ccoli\\member"; // 시연할 때 사용
+		String uploadFileName = "";
+		
+		// 업로드 폴더 결정
+		String uploadFolderPath = getFolder();
+		
+		// 폴더 만들기
+		File uploadPath = new File(uploadFolder, uploadFolderPath);
+		
+
+		// 기존 프로필 이미지 여부 확인
+		MemberAttachDTO orgAttachDto = memberService.readProfileInfo(principal.getName());
+
+		// 기존 프로필 이미지가 없다면
+		if(orgAttachDto == null) { 
+		
+			// 폴더 존재 여부
+			if(!uploadPath.exists()) { // 폴더가 존재하지 않으면
+				// 폴더 생성
+				uploadPath.mkdirs();
+			}
+			
+			// uuid값을 파일이름에 추가(중복된 파일명을 만들지 않게 하기 위함)
+			UUID uuid = UUID.randomUUID();
+			uploadFileName = uuid.toString()+"_"+profileimgname.getOriginalFilename();
+			
+			// 업로드 폴더 경로 및 업로드 파일 이름
+			File saveFile = new File(uploadPath, uploadFileName);
+			
+			// 첨부파일 
+			MemberAttachDTO attachDto = new MemberAttachDTO();
+			attachDto.setPfuuid(uuid.toString());
+			attachDto.setProfileUploadPath(uploadFolderPath);
+			attachDto.setProfileImgName(profileimgname.getOriginalFilename());
+			attachDto.setUserid(principal.getName());
+			
+			// 파일 리사이징 후 파일폴더에 업로드
+			try {
+				FileOutputStream thumbnail = new FileOutputStream(saveFile);
+				InputStream in = profileimgname.getInputStream();
+				Thumbnailator.createThumbnail(in, thumbnail, 150, 150);
+				
+				// 사용 후 닫아주기
+				in.close();
+				thumbnail.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			// 첨부파일을 파일폴더에 업로드
+	//		try {
+	//			profileimgname.transferTo(saveFile);
+	//		} catch (IllegalStateException e) {
+	//			e.printStackTrace();
+	//		} catch (IOException e) {
+	//			e.printStackTrace();
+	//		}
+			
+			// 첨부파일의 정보를 DB에 저장
+			if(memberService.insertProfileImg(attachDto)) {
+				return new ResponseEntity<MemberAttachDTO>(attachDto, HttpStatus.OK);
+			}
+			
+		} // if(orgAttachDto != null) end
+		else { // 기존 프로필 이미지가 있다면
+			deleteFiles(orgAttachDto); // 이미지 폴더에 저장된 파일 삭제
+			
+			// 폴더 존재 여부
+			if (!uploadPath.exists()) { // 폴더가 존재하지 않으면
+				// 폴더 생성
+				uploadPath.mkdirs();
+			}
+
+			// uuid값을 파일이름에 추가(중복된 파일명을 만들지 않게 하기 위함)
+			UUID uuid = UUID.randomUUID();
+			uploadFileName = uuid.toString() + "_" + profileimgname.getOriginalFilename();
+
+			// 업로드 폴더 경로 및 업로드 파일 이름
+			File saveFile = new File(uploadPath, uploadFileName);
+
+			// 첨부파일
+			MemberAttachDTO attachDto = new MemberAttachDTO();
+			attachDto.setPfuuid(uuid.toString());
+			attachDto.setProfileUploadPath(uploadFolderPath);
+			attachDto.setProfileImgName(profileimgname.getOriginalFilename());
+			attachDto.setUserid(principal.getName());
+
+			// 파일 리사이징 후 파일폴더에 업로드
+			try {
+				FileOutputStream thumbnail = new FileOutputStream(saveFile);
+				InputStream in = profileimgname.getInputStream();
+				Thumbnailator.createThumbnail(in, thumbnail, 150, 150);
+
+				// 사용 후 닫아주기
+				in.close();
+				thumbnail.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			if(memberService.modifyProfileImg(attachDto)) {
+				return new ResponseEntity<MemberAttachDTO>(attachDto, HttpStatus.OK);
+			}
+		} // else end 
+		
+		return new ResponseEntity<MemberAttachDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	// 폴더명 생성
+	private String getFolder() {
+		// 년월일 포맷을 사용하겠다고 선언
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+		// 현재 날짜를 가져오는 객체
+		Date date = new Date();
+
+		// str에는 "2021-12-08"만 남음
+		String str = sdf.format(date);
+
+		return str.replace("-", File.separator); // 2021/12/08을 리턴
+	}
+	
+	// 프로필 이미지 가져오기
+	@ResponseBody
+	@GetMapping("/profileDisplay")
+	public ResponseEntity<byte[]> getFile(String fileName) {
+		log.info("프로필 이미지 "+fileName);
+		System.out.println("프로필 이미지 "+fileName);
+		
+//		File file = new File("C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member\\", fileName);
+		// 시연용 파일폴더 경로
+		File file = new File("C:\\ccoli\\member\\", fileName);
+		
+		ResponseEntity<byte[]> result = null;
+		
+		HttpHeaders headers = new HttpHeaders();
+		
+		try {
+			headers.add("Content-Type", Files.probeContentType(file.toPath()));
+			result = new ResponseEntity<byte[]>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	// 프로필 이미지 정보 가져오기
+	@GetMapping("/getProfileImg")
+	public ResponseEntity<MemberAttachDTO> getProfileImg(Principal principal) {
+		
+		return new ResponseEntity<MemberAttachDTO>(memberService.readProfileInfo(principal.getName()), HttpStatus.OK);
+	}
+	
+	// 업로드된 프로필 사진 삭제
+	@ResponseBody
+	@GetMapping("/delete-profile")
+	public String deleteProfileImg(Principal principal) {
+		// 프로필 이미지 정보 가져오기
+		MemberAttachDTO attachDto = memberService.readProfileInfo(principal.getName());
+		// 이미지 폴더에서 프로필 이미지 삭제
+		boolean result = deleteFiles(attachDto);
+		
+		// DB에서 프로필 이미지 정보 삭제
+		if(result) {
+			if(memberService.deleteProfileImg(principal.getName())) {
+				return "success";
+			}
+		}
+		return "fail";
+	}
+	
+	// 첨부 파일 삭제 
+	private boolean deleteFiles(MemberAttachDTO attachDto) {
+		if(attachDto == null || attachDto.getProfileUploadPath().length() == 0) {
+			return false;
+		}
+		log.info("프로필 이미지 삭제 중");
+		System.out.println("프로필 이미지 삭제 중");
+		
+//		Path file = Paths.get("C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member\\"+
+//								attachDto.getProfileUploadPath()+"\\"+attachDto.getPfuuid()+"_"+attachDto.getProfileImgName());
+		// 시연용 경로
+		Path file = Paths.get("e:\\ccoli\\member\\"+
+				attachDto.getProfileUploadPath()+"\\"+attachDto.getPfuuid()+"_"+attachDto.getProfileImgName());
+		
+		try {
+			Files.deleteIfExists(file);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	// 프로필
