@@ -18,8 +18,14 @@ create table myPlace (
 	updatedate DATE default sysdate, -- 수정날짜
 	mcount number(10) default 0, -- 조회수
 	curious number(10) default 0, -- 궁금해요/공감해요 갯수
+	replycnt number default 0, -- 댓글 수 갯수
 	CONSTRAINT pk_myPlace PRIMARY KEY (mno) -- pk
 );
+
+alter table myplace add(replycnt number default 0);
+
+-- 이미 들어간 댓글 수 삽입하기
+update myplace set replycnt = (select count(mno) from MYPLACEREPLY where MYPLACE.mno=myplacereply.mno);
 
 -- 동네생활 테이블 글번호 시퀀스
 CREATE SEQUENCE myPlace_seq INCREMENT BY 1 START WITH 1;
@@ -40,6 +46,16 @@ create table myPlaceReply (
 
 -- 동네생활 댓글 테이블 글번호 시퀀스
 CREATE SEQUENCE myPlaceReply_seq INCREMENT BY 1 START WITH 1;
+
+select *
+from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,nickname,mytown,title,content,regdate,updatedate
+		from myplace where rownum <=(1 * 10))
+where rn> (0) * 10 and mytown='서울시 종로구 관철동';
+
+select count(*) from myplace where mytown='서울시 종로구 관철동';
+
+select * from myplace;
+
 
 -- 게시글 더미 데이터 
 insert into myPlace(mno, userid, nickname, mytown, mcategory, title, content)

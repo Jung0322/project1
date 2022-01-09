@@ -26,6 +26,28 @@ $(function() {
 		}
 
 	})
+	
+	//좋아요 갯수 증가
+	$("#ques").click(function(e){
+		$(this).css("color","#9BB460");
+		
+			/*$.ajax({
+				url: '/replies/new',
+				type: 'post',
+				contentType: 'application/json',
+				data: JSON.stringify(reply),
+				success: function(result) {
+					if (callback) {
+						callback(result);
+					}
+				},
+				error: function(xhr, status, err) {
+					error(err);
+				}
+			})			
+		})*/		
+	})
+	
 
 	//댓글 작업
 	//댓글 입력창 영역 가져오기
@@ -136,6 +158,14 @@ $(function() {
 		);//remove end		
 
 	}) //replyDiv delete end
+	
+	//대댓글 작성하기
+	replyDiv.on("click", "#re-reply", function() {
+		let modalRe = $("#re-replyModal");
+		
+			modalRe.modal("show");
+		
+	})//re-replyModal end
 
 
 
@@ -154,21 +184,27 @@ $(function() {
 			for (var i = 0, len = data.length || 0; i < len; i++) {
 				str += "<div class='dropdown' id='dropdown1'>";
 				str += "<i class='fas fa-ellipsis-v' data-toggle='dropdown' aria-expanded='false'></i>";
+				//str += "<sec:authentication property='principal' var='info'/>";
+				//str += "<sec:authorize access='isAuthenticated()'>";
 				str += "<div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>";
+				//str += "<c:if test='${info.username == "+data[i].userid+"}'>";
 				str += "<div style='display:block;'>";
 				str += "<button class='dropdown-item list' id='replyModifyBtn' type='button' data-mrno='" + data[i].mrno + "'>수정하기</button>";
 				str += "</div>";
 				str += "<div style='display:block;'>";
 				str += "<button class='dropdown-item list' id='replyDeleteBtn' type='button' data-mrno='" + data[i].mrno + "'>삭제하기</button></div></div>";
 				str += "</div>";
+				//str += "</c:if></sec:authorize>";
 				str += "<div class='media-object pull-left'>";
-				str += "<img src='/resources/images/ff.png' class='img-responsive img-circle' alt='Blog Image'>";
+				str += "<img src='/resources/images/temp-profile.png' class='img-responsive img-circle profile' alt='Blog Image'>";
 				str += "</div>";
 				str += "<div class='media-body'>";
+				//str += "<span name='userid'>" + data[i].userid + "</span>";
 				str += "<span name='nickname'>" + data[i].nickname + "</span>";
 				str += "<span name='mytown'>" + data[i].mytown + "</span>";
 				str += "<span name='regdate'>" + replyService.displayTime(data[i].updatedate) + "</span>";
-				str += "<p style='margin-bottom: 20px; margin-top: 10px;' name='content'>" + data[i].content + "</p>";
+				str += "<p style='margin-bottom: 10px; margin-top: 10px;' name='content'>" + data[i].content + "</p>";
+				str += "<div><button type='button' id='re-reply'>답글</button></div>";
 				str += "</div></div>";
 			}
 			replyDiv.html(str);

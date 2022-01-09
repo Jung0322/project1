@@ -36,30 +36,37 @@ public class BoardController {
 	private BoardService service;
 
 	@GetMapping("/myPlace")
-	public void list(Model model, MyPlaceCriteria cri) {
-		log.info("내 동내 페이지 요청");
-
-		List<BoardDTO> list = service.getList(cri);
-
-		int totalCnt = service.getTotalCount(cri);
-
-		model.addAttribute("pageDto", new MyPlacePageDTO(cri, totalCnt));
-		model.addAttribute("list", list);
+	public void list(Model model, MyPlaceCriteria cri, Principal principal) {
+		log.info("로그인 전 내 동내 페이지 요청");
 		
-		//로그인 후 동네 게시물만 보여주기
-		
-//		
-//		List<BoardDTO> mytownList = service.getMytown(cri);
-//		int totalCntMytown = service.getTotalCountMytown(cri);
-//		
-//		model.addAttribute("pageDTO", new MyPlacePageDTO(cri, totalCntMytown));
-//		model.addAttribute("mytownList",mytownList);
+		if (principal == null) {
+			List<BoardDTO> list = service.getList(cri);
+
+			int totalCnt = service.getTotalCount(cri);
+
+			model.addAttribute("pageDto", new MyPlacePageDTO(cri, totalCnt));
+			model.addAttribute("list", list);
+
+		} else {
+			String userid = principal.getName();
+
+			BoardDTO dto = service.readMemberInfo(userid);
+			List<BoardDTO> list = service.listMyTown(dto.getMytown());
+
+			model.addAttribute("list", list);
+		}
 
 	}
 
 	@GetMapping("/myPlace-myPage")
-	public String myPage() {
+	public String myPage(MyPlaceCriteria cri, Principal principal, Model model) {
 		log.info("내 동내 마이페이지 요청");
+		
+		String userid = principal.getName();
+		List<BoardDTO> list = service.listMyPage(userid);
+		
+		model.addAttribute("list",list);
+				
 		return "/board/myPlace-myPage";
 	}
 
@@ -67,6 +74,7 @@ public class BoardController {
 	public String read(int mno, Model model) {
 		log.info("내 동내 게시물 읽기 페이지 요청");
 		BoardDTO dto = service.getRow(mno);
+		System.out.println(dto);
 
 		model.addAttribute("dto", dto);
 
@@ -117,10 +125,14 @@ public class BoardController {
 
 	@PostMapping("/remove")
 	public String deletePost(int mno) {
-
+		log.info("글 삭제하기");
 		service.delete(mno);
 
 		return "redirect:/board/myPlace";
 	}
+
+//	public String curious() {
+//		log.info("글 좋아요 추가하기"); 
+//	}
 
 }

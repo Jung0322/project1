@@ -20,29 +20,26 @@
 						<input type="submit" class="form-control" id="writeButton" value="글 작성" onclick="location.href='/board/write'">
 					</div>
 				</sec:authorize>
-				
 					<c:forEach var="dto" items="${list}">
 					<div class="blog-post">
 						<div class="blog-post-title">
 							<span>${dto.mcategory}</span>
 							<h3 id="listTitle" style="margin-top: 10px;">
-								<a href="${dto.mno}" class="move">${dto.title}</a>
+								<a href="${dto.mno}" class="move">${dto.title}
+								<i class="far fa-comment-dots" style="margin-left: 5px; margin-right: 5px;"></i>${dto.replycnt}</a>
 							</h3>
 						</div>
 						<div class="blog-post-format">
 							<span>
 								<a href="/member/profile-page">
-									<img src="/resources/images/ccoli.png" class="img-responsive img-circle"> ${dto.nickname}
+									<img src="/resources/images/temp-profile.png" class="img-responsive img-circle profile"> ${dto.nickname}
 								</a>
 							</span> 
 							<span>${dto.mytown}</span> 
-							<span><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></span>
+							<span><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.updatedate}"/></span>
 						</div>
 						<div class="blog-post-des">
 							<p>${dto.content}</p>
-						</div>
-						<div class="blog-post-format" id="ques">
-							<span><i class="far fa-grin"></i> 궁금해요</span>
 						</div>
 					</div>
 					</c:forEach>
@@ -61,7 +58,7 @@
 			</c:if>
 			<c:forEach var="idx" begin="${pageDto.startPage}" end="${pageDto.endPage}">
 				<li class="paginate_button">
-					<span class="page-numbers current ${pageDto.cri.pageNum==idx?'active':''}">
+					<span class="page-numbers current">
 						<a href="${idx}">${idx}</a>
 					</span>
 				</li>
