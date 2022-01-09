@@ -49,13 +49,14 @@ CREATE SEQUENCE myPlaceReply_seq INCREMENT BY 1 START WITH 1;
 
 select *
 from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,nickname,mytown,title,content,regdate,updatedate
-		from myplace where rownum <=(1 * 10))
-where rn> (0) * 10 and mytown='서울시 종로구 관철동';
+		from myplace where rownum <=(1 * 10) and mytown='서울시 종로구 관철동')
+where rn> (0) * 10;
 
 select count(*) from myplace where mytown='서울시 종로구 관철동';
 
 select * from myplace;
 
+select * from myplace where mytown ='서울시 종로구 관철동' order by mno asc;
 
 -- 게시글 더미 데이터 
 insert into myPlace(mno, userid, nickname, mytown, mcategory, title, content)

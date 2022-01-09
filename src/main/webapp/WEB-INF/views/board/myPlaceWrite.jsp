@@ -17,7 +17,7 @@
      <div class="container">
           <div class="row">
                <div class="col-md-offset-1 col-md-10 col-sm-12">
-                    <form action="" method="post" role="form">
+                    <form action="" method="post" role="form" id="writeForm">
                          <div class="col-md-6 col-sm-6">
                               <select class="form-control" name="mcategory">
                                    <option>동네질문</option>

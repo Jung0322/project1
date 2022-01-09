@@ -15,9 +15,6 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-offset-1 col-md-10 col-sm-12">
-				<!--<div class="writeButton">
-						<input type="submit" class="form-control" id="writeButton" value="글 작성" onclick="location.href='/board/write'">
-				</div>-->
 					<c:forEach var="dto" items="${list}">
 					<div class="blog-post">
 						<div class="blog-post-title">
@@ -29,7 +26,7 @@
 						</div>
 						<div class="blog-post-format">
 							<span>
-								<a href="/member/profile-page">
+								<a href="/member/profile-page?userid=${dto.userid}">
 									<img src="/resources/images/temp-profile.png" class="img-responsive img-circle profile"> ${dto.nickname}
 								</a>
 							</span> 
@@ -59,5 +56,5 @@
 	<input type="hidden" name="mno" value=""/>
 </form>
 
-<script src="/resources/js/board/myPage-list.js"></script>
+<script src="/resources/js/board/list.js"></script>
 <%@ include file="../includes/footer.jsp"%>

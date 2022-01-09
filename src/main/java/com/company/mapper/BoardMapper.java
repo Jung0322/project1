@@ -18,7 +18,7 @@ public interface BoardMapper {
 	public int delete(int mno);
 
 	public int totalCnt(MyPlaceCriteria cri);
-	public int totalCntMytown(@Param("cri") MyPlaceCriteria cri,@Param("mytown") String mytown);
+	public int totalCntMytown(@Param("cri") MyPlaceCriteria cri, @Param("mytown") String mytown);
 	
 	public int updateReplyCnt(@Param("mno") int mno, @Param("amount") int amount);
 	public int updateCuriousCnt(@Param("mno") int mno, @Param("amount") int amount);

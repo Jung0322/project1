@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.company.domain.BoardDTO;
 import com.company.domain.MyPlaceCriteria;
@@ -44,8 +45,11 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.readMemberInfo(userid);
 	}
 
-	//게시글 삭제하기
+	
+	@Transactional //게시글 삭제하기
 	public boolean delete(int mno) {
+		//댓글 삭제
+		replyMapper.delete(mno);	
 		return mapper.delete(mno) > 0 ? true : false;
 	}
 
@@ -56,10 +60,11 @@ public class BoardServiceImpl implements BoardService {
 
 	//로그인 후 동네 게시물만 보여주기
 	public List<BoardDTO> listMyTown(String mytown) {
+//		System.out.println("===================="+cri);
 		return mapper.listMyTown(mytown);
 	}
 
-	@Override
+	//동네 게시물 개수 
 	public int totalCntMytown(MyPlaceCriteria cri, String mytown) {
 		return mapper.totalCntMytown(cri, mytown);
 	}

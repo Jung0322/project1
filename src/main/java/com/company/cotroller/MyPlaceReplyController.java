@@ -76,7 +76,7 @@ public class MyPlaceReplyController {
 	
 	//댓글 삭제하기
 	@DeleteMapping("/{mrno}")
-	public ResponseEntity<String> remove(@PathVariable int mrno){
+	public ResponseEntity<String> remove(@PathVariable int mrno, MyPlaceReplyDTO userid){
 		return service.deleteReply(mrno)?
 				new ResponseEntity<String>("success",HttpStatus.OK):
 					new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);

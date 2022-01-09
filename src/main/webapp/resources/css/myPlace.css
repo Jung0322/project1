@@ -102,7 +102,7 @@
 
 .blog-post {
 	  border-bottom: 1px solid #f0f0f0;
-	  padding-top: 12px; /* 게시물과 구분선 상단 간격*/
+	  padding-top: 25px; /* 게시물과 구분선 상단 간격*/
 	  padding-bottom: 12px; /* 게시물과 구분선 하단 간격*/ 
 }
 
@@ -141,7 +141,7 @@
 }
 
 #dropdown1 {
-	margin-left: 96%;
+	margin-left: 94%;
 	position: absolute;
 }
 

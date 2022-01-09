@@ -13,17 +13,17 @@
 	</select>
 	
 	<!-- 같은 동네 게시물 보여주기 -->
-	  <!--<select id="listMyTown" resultType="com.company.domain.BoardDTO">
+	 <!--<select id="listMyTown" resultType="com.company.domain.BoardDTO">
 		<![CDATA[
 		select *
 		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,nickname,mytown,title,content,regdate,updatedate
-				from myplace where rownum <=(#{pageNum} * #{amount}))
-		where rn> (#{pageNum}-1) * #{amount} and mytown=#{mytown}
+				from myplace where rownum <=(#{pageNum} * #{amount}) and mytown=#{mytown})
+		where rn> (#{pageNum}-1) * #{amount}
 		]]>
 	</select>-->
 	
-	<select id="listMyTown" resultType="com.company.domain.BoardDTO">
-		select * from myplace where mytown=#{mytown}
+	 <select id="listMyTown" resultType="com.company.domain.BoardDTO">
+		select * from myplace where mytown=#{mytown} order by mno desc
 	</select>
 	
 	<!-- 로그인 후 본인이 작성한 글 보여주기 -->

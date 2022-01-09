@@ -48,10 +48,13 @@ public class BoardController {
 			model.addAttribute("list", list);
 
 		} else {
+			//로그인 후 동네 페이지 요청
 			String userid = principal.getName();
 
 			BoardDTO dto = service.readMemberInfo(userid);
 			List<BoardDTO> list = service.listMyTown(dto.getMytown());
+			
+//			int totalCnt = service.totalCntMytown(cri, dto.getMytown());
 
 			model.addAttribute("list", list);
 		}
@@ -59,10 +62,9 @@ public class BoardController {
 	}
 
 	@GetMapping("/myPlace-myPage")
-	public String myPage(MyPlaceCriteria cri, Principal principal, Model model) {
+	public String myPage(MyPlaceCriteria cri, String userid, Model model) {
 		log.info("내 동내 마이페이지 요청");
 		
-		String userid = principal.getName();
 		List<BoardDTO> list = service.listMyPage(userid);
 		
 		model.addAttribute("list",list);
@@ -82,11 +84,12 @@ public class BoardController {
 	}
 
 	@GetMapping("/modify")
-	public String modifyGet(int mno, Model model) {
+	public String modifyGet(int mno, Model model, MyPlaceCriteria cri) {
 		log.info("내 동내 게시물 수정 페이지 요청");
 
 		BoardDTO dto = service.getRow(mno);
 		model.addAttribute("dto", dto);
+		model.addAttribute("cri",cri);
 
 		return "/board/myPlaceModify";
 	}

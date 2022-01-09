@@ -31,7 +31,7 @@
 						</div>
 						<div class="blog-post-format">
 							<span>
-								<a href="/member/profile-page">
+								<a href="/member/profile-page?userid=${dto.userid}">
 									<img src="/resources/images/temp-profile.png" class="img-responsive img-circle profile"> ${dto.nickname}
 								</a>
 							</span> 

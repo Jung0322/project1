@@ -11,7 +11,7 @@ public class MyPlaceCriteria {
 	private int pageNum; //페이지 번호
 	private int amount; //한 페이지 당 보여줄 게시물 수
 	
-//	private String type;
+	private String mcategory;
 	
 	public MyPlaceCriteria() {
 		this(1,10);
@@ -22,7 +22,7 @@ public class MyPlaceCriteria {
 		this.amount = amount;
 	}
 	
-//	public String[] getTypeArr() {
-//		return type==null?new String[] {}:type.split("");
-//	}
+	public String[] getTypeArr() {
+		return mcategory==null?new String[] {}:mcategory.split("");
+	}
 }

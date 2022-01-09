@@ -121,8 +121,9 @@
 			        <div class="modal-user">
 				        <div class="media-object pull-left" style="margin-right: 10px;">
 							<img src="/resources/images/temp-profile.png" class="img-responsive img-circle profile" alt="Blog Image" >
-						</div>
-			        	<span name="nickname">Omar Larus</span> 
+						</div>						
+			        	<span name="userid">Omar Larus</span> 
+			        	<span name="nickname" style="margin-right: 7px;">Omar Larus</span> 
 						<span name="mytown" style="margin-right: 7px;">서울시 은평구 신사동</span> 
 						<span name="regdate" style="margin-right: 7px;">7 months ago</span>
 						<textarea rows="3" cols="" style="width: 100%; margin-top: 10px" name="content">댓글 내용</textarea>       
@@ -150,10 +151,10 @@
 				        <div class="media-object pull-left" style="margin-right: 10px;">
 							<img src="/resources/images/temp-profile.png" class="img-responsive img-circle profile" alt="Blog Image" >
 						</div>
-			        	<span name="nickname">Omar Larus</span> 
-						<span name="mytown" style="margin-right: 7px;">서울시 은평구 신사동</span> 
-						<span name="regdate" style="margin-right: 7px;">7 months ago</span>
-						<textarea rows="3" cols="" style="width: 100%; margin-top: 10px" name="content">댓글 내용</textarea>       
+			        	<span name="nicknameM" style="margin-right: 7px;">Omar Larus</span> 
+						<span name="mytownM" style="margin-right: 7px;">서울시 은평구 신사동</span> 
+						<span name="regdateM" style="margin-right: 7px;">7 months ago</span>
+						<textarea rows="3" cols="" style="width: 100%; margin-top: 10px" name="contentM">댓글 내용</textarea>       
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="" id="modalModifyBtnRe">작성완료</button>
@@ -166,6 +167,11 @@
 <script>
 	//현재 글번호 가져오기
 	let mno = ${dto.mno};
+	
+	let replyer = null;
+	<sec:authorize access = "isAuthenticated()">
+		replyer = '<sec:authentication property="principal.username"/>';
+	</sec:authorize>
 	
 	let csrfHeaderName = "${_csrf.headerName}";
 	let csrfTokenValue = "${_csrf.token}";	
