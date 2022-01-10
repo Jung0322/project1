@@ -124,12 +124,11 @@
                             <input type="text" name="mytown" id="mytown" class="form-control" value="${dto.mytown}" placeholder="내 동네" readonly>
                          </div>
                          
-                         <!-- <div class="col-md-4">
-                              <input type="submit" class="form-control" value="회원가입">
-                         </div>
-                         <div class="col-md-4">
-                              <input type="button" class="form-control" value="쥐소">
-                         </div> -->
+                        <div class="login-form">
+                        	<div class="modify-label">
+                        		<a href="/member/remove-member" style="position: absolute; right: 0;">회원탈퇴</a>
+                        	</div>
+                        </div>
                </div>
 
           </div>
