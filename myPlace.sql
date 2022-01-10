@@ -71,3 +71,4 @@ values (myPlace_seq.nextval, 'ccoli1', '콜리', '종로구 관철동', '동네�
 
 
 
+
