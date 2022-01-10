@@ -9,7 +9,7 @@ public interface ChatMapper {
 	
 	public int createChat(ChatRoom room); // 채팅방 생성 
 	
-	public ChatRoom selectChatRoom(String roomId); // 채팅방 가져오기 
+	public ChatRoom selectChatRoom(String roomid); // 채팅방 가져오기 
 	
 	public int insertMessage(ChatMessage chatMessage); // 상호간 메세지 데이터 값 넣기
 	
@@ -21,7 +21,7 @@ public interface ChatMapper {
 
 	public int updateCount(ChatMessage message); // 읽지 않은 메세지 수
 	
-	public List<ChatMessage> messageList(ChatRoom roomid); //메세지 내용 리스트 출력
+	public List<ChatMessage> messageList(String roomid); //메세지 내용 리스트 출력
 	
 	
 	

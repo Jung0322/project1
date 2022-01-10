@@ -19,16 +19,16 @@ public class ChatMessage {
 //	[ => 2명이 들어와있으니 읽지않은 메세지는 없다.]
 //	sessionCount가 1잉면 unReadCount는 1이 되는 것이다.
 	
-	private String roomId;            // 방 번호
-    private String messageId;        // 메세지 번호
+	private String roomid;            // 방 번호
+    private String messageid;        // 메세지 번호
     private String message;            // 메세지 내용
     private String nickname;            // 보낸이 이름
-    private String userid;            // 보낸이 아이디
+    private String sentid;            // 보낸이 아이디
     private int unReadCount;        // 안 읽은 메세지 수
     private int sessionCount;        // 현재 세션 수
     // sessionCount가 2 이면 unReadCount는 0으로 db에 집어넣을 수 있겠다.
     // => 2 명이 들어와있으니 읽지 않은 메세지는 없다.]
     //sessionCount가 1이면 unReadCount는 1이 되는것이다.
 	
-	
+  
 }

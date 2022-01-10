@@ -12,10 +12,11 @@ create table chatroom(
     masternickname varchar2(20) not null,
     masterprofile varchar2(50)
 );
+select * from chatroom;
 -- 채팅방 테이블 방번 시퀀스
 CREATE SEQUENCE SEQ_CHATROOM_ID;
-alter table chatroom modify roomid varchar2(10);
 delete chatroom where userid = 'hong12';
+alter table chatroom modify roomid varchar2(10);
 -- 14. 채팅 메세지 
 CREATE TABLE chatmessage(
 	roomid varchar2(10) not null,  		-- 채팅 방번호
@@ -28,8 +29,12 @@ CREATE TABLE chatmessage(
 	sessioncount number(3) default 0,   	-- 현재 세션 수
 	CONSTRAINT pk_messageid PRIMARY KEY (messageid) -- pk
 );
+alter table chatmessage drop  column sessioncount;
+alter table chatmessage modify sessioncount number(2);
+insert into chatmessage values(21,SEQ_CHATMESSAGE_ID.NEXTVAL,'이게 채팅이냐?','hong12','huskii',default,default);
 CREATE SEQUENCE SEQ_CHATMESSAGE_ID;
-select * from chatroom;
+select * from chatmessage;
+delete from chatmessage where roomid='21';
 insert into chatroom values(SEQ_CHATROOM_id.nextval,'hong12','huskiii','default.png',1,'hong2','as','default.png');
 insert into chatroom values(SEQ_CHATROOM_id.nextval,'hong12','huskiii','default.png',1,'hong3','qw','default.png');
 insert into chatroom values(SEQ_CHATROOM_id.nextval,'hong12','huskiii','default.png',1,'hong1','honghong','default.png');

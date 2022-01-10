@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
  
 import javax.servlet.http.HttpServletResponse;
- 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,7 @@ import com.company.service.ChatServiceImpl;
 import com.company.service.MemberService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
  
  
 @Controller
@@ -32,11 +34,14 @@ public class ChatController {
     private ChatServiceImpl cService;
     
     @Autowired
-    private MemberService pService;
+    private MemberService mService;
     
     @RequestMapping(value = "/view_chat")
-    public String viewChat(Principal principal) {
+    public String viewChat(Principal principal, Model model) {
+    	
+    	System.out.println(principal.getName());
     	if(principal.getName()!= null) {
+    		model.addAttribute("loginMember", mService.readMemberInfo(principal.getName()));
     		return "/chatting/view_chat";
     	}
     	else 
@@ -51,16 +56,15 @@ public class ChatController {
      * @throws JsonIOException
      * @throws IOException
      */
-    @RequestMapping(value="{roomId}.do")
-    public void messageList(@PathVariable String roomId, String nickname, Model model,Principal principal, HttpServletResponse response) throws /*JsonIOException,*/ IOException {
-        
-        List<ChatMessage> mList = cService.messageList(roomId);
+    @RequestMapping(value="{roomid}.do")
+    public void messageList(@PathVariable String roomid, String userid, Model model, HttpServletResponse response) throws /*JsonIOException,*/ IOException {
+        List<ChatMessage> mList = cService.messageList(roomid);
         response.setContentType("application/json; charset=utf-8");
- 
+        
         // 안읽은 메세지의 숫자 0으로 바뀌기
         ChatMessage message = new ChatMessage();
-        message.setNickname(nickname);
-        message.setRoomId(roomId);
+        message.setSentid(userid);
+        message.setRoomid(roomid);
         cService.updateCount(message);
         
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
@@ -76,16 +80,16 @@ public class ChatController {
      */
     @ResponseBody
     @RequestMapping("createChat.do")
-    public String createChat(ChatRoom room, String userId, String userNickname, String masterNickname){
+    public String createChat(ChatRoom room, String userId, String usernickname, String masternickname){
         
-        MemberDTO m = pService.readMember(masterNickname); // 상대방 닉네임으로 member service에서 데이터 가져오기 
+        MemberDTO m = mService.readMemberInfo(masternickname); // 상대방 닉네임으로 member service에서 데이터 가져오기 
         
         // 채팅방DTO에 값 저장 
-        room.setUserId(userId);
-        room.setUserNickname(userNickname);
-        room.setMasterId(m.getUserid());
-        room.setMasterNickname(m.getNickname());
-        room.setMasterPic(m.getUserid());
+        room.setUserid(userId);
+        room.setUsernickname(usernickname);
+        room.setMasterid(m.getUserid());
+        room.setMasternickname(m.getNickname());
+        room.setMasterpic(m.getUserid());
  
         ChatRoom exist  = cService.searchChatRoom(room);
         
@@ -116,12 +120,13 @@ public class ChatController {
      * @throws IOException
      */
     @RequestMapping("chatRoomList.do")
-    public void createChat(ChatRoom room, ChatMessage message, String userid, HttpServletResponse response) throws /*JsonIOException,*/ IOException{
-        List<ChatRoom> cList = cService.chatRoomList(userid);
+    public void createChat(ChatMessage message, String userid, HttpServletResponse response) throws JsonIOException, IOException{
+        System.out.println("로그인한 아이디 불러줘 ::"+userid);
+    	List<ChatRoom> cList = cService.chatRoomList(userid);
         
         for(int i = 0; i < cList.size(); i++) {
-            message.setRoomId(cList.get(i).getRoomId());
-            message.setUserid(userid);
+            message.setRoomid(cList.get(i).getRoomid());
+            message.setSentid(userid);
             int count = cService.selectUnReadCount(message);
             cList.get(i).setUnReadCount(count);
         }
@@ -131,6 +136,7 @@ public class ChatController {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         gson.toJson(cList,response.getWriter());
     }
+    
     
     @RequestMapping("chatSession.do")
     public void chatSession(HttpServletResponse response, Principal principal) throws /*JsonIOException,*/ IOException{

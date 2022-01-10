@@ -3,79 +3,78 @@
 <mapper namespace="com.company.mapper.ChatMapper">
 
 	<resultMap type="com.company.domain.ChatRoom" id="chatRoomResultset">
-		<id property="roomId" column="ROOM_ID" />
-		<result property="userNickname" column="USER_NICKNAME" />
-		<result property="userId" column="USER_USERID" />
-		<result property="userPic" column="USER_PIC" />
-		<result property="masterNickname" column="MASTER_NICKNAME" />
-		<result property="masterId" column="MASTER_ID" />
-		<result property="masterPic" column="MASTER_PIC" />
+		<id property="roomid" column="roomid" />
+		<result property="userid" column="userid" />
+		<result property="usernickname" column="usernickname" />
+		<result property="userpic" column="userpic" />
+		<result property="masternickname" column="masternickname" />
+		<result property="masterid" column="masterid" />
+		<result property="masterpic" column="masterpic" />
 	</resultMap>
 
 	<resultMap type="com.company.domain.ChatMessage" id="chatMessageResultSet">
-		<id property="messageId" column="MESSAGE_ID" />
-		<result property="roomId" column="ROOM_ID" />
-		<result property="message" column="MESSAGE_CONTENT" />
-		<result property="userid" column="USER_ID" />
-		<result property="nickname" column="USER_NICKNAME" />
-		<result property="unReadCount" column="UNREAD_COUNT" />
+		<id property="messageid" column="mssageid" />
+		<result property="roomid" column="roomid" />
+		<result property="message" column="message" />
+		<result property="sentid" column="sentid" />
+		<result property="nickname" column="nickname" />
+		<result property="unReadCount" column="unReadCount" />
 	</resultMap>
 
 	<!-- 신규 채팅방일 때 채팅 방 생성 -->
- 	<insert id="createChat" parameterType="com.company.domain.ChatRoom">
+ 	<insert id="createChat" >
 		insert into CHATROOM
-		values(SEQ_CHATROOM_ID.NEXTVAL, #{userId},
+		values(SEQ_CHATROOM_ID.NEXTVAL, #{userid},
 		#{usernickname}, DEFAULT,
-		#{masterId}, #{masternickname}, #{masterPic})
+		#{masterid}, #{masternickname}, #{masterpic})
 	</insert>
 
-	<select id="selectChatRoom" parameterType="string" resultMap="chatRoomResultset">
+	<select id="selectChatRoom" resultMap="chatRoomResultset">
 		SELECT * FROM CHATROOM
-		WHERE ROOM_ID = #{roomId}
+		WHERE roomid = #{roomid}
 	</select>
 	
-	<insert id="insertMessage" parameterType="com.company.domain.ChatMessage">
+	<insert id="insertMessage" >
 		<if test="sessionCount == 1">
-			INSERT INTO CHATMESSAGE VALUES(#{roomId},
+			INSERT INTO CHATMESSAGE VALUES(#{roomid},
 			SEQ_CHATMESSAGE_ID.NEXTVAL,
-			#{message}, #{name}, #{email}, DEFAULT)
+			#{message}, #{sentid}, #{nickname}, DEFAULT)
 		</if>
 		<if test="sessionCount == 2">
-			INSERT INTO CHATMESSAGE VALUES(#{roomId},
+			INSERT INTO CHATMESSAGE VALUES(#{roomid},
 			SEQ_CHATMESSAGE_ID.NEXTVAL,
-			#{message}, #{name}, #{email}, 0)
+			#{message}, #{sentid}, #{nickname}, 0)
 		</if>
 	</insert>
 
 	<select id="messageList"  resultMap="chatMessageResultSet">
 		SELECT * FROM CHATMESSAGE
-		WHERE ROOM_ID = #{rooomId}
+		WHERE roomid = #{roomid}
 	</select>
 
-	<select id="searchChatRoom" parameterType="com.company.domain.ChatRoom" resultMap="chatRoomResultset">
+	<select id="searchChatRoom" resultMap="chatRoomResultset">
 		SELECT * FROM CHATROOM
-		WHERE USER_EMAIL = #{userEmail} AND
-		MASTER_EMAIL = #{masterEmail}
+		WHERE usernickname= #{usernickname} AND
+		masternickname = #{masternickname}
 	</select>
 
-	<select id="chatRoomList" parameterType="string" resultMap="chatRoomResultset">
+	<select id="chatRoomList" resultMap="chatRoomResultset">
 		SELECT * FROM CHATROOM
-		WHERE USER_ID = #{userid} OR
-		MASTER_ID= #{userid}
+		WHERE userid = #{userid} OR masterid = #{userid}
 	</select>
 
-	<select id="selectUnReadCount" parameterType="com.company.domain.ChatMessage" resultType="_int">
+	<select id="selectUnReadCount" resultType="_int">
 		SELECT COUNT(*) FROM CHATMESSAGE
-		WHERE ROOM_ID = #{roomId}
-		AND USER_EMAIL != #{email} AND UNREAD_COUNT = 1
+		WHERE roomid = #{roomid}
+		AND sentid != #{sentid} AND unReadCount = 1
 	</select>
 
-	<update id="updateCount" parameterType="com.company.domain.ChatMessage">
+	<update id="updateCount">
 		UPDATE CHATMESSAGE
 		SET
-		UNREAD_COUNT = 0
-		WHERE ROOM_ID = #{roomId} AND USER_EMAIL != #{email}
-		AND UNREAD_COUNT = 1
+		unReadCount = 0
+		WHERE roomid = #{roomid} AND sentid != #{sentid}
+		AND unReadCount = 1
 	</update>
  
 </mapper>

@@ -29,7 +29,7 @@
 	</beans:bean>
 
 	<context:component-scan
-		base-package="com.company.controller" />
+		base-package="com.company" />
 	
 	<!-- MultiPartResolver -->
 	<beans:bean id="multipartResolver"
@@ -38,7 +38,7 @@
 	</beans:bean>
 	<!-- websocket -->
 	<websocket:handlers>
-		<websocket:mapping handler="webSocketHandler" path="/chat" />
+		<websocket:mapping handler="webSocketHandler" path="/websocket/echo.do" />
 			<!-- <websocket:handshake-interceptors>
 				<beans:bean	class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
 			</websocket:handshake-interceptors>

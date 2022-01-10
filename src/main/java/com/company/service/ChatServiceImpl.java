@@ -16,8 +16,8 @@ public class ChatServiceImpl implements ChatService{
 	ChatMapper mapper;
 	
 	@Override
-	public ChatRoom selectChatRoom(String roomId) {
-		return mapper.selectChatRoom(roomId);
+	public ChatRoom selectChatRoom(String roomid) {
+		return mapper.selectChatRoom(roomid);
 	}
 
 	@Override
@@ -26,8 +26,8 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	@Override
-	public List<ChatMessage> messageList(String roomId) {
-		return null;
+	public List<ChatMessage> messageList(String roomid) {
+		return mapper.messageList(roomid);
 	}
 
 	@Override
