@@ -117,7 +117,7 @@
 }
 .div-pwd-hide {
 	border-top: 1px solid #808080;
-	height: 20px
+	height: 20px;
 }
 .div-pwd-form {
 	display: none;
@@ -263,4 +263,20 @@
 .cashbook-trade-date {
 	position: absolute;
 	top: 0;
+}
+
+
+/* remove-member.jsp */
+.div-remove-hide {
+	border-top: 1px solid #808080;
+	height: 20px;
+	margin: 20px 0;
+}
+.div-remove {
+	display: none;
+}
+.login-form textarea {
+	width: 100%;
+	height: 100px;
+	display: none;
 }

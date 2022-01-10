@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -31,7 +33,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.company.domain.AddressDTO;
 import com.company.domain.MemberAttachDTO;
@@ -252,8 +256,8 @@ public class MemberController {
 		System.out.println("파일 업로드");
 		
 		// 서버 폴더에 첨부 파일 저장
-//		String uploadFolder = "C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member";
-		String uploadFolder = "E:\\ccoli\\member"; // 시연할 때 사용
+		String uploadFolder = "C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member";
+//		String uploadFolder = "E:\\ccoli\\member"; // 시연할 때 사용
 		String uploadFileName = "";
 		
 		// 업로드 폴더 결정
@@ -391,9 +395,9 @@ public class MemberController {
 		log.info("프로필 이미지 "+fileName);
 		System.out.println("프로필 이미지 "+fileName);
 		
-//		File file = new File("C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member\\", fileName);
+		File file = new File("C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member\\", fileName);
 		// 시연용 파일폴더 경로
-		File file = new File("C:\\ccoli\\member\\", fileName);
+//		File file = new File("e:\\ccoli\\member\\", fileName);
 		
 		ResponseEntity<byte[]> result = null;
 		
@@ -411,9 +415,14 @@ public class MemberController {
 	
 	// 프로필 이미지 정보 가져오기
 	@GetMapping("/getProfileImg")
-	public ResponseEntity<MemberAttachDTO> getProfileImg(Principal principal) {
+	public ResponseEntity<MemberAttachDTO> getProfileImg(String userid, Principal principal) {
 		
-		return new ResponseEntity<MemberAttachDTO>(memberService.readProfileInfo(principal.getName()), HttpStatus.OK);
+		if(userid != null) {
+			return new ResponseEntity<MemberAttachDTO>(memberService.readProfileInfo(userid), HttpStatus.OK);
+		} else if(principal != null) {
+			return new ResponseEntity<MemberAttachDTO>(memberService.readProfileInfo(principal.getName()), HttpStatus.OK);
+		}
+		return null;
 	}
 	
 	// 업로드된 프로필 사진 삭제
@@ -442,11 +451,11 @@ public class MemberController {
 		log.info("프로필 이미지 삭제 중");
 		System.out.println("프로필 이미지 삭제 중");
 		
-//		Path file = Paths.get("C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member\\"+
-//								attachDto.getProfileUploadPath()+"\\"+attachDto.getPfuuid()+"_"+attachDto.getProfileImgName());
+		Path file = Paths.get("C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member\\"+
+								attachDto.getProfileUploadPath()+"\\"+attachDto.getPfuuid()+"_"+attachDto.getProfileImgName());
 		// 시연용 경로
-		Path file = Paths.get("e:\\ccoli\\member\\"+
-				attachDto.getProfileUploadPath()+"\\"+attachDto.getPfuuid()+"_"+attachDto.getProfileImgName());
+//		Path file = Paths.get("e:\\ccoli\\member\\"+
+//				attachDto.getProfileUploadPath()+"\\"+attachDto.getPfuuid()+"_"+attachDto.getProfileImgName());
 		
 		try {
 			Files.deleteIfExists(file);
@@ -457,6 +466,43 @@ public class MemberController {
 		}
 	}
 	
+	// 회원 탈퇴
+	@GetMapping("/remove-member")
+	public void removeMember() {
+		
+	}
+	
+	@PostMapping("/remove-member")
+	public String removeMemberPost(MemberDTO deleteDto, RedirectAttributes redirectAttr, SessionStatus sessionStatus) {
+		// 회원 탈퇴시 프로필 이미지, 회원정보 삭제
+		
+		// 프로필 이미지 여부 확인
+		MemberAttachDTO attachDto = memberService.readProfileInfo(deleteDto.getUserid());
+		
+		if(attachDto != null) { // 프로필 이미지가 있다면
+			if(deleteFiles(attachDto)) { // 파일폴더에서 파일 삭제
+				// DB의 프로필 이미지 정보 삭제
+				memberService.deleteProfileImg(deleteDto.getUserid());
+				// 회원, 권한정보 삭제
+				memberService.deleteMember(deleteDto);
+				
+				redirectAttr.addFlashAttribute("msg", "성공적으로 회원정보를 삭제했습니다.");
+				SecurityContextHolder.clearContext();
+			}
+		} else { // 프로필 이미지가 없다면
+			// 회원, 권한정보 삭제
+			memberService.deleteMember(deleteDto);
+			
+			redirectAttr.addFlashAttribute("msg", "성공적으로 회원정보를 삭제했습니다.");
+			SecurityContextHolder.clearContext();
+		}
+		
+		redirectAttr.addFlashAttribute("msg", "회원정보삭제에 실패했습니다.");
+		
+		
+		return "redirect:/product/index";
+	}
+	
 	// 프로필
 	// 프로필 화면
 	@GetMapping("/profile-page")
@@ -464,6 +510,18 @@ public class MemberController {
 		MemberDTO memberInfo = memberService.readMemberInfo(userid);
 		
 		model.addAttribute("dto", memberInfo);
+		
+		// 프로필 이미지 불러오기
+		//프로필 이미지 - userid
+		MemberAttachDTO profileImg = memberService.readProfileInfo(userid);
+		if(profileImg != null) {
+			//   2022\01\02  => 2022\\01\\02
+			profileImg.setProfileUploadPath(profileImg.getProfileUploadPath().replace("\\", "\\\\"));
+			
+			//System.out.println("profileImg "+profileImg);
+			model.addAttribute("profileImg", profileImg);
+		}
+		
 	}
 
 	
@@ -481,10 +539,7 @@ public class MemberController {
 		log.info("주소 API");
 	}
 	@PostMapping("/jusoPopup")
-	public void jusoPost(Model model, MemberDTO memberDto, AddressDTO addDto) {
-		
-		model.addAttribute("memberDto", memberDto);
-		model.addAttribute("addDto", addDto);
-		
+	public void jusoPost() {
+		log.info("주소 불러오기");
 	}
 }

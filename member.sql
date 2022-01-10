@@ -36,3 +36,6 @@ foreign key(userid) references member(userid) ON DELETE CASCADE;
 
 select * from profileImg;
 delete from profileImg;
+
+
+select * from member;

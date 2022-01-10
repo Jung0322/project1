@@ -3,14 +3,15 @@
  */
 
 $(function() {
+
 	$.ajax ({
 		url: "/member/getProfileImg",
-		typ: "get",
-		success: function(data) {
-			console.log(data);
+		type: "get",
+		success: function(result) {
+			console.log(result);
 			
-			if(data != null) {
-				$(data).each(function(idx, obj) {
+			if(result != null) {
+				$(result).each(function(idx, obj) {
 					var fileCallPath = encodeURIComponent(obj.profileUploadPath+"\\"+obj.pfuuid+"_"+obj.profileImgName);
 					var str = "/member/profileDisplay?fileName="+fileCallPath;
 					

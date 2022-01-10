@@ -20,7 +20,7 @@
 
 	<security:http>
 		<!-- 접근 권한이 없는 uri에 접근 시 이동하는 경로 설정 -->
-		<security:access-denied-handler error-page="/member/signIn"/>
+		<!-- <security:access-denied-handler error-page="/member/signIn"/> -->
 	
 		<!-- 원하는 로그인 페이지 출력 -->
 		<!-- default-target-url : 로그인 성공시 이동 페이지, authentication-failure-url : 로그인 실패시 이동 페이지
@@ -40,8 +40,23 @@
 		
 		<!-- csrf 설정 끄기 -->
 		<!-- <security:csrf disabled="true"/> -->
+		
+		<!-- csrf 예외처리 
+			참조 사이트 : https://okky.kr/article/433168 -->
+		<security:csrf request-matcher-ref="csrfMatcher"/>
 	</security:http>
 	
+	<!-- csrf 예외처리 -->
+	<bean id="csrfMatcher" class="org.springframework.security.web.util.matcher.OrRequestMatcher" >
+		<constructor-arg>
+			<list value-type="org.springframework.security.web.util.matcher.RequestMatcher">
+				<bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+					<constructor-arg name="pattern" value="https://www.juso.go.kr/addrlink/addrLinkUrl.do"/>
+					<constructor-arg name="httpMethod" value="POST" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
 
 	<!-- 사용자 인증방식 -->
 	<security:authentication-manager>

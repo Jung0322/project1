@@ -3,6 +3,7 @@
  */
 
 $(function() {
+	console.log(replyer);
 
 	// 댓글 전체 가져오기
 	showList(1);
@@ -26,7 +27,28 @@ $(function() {
 		}
 
 	})
+	
+	//좋아요 갯수 증가
+	$("#ques").click(function(e){
+		$(this).css("color","#9BB460");
+		
+			/*$.ajax({
+				url: '/replies/new',
+				type: 'post',
+				contentType: 'application/json',
+				data: JSON.stringify(reply),
+				success: function(result) {
+					if (callback) {
+						callback(result);
+					}
+				},
+				error: function(xhr, status, err) {
+					error(err);
+				}
+			})*/			
+		}) //ques end		
 
+	
 	//댓글 작업
 	//댓글 입력창 영역 가져오기
 	let modal = $("#replyModal");
@@ -34,6 +56,8 @@ $(function() {
 	let content = replyForm.find("textarea[name='replyContent']");
 
 	//댓글 정보 출력할 영역 가져오기
+		
+	let modalUserid = modal.find("span[name='userid']");
 	let modalNickname = modal.find("span[name='nickname']");
 	let modalMytown = modal.find("span[name='mytown']");
 	let modalRegdate = modal.find("span[name='regdate']");
@@ -55,6 +79,11 @@ $(function() {
 	//댓글 입력 버튼이 눌리면
 	replyRegisterBtn.click(function() {
 		console.log("컨텐츠 : " + content.val());
+		
+		if(content.val()==""){
+			alert("댓글을 작성해주세요");
+			return;
+		}
 
 		var reply = {
 			mno: mno,
@@ -82,6 +111,18 @@ $(function() {
 		replyService.get(mrno, function(data) {
 			console.log(data);
 
+			modalUserid.html(data.userid);
+			
+			//댓글 작성자 가져오기
+			let oriReplyer = modalUserid.html();
+			console.log("로그인 사용자"+replyer);
+			console.log("댓글 작성자"+oriReplyer)
+			
+			if(replyer != oriReplyer){
+				alert("본인이 작성한 댓글만 수정가능합니다.");
+				return;
+			}
+			
 			//도착한 데이터를 모달창에 보여주기
 			modalNickname.html(data.nickname);
 			modalMytown.html(data.mytown);
@@ -94,7 +135,12 @@ $(function() {
 
 		//모달창 안에 있는 수정 버튼이 눌리면
 		modalModifyBtn.click(function() {
-
+			//댓글 작성 확인
+			if(modalContent.val()==""){
+				alert("댓글을 작성해주세요.");
+				return;
+			}
+			
 			var reply = {
 				mrno: mrno,
 				content: modalContent.val()
@@ -111,8 +157,7 @@ $(function() {
 				},
 				function(msg) {
 					alert(msg);
-				}
-			)
+				})
 
 		}) // modalModifyBtn end
 
@@ -123,19 +168,51 @@ $(function() {
 		let mrno = $(this).data("mrno");
 		console.log("mrno : " + mrno);
 
-		//댓글삭제
-		replyService.remove(mrno,
-			function(result) {
-				if (result == "success") {
-					showList(1);
-				}
-			},
-			function(msg) {
-				alert(msg);
-			}
-		);//remove end		
+		replyService.get(mrno, function(data) {
+			console.log(data);
+
+			modalUserid.html(data.userid);
+			
+			//댓글 작성자 가져오기
+			let oriReplyer = modalUserid.html();
+			console.log("로그인 사용자"+replyer);
+			console.log("댓글 작성자"+oriReplyer)
+			
+			if(replyer != oriReplyer){
+				alert("본인이 작성한 댓글만 삭제가능합니다.");
+				return;
+			}else{
+				//댓글삭제
+				replyService.remove(mrno,
+					function(result) {
+						if (result == "success") {
+							showList(1);
+						}
+					},
+					function(msg) {
+						alert(msg);
+					}
+				);//remove end		
+
+			};
+		
+		})//get end	
 
 	}) //replyDiv delete end
+	
+	//대댓글 작성하기
+	replyDiv.on("click", "#re-reply", function() {
+		let modalRe = $("#re-replyModal");
+		
+		//userid를 이용해 로그인 한 사용자 정보 가져오기
+		
+		
+		//가져온 정보 모달 창에 뿌리기
+		
+		
+			modalRe.modal("show");
+		
+	})//re-replyModal end
 
 
 
@@ -162,13 +239,14 @@ $(function() {
 				str += "<button class='dropdown-item list' id='replyDeleteBtn' type='button' data-mrno='" + data[i].mrno + "'>삭제하기</button></div></div>";
 				str += "</div>";
 				str += "<div class='media-object pull-left'>";
-				str += "<img src='/resources/images/ff.png' class='img-responsive img-circle' alt='Blog Image'>";
+				str += "<img src='/resources/images/temp-profile.png' class='img-responsive img-circle profile' alt='Blog Image'>";
 				str += "</div>";
 				str += "<div class='media-body'>";
 				str += "<span name='nickname'>" + data[i].nickname + "</span>";
 				str += "<span name='mytown'>" + data[i].mytown + "</span>";
 				str += "<span name='regdate'>" + replyService.displayTime(data[i].updatedate) + "</span>";
-				str += "<p style='margin-bottom: 20px; margin-top: 10px;' name='content'>" + data[i].content + "</p>";
+				str += "<p style='margin-bottom: 10px; margin-top: 10px;' name='content'>" + data[i].content + "</p>";
+				str += "<div><button type='button' id='re-reply'>답글</button></div>";
 				str += "</div></div>";
 			}
 			replyDiv.html(str);
@@ -178,11 +256,4 @@ $(function() {
 
 	}//showlist end
 
-})
-
-
-
-
-
-
-
+}) // function end

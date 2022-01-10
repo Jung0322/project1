@@ -467,7 +467,7 @@ $(function() {
 	//업로드 할 수 있는 파일의 종류 제한하기
 	function checkExtension(fileName, fileSize) {
 		//적혀있는 확장자만 허용
-		var regex = new RegExp("(.*?)\.(jpeg|jpg|gif|png|bmp)$")
+		var regex = new RegExp("(.*?)\.(jpeg|jpg|PNG|png|bmp)$")
 		var maxSize = 5242880; //약 5MB
 
 		if (fileSize > maxSize) {
@@ -482,16 +482,7 @@ $(function() {
 		return true;
 	}//check Extnsion end
 	
-	// 프로필 이미지 보여주기
-	function showUploadFile(uploadResult) {
-		// 결과 보여줄 영역
-		
-		var fileCallPath = encodeURIComponent($("#pfUploadPath").val()+"\\"+$("#pfImgName").val()+"_"+$("#pfUploadPath").val());
-		
-		$("#profileImg").attr("src", "/profileDisplay?fileName="+fileCallPath);
-		
-		console.log(uploadResult);
-	}
+
 });
 
 // 유효성 검사 규칙

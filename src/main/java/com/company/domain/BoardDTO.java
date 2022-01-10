@@ -1,6 +1,7 @@
 package com.company.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,11 +21,15 @@ public class BoardDTO {
 	private Date regdate; // 작성날짜
 	private Date updatedate; // 수정날짜
 	private int mcount; // 조회수
+	private int replycnt; // 댓글수
 	private int curious; // 궁금해요/공감해요 갯수
 	
 	private String userid;
 	private String nickname;
 	private String mytown;
+	
+	private List<MyPlaceAttachDTO> attachList;
+	private List<MyPlaceCriteria> cri;
 
 
 }
