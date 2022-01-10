@@ -40,4 +40,11 @@ public interface MemberMapper {
 	public int modifyEmail(MemberDTO modifyDto);
 	// 휴대전화 수정
 	public int modifyPhone(MemberDTO modifyDto);
+	
+	
+	// 회원탈퇴
+	// 회원정보 삭제
+	public int deleteMember(String userid);
+	// 권한정보 삭제
+	public int deleteMemberROLE(String userid);
 }

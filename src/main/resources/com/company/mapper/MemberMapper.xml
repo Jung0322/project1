@@ -63,6 +63,7 @@
 	</select>
 
 
+
 	<!-- 회원정보 -->
 	<!-- 회원정보 불러오기 -->
 	<select id="readMemberInfo" resultType="com.company.domain.MemberDTO">
@@ -103,4 +104,15 @@
 	<update id="modifyPhone">
 		UPDATE member SET phone=#{phone} WHERE userid=#{userid}
 	</update>
+	
+	
+	<!-- 회원탈퇴 -->
+	<!-- 회원정보 삭제 -->
+	<delete id="deleteMember">
+		DELETE FROM member WHERE userid=#{userid}
+	</delete>
+	<!-- 권한정보 삭제 -->
+	<delete id="deleteMemberROLE">
+		DELETE FROM sp_member_authority WHERE userid=#{userid}
+	</delete>
 </mapper>

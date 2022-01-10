@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -31,7 +33,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.company.domain.AddressDTO;
 import com.company.domain.MemberAttachDTO;
@@ -393,7 +397,7 @@ public class MemberController {
 		
 //		File file = new File("C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member\\", fileName);
 		// 시연용 파일폴더 경로
-		File file = new File("C:\\ccoli\\member\\", fileName);
+		File file = new File("e:\\ccoli\\member\\", fileName);
 		
 		ResponseEntity<byte[]> result = null;
 		
@@ -411,8 +415,11 @@ public class MemberController {
 	
 	// 프로필 이미지 정보 가져오기
 	@GetMapping("/getProfileImg")
-	public ResponseEntity<MemberAttachDTO> getProfileImg(Principal principal) {
+	public ResponseEntity<MemberAttachDTO> getProfileImg(List<String> userid, Principal principal) {
 		
+		if(userid != null) {
+//			return new ResponseEntity<MemberAttachDTO>(memberService.readProfileInfo(userid), HttpStatus.OK);
+		}
 		return new ResponseEntity<MemberAttachDTO>(memberService.readProfileInfo(principal.getName()), HttpStatus.OK);
 	}
 	
@@ -455,6 +462,43 @@ public class MemberController {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	// 회원 탈퇴
+	@GetMapping("/remove-member")
+	public void removeMember() {
+		
+	}
+	
+	@PostMapping("/remove-member")
+	public String removeMemberPost(MemberDTO deleteDto, RedirectAttributes redirectAttr, SessionStatus sessionStatus) {
+		// 회원 탈퇴시 프로필 이미지, 회원정보 삭제
+		
+		// 프로필 이미지 여부 확인
+		MemberAttachDTO attachDto = memberService.readProfileInfo(deleteDto.getUserid());
+		
+		if(attachDto != null) { // 프로필 이미지가 있다면
+			if(deleteFiles(attachDto)) { // 파일폴더에서 파일 삭제
+				// DB의 프로필 이미지 정보 삭제
+				memberService.deleteProfileImg(deleteDto.getUserid());
+				// 회원, 권한정보 삭제
+				memberService.deleteMember(deleteDto);
+				
+				redirectAttr.addFlashAttribute("msg", "성공적으로 회원정보를 삭제했습니다.");
+				SecurityContextHolder.clearContext();
+			}
+		} else { // 프로필 이미지가 없다면
+			// 회원, 권한정보 삭제
+			memberService.deleteMember(deleteDto);
+			
+			redirectAttr.addFlashAttribute("msg", "성공적으로 회원정보를 삭제했습니다.");
+			SecurityContextHolder.clearContext();
+		}
+		
+		redirectAttr.addFlashAttribute("msg", "회원정보삭제에 실패했습니다.");
+		
+		
+		return "redirect:/product/index";
 	}
 	
 	// 프로필

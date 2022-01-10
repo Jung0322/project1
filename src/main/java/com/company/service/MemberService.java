@@ -39,4 +39,8 @@ public interface MemberService {
 	public boolean deleteProfileImg(String userid);
 	// 프로필 이미지 수정
 	public boolean modifyProfileImg(MemberAttachDTO modifyDto);
+	
+	
+	// 회원탈퇴
+	public boolean deleteMember(MemberDTO deleteDto);
 }

@@ -153,4 +153,22 @@ public class MemberServiceImpl implements MemberService {
 	public boolean modifyProfileImg(MemberAttachDTO modifyDto) {
 		return memberAttachMapper.modifyProfileImg(modifyDto) > 0 ? true : false;
 	}
+	
+	@Transactional
+	@Override
+	// 회원탈퇴
+	public boolean deleteMember(MemberDTO deleteDto) {
+		// 기존 비밀번호
+		String orgPassword = memberMapper.checkOrgPwd(deleteDto.getUserid());
+		
+		// 기존 비밀번호와 입력 비밀번호 일치 여부
+		boolean checkOrgPwd = passwordEncoder.matches(deleteDto.getPassword(), orgPassword);
+		
+		if(checkOrgPwd) { // 기존 비밀번호와 입력 비밀번호가 일치 한다면
+			if(memberMapper.deleteMember(deleteDto.getUserid()) > 0) {
+				memberMapper.deleteMemberROLE(deleteDto.getUserid());
+			}
+		}
+		return checkOrgPwd;
+	}
 }
