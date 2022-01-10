@@ -58,8 +58,15 @@
 					</a><span>❤ : ${dto.good}</span>
 					<div class="modify" style="margin-top: 5px;"> 
 					<a class="mbutton" href="${dto.pno}" style="margin-right: 5px;">수정</a> 
-					<a class="rbutton" style="margin-right: 5px;">판매완료</a>    
-					<a class="sbutton">예약중</a>
+					<a class="rbutton" href="${dto.pno}" style="margin-right: 5px;">판매완료</a> 
+					<c:choose>
+						<c:when test="${dto.reservation == 1}">
+							<a class="sbutton" href="${dto.pno}" data-val=0>예약취소</a>
+						</c:when>
+						<c:when test="${dto.reservation == 0}">
+							<a class="sbutton" href="${dto.pno}" data-val=1>예약설정</a>
+						</c:when>
+					</c:choose>
 					</div>
 					</li>
 				</c:forEach>
@@ -104,7 +111,6 @@ let pimg = $(".pimg");
 $(pimg).each(function(i,item){
 	$(this).attr("src","/display?fileName="+encodeURIComponent(pathArr[i]));
 })
-
 
 </script>		
 		

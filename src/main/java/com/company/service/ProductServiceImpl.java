@@ -105,4 +105,49 @@ public class ProductServiceImpl implements ProductService {
 		return mapper.SelltotalCnt(cate, userid);
 	}
 
+	@Override
+	public boolean delete(int pno) {
+		// 첨부물 삭제
+		AttachMapper.deleteAll(pno);
+		
+		return mapper.delete(pno)>0?true:false;
+	}
+
+	@Override
+	public boolean update(ProductDTO dto) {
+		// 기존 첨부파일 삭제
+		AttachMapper.deleteAll(dto.getPno());
+		
+		//글 수정
+		boolean result = mapper.update(dto)==1;
+		
+		//첨부물이 없다면 돌아가기
+		if(dto.getAttachList() == null || dto.getAttachList().size()<=0) {
+			return result;
+		}
+		
+		//첨부파일 추가
+			if(result && dto.getAttachList().size() > 0) {
+				dto.getAttachList().forEach(attach ->{
+					attach.setPno(dto.getPno());
+					AttachMapper.insert(attach);
+				});
+			}
+		
+		
+		return result;
+	}
+
+	@Override
+	public boolean attachRemove(int pno) {
+		// TODO Auto-generated method stub
+		return AttachMapper.deleteAll(pno)>0?true:false;
+	}
+
+	@Override
+	public boolean resupdate(int pno, int num) {
+		// TODO Auto-generated method stub
+		return mapper.resupdate(pno,num)>0?true:false;
+	}
+
 }

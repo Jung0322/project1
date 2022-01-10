@@ -20,4 +20,7 @@ public interface ProductMapper {
 	public List<ProductDTO> SeclistAll(@Param("cri") ProductCriteria cri,@Param("userid") String userid);
 	public int SelltotalCnt(@Param("cate") String cate , @Param("userid") String userid);
 	public List<ProductDTO> SelllistAll(@Param("cri") ProductCriteria cri,@Param("userid") String userid);
+	public int delete(int pno);
+	public int update(ProductDTO dto);
+	public int resupdate(@Param("pno") int pno, @Param("num") int num);
 }

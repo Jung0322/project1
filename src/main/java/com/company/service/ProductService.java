@@ -19,4 +19,8 @@ public interface ProductService {
 	public int SecgetTotalCount(String cate,String userid);
 	public List<ProductDTO> SellgetList(ProductCriteria cri, String userid);
 	public int SellgetTotalCount(String cate,String userid);
+	public boolean delete(int pno);
+	public boolean update(ProductDTO dto);
+	public boolean attachRemove(int pno);
+	public boolean resupdate(int pno, int num);
 }

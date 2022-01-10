@@ -15,11 +15,10 @@ body {
 	color:  gray;
 }
 
-#registration{
-position: absolute; left: 50%; margin-left: -200px;
-
-	background-color: black;
-	color: white;
+#registration {
+    position: absolute;
+    background-color: black;
+    color: white;
 }
 
 #asd {

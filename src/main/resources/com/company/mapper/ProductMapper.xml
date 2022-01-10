@@ -157,4 +157,21 @@
 	<update id="goodcount">
 		update product set good = good + #{num} where  pno = #{pno}
 	</update>
+	
+		<!-- 삭제 -->
+	<delete id="delete">
+		delete from product where pno=#{pno}
+	</delete>
+	
+		<!-- update -->
+	<update id="update">
+		update product set title=#{title},
+		content=#{content}, category=#{category}, price = #{price}, delivery=#{delivery}, discount=#{discount} where pno = #{pno}
+	</update>
+	
+	<!-- 예약여부 변경 -->
+	<update id="resupdate">
+		update PRODUCT set reservation = #{num} where pno = #{pno}
+	</update>
+
 </mapper>
