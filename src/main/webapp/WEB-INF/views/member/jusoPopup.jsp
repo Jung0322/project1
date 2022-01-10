@@ -13,6 +13,9 @@
 	String sggNm  = request.getParameter("sggNm"); // 시군구
 	String emdNm  = request.getParameter("emdNm"); // 읍면동
 	String liNm  = request.getParameter("liNm"); // 법정리
+	
+	String csrfHeaderName = request.getParameter("csrfHeaderName");
+	String csrfTokenValue = request.getParameter("csrfTokenValue");
 
 %>
 </head>
@@ -39,7 +42,7 @@ function init(){
 		document.form.submit();
 	}else{
 		<%-- opener.jusoCallBack("<%=roadFullAddr%>","<%=jibunAddr%>"); --%>
-		opener.jusoCallBack("<%=siNm%>","<%=sggNm%>","<%=emdNm%>","<%=liNm%>");
+		opener.jusoCallBack("<%=siNm%>","<%=sggNm%>","<%=emdNm%>","<%=liNm%>", "<%=csrfHeaderName%>", "<%=csrfTokenValue%>");
 		window.close();  // 막히는 부분 
 	}
 }
@@ -49,6 +52,8 @@ function init(){
 		<input type="hidden" id="confmKey" name="confmKey" value=""/>
 		<input type="hidden" id="returnUrl" name="returnUrl" value=""/>
 		<input type="hidden" id="resultType" name="resultType" value=""/>	
+		
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	</form>
 </body>
 </html>

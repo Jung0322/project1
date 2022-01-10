@@ -419,8 +419,10 @@ public class MemberController {
 		
 		if(userid != null) {
 			return new ResponseEntity<MemberAttachDTO>(memberService.readProfileInfo(userid), HttpStatus.OK);
+		} else if(principal != null) {
+			return new ResponseEntity<MemberAttachDTO>(memberService.readProfileInfo(principal.getName()), HttpStatus.OK);
 		}
-		return new ResponseEntity<MemberAttachDTO>(memberService.readProfileInfo(principal.getName()), HttpStatus.OK);
+		return null;
 	}
 	
 	// 업로드된 프로필 사진 삭제
@@ -537,10 +539,7 @@ public class MemberController {
 		log.info("주소 API");
 	}
 	@PostMapping("/jusoPopup")
-	public void jusoPost(Model model, MemberDTO memberDto, AddressDTO addDto) {
-		
-		model.addAttribute("memberDto", memberDto);
-		model.addAttribute("addDto", addDto);
-		
+	public void jusoPost() {
+		log.info("주소 불러오기");
 	}
 }
