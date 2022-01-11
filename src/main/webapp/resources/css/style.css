@@ -15,7 +15,7 @@ body {
 	color:  gray;
 }
 
-#registration {
+.registration {
     position: absolute;
     background-color: black;
     color: white;

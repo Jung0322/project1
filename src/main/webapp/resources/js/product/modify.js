@@ -6,7 +6,7 @@ $(function(){
 	//remove, list 일 때 전송될 폼
    let formObj = $("#actionForm");
     
-   $("#registration").click(function(e){
+   $(".registration").click(function(e){
       e.preventDefault(); //submit 막기
       
       //어느버튼에서 명령이 왔는가
@@ -26,6 +26,11 @@ $(function(){
 			str +="<input type='hidden' name='attachList["+i+"].pimgname' value='"+ele.data('filename')+"'>";
 		})
 		
+		if(str==""){
+			alert("상품사진을 첨부하세요");
+			return;
+		}
+		
 		console.log("form");
 		console.log(str);
 		
@@ -33,34 +38,13 @@ $(function(){
       	formObj.append(str);
 
       }else if(oper=='remove'){
-         formObj.attr("action","/product/delete")
-               .attr("method","post");
+         formObj.attr("action","/product/delete").attr("method","post");
       }else{
          formObj.attr("action","/product/sellproduct")
                .attr("method","get")
                .find("input[name='pno']").remove();
       }
 
-	  formObj.submit();
-   })
-	
-	//submit 버튼 클릭시 첨부파일 정보 추가하기
-	$(":submit").click(function(e){
-		e.preventDefault();
-		
-		//첨부된 파일 정보 수집하기
-		var str = "";
-		$(".uploadResult ul li").each(function(i,obj){
-			var ele = $(obj);
-			
-			str +="<input type='hidden' name='attachList["+i+"].puuid' value='"+ele.data('uuid')+"'>";
-			str +="<input type='hidden' name='attachList["+i+"].puploadPath' value='"+ele.data('path')+"'>";
-			str +="<input type='hidden' name='attachList["+i+"].pimgname' value='"+ele.data('filename')+"'>";
-		})
-		
-		console.log("form");
-		console.log("str"+ str);
-		
 		if($("select[name='category']").val()==''){
 			alert("카테고리를 입력하세요");
 			return;
@@ -70,22 +54,17 @@ $(function(){
 		}else if($("select[name='discount']").val()==''){
 			alert("내고가능 여부를 입력하세요");
 			return;
-		}else if(str==""){
-			alert("상품사진을 첨부하세요");
-			return;
 		}else if($("input[name='title']").val()==''){
 			alert("제목을 입력하세요");
 			return;
 		}else if($("input[name='price']").val()==''){
 			alert("가격을 입력하세요");
 			return;
-		}else{
-			//게시글 등록 폼에 추가하기
-			$("form[role='form']").append(str).submit();
 		}
-		
-		
-	})
+
+	  formObj.submit();
+   })
+	
 	
 	let uploadResult = $(".uploadResult ul");
 	let str1="";

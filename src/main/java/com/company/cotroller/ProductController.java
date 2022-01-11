@@ -168,7 +168,7 @@ public class ProductController {
 	
 	String userid= principal.getName();
 	
-	List<ProductDTO> list = service.SecgetList(cri,userid);
+	List<ProductDTO> list = service.SellgetList(cri,userid,0);
 	
 	
 	
@@ -180,7 +180,7 @@ public class ProductController {
 	}
 	
 	//페이지 나누기를 위한 정보 얻기
-	int totalCnt =  service.SecgetTotalCount(cri.getCate(), userid);
+	int totalCnt =  service.SellgetTotalCount(cri.getCate(), userid,0);
 
 	
 	System.out.println("아예이오후"+list);
@@ -194,6 +194,47 @@ public class ProductController {
 	model.addAttribute("list", list);
 	
 	return"/product/mysell-product";
+	
+}
+	
+	//판매완료 상품 목록
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = "/product/soldproduct", method = RequestMethod.GET)
+	public String soldproduct(Model model, ProductCriteria cri,Principal principal) {
+	
+		log.info("로그인 한 회원 전체 보여주기");
+		
+
+		System.out.println("가나다라"+cri);
+		
+		String userid= principal.getName();
+		
+		List<ProductDTO> list = service.SellgetList(cri,userid,1);
+		
+		
+		
+		for(ProductDTO dto:list) {
+			for(AttachProductDTO attach:dto.getAttachList()) {
+				
+				attach.setPuploadPath(attach.getPuploadPath().replace("\\", "\\\\"));
+			}
+		}
+		
+		//페이지 나누기를 위한 정보 얻기
+		int totalCnt =  service.SellgetTotalCount(cri.getCate(), userid,1);
+
+		
+		System.out.println("아예이오후"+list);
+		System.out.println("totalCnt "+totalCnt);
+		
+		ProductPageDTO pageDto = new ProductPageDTO(cri, totalCnt);
+		System.out.println("pageDto "+pageDto);
+		model.addAttribute("pageDto", pageDto);
+		
+		
+		model.addAttribute("list", list);
+	
+	return"/product/sold-product";
 	
 }
 	
@@ -213,6 +254,10 @@ public class ProductController {
 	public String delete(int pno,ProductCriteria cri, RedirectAttributes rttr) {
 		//첨부파일 목록 얻어오기
 	 	List<AttachProductDTO> attachList = service.getRowImg(pno);
+	 	
+	 	System.out.println("삭제 요청"+ pno + cri);
+	 	
+	 	System.out.println("삭제 요청"+ attachList);
 	 	
 	 	//삭제
 	 	if(service.delete(pno)) {
@@ -263,6 +308,8 @@ public class ProductController {
 	public String modify(ProductDTO productDTO, ProductCriteria cri, RedirectAttributes rttr) {
 		log.info("수정 요청" +productDTO+" "+cri);
 		
+		System.out.println("수정 요청" +productDTO+" "+cri);
+		
 		service.update(productDTO);
 		
 		//페이지 나누기 값 보내기(주소줄에 보임)
@@ -288,5 +335,22 @@ public class ProductController {
 		rttr.addFlashAttribute("result","success");
 		
 		return "redirect:/product/sellproduct";
+	}
+	
+	//판매완료 수정
+	@RequestMapping(value = "/solupdate", method = RequestMethod.GET)
+	public String solupdate(int pno,int num ,@ModelAttribute("cri") ProductCriteria cri, RedirectAttributes rttr) {
+		log.info("resupdate");
+		
+		service.solupdate(num, pno);
+		
+		//페이지 나누기 값 보내기(주소줄에 보임)
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		rttr.addAttribute("cate", cri.getCate());
+				
+		rttr.addFlashAttribute("result","success");
+		
+		return "redirect:/product/soldproduct";
 	}
 }

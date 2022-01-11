@@ -37,7 +37,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.company.domain.AddressDTO;
 import com.company.domain.MemberAttachDTO;
 import com.company.domain.MemberDTO;
 import com.company.service.MemberService;

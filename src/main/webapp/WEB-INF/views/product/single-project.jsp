@@ -61,7 +61,7 @@
 
 									<h2>Product Description</h2>
 									<p>
-										"${row.content}"
+										${row.content}
 									</p>
 									</div>
 							</div>

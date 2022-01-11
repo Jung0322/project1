@@ -114,6 +114,9 @@
 										<a href="/product/sellproduct">판매목록</a>
 									</div>
 									<div class="dropdown-item dropdown-item-area">
+										<a href="/product/soldproduct">판매완료상품</a>
+									</div>
+									<div class="dropdown-item dropdown-item-area">
 										<form action="/member/logout" method="post">
 											<button type="submit">로그아웃</button>
 											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

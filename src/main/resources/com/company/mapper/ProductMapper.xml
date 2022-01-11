@@ -48,7 +48,7 @@
 			    from product pd, (select * 
 			                      from PRODUCTIMG 
 			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
-				where pd.pno = pdi.pno 
+				where pd.pno = pdi.pno and pd.soldout = 0
 		]]>
 		
 		<if test='!cate.equals("전체")'>
@@ -68,7 +68,7 @@
 		from
 		product
 		where		
-		 pno > 0
+		 pno > 0 and soldout = 0
 		 <if test='!cate.equals("전체")'>
 		 and category = #{cate}
 		 </if>
@@ -84,7 +84,7 @@
 			    from product pd, (select * 
 			                      from PRODUCTIMG 
 			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
-				where pd.pno = pdi.pno and pd.mytown = (select mytown from member where userid = #{userid})
+				where pd.pno = pdi.pno and pd.mytown = (select mytown from member where userid = #{userid}) and pd.soldout = 0
 		]]>
 		
 		<if test='!cri.cate.equals("전체")'>
@@ -104,7 +104,7 @@
 		from
 		product
 		where		
-		 pno > 0 and mytown = (select mytown from member where userid = #{userid})
+		 pno > 0 and mytown = (select mytown from member where userid = #{userid}) and soldout = 0
 		 <if test='!cate.equals("전체")'>
 		 and category = #{cate} 
 		 </if>
@@ -120,7 +120,7 @@
 			    from product pd, (select * 
 			                      from PRODUCTIMG 
 			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
-				where pd.pno = pdi.pno and pd.userid = #{userid})
+				where pd.pno = pdi.pno and pd.userid = #{userid} and pd.soldout = #{num}
 		]]>
 		
 		<if test='!cri.cate.equals("전체")'>
@@ -140,11 +140,12 @@
 		from
 		product
 		where		
-		 pno > 0 and userid = #{userid}
+		 pno > 0 and userid = #{userid} and soldout = #{num}
 		 <if test='!cate.equals("전체")'>
 		 and category = #{cate} 
 		 </if>
 	</select>
+	
 	
 	<!--  상품상세정보 확인 -->
 	<select id="getRow" resultType="com.company.domain.ProductDTO">
@@ -174,4 +175,8 @@
 		update PRODUCT set reservation = #{num} where pno = #{pno}
 	</update>
 
+	<!-- 판매여부 변경 -->
+	<update id="solupdate">
+		update PRODUCT set soldout = #{num} where pno = #{pno}
+	</update>
 </mapper>

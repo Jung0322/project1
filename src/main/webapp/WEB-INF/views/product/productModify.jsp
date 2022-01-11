@@ -22,6 +22,7 @@
                     </div>
 
                     <form action="/product/modify" method="post" role="form">
+                    	<input type="hidden" name="pno" value="${row.pno}"/>
                          <div class="col-md-6 col-sm-6">
                               <input type="text" class="form-control" placeholder="제목" name="title" value="${row.title}" required />
                          </div>
@@ -77,13 +78,13 @@
 						</div>
 					<div style="justify-content: center; display: flex;">
                          <div class="col-md-3">
-                              <button id="registration" data-oper='modify' type="submit" class="form-control">수정</button>
+                              <button class="registration form-control" data-oper='modify' type="submit">수정</button>
                          </div>
                          <div class="col-md-3">
-                              <button id="registration" data-oper='remove' type="submit" class="form-control">삭제</button>
+                              <button class="registration form-control" data-oper='remove' type="submit">삭제</button>
                          </div>
                           <div class="col-md-3">
-                              <button id="registration" data-oper='list' type="submit" class="form-control">목록</button>
+                              <button class="registration form-control" data-oper='list' type="submit">목록</button>
                          </div>
                          </div>
                </div>
@@ -107,7 +108,7 @@
 	let csrfTokenValue= "${_csrf.token}";
 	
 	let pno = ${row.pno};
-	console.log(pno);
+	console.log("pno확인 :"+pno);
 	console.log(${row.delivery});
 	console.log(${row.discount});
 	
@@ -118,7 +119,6 @@
 	
 <!-- #page -->
 <script src='/resources/js/product/modify.js'></script>
-<script src='/resources/js/product/product-registration.js'></script>
 <script src='/resources/js/product/shopjs.js'></script>
 <script src='/resources/js/plugins.js'></script>
 <script src='/resources/js/scripts.js'></script>

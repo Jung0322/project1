@@ -76,8 +76,8 @@
 						<input type="hidden" name="mytown" value="${dto.mytown}" />
 						<input type="hidden" name="userid" value="${dto.userid}" />
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                         <div class="col-md-8">
-                              <input id="registration" type="submit" class="form-control" value="등록">
+                         <div class="col-md-offset-2 col-md-8">
+                              <input type="submit" class="form-control" value="등록" style="background: black; color: white; align-items: center; ">
                          </div>
                     </form>
                </div>

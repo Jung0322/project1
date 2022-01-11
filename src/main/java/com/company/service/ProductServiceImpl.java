@@ -94,17 +94,18 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductDTO> SellgetList(ProductCriteria cri, String userid) {
+	public List<ProductDTO> SellgetList(ProductCriteria cri, String userid,int num) {
 		// TODO Auto-generated method stub
-		return mapper.SelllistAll(cri, userid);
+		return mapper.SelllistAll(cri, userid,num);
 	}
 
 	@Override
-	public int SellgetTotalCount(String cate, String userid) {
+	public int SellgetTotalCount(String cate, String userid,int num) {
 		// TODO Auto-generated method stub
-		return mapper.SelltotalCnt(cate, userid);
+		return mapper.SelltotalCnt(cate, userid,num);
 	}
 
+	@Transactional
 	@Override
 	public boolean delete(int pno) {
 		// 첨부물 삭제
@@ -113,6 +114,7 @@ public class ProductServiceImpl implements ProductService {
 		return mapper.delete(pno)>0?true:false;
 	}
 
+	@Transactional
 	@Override
 	public boolean update(ProductDTO dto) {
 		// 기존 첨부파일 삭제
@@ -149,5 +151,13 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return mapper.resupdate(pno,num)>0?true:false;
 	}
+
+	@Override
+	public boolean solupdate(int num, int pno) {
+		// TODO Auto-generated method stub
+		return mapper.solupdate(num, pno)>0?true:false;
+	}
+
+	
 
 }
