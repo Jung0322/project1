@@ -11,20 +11,16 @@ import java.nio.file.Paths;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,14 +33,12 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.company.domain.AddressDTO;
 import com.company.domain.MemberAttachDTO;
 import com.company.domain.MemberDTO;
 import com.company.service.MemberService;
 
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnailator;
-import oracle.jdbc.proxy.annotation.Post;
 
 @Log4j2
 @Controller
@@ -244,6 +238,23 @@ public class MemberController {
 		modifyDto.setUserid(principal.getName());
 		
 		if(memberService.modifyPhone(modifyDto)) {
+			return "success";
+		}
+		
+		return "fail";
+	}
+	
+	// 내동네 수정
+	@ResponseBody
+	@PostMapping("/mytown-modify")
+	public String modifyMytown(MemberDTO modifyDto, Principal principal) {
+		log.info("내 동내 수정 "+modifyDto);
+
+		// 로그인한 유저의 userid 정보 저장
+		modifyDto.setUserid(principal.getName());
+		System.out.println("내 동내 수정 "+modifyDto);
+		
+		if(memberService.modifyMytown(modifyDto)) {
 			return "success";
 		}
 		
