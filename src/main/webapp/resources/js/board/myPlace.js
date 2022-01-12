@@ -225,7 +225,7 @@ $(function() {
 				str += "<button class='dropdown-item list' id='replyDeleteBtn' type='button' data-mrno='" + data[i].mrno + "'>삭제하기</button></div></div>";
 				str += "</div>";
 				str += "<div class='media-object pull-left'>";
-				str += "<img src='/resources/images/temp-profile.png' class='img-responsive img-circle' alt='Blog Image'>";
+				str += "<img src='/resources/images/temp-profile.png' class='img-responsive img-circle pro' alt='Blog Image'>";
 				str += "</div>";
 				str += "<div class='media-body'>";
 				str += "<span name='nickname'>" + data[i].nickname + "</span>";

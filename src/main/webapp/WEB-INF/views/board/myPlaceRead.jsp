@@ -121,7 +121,7 @@
 			      <div class="modal-body">
 			        <div class="modal-user">
 				        <div class="media-object pull-left" style="margin-right: 10px;">
-							<img src="/resources/images/temp-profile.png" class="img-responsive img-circle profile" alt="Blog Image" >
+							<img src="/resources/images/temp-profile.png" class="img-responsive img-circle pro" alt="Blog Image" >
 						</div>						
 			        	<span name="userid">Omar Larus</span> 
 			        	<span name="nickname" style="margin-right: 7px;">Omar Larus</span> 
@@ -150,7 +150,7 @@
 			      <div class="modal-body">
 			        <div class="modal-user">
 				        <div class="media-object pull-left" style="margin-right: 10px;">
-							<img src="/resources/images/temp-profile.png" class="img-responsive img-circle profile" alt="Blog Image" >
+							<img src="/resources/images/temp-profile.png" class="img-responsive img-circle pro" alt="Blog Image" >
 						</div>
 			        	<span name="nicknameM" style="margin-right: 7px;">Omar Larus</span> 
 						<span name="mytownM" style="margin-right: 7px;">서울시 은평구 신사동</span> 

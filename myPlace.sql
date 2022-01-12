@@ -1,4 +1,9 @@
 --기존 테이블, 시퀀스 삭제
+
+drop table profileimg;
+
+
+
 drop table myplace;
 drop sequence myPlace_seq;
 drop table myplacereply;
