@@ -62,9 +62,16 @@
 					</div>
 					
 					<div class="profile-form">
-						<a>
-							<b>판매상품 n개</b>
+					<c:if  test="${info.username == dto.userid}">
+						<a href="/product/sellproduct?userid=${info.username}">
+							<b>판매상품 ${sellpdcount}개</b>
 						</a>
+					</c:if>
+					<c:if  test="${info.username != dto.userid}">
+						<a href="/product/sellproduct?userid=${dto.userid}">
+							<b>판매상품 ${sellpdcount}개</b>
+						</a>
+					</c:if>
 					</div>
 					<div class="profile-form">
 						<a>

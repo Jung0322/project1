@@ -22,6 +22,7 @@
 		<result property="category" column="category"/>
 		<result property="mytown" column="mytown"/>
 		<result property="reservation" column="reservation"/>
+		<result property="userid" column="userid"/>
 		<collection property="attachList" resultMap="attachMap"></collection>
 	</resultMap>
 
@@ -115,8 +116,8 @@
 		
 		<![CDATA[
 		select * 
-		from (select rownum rn,pno, price, title, good, puuid, puploadpath, pimgname, category, mytown , reservation
-		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname, category, mytown , reservation
+		from (select rownum rn,pno, price, title, good, puuid, puploadpath, pimgname, category, mytown , reservation, userid
+		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname, category, mytown , reservation, pd.userid
 			    from product pd, (select * 
 			                      from PRODUCTIMG 
 			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
@@ -164,7 +165,7 @@
 		delete from product where pno=#{pno}
 	</delete>
 	
-		<!-- update -->
+		<!-- 상품 수정 -->
 	<update id="update">
 		update product set title=#{title},
 		content=#{content}, category=#{category}, price = #{price}, delivery=#{delivery}, discount=#{discount} where pno = #{pno}
@@ -179,4 +180,9 @@
 	<update id="solupdate">
 		update PRODUCT set soldout = #{num} where pno = #{pno}
 	</update>
+	
+	<!-- 닉네임 값 가져오기 -->
+	<select id="nicknameGet" resultType="String">
+	select nickname from member where userid = #{userid}
+	</select>
 </mapper>

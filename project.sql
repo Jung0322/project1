@@ -86,11 +86,6 @@ create table myPlaceImg (
 );
 
 
-		select pno, puuid, puploadpath, pimgname
-		from PRODUCTIMG  where pno = 3
-		
-		select pno
-		from PRODUCt;
 
 -- 상품
 -- 7. 상품 테이블
@@ -115,66 +110,10 @@ create table product (
          REFERENCES member(userid) ON DELETE CASCADE,
 	CONSTRAINT pk_product PRIMARY KEY (pno) -- pk
 );
-ALTER TABLE product  ADD mytown varchar2(50) not null;
-select * from product;
-<<<<<<< HEAD
--- 이게 맞음(rn pno 안맞음)
-select * 
-	from (select /*+INDEX_DESC(product pk_product)*/ rownum rn,pno, price, title, good, puuid, puploadpath, pimgname
-		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname
-			    from product pd, (select * 
-			                      from PRODUCTIMG 
-			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
-				where pd.pno = pdi.pno)
-		  where rownum <=8)
-	where rn>0;	
-	
-	select count(pno) from product;
-	
-	
-select * 
-	from (select rownum rn,pno, price, title, good, puuid, puploadpath, pimgname
-		  from (select  pd.pno, price, title, good, puuid, puploadpath, pimgname
-			    from product pd, (select * 
-			                      from PRODUCTIMG 
-			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
-				where pd.pno = pdi.pno order by pd.pno desc)
-		  where rownum <=8)
-	where rn>0;	
-	
-	
--- 이거임
-	
-select /*+INDEX_DESC(product pk_product)*/ rownum,pno, price from product where rownum<=8;
-
-select rn,bno,title,replycnt
-from (select /*+INDEX_DESC(spring_board pk_spring_board)*/ rownum rn,bno,title,replycnt
-	  from spring_board
-	  where rownum <=10)
-where rn>0;
-=======
->>>>>>> branch 'master' of https://github.com/Jung0322/project1.git
 
 
-
-<<<<<<< HEAD
-select pd.pno, price, title, good, puuid, puploadpath, pimgname
-from product pd, (select * from PRODUCTIMG where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
-where pd.pno = pdi.pno order by pd.pno desc;
-
-select * from PRODUCTIMG;
-
-
-
--- 상품 좋아요 개수 칼럼 추가
-ALTER TABLE product  ADD good number(10) default 0;
-
-=======
->>>>>>> branch 'master' of https://github.com/Jung0322/project1.git
 -- 상품 테이블 글번호 시퀀스
 CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1;
-
-select * from basket;
 
 -- 8. 상품 이미지 테이블
 create table productimg (
@@ -198,9 +137,6 @@ create table basket (
 	CONSTRAINT pk_basket PRIMARY KEY (pno,userid) -- pk
 );
 
-update MEMBER set userid = 'dnrwls' where userid='ㅋㅋ';
-select  *  from basket;
-drop table basket;
 
 -- 장바구니 테이블 글번호 시퀀스
 CREATE SEQUENCE basket_seq INCREMENT BY 1 START WITH 1;

@@ -26,5 +26,5 @@ public interface ProductService {
 	public boolean attachRemove(int pno);
 	public boolean resupdate(int pno, int num);
 	public boolean solupdate(int num, int pno);
-
+	public String nicknameGet(String userid);
 }
