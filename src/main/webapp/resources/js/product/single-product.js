@@ -222,7 +222,26 @@ $(function(){
 		 imgslide.html(imgStr);
 		}
 	})// 전체 첨부물 가져오기 종료		
-				
+	
+	//-----------------------채팅하기 눌렀을 시 채팅 방있는지 여부 확인 ---------------------------------
+	$(".alt").click(function(e){
+		e.preventDefault();
+		$.ajax({
+			url:'chatcreateChat.do',
+			type:'post',
+			data :{
+				pno:pno,
+				userid:userid
+			},
+			success:function(data){
+
+			},
+			error:function(xhr,status,error){
+				alert(xhr.responseText);
+			}
+		})
+		
+	})				
 
 })
 function heartPlus(i){
@@ -250,4 +269,4 @@ function heartPlus(i){
 							}
 			
 						})
-}
+} 

@@ -1,5 +1,6 @@
 package com.company.service;
 
+import com.company.domain.MemberAttachDTO;
 import com.company.domain.MemberDTO;
 
 public interface MemberService {
@@ -19,6 +20,8 @@ public interface MemberService {
 	// 회원정보 수정
 	// 회원정보 불러오기
 	public MemberDTO readMemberInfo(String userid);
+	// 프로필 이미지 정보 불러오기
+	public MemberAttachDTO readProfileInfo(String userid);
 	// 동일 닉네임 검사
 	public String checkSameNickname(String userid);
 	// 닉네임 수정
@@ -33,4 +36,14 @@ public interface MemberService {
 	public boolean modifyEmail(MemberDTO modifyDto);
 	// 휴대전화 수정
 	public boolean modifyPhone(MemberDTO modifyDto);
+	// 프로필 이미지 저장
+	public boolean insertProfileImg(MemberAttachDTO insertDto);
+	// 프로필 이미지 삭제
+	public boolean deleteProfileImg(String userid);
+	// 프로필 이미지 수정
+	public boolean modifyProfileImg(MemberAttachDTO modifyDto);
+	
+	
+	// 회원탈퇴
+	public boolean deleteMember(MemberDTO deleteDto);
 }

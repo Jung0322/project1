@@ -218,8 +218,92 @@ $(function() {
 				})
 			})
 		} // phone end
+		else if(oper == 'profile') {
+			$("input[type='file']").click();
+			
+		} // profile end
+		else if(oper == 'delete') {
+			$.ajax({
+				url: "/member/delete-profile",
+				type: "get",
+				success: function(result) {
+					console.log(result);
+					
+					var str = "/resources/images/temp-profile.png";
+					$("#profileImg").attr("src", str);
+				}
+			})
+		}
 	}); // $("button").click end
+
+	// input[type='file'] 변화시 파일 저장
+	$("input[type='file']").change(function(e) {
+		e.preventDefault();
+
+		console.log("업로드 요청");
+
+		// FormData 객체 생성 - ajax 형태로 데이터를 보낼 때
+		// key / value 형태로 쌍을 생성
+		var formData = new FormData();
+
+		// 첨부파일 이미지 가져오기
+		var inputFile = $("input[name='profileimgname']");
+		var files = inputFile[0].files;
+
+		// 추가하기 전에 파일 확장자와 사이즈 확인				
+		if (!checkExtension(files[0].name, files[0].size)) {
+			return false;
+		}
+		formData.append("profileimgname", files[0]);
+
+		// formData의 정보를 서버에 저장
+		$.ajax({
+			url: "/member/uploadProfile",
+			type: "post",
+			processData: false,
+			contentType: false,
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			},
+			data: formData,
+			success: function(result) {
+				console.log(result);
+				//showUploadFile(result);
+				$("input[name='profileimgname']").val("");
+
+				if (result != null) {
+					$(result).each(function(idx, obj) {
+						var fileCallPath = encodeURIComponent(obj.profileUploadPath + "\\" + obj.pfuuid + "_" + obj.profileImgName);
+						var str = "/member/profileDisplay?fileName=" + fileCallPath;
+
+						$("#profileImg").attr("src", str);
+					})
+				}
+			},
+			error: function(xhr, status, error) {
+				console.log(xhr.responseText);
+			}
+		}); // ajax end
+	}); // $("input[type='file']").change end
 	
+	
+	// 파일 정보 불러오기 -> heaer.jsp에 해당 내용 추가
+	/*$.ajax ({
+		url: "/member/getProfileImg",
+		typ: "get",
+		success: function(data) {
+			console.log(data);
+			
+			if(data != null) {
+				$(data).each(function(idx, obj) {
+					var fileCallPath = encodeURIComponent(obj.profileUploadPath+"\\"+obj.pfuuid+"_"+obj.profileImgName);
+					var str = "/member/profileDisplay?fileName="+fileCallPath;
+					
+					$("#profileImg").attr("src", str);
+				})
+			}
+		}
+	})*/
 	
 	// 유효성 검사 - 닉네임
 	$("#modifyForm_nickname").validate({
@@ -360,7 +444,7 @@ $(function() {
 				minlength: "번호의 길이가 너무 짧습니다."
 			}
 		} // messages end
-	});
+	}); // $("#modifyForm_email").validate end
 	
 	// 자동 하이픈 추가
 	$("#phone").keydown(function(event) {
@@ -377,8 +461,29 @@ $(function() {
 		// 0~9 숫자, 백스페이스, 탭, Delete 키, 넘버패드 외 입력 불가
 		return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
 	}) // $("#phone").keydown(function(event) end
-});
+	
+	
+	// 프로필 이미지 업로드
+	//업로드 할 수 있는 파일의 종류 제한하기
+	function checkExtension(fileName, fileSize) {
+		//적혀있는 확장자만 허용
+		var regex = new RegExp("(.*?)\.(jpeg|jpg|PNG|png|bmp)$")
+		var maxSize = 5242880; //약 5MB
 
+		if (fileSize > maxSize) {
+			alert("파일 사이즈 초과");
+			return false;
+		}
+		//기재해놓은 확장자가 아닌 경우 메시지 띄우기
+		if (!regex.test(fileName)) {
+			alert("해당 종류의 파일은 업로드 할 수 없습니다.");
+			return false;
+		}
+		return true;
+	}//check Extnsion end
+	
+
+});
 
 // 유효성 검사 규칙
 $.validator.addMethod(

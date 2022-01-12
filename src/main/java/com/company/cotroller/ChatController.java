@@ -14,15 +14,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.company.domain.ChatMessage;
 import com.company.domain.ChatRoom;
+import com.company.domain.MemberAttachDTO;
 import com.company.domain.MemberDTO;
+import com.company.domain.ProductDTO;
 import com.company.handler.ChatSession;
 import com.company.service.ChatService;
 import com.company.service.ChatServiceImpl;
 import com.company.service.MemberService;
+import com.company.service.ProductService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
@@ -36,12 +40,17 @@ public class ChatController {
     @Autowired
     private MemberService mService;
     
-    @RequestMapping(value = "/view_chat")
+    @Autowired
+    private ProductService pService;
+    
+    @RequestMapping(value = "/view_chat", method = RequestMethod.GET)
     public String viewChat(Principal principal, Model model) {
     	
     	System.out.println(principal.getName());
+    	
     	if(principal.getName()!= null) {
     		model.addAttribute("loginMember", mService.readMemberInfo(principal.getName()));
+    		
     		return "/chatting/view_chat";
     	}
     	else 
@@ -78,18 +87,20 @@ public class ChatController {
      * @param masterNickname
      * @return
      */
-    @ResponseBody
     @RequestMapping("createChat.do")
-    public String createChat(ChatRoom room, String userId, String usernickname, String masternickname){
+    public String createChat(ChatRoom room, String userId, int  pno, Model model){
         
-        MemberDTO m = mService.readMemberInfo(masternickname); // 상대방 닉네임으로 member service에서 데이터 가져오기 
+    	// 상품번호로 등록한 판매자의 아이디/닉네임 가져오기 
+        ProductDTO p = pService.getRow(pno);
+        MemberDTO m =  mService.readMemberInfo(p.getUserid());
+        MemberAttachDTO mp = mService.readProfileInfo(m.getUserid());
+        
         
         // 채팅방DTO에 값 저장 
         room.setUserid(userId);
-        room.setUsernickname(usernickname);
         room.setMasterid(m.getUserid());
         room.setMasternickname(m.getNickname());
-        room.setMasterpic(m.getUserid());
+        room.setMasterpic(mp.getProfileImgName());
  
         ChatRoom exist  = cService.searchChatRoom(room);
         
@@ -99,15 +110,17 @@ public class ChatController {
             int result = cService.createChat(room);
             if(result == 1) {
                 System.out.println("방 만들었다!!");
-                return "new";
+                model.addAttribute("masterDto",m);
+                return "redirect:/view_chat";
             }else {
-                return "fail";
+                return "/product/index";
             }
         }
         // DB에 방이 있을 때
         else{
             System.out.println("방이 있다!!");
-            return "exist";
+            model.addAttribute("masterDto",m);
+            return "redirect:/view_chat";
         }
     }
     

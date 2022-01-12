@@ -40,6 +40,9 @@
 <!-- 폰트(글자 종류) api -->
 <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet" />
 
+<!-- script file -->
+<script src="/resources/js/includes/header.js"></script>
+
 <style>
 .profile-menu {
 	border-radius: 100%;
@@ -92,7 +95,7 @@
 					<sec:authentication property="principal" var="info" />
 						<li style="margin-left: 13px; margin-top: 5px;">
 							<div class="dropdown" style="height: 40px; width: 40px; margin:auto;">
-								<img class="dropdown-toggle profile-menu" data-toggle="dropdown" aria-expanded="false" src="/resources/images/temp-profile.png"/>
+								<img class="dropdown-toggle profile-menu profile" data-toggle="dropdown" aria-expanded="false" src="/resources/images/temp-profile.png" id="headerProfileImg" />
 								
 								<div class="dropdown-menu dropdown-menu-area" aria-labelledby="dropdownMenuLink">
 									<div class="dropdown-item dropdown-item-area">
@@ -106,6 +109,9 @@
 									</div>
 									<div class="dropdown-item dropdown-item-area">
 										<a href="/my-basket">찜목록</a>
+									</div>
+									<div class="dropdown-item dropdown-item-area">
+										<a href="/product/sellproduct">판매목록</a>
 									</div>
 									<div class="dropdown-item dropdown-item-area">
 										<form action="/member/logout" method="post">

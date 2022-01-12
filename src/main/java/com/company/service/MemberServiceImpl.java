@@ -5,7 +5,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.company.domain.MemberAttachDTO;
 import com.company.domain.MemberDTO;
+import com.company.mapper.MemberAttachMapper;
 import com.company.mapper.MemberMapper;
 
 @Service
@@ -13,6 +15,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberMapper memberMapper;
+	@Autowired
+	private MemberAttachMapper memberAttachMapper;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -57,6 +61,13 @@ public class MemberServiceImpl implements MemberService {
 	// 회원정보 불러오기
 	public MemberDTO readMemberInfo(String userid) { 
 		return memberMapper.readMemberInfo(userid);
+	}
+	
+
+	@Override
+	// 프로필 이미지 정보 불러오기
+	public MemberAttachDTO readProfileInfo(String userid) {
+		return memberAttachMapper.showProfileimg(userid);
 	}
 
 	@Override
@@ -119,5 +130,49 @@ public class MemberServiceImpl implements MemberService {
 	// 휴대전화 수정
 	public boolean modifyPhone(MemberDTO modifyDto) {
 		return memberMapper.modifyPhone(modifyDto) > 0 ? true : false;
+	}
+
+	@Override
+	// 프로필 이미지 저장
+	public boolean insertProfileImg(MemberAttachDTO insertDto) {
+		// 프로필 이미지 저장
+		// null이거나 사이즈가 0보다 작거나 같은 경우 리턴
+		if(insertDto.getProfileImgName() == null || insertDto.getProfileImgName().length() <= 0) {
+			return false;
+		}
+		
+		boolean result = memberAttachMapper.insertProfileImg(insertDto) > 0 ? true : false; 
+		
+		return result;
+	}
+
+	@Override
+	// 프로필 이미지 삭제
+	public boolean deleteProfileImg(String userid) {
+		return memberAttachMapper.deleteProfileImg(userid) > 0 ? true : false;
+	}
+
+	@Override
+	// 프로필 이미지 수정
+	public boolean modifyProfileImg(MemberAttachDTO modifyDto) {
+		return memberAttachMapper.modifyProfileImg(modifyDto) > 0 ? true : false;
+	}
+	
+	@Transactional
+	@Override
+	// 회원탈퇴
+	public boolean deleteMember(MemberDTO deleteDto) {
+		// 기존 비밀번호
+		String orgPassword = memberMapper.checkOrgPwd(deleteDto.getUserid());
+		
+		// 기존 비밀번호와 입력 비밀번호 일치 여부
+		boolean checkOrgPwd = passwordEncoder.matches(deleteDto.getPassword(), orgPassword);
+		
+		if(checkOrgPwd) { // 기존 비밀번호와 입력 비밀번호가 일치 한다면
+			if(memberMapper.deleteMember(deleteDto.getUserid()) > 0) {
+				memberMapper.deleteMemberROLE(deleteDto.getUserid());
+			}
+		}
+		return checkOrgPwd;
 	}
 }

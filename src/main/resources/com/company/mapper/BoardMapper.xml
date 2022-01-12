@@ -1,28 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.mapper.BoardMapper">
-	
-	<insert id="insert">
-		insert into myPlace(mno, userid, nickname, mcategory, title, content, mytown)
-		values (myPlace_seq.nextval, #{userid}, #{nickname}, #{mcategory}, #{title}, #{content}, #{mytown})
-	</insert>
 
+	<!-- 전체 게시물 보여주기 -->
 	<select id="listAll" resultType="com.company.domain.BoardDTO">
 	<![CDATA[
-	select *
-	from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,nickname,mytown,title,content,regdate,updatedate
-			from myplace where rownum <=(#{pageNum} * #{amount}))
-	where rn> (#{pageNum}-1) * #{amount}	
-		]]>
+		select *
+		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,mcategory,nickname,mytown,title,content,regdate,updatedate,replycnt
+				from myplace where rownum <=(#{pageNum} * #{amount}))
+		where rn> (#{pageNum}-1) * #{amount}	
+			]]>
 	</select>
 	
+	<!-- 같은 동네 게시물 보여주기 -->
+	 <!--<select id="listMyTown" resultType="com.company.domain.BoardDTO">
+		<![CDATA[
+		select *
+		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,nickname,mytown,title,content,regdate,updatedate
+				from myplace where rownum <=(#{pageNum} * #{amount}) and mytown=#{mytown})
+		where rn> (#{pageNum}-1) * #{amount}
+		]]>
+	</select>-->
+	
+	 <select id="listMyTown" resultType="com.company.domain.BoardDTO">
+		select * from myplace where mytown=#{mytown} order by mno desc
+	</select>
+	
+	<!-- 로그인 후 본인이 작성한 글 보여주기 -->
+	<!-- <select id="listMyPage" resultType="com.company.domain.BoardDTO">
+		<![CDATA[
+		select *
+		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,nickname,mytown,title,content,regdate,updatedate
+				from myplace where rownum <=(#{pageNum} * #{amount}))
+		where rn> (#{pageNum}-1) * #{amount} and userid = #{userid}
+		]]>
+	</select>-->
+	
+	<select id="listMyPage" resultType="com.company.domain.BoardDTO">
+		select * from myplace where userid=#{userid}
+	</select>
+	
+
 	<!-- 전체 게시물 수 -->
 	<select id="totalCnt" resultType="int">
 		select count(*) from myplace where mno > 0
 	</select>
 	
+	<!-- 같은 동네 전체 게시물 수 -->
+	<select id="totalCntMytown" resultType="int">
+		select count(*) from myplace where mytown=#{mytown}
+	</select>
+	
+	<!-- 로그인 한 사용자가 작성한 전체 게시물 수 -->
+	<select id="totalCntMypage" resultType="int">
+		select count(*) from myplace where userid=#{userid}
+	</select>
+	
+	
+	<insert id="insert">
+		insert into myPlace(mno, userid, nickname, mcategory, title, content, mytown)
+		values (myPlace_seq.nextval, #{userid}, #{nickname}, #{mcategory}, #{title}, #{content}, #{mytown})
+	</insert>
+		
 	<select id="read" resultType="com.company.domain.BoardDTO">
-		select mno, mcategory, nickname, title, content, mytown, regdate from myPlace
+		select mno, mcategory, userid, nickname, title, content, mytown, regdate, updatedate, replycnt from myPlace
 		where mno = #{mno}
 	</select>
 	
@@ -34,6 +75,19 @@
 	<delete id="delete">
 		delete from myPlace where mno=#{mno}
 	</delete>
+	
+	<!-- 댓글 개수 수정 -->
+	<update id="updateReplyCnt">
+		update myplace set replycnt = replycnt + #{amount}
+		where mno = #{mno}
+	</update>
+	
+	<!-- 줗아요 횟수 증가 -->
+	<update id="updateCuriousCnt">
+		update myplace set curious = curious + #{amount}
+		where mno = #{mno}
+	</update>
+	
 	
 	<!-- 글 작성시 필요한 회원정보 -->
 	<select id="readMemberInfo" resultType="com.company.domain.BoardDTO">

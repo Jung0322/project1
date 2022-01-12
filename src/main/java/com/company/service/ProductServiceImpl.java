@@ -93,4 +93,16 @@ public class ProductServiceImpl implements ProductService {
 		return mapper.SectotalCnt(cate, userid);
 	}
 
+	@Override
+	public List<ProductDTO> SellgetList(ProductCriteria cri, String userid) {
+		// TODO Auto-generated method stub
+		return mapper.SelllistAll(cri, userid);
+	}
+
+	@Override
+	public int SellgetTotalCount(String cate, String userid) {
+		// TODO Auto-generated method stub
+		return mapper.SelltotalCnt(cate, userid);
+	}
+
 }

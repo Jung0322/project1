@@ -13,24 +13,24 @@
                
                     <div class="member-profile-area">
 	                    <div class="profile-area">
-	                         <img src="/resources/images/temp-profile.png" class="profile-img">
+							<img src="/resources/images/temp-profile.png"  class="profile-img">
 	                    </div> <!-- profile-area end -->
 	
 	                    <div class="member-info-id" style="left: 25%;">
-	                         <h3 style="margin: 23px 0 15px 0;">${dto.nickname}</h3>
+	                        <h3 style="margin: 23px 0 15px 0;">${dto.nickname}</h3>
 	                         
-	                         <c:if test="${info.username != dto.userid}">
-		                         <div class="user-assessment">
-		                         	<button type="button" class="modify-profile-btn">매너평가</button>
+	                        <c:if test="${info.username != dto.userid}">
+								<div class="user-assessment">
+		                        	<button type="button" class="modify-profile-btn">매너평가</button>
 		                         	<button type="button" class="modify-profile-btn">모아보기</button>
-		                         </div> <!-- user-assessment end -->
-							 </c:if>
+		                        </div> <!-- user-assessment end -->
+							</c:if>
 							 
-	                         <c:if test="${info.username == dto.userid}">
-		                         <div class="member-info-modify">
-		                         	<a href="/member/modify-info"><button type="button" class="modify-info-btn">프로필 및 정보 수정</button></a>
-		                         </div> <!-- member-info-modify end -->
-	                         </c:if>
+	                        <c:if test="${info.username == dto.userid}">
+		                    	<div class="member-info-modify">
+		                        	<a href="/member/modify-info"><button type="button" class="modify-info-btn">프로필 및 정보 수정</button></a>
+		                        </div> <!-- member-info-modify end -->
+	                        </c:if>
 	                    </div> <!-- member-info-id end -->
                     </div> <!-- member-info-area end -->
 

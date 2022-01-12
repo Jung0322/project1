@@ -37,32 +37,11 @@
                    </div>
                     <div class="col-md-12 col-sm-6" id="textArea"> 
                     	<textarea id="summernote" name="content">${dto.content}</textarea>
-                         <script>
-                           $('#summernote').summernote({
-                             height: 300,                 // 에디터 높이
-                             minHeight: null,             // 최소 높이
-                             maxHeight: null,             // 최대 높이
-                             focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-                             lang: "ko-KR",               // 한글 설정
-                             placeholder: "내용을 작성해주세요",
-                             toolbar: [
-                            	['font',['sans-serif','Arial']],
-                                ['fontname', ['fontname']],
-                                ['fontsize', ['fontsize']],
-                                ['style', ['bold']],
-                                ['color', ['forecolor','color']],
-                                ['para', ['ul', 'ol', 'paragraph']],
-                                ['height', ['height']],
-                                ['insert',['picture','link']],
-                                ['view', ['fullscreen', 'help']]
-                             ]
-                           });
-                         </script>
                          </div>
                          <div>
-                              <input type="button" class="form-control" id="listButton2" onclick="location.href='/board/myPlace'" value="목록보기" style="border:1px solid #9BB460;">  
-                              <input type="submit" class="form-control" data-oper='modify' id="modifyButton" value="수정하기">
-                              <input type="submit" class="form-control" data-oper='remove' id="deleteButton" value="삭제하기" onclick="javascript: form.action='/board/remove';">
+                              <input type="button" class="form-control" id="listButton2" onclick="location.href='/board/myPlace'" value="목록보기" style="border: 1px solid #9BB460;">  
+                              <input type="submit" class="form-control" data-oper='modify' id="modifyButton" value="수정하기" style="border: 1px solid #9BB460;">
+                              <input type="submit" class="form-control" data-oper='remove' id="deleteButton" value="삭제하기" onclick="javascript: form.action='/board/remove';" style="border: 1px solid #9BB460;">
                          </div>
                          	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />                       	                     	                      	                     	                        	                       	                     	
 							<input type="hidden" name="mno" value="${dto.mno}">
@@ -71,7 +50,11 @@
           </div>
      </div>
 </section>
+<script>
+let csrfHeaderName = "${_csrf.headerName}";
+let csrfTokenValue = "${_csrf.token}";	
+</script>
 
-
+<script src="/resources/js/board/imageUpload.js"></script>  
 <script src="/resources/js/myPlace.js"></script>  
 <%@ include file="../includes/footer.jsp"%>

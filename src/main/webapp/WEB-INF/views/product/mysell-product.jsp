@@ -14,7 +14,7 @@
 </script>
 <div class="section-title" style="padding-top: 45px;">
                          <h3>상품</h3>
-                         <h2>장바구니</h2>
+                         <h2>판매목록</h2>
                          <hr />
                     </div>
 <body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page col-md-offset-1 col-md-10 col-sm-12">
@@ -56,6 +56,11 @@
 					<h3>${dto.title}</h3>
 					<span class="price"><span class="amount">${dto.price}원</span></span>
 					</a><span>❤ : ${dto.good}</span>
+					<div class="modify" style="margin-top: 5px;"> 
+					<a class="mbutton" href="${dto.pno}" style="margin-right: 5px;">수정</a> 
+					<a class="rbutton" style="margin-right: 5px;">판매완료</a>    
+					<a class="sbutton">예약중</a>
+					</div>
 					</li>
 				</c:forEach>
 					
@@ -107,6 +112,7 @@ $(pimg).each(function(i,item){
 
 
 <!-- #page -->
+<script src='/resources/js/product/mysell.js'></script>
 <script src='/resources/js/product/index.js'></script>
 <script src='/resources/js/product/shopjs.js'></script>
 <script src='/resources/js/plugins.js'></script>

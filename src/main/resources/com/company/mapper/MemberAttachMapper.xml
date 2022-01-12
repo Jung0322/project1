@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.mapper.MemberAttachMapper">
+	<!-- 프로필 이미지 저장 -->
+	<insert id="insertProfileImg">
+		INSERT INTO
+			profileimg(pfuuid, userid, profileUploadPath, profileImgName)
+		VALUES
+			(#{pfuuid}, #{userid}, #{profileUploadPath}, #{profileImgName})
+	</insert>
+	
+	<!-- 프로필 이미지 정보 불러오기 -->
+	<select id="showProfileimg" resultType="com.company.domain.MemberAttachDTO">
+		SELECT * FROM profileimg WHERE userid=#{userid}
+	</select>
+	
+	<!-- 저장된 프로필 이미지 삭제 -->
+	<delete id="deleteProfileImg">
+		DELETE FROM profileimg WHERE userid=#{userid}
+	</delete>
+	
+	<!-- 프로필 이미지 수정 -->
+	<update id="modifyProfileImg">
+		UPDATE 
+			profileimg
+		SET
+			pfuuid=#{pfuuid}, profileUploadPath=#{profileUploadPath}, profileImgName=#{profileImgName}
+		WHERE
+			userid=#{userid}
+	</update>
+</mapper>

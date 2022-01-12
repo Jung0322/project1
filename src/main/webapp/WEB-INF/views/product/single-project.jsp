@@ -145,8 +145,8 @@ console.log(userid);
 </script>
 
 <!-- #page -->
-<script src='/resources/js/single-product.js'></script>
-<script src='/resources/js/slide.js'></script>
+<script src='/resources/js/product/single-product.js'></script>
+<script src='/resources/js/product/slide.js'></script>
 <script src='/resources/js/shopjs.js'></script>
 <script src='/resources/js/plugins.js'></script>
 <script src='/resources/js/scripts.js'></script>

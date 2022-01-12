@@ -1,4 +1,4 @@
-#writeButton, #replyButton, #listButton {
+#writeButton, #replyButton {
 	background: #9BB460;
 	border-radius: 100px;
 	border: none;
@@ -10,33 +10,34 @@
 	float: right;
 }
 
-#modifyButton, #deleteButton {
-	background: #549145;
+#listButton{
+	background: #9BB460;
 	border-radius: 100px;
 	border: none;
 	color: #ffffff;
 	font-weight: 400;
 	transition: all 0.4s ease-in-out;
 	height: 40px;
-	width: 80px;
-	float: right;
+	width: 150px;
+	float: left;
+	
 }
 
-#modifyButton, #deleteButton {
-	margin-right: 5px;
-}
-
-#listButton2 {
-	border-radius: 100px;
-	border: 1px solid #9BB460;
+#modifyButton, #deleteButton, #listButton2 {
 	color: #9BB460;
 	font-weight: 400;
 	transition: all 0.4s ease-in-out;
 	height: 40px;
-	width: 150px;
-	float: right;
-	margin-right: 320px;
+	width: 100px;
+	float: left;
+	margin-right: 10px;
+	
 }
+
+#listButton2{
+	margin-left: 33%;
+}
+
 
 #successButton {
 	background: #9BB460;
@@ -47,8 +48,9 @@
 	transition: all 0.4s ease-in-out;
 	height: 40px;
 	width: 150px;
-	float: right;
+	float: left;
 	margin-right: 20px;
+	margin-left: 32.5%;
 }
 
 #replyButton {
@@ -100,13 +102,17 @@
 
 .blog-post {
 	  border-bottom: 1px solid #f0f0f0;
-	  padding-top: 12px; /* 게시물과 구분선 상단 간격*/
+	  padding-top: 25px; /* 게시물과 구분선 상단 간격*/
 	  padding-bottom: 12px; /* 게시물과 구분선 하단 간격*/ 
 }
 
 .blog-post-title h2{
 	font-size: 20px;
 	
+}
+
+.blog-post-des p img{
+	display: none;
 }
 
 
@@ -135,7 +141,7 @@
 }
 
 #dropdown1 {
-	margin-left: 95%;
+	margin-left: 94%;
 	position: absolute;
 }
 
@@ -144,4 +150,26 @@
 	display: block;
 	border: none;
 	background-color: white;
+}
+
+.profile {
+	display: inline-block;
+    width: 32px;
+    margin-right: 4px;
+}
+
+#re-reply {
+	margin-bottom: 13px;
+	background-color: white;
+	border: 1px solid #9BB460;
+	color: #9BB460;
+	transition: all 0.4s ease-in-out;
+		
+}
+
+.modal-footer button {
+	background-color: #9BB460;
+	border: 1px solid #9BB460;
+	color: white;
+	transition: all 0.4s ease-in-out;
 }
