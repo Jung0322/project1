@@ -11,7 +11,6 @@
     
 
 <!-- Contact Section -->
-
 <body>
 <section id="contact">
      <div class="container">

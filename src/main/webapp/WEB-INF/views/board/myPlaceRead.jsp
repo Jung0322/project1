@@ -17,7 +17,7 @@
 							<h2 style="line-height: 20px;">${dto.title}</h2>
 						</div>
 						<div class="blog-post-format">
-							<span> <a href="/member/profile-page"><img src="/resources/images/temp-profile.png" class="img-responsive img-circle profile"> ${dto.nickname}</a></span> 
+							<span> <a href="/member/profile-page?userid=${dto.userid}"><img src="/resources/images/temp-profile.png" class="img-responsive img-circle profile"> ${dto.nickname}</a></span> 
 							<span>${dto.mytown}</span> 
 							<span><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}" /></span> 
 							<span style="display: none;">${dto.userid}</span> 							
@@ -41,8 +41,7 @@
 						<p>${dto.content}</p>
 					</div>
 					<div class="blog-good" id="ques">
-						<!-- 카테고리에 맞는 버튼 띄우기 -->
-						<c:choose>
+						<c:choose>						
 							<c:when test="${dto.mcategory == '동네질문'}">
 								<span><i class="far fa-grin"></i> 궁금해요</span>
 							</c:when>
@@ -55,7 +54,8 @@
 							<c:otherwise>
 								<span><i class="far fa-grin"></i> 공감해요</span>
 							</c:otherwise>
-						</c:choose>						
+						</c:choose>
+						<span id="quesCnt">${dto.curious}</span>						
 					</div>
 				<div class="blog-reply">
 					<!--  <h3>${dto.replycnt} Comments</h3>-->
@@ -105,6 +105,7 @@
 				</div>
 				</sec:authorize>
 			</div>
+		</div>
 		</div>	
 </section>
             <!-- 댓글작성 폼 -->
@@ -163,22 +164,28 @@
 			    </div>
 			  </div>
 			</div>
-		</div>
+		</div>		
 <script>
 	//현재 글번호 가져오기
 	let mno = ${dto.mno};
+	let writer = "${dto.userid}";
+	
 	
 	let replyer = null;
 	<sec:authorize access = "isAuthenticated()">
-		replyer = '<sec:authentication property="principal.username"/>';
+		replyer = "<sec:authentication property='principal.username'/>";
 	</sec:authorize>
 	
 	let csrfHeaderName = "${_csrf.headerName}";
 	let csrfTokenValue = "${_csrf.token}";	
 	
+	//페이지 로드 시 좋아요 표시
+	let good_check = "${good_check}";
+	let curious = ${dto.curious};
+	
 </script>
 
-
+<script src="/resources/js/board/good.js"></script> 
 <script src="/resources/js/board/myPlace.js"></script> 
 <script src="/resources/js/board/myPlaceReply.js"></script> 
 <%@ include file="../includes/footer.jsp"%>

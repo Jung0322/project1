@@ -59,9 +59,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	//로그인 후 동네 게시물만 보여주기
-	public List<BoardDTO> listMyTown(String mytown) {
-//		System.out.println("===================="+cri);
-		return mapper.listMyTown(mytown);
+	public List<BoardDTO> listMyTown(MyPlaceCriteria cri,String mytown) {
+		return mapper.listMyTown(cri,mytown);
 	}
 
 	//동네 게시물 개수 
@@ -70,14 +69,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	//본인이 작성한 게시물만 보여주기
-	public List<BoardDTO> listMyPage(String userid) {
-		return mapper.listMyPage(userid);
+	public List<BoardDTO> listMyPage(MyPlaceCriteria cri,String userid) {
+		return mapper.listMyPage(cri,userid);
 	}
 
-
-
-
-	
-
+	@Override
+	public int totalCntMypage(MyPlaceCriteria cri, String userid) {
+		return  mapper.totalCntMypage(cri, userid);
+	}
 
 }
