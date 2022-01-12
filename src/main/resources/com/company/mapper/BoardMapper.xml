@@ -6,41 +6,33 @@
 	<select id="listAll" resultType="com.company.domain.BoardDTO">
 	<![CDATA[
 		select *
-		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,mcategory,nickname,mytown,title,content,regdate,updatedate,replycnt
+		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,mcategory,nickname,mytown,title,content,regdate,updatedate,replycnt,curious
 				from myplace where rownum <=(#{pageNum} * #{amount}))
 		where rn> (#{pageNum}-1) * #{amount}	
 			]]>
 	</select>
 	
 	<!-- 같은 동네 게시물 보여주기 -->
-	 <!--<select id="listMyTown" resultType="com.company.domain.BoardDTO">
+	<select id="listMyTown" resultType="com.company.domain.BoardDTO">
 		<![CDATA[
 		select *
-		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,nickname,mytown,title,content,regdate,updatedate
-				from myplace where rownum <=(#{pageNum} * #{amount}) and mytown=#{mytown})
-		where rn> (#{pageNum}-1) * #{amount}
+		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,nickname,mytown,title,content,regdate,updatedate,curious,mcategory
+				from myplace where rownum <=(#{cri.pageNum} * #{cri.amount}) and mytown=#{mytown})
+		where rn> (#{cri.pageNum}-1) * #{cri.amount}
 		]]>
-	</select>-->
-	
-	 <select id="listMyTown" resultType="com.company.domain.BoardDTO">
-		select * from myplace where mytown=#{mytown} order by mno desc
 	</select>
-	
+		
 	<!-- 로그인 후 본인이 작성한 글 보여주기 -->
-	<!-- <select id="listMyPage" resultType="com.company.domain.BoardDTO">
+	<select id="listMyPage" resultType="com.company.domain.BoardDTO">
 		<![CDATA[
 		select *
-		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,nickname,mytown,title,content,regdate,updatedate
-				from myplace where rownum <=(#{pageNum} * #{amount}))
-		where rn> (#{pageNum}-1) * #{amount} and userid = #{userid}
+		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,nickname,mytown,title,content,regdate,updatedate,curious,mcategory
+				from myplace where rownum <=(#{cri.pageNum} * #{cri.amount}))
+		where rn> (#{cri.pageNum}-1) * #{cri.amount} and userid = #{userid}
 		]]>
-	</select>-->
-	
-	<select id="listMyPage" resultType="com.company.domain.BoardDTO">
-		select * from myplace where userid=#{userid}
 	</select>
 	
-
+	
 	<!-- 전체 게시물 수 -->
 	<select id="totalCnt" resultType="int">
 		select count(*) from myplace where mno > 0
@@ -63,7 +55,7 @@
 	</insert>
 		
 	<select id="read" resultType="com.company.domain.BoardDTO">
-		select mno, mcategory, userid, nickname, title, content, mytown, regdate, updatedate, replycnt from myPlace
+		select mno, mcategory, userid, nickname, title, content, mytown, regdate, updatedate, replycnt,curious from myPlace
 		where mno = #{mno}
 	</select>
 	
@@ -82,13 +74,7 @@
 		where mno = #{mno}
 	</update>
 	
-	<!-- 줗아요 횟수 증가 -->
-	<update id="updateCuriousCnt">
-		update myplace set curious = curious + #{amount}
-		where mno = #{mno}
-	</update>
-	
-	
+		
 	<!-- 글 작성시 필요한 회원정보 -->
 	<select id="readMemberInfo" resultType="com.company.domain.BoardDTO">
 		select nickname, userid, mytown from member where userid=#{userid}

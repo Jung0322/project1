@@ -28,8 +28,6 @@ public class BoardDTO {
 	private String nickname;
 	private String mytown;
 	
-	private List<MyPlaceAttachDTO> attachList;
-	private List<MyPlaceCriteria> cri;
 
 
 }

@@ -9,8 +9,8 @@ import com.company.domain.MyPlaceCriteria;
 
 public interface BoardService {
 	public List<BoardDTO> getList(MyPlaceCriteria cri);
-	public List<BoardDTO> listMyTown(String mytown);
-	public List<BoardDTO> listMyPage(String userid);
+	public List<BoardDTO> listMyTown(MyPlaceCriteria cri,String mytown);
+	public List<BoardDTO> listMyPage(MyPlaceCriteria cri,String userid);
 	
 	public boolean register(BoardDTO insertDTO);
 	public BoardDTO getRow(int mno);
@@ -19,7 +19,7 @@ public interface BoardService {
 	
 	public int getTotalCount(MyPlaceCriteria cri);
 	public int totalCntMytown(MyPlaceCriteria cri, String mytown);
-	
+	public int totalCntMypage(MyPlaceCriteria cri, String userid);
 	
 	public BoardDTO readMemberInfo(String userid);
 	

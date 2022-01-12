@@ -20,8 +20,8 @@
                <div class="col-md-offset-1 col-md-10 col-sm-12">
                     <form action="" method="post" role="form">
                          <div class="col-md-6 col-sm-6">
-                              <select class="form-control" name="mcategory">
-                                   <option>동네생활</option>
+                              <select class="form-control" name="mcategory" id="mcategory">
+                                   <option>동네질문</option>
                                    <option>동네사건사고</option>
                                    <option>일상</option>
                                    <option>기타</option>
@@ -51,10 +51,13 @@
      </div>
 </section>
 <script>
+
 let csrfHeaderName = "${_csrf.headerName}";
 let csrfTokenValue = "${_csrf.token}";	
+
+let mcategory = "${dto.mcategory}"
+
 </script>
 
 <script src="/resources/js/board/imageUpload.js"></script>  
-<script src="/resources/js/myPlace.js"></script>  
 <%@ include file="../includes/footer.jsp"%>

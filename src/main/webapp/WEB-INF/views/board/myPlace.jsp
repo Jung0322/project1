@@ -14,12 +14,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-offset-1 col-md-10 col-sm-12">
+				
 				<!-- 로그인 후 보여질 버튼 -->
 				<sec:authorize access="isAuthenticated()">
 					<div class="writeButton">
 						<input type="submit" class="form-control" id="writeButton" value="글 작성" onclick="location.href='/board/write'">
 					</div>
 				</sec:authorize>
+				
 					<c:forEach var="dto" items="${list}">
 					<div class="blog-post">
 						<div class="blog-post-title">
@@ -32,7 +34,7 @@
 						<div class="blog-post-format">
 							<span>
 								<a href="/member/profile-page?userid=${dto.userid}">
-									<img src="/resources/images/temp-profile.png" class="img-responsive img-circle profile"> ${dto.nickname}
+									<img src="/resources/images/temp-profile.png" class="img-responsive img-circle"> ${dto.nickname}
 								</a>
 							</span> 
 							<span>${dto.mytown}</span> 
