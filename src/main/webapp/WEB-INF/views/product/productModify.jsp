@@ -21,7 +21,8 @@
                          <h2>중고거래 상품 수정</h2>
                     </div>
 
-                    <form action="/product/product-registration" method="post" role="form">
+                    <form action="/product/modify" method="post" role="form">
+                    	<input type="hidden" name="pno" value="${row.pno}"/>
                          <div class="col-md-6 col-sm-6">
                               <input type="text" class="form-control" placeholder="제목" name="title" value="${row.title}" required />
                          </div>
@@ -58,6 +59,8 @@
                          <div class="col-md-12 col-sm-12"> 
                               <textarea class="form-control" rows="5" placeholder="상품 상세정보를 입력해주세요." name="content" required>${row.content}</textarea>
                          </div>
+                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    </form>
                          <div class="row">
 							<div class="col-md-12 col-sm-12">
 								<div class="panel panel-default">
@@ -73,18 +76,31 @@
 								</div>
 							</div>
 						</div>
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                         <div class="col-md-8">
-                              <input id="registration" type="submit" class="form-control" value="등록">
+					<div style="justify-content: center; display: flex;">
+                         <div class="col-md-3">
+                              <button class="registration form-control" data-oper='modify' type="submit">수정</button>
                          </div>
-                    </form>
+                         <div class="col-md-3">
+                              <button class="registration form-control" data-oper='remove' type="submit">삭제</button>
+                         </div>
+                          <div class="col-md-3">
+                              <button class="registration form-control" data-oper='list' type="submit">목록</button>
+                         </div>
+                         </div>
                </div>
 
           </div>
      </div>
 </section>	
 	
-	
+<%-- remove와 list를 위한 폼--%>
+<form action="" id="actionForm">
+	<input type="hidden" name="pageNum" value="${cri.pageNum}"/>
+	<input type="hidden" name="amount" value="${cri.amount}"/>
+	<input type="hidden" name="pno" value="${row.pno}"/>
+	<%-- 시큐리티 적용으로 인한 추가 --%>
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+</form> 	
 	
 <script>
 	//ajax 동작시 헤더 값에 포함해서 보낼 csrf 토큰 값 설정
@@ -92,7 +108,7 @@
 	let csrfTokenValue= "${_csrf.token}";
 	
 	let pno = ${row.pno};
-	console.log(pno);
+	console.log("pno확인 :"+pno);
 	console.log(${row.delivery});
 	console.log(${row.discount});
 	
@@ -103,7 +119,6 @@
 	
 <!-- #page -->
 <script src='/resources/js/product/modify.js'></script>
-<script src='/resources/js/product/product-registration.js'></script>
 <script src='/resources/js/product/shopjs.js'></script>
 <script src='/resources/js/plugins.js'></script>
 <script src='/resources/js/scripts.js'></script>

@@ -36,6 +36,8 @@ public interface MemberService {
 	public boolean modifyEmail(MemberDTO modifyDto);
 	// 휴대전화 수정
 	public boolean modifyPhone(MemberDTO modifyDto);
+	// 내동네 수정
+	public boolean modifyMytown(MemberDTO modifyDto);
 	// 프로필 이미지 저장
 	public boolean insertProfileImg(MemberAttachDTO insertDto);
 	// 프로필 이미지 삭제

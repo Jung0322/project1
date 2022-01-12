@@ -94,15 +94,70 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductDTO> SellgetList(ProductCriteria cri, String userid) {
+	public List<ProductDTO> SellgetList(ProductCriteria cri, String userid,int num) {
 		// TODO Auto-generated method stub
-		return mapper.SelllistAll(cri, userid);
+		return mapper.SelllistAll(cri, userid,num);
 	}
 
 	@Override
-	public int SellgetTotalCount(String cate, String userid) {
+	public int SellgetTotalCount(String cate, String userid,int num) {
 		// TODO Auto-generated method stub
-		return mapper.SelltotalCnt(cate, userid);
+		return mapper.SelltotalCnt(cate, userid,num);
 	}
+
+	@Transactional
+	@Override
+	public boolean delete(int pno) {
+		// 첨부물 삭제
+		AttachMapper.deleteAll(pno);
+		
+		return mapper.delete(pno)>0?true:false;
+	}
+
+	@Transactional
+	@Override
+	public boolean update(ProductDTO dto) {
+		// 기존 첨부파일 삭제
+		AttachMapper.deleteAll(dto.getPno());
+		
+		//글 수정
+		boolean result = mapper.update(dto)==1;
+		
+		//첨부물이 없다면 돌아가기
+		if(dto.getAttachList() == null || dto.getAttachList().size()<=0) {
+			return result;
+		}
+		
+		//첨부파일 추가
+			if(result && dto.getAttachList().size() > 0) {
+				dto.getAttachList().forEach(attach ->{
+					attach.setPno(dto.getPno());
+					AttachMapper.insert(attach);
+				});
+			}
+		
+		
+		return result;
+	}
+
+	@Override
+	public boolean attachRemove(int pno) {
+		// TODO Auto-generated method stub
+		return AttachMapper.deleteAll(pno)>0?true:false;
+	}
+
+	@Override
+	public boolean resupdate(int pno, int num) {
+		// TODO Auto-generated method stub
+		return mapper.resupdate(pno,num)>0?true:false;
+	}
+
+	@Override
+	public boolean solupdate(int num, int pno) {
+		// TODO Auto-generated method stub
+		return mapper.solupdate(num, pno)>0?true:false;
+	}
+
+	
 
 }

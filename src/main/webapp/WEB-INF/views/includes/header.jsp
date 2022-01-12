@@ -50,10 +50,14 @@
 	width: 100%;
 }
 .dropdown-menu-area {
-	width: 250px;
+	width: 150px;
 }
 .dropdown-item-area {
 	display: block;
+}
+#logoutForm {
+	margin: 0;
+	padding: 0;
 }
 </style>
 
@@ -114,8 +118,12 @@
 										<a href="/product/sellproduct">판매목록</a>
 									</div>
 									<div class="dropdown-item dropdown-item-area">
-										<form action="/member/logout" method="post">
-											<button type="submit">로그아웃</button>
+										<a href="/product/soldproduct">판매완료상품</a>
+									</div>
+									<div class="dropdown-item dropdown-item-area">
+										<form action="/member/logout" method="post" name="logoutForm" id="logoutForm">
+											<!-- <button type="submit">로그아웃</button> -->
+											<a href="javascript:logoutForm.submit();">로그아웃</a>
 											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 										</form>
 									</div>

@@ -50,7 +50,7 @@
                               		<label for="mytown">내 동네</label>
                                 	<input type="button" value="선택" class="modify-btn" onclick="goPopup();" />
                               </div>
-                              <input type="text" id="mytown" name="mytown" class="form-control" placeholder="내 동네" >
+                              <input type="text" id="mytown" name="mytown" class="form-control" placeholder="내 동네(동까지만 저장 됩니다)" readonly>
                               <small id="mytown"></small>
                          </div>
                          <div class="login-form">

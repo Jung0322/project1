@@ -26,7 +26,7 @@
 									<div>
 										<p id="local">${row.mytown}</p>
 											<sec:authorize access="isAuthenticated()">
-												<button class="heart"><img id="asd" src="c" alt=""></button>
+												<button class="heart"><img id="asd" src="" alt=""></button>
 											</sec:authorize>
 									</div>
 								<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
@@ -61,7 +61,7 @@
 
 									<h2>Product Description</h2>
 									<p>
-										"${row.content}"
+										${row.content}
 									</p>
 									</div>
 							</div>
@@ -146,8 +146,8 @@ console.log(userid);
 
 <!-- #page -->
 <script src='/resources/js/product/single-product.js'></script>
-<script src='/resources/js/product/slide.js'></script>
-<script src='/resources/js/shopjs.js'></script>
+<script src='/resources/js/slide.js'></script>
+<script src='/resources/js/product/shopjs.js'></script>
 <script src='/resources/js/plugins.js'></script>
 <script src='/resources/js/scripts.js'></script>
 <script src='/resources/js/masonry.pkgd.min.js'></script>

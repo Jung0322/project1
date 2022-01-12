@@ -37,5 +37,5 @@ foreign key(userid) references member(userid) ON DELETE CASCADE;
 select * from profileImg;
 delete from profileImg;
 
-
+update member set mytown='서울특별시 영등ㅍ구 여의도동' where userid='haha'
 select * from member;

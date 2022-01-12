@@ -133,6 +133,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	// 내동네 수정
+	public boolean modifyMytown(MemberDTO modifyDto) {
+		return memberMapper.modifyMytown(modifyDto) > 0 ? true : false;
+	}
+
+	@Override
 	// 프로필 이미지 저장
 	public boolean insertProfileImg(MemberAttachDTO insertDto) {
 		// 프로필 이미지 저장

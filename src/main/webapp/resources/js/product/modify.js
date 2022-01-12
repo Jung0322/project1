@@ -3,10 +3,19 @@
  */
 $(function(){
 	
-	//submit 버튼 클릭시 첨부파일 정보 추가하기
-	$(":submit").click(function(e){
-		e.preventDefault();
-		
+	//remove, list 일 때 전송될 폼
+   let formObj = $("#actionForm");
+    
+   $(".registration").click(function(e){
+      e.preventDefault(); //submit 막기
+      
+      //어느버튼에서 명령이 왔는가
+      //data-*(아무거나 와도된다.)
+      let oper = $(this).data("oper");
+      
+      if(oper=='modify'){
+         formObj = $("form[role='form']")
+
 		//첨부된 파일 정보 수집하기
 		var str = "";
 		$(".uploadResult ul li").each(function(i,obj){
@@ -17,9 +26,25 @@ $(function(){
 			str +="<input type='hidden' name='attachList["+i+"].pimgname' value='"+ele.data('filename')+"'>";
 		})
 		
-		console.log("form");
-		console.log("str"+ str);
+		if(str==""){
+			alert("상품사진을 첨부하세요");
+			return;
+		}
 		
+		console.log("form");
+		console.log(str);
+		
+		//현재 폼에 첨부파일 정보 추가하기
+      	formObj.append(str);
+
+      }else if(oper=='remove'){
+         formObj.attr("action","/product/delete").attr("method","post");
+      }else{
+         formObj.attr("action","/product/sellproduct")
+               .attr("method","get")
+               .find("input[name='pno']").remove();
+      }
+
 		if($("select[name='category']").val()==''){
 			alert("카테고리를 입력하세요");
 			return;
@@ -29,22 +54,17 @@ $(function(){
 		}else if($("select[name='discount']").val()==''){
 			alert("내고가능 여부를 입력하세요");
 			return;
-		}else if(str==""){
-			alert("상품사진을 첨부하세요");
-			return;
 		}else if($("input[name='title']").val()==''){
 			alert("제목을 입력하세요");
 			return;
 		}else if($("input[name='price']").val()==''){
 			alert("가격을 입력하세요");
 			return;
-		}else{
-			//게시글 등록 폼에 추가하기
-			$("form[role='form']").append(str).submit();
 		}
-		
-		
-	})
+
+	  formObj.submit();
+   })
+	
 	
 	let uploadResult = $(".uploadResult ul");
 	let str1="";
@@ -187,29 +207,16 @@ $(function(){
 	$(".uploadResult").on("click","button",function(){
 		//삭제할 파일 가져오기
 		let targetFile =  $(this).data("file");
-
+		//삭제할 파일 타입 가져오기
+		let type = $(this).data("type");
 		//x버튼의 부모 li 가져오기
 		var targetLi = $(this).closest("li");
 		
-		$.ajax({
-			url:'/deleteFile',
-			type:'post',
-			beforeSend:function(xhr){
-				xhr.setRequestHeader(csrfHeaderName,csrfTokenValue)
-			},
-			data:{
-				fileName:targetFile
-			},
-			success:function(data){
-				//목록에서 지우기
-				targetLi.remove();
-			},
-			error:function(xhr,status,error){
-				alert(xhr.responseText);
-			}
-			
-		})
-	})
+		if(confirm("정말로 파일을 삭제하시겠습니까")){
+			//목록에서 지우기
+			targetLi.remove();
+		}
+	})// X 버튼 종료
 	
 })
 

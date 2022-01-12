@@ -105,6 +105,11 @@
 		UPDATE member SET phone=#{phone} WHERE userid=#{userid}
 	</update>
 	
+	<!-- 내동네 수정 -->
+	<update id="modifyMytown">
+		update member set mytown=#{mytown} where userid=#{userid}
+	</update>
+	
 	
 	<!-- 회원탈퇴 -->
 	<!-- 회원정보 삭제 -->

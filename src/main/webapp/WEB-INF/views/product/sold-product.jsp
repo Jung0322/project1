@@ -14,8 +14,8 @@
 </script>
 <div class="section-title" style="padding-top: 45px;">
                          <h3>상품</h3>
-                         <h2>판매목록</h2>
-                         <hr />
+                         <h2>판매완료 상품 목록</h2>
+                         <hr/>
                     </div>
 <body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page col-md-offset-1 col-md-10 col-sm-12">
 		<div id="content" class="site-content">
@@ -39,9 +39,6 @@
 				<c:forEach var="dto" items="${list}">
 					<li class="product">
 					<a href="${dto.pno}" class="move">
-					<c:if test="${dto.reservation == 1}">
-						<span class="onsale">예약</span>				
-					</c:if>	
 					<script>
 					uploadPath = '${dto.attachList[0].puploadPath}';
 					fileName = '${dto.attachList[0].pimgname}';
@@ -57,16 +54,7 @@
 					<span class="price"><span class="amount">${dto.price}원</span></span>
 					</a><span>❤ : ${dto.good}</span>
 					<div class="modify" style="margin-top: 5px;"> 
-					<a class="mbutton" href="${dto.pno}" style="margin-right: 5px;">수정</a> 
-					<a class="rbutton" href="${dto.pno}" style="margin-right: 5px;">판매완료</a> 
-					<c:choose>
-						<c:when test="${dto.reservation == 1}">
-							<a class="sbutton" href="${dto.pno}" data-val=0>예약취소</a>
-						</c:when>
-						<c:when test="${dto.reservation == 0}">
-							<a class="sbutton" href="${dto.pno}" data-val=1>예약설정</a>
-						</c:when>
-					</c:choose>
+					<a class="rbutton" href="${dto.pno}" style="margin-right: 5px;">판매완료취소</a> 
 					</div>
 					</li>
 				</c:forEach>
@@ -118,7 +106,7 @@ $(pimg).each(function(i,item){
 
 
 <!-- #page -->
-<script src='/resources/js/product/mysell.js'></script>
+<script src='/resources/js/product/sold.js'></script>
 <script src='/resources/js/product/index.js'></script>
 <script src='/resources/js/product/shopjs.js'></script>
 <script src='/resources/js/plugins.js'></script>

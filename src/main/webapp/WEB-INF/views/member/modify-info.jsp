@@ -118,7 +118,10 @@
                          <div class="login-form">
                          	<div class="modify-label">
 							 	<p>내 동네</p>
-							 	<input type="button" class="modify-btn" value="수정" />
+							 	<button type="button" id="mytown-btn" class="modify-btn" data-oper="mytown" onclick="goPopup();">수정</button>
+							 	<button type="button" id="mytown-btn-reselect" class="modify-btn-reselect" onclick="goPopup();">다시 선택</button>
+							 	<button type="submit" id="mytown-btn-submit" class="modify-btn-submit">저장</button>
+	                            <button type="button" id="mytown-btn-cancel" class="modify-btn" style="display: none;">취소</button>
 						 	</div>
                           
                             <input type="text" name="mytown" id="mytown" class="form-control" value="${dto.mytown}" placeholder="내 동네" readonly>
@@ -134,6 +137,30 @@
           </div>
      </div>
 </section>
+
+
+<script>
+function goPopup(e){
+   // 주소검색을 수행할 팝업 페이지를 호출합니다.
+   // 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+   var pop = window.open("/member/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+   
+   // 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+}
+
+
+/* function jusoCallBack(roadFullAddr,jibunAddr){ */
+function jusoCallBack(siNm, sggNm, emdNm, liNm){
+      // 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+      var addressEl =  document.querySelector("#mytown");
+      addressEl.value = siNm+" "+sggNm+" "+emdNm+" "+liNm;
+      
+      /* document.form.roadFullAddr.value = roadFullAddr;
+      document.form.jibunAddr.value = jibunAddr; */
+      
+}
+</script>
 
 <script src="/resources/js/member/modify-info.js"></script>
 <%@ include file="../includes/footer.jsp" %>

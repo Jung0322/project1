@@ -220,7 +220,6 @@ $(function() {
 		} // phone end
 		else if(oper == 'profile') {
 			$("input[type='file']").click();
-			
 		} // profile end
 		else if(oper == 'delete') {
 			$.ajax({
@@ -233,7 +232,53 @@ $(function() {
 					$("#profileImg").attr("src", str);
 				}
 			})
-		}
+		} // delete end(프로필 이미지 삭제 버튼)
+		else if(oper == 'mytown') {
+			// 기존 내 동내 값
+			var mytownOrgValue = $("#mytown").val();
+			
+			// 수정버튼 클릭 시
+			$("#mytown-btn").css("display", "none");
+			$("#mytown-btn-reselect").css("display", "block");
+			$("#mytown-btn-submit").css("display", "block");
+			$("#mytown-btn-cancel").css("display", "block");
+			
+			// 수정 취소버튼 클릭 시
+			$("#mytown-btn-cancel").click(function() {
+				$("#mytown-btn").css("display", "block");
+				$("#mytown-btn-reselect").css("display", "none");
+				$("#mytown-btn-submit").css("display", "none");
+				$("#mytown-btn-cancel").css("display", "none");
+			
+				$("#mytown").val(mytownOrgValue);	
+				
+				$("small#mytown > label").remove();
+			})
+			
+			// 수정 저장버튼 클릭 시 
+			$("#mytown-btn-submit").click(function(e) {
+				e.preventDefault();
+				
+				if($("small#mytown > label").text() != ""){ // small 태그 안에 값이 있다면
+					return; // 리턴(값을 보내지 않음)
+				}
+				
+				$.ajax({
+					url: "/member/mytown-modify",
+					type: "post",
+					beforeSend: function(xhr) {
+						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+					},
+					data: { mytown: $("#mytown").val() },
+					success: function() {
+						$("#mytown-btn").css("display", "block");
+						$("#mytown-btn-reselect").css("display", "none");
+						$("#mytown-btn-submit").css("display", "none");
+						$("#mytown-btn-cancel").css("display", "none");
+					}
+				})
+			})
+		} // mytown end
 	}); // $("button").click end
 
 	// input[type='file'] 변화시 파일 저장
