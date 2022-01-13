@@ -10,11 +10,9 @@
 				from myplace where rownum <=(#{pageNum} * #{amount}))
 		where rn> (#{pageNum}-1) * #{amount}	
 			]]>
-		<if test="!mcategory.equals('전체')">
+		<!--  <if test="!mcategory.equals('전체')">
 			and mcategory=#{mcategory}
-		</if>
-		
-			
+		</if>-->			
 	</select>
 	
 	<!-- 같은 동네 게시물 보여주기 -->

@@ -14,7 +14,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-offset-1 col-md-10 col-sm-12">
-				<form action="" method="get" id="categoryForm">			
+				<!--  <form action="" method="get" id="categoryForm">			
 				 	<div class="cBtn">
 						<button class="categoryBtn" name="mcategory" value="동네질문">동네질문</button>
 						<button class="categoryBtn" name="mcategory" value="동네맛집">동네맛집</button>
@@ -23,7 +23,7 @@
 						<button class="categoryBtn" name="mcategory" value="일상">일상</button>
 						<button class="categoryBtn" name="mcategory" value="기타">기타</button>
 					</div>
-				</form>
+				</form>-->
 				
 				<!-- 로그인 후 보여질 버튼 -->
 				<sec:authorize access="isAuthenticated()">
