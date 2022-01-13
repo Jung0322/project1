@@ -34,6 +34,7 @@
 						<option value="여성잡화/의류"<c:out value="${pageDto.cri.cate =='여성잡화/의류'?'selected':''}"/>>여성잡화/의류</option>
 						<option value="남성잡화/의류"<c:out value="${pageDto.cri.cate=='남성잡화/의류'?'selected':''}"/>>남성잡화/의류</option>
 					</select>
+					<input type="hidden" name="userid" value="${list[0].userid}"/>
 				</form>
 				<ul class="products">
 				<c:forEach var="dto" items="${list}">
@@ -46,6 +47,7 @@
 					uploadPath = '${dto.attachList[0].puploadPath}';
 					fileName = '${dto.attachList[0].pimgname}';
 					uuid = '${dto.attachList[0].puuid}';
+					
 					
 					originPath = uploadPath+"\\"+uuid+"_"+fileName;	
 					
@@ -102,7 +104,6 @@
 	<input type="hidden" name="type" value="${pageDto.cri.type}"/>
 	<input type="hidden" name="cate" value="${pageDto.cri.cate}"/>
 	<input type="hidden" name="pno" value=""/>
-	
 	</form>
 		</div>
 	
@@ -110,7 +111,9 @@
 console.log(pathArr);	
 
 
+
 let pimg = $(".pimg");
+
 
 $(pimg).each(function(i,item){
 	$(this).attr("src","/display?fileName="+encodeURIComponent(pathArr[i]));

@@ -121,8 +121,11 @@ public class ProductController {
 		
 		String nickname = service.nicknameGet(row.getUserid());
 		
-		List<ProductDTO> list = service.SellgetList(cri,row.getUserid(),0);
+		ProductCriteria cri1 = new ProductCriteria();
 		
+		List<ProductDTO> list = service.SellgetList(cri1,row.getUserid(),0);
+		
+		System.out.println("리스트 : "+list);
 		
 		
 		for(ProductDTO dto:list) {
@@ -336,7 +339,7 @@ public class ProductController {
 	
 	//예약중 수정
 	@RequestMapping(value = "/resupdate", method = RequestMethod.GET)
-	public String resupdate(int pno,int num ,@ModelAttribute("cri") ProductCriteria cri, RedirectAttributes rttr) {
+	public String resupdate(int pno,int num ,@ModelAttribute("cri") ProductCriteria cri, RedirectAttributes rttr, Principal principal) {
 		log.info("resupdate");
 		
 		service.resupdate(pno,num);
@@ -345,6 +348,7 @@ public class ProductController {
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("cate", cri.getCate());
+		rttr.addAttribute("userid", principal.getName());
 				
 		rttr.addFlashAttribute("result","success");
 		
@@ -353,7 +357,7 @@ public class ProductController {
 	
 	//판매완료 수정
 	@RequestMapping(value = "/solupdate", method = RequestMethod.GET)
-	public String solupdate(int pno,int num ,@ModelAttribute("cri") ProductCriteria cri, RedirectAttributes rttr) {
+	public String solupdate(int pno,int num ,@ModelAttribute("cri") ProductCriteria cri, RedirectAttributes rttr, Principal principal) {
 		log.info("resupdate");
 		
 		service.solupdate(num, pno);
@@ -362,6 +366,7 @@ public class ProductController {
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("cate", cri.getCate());
+		rttr.addAttribute("userid", principal.getName());
 				
 		rttr.addFlashAttribute("result","success");
 		
