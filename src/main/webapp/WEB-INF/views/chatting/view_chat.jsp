@@ -13,8 +13,8 @@
 .chat_wrap .chatMiddle { padding-bottom: 80px; overflow: scroll; }
 .chat_wrap .chatMiddle ul { width: 100%; list-style: none; }
 .chatMiddle .format { display:none; } 
-.format  ul li { list-style: none; } 
-.chat_wrap .header { font-size: 14px; padding: 15px 0; background: #9BB460; color: white; text-align: center;  }
+.format  ul li { list-style: none; }
+.chat_wrap .header { font-size: 14px; padding: 15px 0; background: #9BB460; color: white; text-align: center; }
 .chat_wrap .chatMiddle {height: 500px; }
 .chat_wrap .chatMiddle ul li { width: 100%; }
 .chat_wrap .chatMiddle ul li.left { text-align: left; }
