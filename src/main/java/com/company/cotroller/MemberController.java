@@ -267,8 +267,8 @@ public class MemberController {
 		System.out.println("파일 업로드");
 		
 		// 서버 폴더에 첨부 파일 저장
-		String uploadFolder = "C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member";
-//		String uploadFolder = "E:\\ccoli\\member"; // 시연할 때 사용
+		//String uploadFolder = "C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member";
+		String uploadFolder = "c:\\ccoli\\member"; // 시연할 때 사용
 		String uploadFileName = "";
 		
 		// 업로드 폴더 결정
@@ -406,9 +406,9 @@ public class MemberController {
 		log.info("프로필 이미지 "+fileName);
 		System.out.println("프로필 이미지 "+fileName);
 		
-		File file = new File("C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member\\", fileName);
+		//File file = new File("C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member\\", fileName);
 		// 시연용 파일폴더 경로
-//		File file = new File("e:\\ccoli\\member\\", fileName);
+		File file = new File("c:\\ccoli\\member\\", fileName);
 		
 		ResponseEntity<byte[]> result = null;
 		
@@ -435,6 +435,17 @@ public class MemberController {
 		}
 		return null;
 	}
+	// 채팅 리스트 프로필 이미지 정보 가져오기
+		@GetMapping("/chatgetProfileImg")
+		public ResponseEntity<MemberAttachDTO> getProfileImg(String userid, String masterid) {
+			System.out.println("userid :::"+userid+"masterid ::::"+masterid);
+			if(userid != null) {
+				return new ResponseEntity<MemberAttachDTO>(memberService.readProfileInfo(userid), HttpStatus.OK);
+			} else if(masterid != null) {
+				return new ResponseEntity<MemberAttachDTO>(memberService.readProfileInfo(masterid), HttpStatus.OK);
+			}
+			return null;
+		}
 	
 	// 업로드된 프로필 사진 삭제
 	@ResponseBody
@@ -462,11 +473,11 @@ public class MemberController {
 		log.info("프로필 이미지 삭제 중");
 		System.out.println("프로필 이미지 삭제 중");
 		
-		Path file = Paths.get("C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member\\"+
-								attachDto.getProfileUploadPath()+"\\"+attachDto.getPfuuid()+"_"+attachDto.getProfileImgName());
+		//Path file = Paths.get("C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member\\"+
+		//						attachDto.getProfileUploadPath()+"\\"+attachDto.getPfuuid()+"_"+attachDto.getProfileImgName());
 		// 시연용 경로
-//		Path file = Paths.get("e:\\ccoli\\member\\"+
-//				attachDto.getProfileUploadPath()+"\\"+attachDto.getPfuuid()+"_"+attachDto.getProfileImgName());
+		Path file = Paths.get("c:\\ccoli\\member\\"+
+				attachDto.getProfileUploadPath()+"\\"+attachDto.getPfuuid()+"_"+attachDto.getProfileImgName());
 		
 		try {
 			Files.deleteIfExists(file);

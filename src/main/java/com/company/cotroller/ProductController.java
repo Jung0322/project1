@@ -279,14 +279,14 @@ public class ProductController {
 	      log.info("파일 삭제중....");
 	      
 	      attachListDto.forEach(attach -> {
-	         Path file = Paths.get("e:\\ccoli\\product"+attach.getPuploadPath()+"\\"+attach.getPuuid()+"_"+attach.getPimgname());
+	         Path file = Paths.get("c:\\ccoli\\product"+attach.getPuploadPath()+"\\"+attach.getPuuid()+"_"+attach.getPimgname());
 	      
 	         try {
 	        	//일반파일, 이미지 원본 파일만 삭제
 	            Files.deleteIfExists(file);
 	            
 	            if(Files.probeContentType(file).startsWith("image")) {
-	               Path thumbnail = Paths.get("e:\\ccoli\\product"+attach.getPuploadPath()+"\\s_"+attach.getPuuid()+"_"+attach.getPimgname());
+	               Path thumbnail = Paths.get("c:\\ccoli\\product"+attach.getPuploadPath()+"\\s_"+attach.getPuuid()+"_"+attach.getPimgname());
 	               
 	               //이미지 썸네일 삭제
 	               Files.delete(thumbnail);

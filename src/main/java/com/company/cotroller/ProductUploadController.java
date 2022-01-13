@@ -46,7 +46,7 @@ public class ProductUploadController {
 		
 		
 		//서버 폴더에 첨부 파일 저장
-		String uploadFoler= "e:\\ccoli\\product";
+		String uploadFoler= "c:\\ccoli\\product";
 		
 		String uploadFileName = "";
 		
@@ -118,7 +118,7 @@ public class ProductUploadController {
 	public ResponseEntity<byte[]> getFile(String fileName) {
 		log.info("이미지 요청   "+fileName);
 		
-		File file = new File("e:\\ccoli\\product",fileName);
+		File file = new File("c:\\ccoli\\product",fileName);
 		
 		ResponseEntity<byte[]> result = null;
 		
@@ -142,7 +142,7 @@ public class ProductUploadController {
 		
 		try {
 			//일반 파일인 경우 - 원본 파일만 삭제
-			File file = new File("e:\\ccoli\\product"+URLDecoder.decode(fileName,"utf-8"));
+			File file = new File("c:\\ccoli\\product"+URLDecoder.decode(fileName,"utf-8"));
 			file.delete();
 			
 			//이미지 파일인 경우 - 원본 이미지와 썸네일 이미지를 삭제

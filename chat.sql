@@ -33,6 +33,7 @@ alter table chatmessage drop  column sessioncount;
 alter table chatmessage modify sessioncount number(2);
 insert into chatmessage values(21,SEQ_CHATMESSAGE_ID.NEXTVAL,'이게 채팅이냐?','hong12','huskii',default,default);
 CREATE SEQUENCE SEQ_CHATMESSAGE_ID;
+delete from chatmessage where sentid='hong2';
 select * from chatmessage;
 delete from chatmessage where roomid='21';
 insert into chatroom values(SEQ_CHATROOM_id.nextval,'hong12','huskiii','default.png',1,'hong2','as','default.png');

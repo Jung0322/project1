@@ -103,7 +103,8 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 
 				// 메세지에 이름, 이메일, 내용을 담는다.
 				TextMessage textMessage = new TextMessage(
-						chatMessage.getNickname() + "," + chatMessage.getSentid() + "," + chatMessage.getMessage());
+						
+						chatMessage.getSentid() + "," + chatMessage.getNickname() + "," + chatMessage.getMessage()+",right");
 
 				// 현재 session 수
 				int sessionCount = 0;
@@ -118,6 +119,7 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 				// 동적쿼리에서 사용할 sessionCount 저장
 				// sessionCount == 2 일 때는 unReadCount = 0,
 				// sessionCount == 1 일 때는 unReadCount = 1
+				
 				chatMessage.setSessionCount(sessionCount);
 				System.out.println("세션 수 : ::::"+chatMessage.getSessionCount());
 				// DB에 저장한다.
@@ -145,12 +147,13 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 			sessionList.remove(session);
 		}
 	}
-	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 
 	
 }

@@ -24,7 +24,7 @@ create table profileimg (
  	profileimgname varchar2(200) not null, -- 프로필 이미지 이름
 	CONSTRAINT pk_profileImg PRIMARY KEY (pfuuid) -- pk
 );
-
+drop table profileimg;
 -- 3. 유저 권한 테이블
 create table sp_member_authority(
 	userid varchar2(50) not null,

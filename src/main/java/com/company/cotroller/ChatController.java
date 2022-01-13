@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -87,17 +88,20 @@ public class ChatController {
      * @param masterNickname
      * @return
      */
+    @ResponseBody
     @RequestMapping("createChat.do")
-    public String createChat(ChatRoom room, String userId, int  pno, Model model){
+    public String createChat(ChatRoom room, String userid, int  pno, Model model){
         
     	// 상품번호로 등록한 판매자의 아이디/닉네임 가져오기 
         ProductDTO p = pService.getRow(pno);
         MemberDTO m =  mService.readMemberInfo(p.getUserid());
         MemberAttachDTO mp = mService.readProfileInfo(m.getUserid());
-        
+        System.out.println("로그인한 아이디 :::::"+userid+"상품 판매하는 아이디:::"+m.getUserid());
         
         // 채팅방DTO에 값 저장 
-        room.setUserid(userId);
+        room.setUserid(userid);
+        room.setUsernickname(mService.readMemberInfo(userid).getNickname());
+        room.setUserpic(mService.readProfileInfo(userid).getProfileImgName());
         room.setMasterid(m.getUserid());
         room.setMasternickname(m.getNickname());
         room.setMasterpic(mp.getProfileImgName());
@@ -111,16 +115,16 @@ public class ChatController {
             if(result == 1) {
                 System.out.println("방 만들었다!!");
                 model.addAttribute("masterDto",m);
-                return "redirect:/view_chat";
+                return "createRoom";
             }else {
-                return "/product/index";
+                return "failRoom";
             }
         }
         // DB에 방이 있을 때
         else{
             System.out.println("방이 있다!!");
             model.addAttribute("masterDto",m);
-            return "redirect:/view_chat";
+            return "exist";
         }
     }
     

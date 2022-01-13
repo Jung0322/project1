@@ -25,7 +25,7 @@
  	<insert id="createChat" >
 		insert into CHATROOM
 		values(SEQ_CHATROOM_ID.NEXTVAL, #{userid},
-		#{usernickname}, DEFAULT,
+		#{usernickname}, #{userpic},
 		#{masterid}, #{masternickname}, #{masterpic})
 	</insert>
 
@@ -52,10 +52,10 @@
 		WHERE roomid = #{roomid}
 	</select>
 
-	<select id="searchChatRoom" resultMap="chatRoomResultset">
+	<select id="searchChatRoom" resultType="com.company.domain.ChatRoom">
 		SELECT * FROM CHATROOM
-		WHERE usernickname= #{usernickname} AND
-		masternickname = #{masternickname}
+		WHERE userid= #{userid} AND
+		masterid = #{masterid}
 	</select>
 
 	<select id="chatRoomList" resultMap="chatRoomResultset">
