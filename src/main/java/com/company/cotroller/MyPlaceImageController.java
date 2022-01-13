@@ -31,7 +31,7 @@ public class MyPlaceImageController {
 		System.out.println("image 업로드 " + Arrays.toString(uploadFile));
 
 		// 서버 폴더에 첨부 파일 저장
-		String uploadFolder = "c:\\ccoli\\myPlace";
+		String uploadFolder = "e:\\ccoli\\myPlace";
 		String uploadFileName = "";
 
 		// 첨부파일 목록 리스트 생성

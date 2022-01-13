@@ -2,33 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.mapper.BoardMapper">
 
-<!-- 	<sql id="getCateList">
-		<trim prefix="and">
-			<foreach collection="mcategoryArr" item="mcategory">
-				<choose>
-					<when test="mcategory=='Q'.tostring()">
-						mcategory={'동네질문'}
-					</when>		
-					<when test="mcategory=='W'.tostring()">
-						mcategory={'동네맛집'}
-					</when>	
-					<when test="mcategory=='N'.tostring()">
-						mcategory={'동네소식'}
-					</when>				
-					<when test="mcategory=='S'.tostring()">
-						mcategory={'동네사건사고'}
-					</when>
-					<when test="mcategory=='D'.tostring()">
-						mcategory={'일상'}
-					</when>
-					<when test="mcategory=='E'.tostring()">
-						mcategory={'기타'}
-					</when>			
-				</choose>
-			</foreach>		
-		</trim>	
-	</sql> -->
-
 	<!-- 전체 게시물 보여주기 -->
 	<select id="listAll" resultType="com.company.domain.BoardDTO">
 	<![CDATA[
@@ -37,6 +10,11 @@
 				from myplace where rownum <=(#{pageNum} * #{amount}))
 		where rn> (#{pageNum}-1) * #{amount}	
 			]]>
+		<if test="!mcategory.equals('전체')">
+			and mcategory=#{mcategory}
+		</if>
+		
+			
 	</select>
 	
 	<!-- 같은 동네 게시물 보여주기 -->
