@@ -124,16 +124,16 @@
 						$chatWrap.html("");
 
 						var $div; // 1단계
-						var $img; // 2단계
-						var $divs; // 2단계
-						var $span; // 2단계
-
+						var $img;
+						var divs;
+						
 						if (data.length > 0) {
 							// 읽지 않은 메세지 초기화
 							countAll = 0;
 
 							// 태그 동적 추가
 							for ( var i in data) {
+								var $span; // 2단계
 								// 자신이 구매자 입장일 때
 								if (data[i].userid == "${loginMember.userid}") {
 									console.log("구매자 아이디 :::"+data[i].userid+"판매자 아이디 :::"+data[i].masterid);
@@ -142,35 +142,27 @@
 												.attr("id", data[i].roomid)
 												.attr("userId",
 														data[i].userid);
+										$img = $("<img class='profile_img' src='/resources/images/temp-profile.png'>");
+										$divs = $("<div class='userNameId'>");
 										 $.ajax({
 											url: "/member/chatgetProfileImg",
 											type:"get",
 											data: {
-												masterid: data[i].masterid
+												userid: data[i].masterid
 											},
 											success: function(result){
-												console.log(result);
+												console.log("결과:::::"+result);
 												if(result != null) {
 													$(result).each(function(idx, obj) {
 														var fileCallPath = encodeURIComponent(obj.profileUploadPath+"\\"+obj.pfuuid+"_"+obj.profileImgName);
 														var str = "/member/profileDisplay?fileName="+fileCallPath;
-														$img = $("<img class='profile_img'>")
-														.attr("src", str);
-														console.log("판매자 아이디 :::"+result.userid);
-					 									$divs = $("<div class='userNameId'>").text(result.userid);
-													})
+														$img = $img.attr("src", str);
 														$div.append($img);
-														$div.append($divs);
+													})
 												}
 											}
 											
 										}) 
-									// 현재 판매자가 로그아웃 상태 일 때
-									/*$img = $("<img class='profile_img'>")
-											.attr("src", "/resources/images/default.png"/* + data[i].masterPic );*/ 
-										
-/* 									$divs = $("<div class='userNameId'>").text(data[i].masterid);
-										 $div.append($divs);*/
 								} //자신이 구매자일떄 end
 								// 자신이 판매자 입장일 때
 								else {
@@ -180,6 +172,7 @@
 												.attr("id", data[i].roomid)
 												.attr("masterId",
 														data[i].masterid);
+										$img = $("<img class='profile_img'>").attr("src", "/resources/images/temp-profile.png");
 										 $.ajax({
 												url: "/member/chatgetProfileImg",
 												type:"get",
@@ -193,12 +186,9 @@
 															var fileCallPath = encodeURIComponent(obj.profileUploadPath+"\\"+obj.pfuuid+"_"+obj.profileImgName);
 															var str = "/member/profileDisplay?fileName="+fileCallPath;
 															console.log("경로 !!:::"+str);
-															$img = $("<img class='profile_img'>")
-															.attr("src", str);
+															
+					                                        $img = $img.attr("src", str);
 															$div.append($img);
-															$divs = $("<div class='userNameId'>")
-																	.text(result.userid);
-															$div.append($divs);
 														})
 													}
 												}
@@ -211,16 +201,15 @@
 
 								// 읽지 않은 메세지가 0이 아닐 때
 								if (data[i].unReadCount != 0) {
-									$span = $("<span class='notRead'>")
-											.text(data[i].unReadCount);
+									$span = $("<span class='notRead'>").text(data[i].unReadCount);
 								} else {
 									$span = $("<span>");
 								}
-								console.log($img);
-								//$div.append($img);
-								//$div.append($divs);
+								$divs = $("<span class='userNameId'>").text(data[i].masterid);
+								$div.append($img);
+								$div.append($divs);
 								$div.append($span);
-
+								
 								$chatWrap.append($div);
 
 								// String을 int로 바꿔주고 더해준다.
