@@ -10,12 +10,27 @@
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
-		<java-version>11</java-version>
-		<org.springframework-version>5.3.7</org.springframework-version>
-		<org.aspectj-version>1.9.6</org.aspectj-version>
-		<org.slf4j-version>1.7.30</org.slf4j-version>
-	</properties>
-	<dependencies>
+      <java-version>11</java-version>
+      <org.springframework-version>5.3.7</org.springframework-version>
+      <org.aspectj-version>1.9.6</org.aspectj-version>
+      <org.slf4j-version>1.7.30</org.slf4j-version>
+   </properties>
+   <dependencies>
+
+	<!-- 문자 인증관련 라이브러리 -->
+	<dependency>
+		<groupId>net.nurigo</groupId>
+		<artifactId>javaSDK</artifactId>
+		<version>2.2</version>
+	</dependency>
+   
+	<!-- https://mvnrepository.com/artifact/org.java-websocket/Java-WebSocket -->
+	<dependency>
+		<groupId>org.java-websocket</groupId>
+		<artifactId>Java-WebSocket</artifactId>
+		<version>1.5.1</version> <!-- 스프링과 버전 맞추는 작업이 쉽지않았다.ㅠㅠ -->
+	</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>

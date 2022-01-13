@@ -302,3 +302,85 @@
 	height: 100px;
 	display: none;
 }
+
+
+
+/* find-userinfo.jsp */
+.find-userinfo {
+	position: relative;
+	border-bottom: 1px solid #808080;
+	margin: 10px;
+}
+.phone {
+	width: 74%;
+}
+.sendPhoneCerti {
+	border: 1px solid #9BB460;
+	color: #9BB460;
+	font-weight: 400;
+	transition: all 0.4s ease-in-out;
+	
+	/* .form-control style 가져옴 */
+	display: block;
+    width: 116px;
+    height: 25px;
+    padding: 3px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    background-image: none;
+    
+    /* 오른쪽으로 정렬 */
+    position: absolute;
+    right: 0px;
+    top: 117px;
+}
+.checkPhoneCerti {
+	border: 1px solid #9BB460;
+	color: #9BB460;
+	font-weight: 400;
+	transition: all 0.4s ease-in-out;
+	
+	/* .form-control style 가져옴 */
+	display: block;
+    width: 116px;
+    height: 25px;
+    padding: 3px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    background-image: none;
+    
+    /* 오른쪽으로 정렬 */
+    position: absolute;
+    right: 0px;
+    top: 162px;
+}
+.chkMemberInfo {
+	border: 1px solid #9BB460;
+	color: #fff;
+	font-weight: 400;
+	transition: all 0.4s ease-in-out;
+	
+	/* .form-control style 가져옴 */
+	display: block;
+    width: 116px;
+    height: 25px;
+    padding: 3px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    background-color: #9BB460;
+    background-image: none;
+    
+    /* 오른쪽으로 정렬 */
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0 0 5px 0;
+}
+.div-chkMemberInfo {
+	position: relative;
+	height: 30px;
+	margin-bottom: 8px;
+	display: none;
+}

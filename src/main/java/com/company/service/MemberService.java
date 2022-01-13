@@ -17,6 +17,7 @@ public interface MemberService {
 	// 중복 이메일 검사(전체)
 	public MemberDTO checkEmail(String email);
 	
+	
 	// 회원정보 수정
 	// 회원정보 불러오기
 	public MemberDTO readMemberInfo(String userid);
@@ -48,4 +49,15 @@ public interface MemberService {
 	
 	// 회원탈퇴
 	public boolean deleteMember(MemberDTO deleteDto);
+	
+	
+	// 아이디, 비밀번호 찾기
+	// 전화번호 인증
+	public void certifiedPhoneNumber(String phone, int randomNumer);
+	// 아이디 찾기
+	public String findUserid(String email, String phone);
+	// 비밀번호 찾기
+	public MemberDTO findPwd(MemberDTO MemberDto);
+	// 비밀전호 재설정
+	public boolean replacePwd(String userid, String new_password);
 }
