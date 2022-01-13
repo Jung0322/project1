@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.mapper.MyPlaceGoodMapper">
+	
+	<!-- 좋아요 숫자 증가 -->
+	<update id="updateGoodCnt">
+		update myplace set curious = curious + 1
+		where mno = #{mno}
+	</update>
+	
+	<!-- 좋아요 숫자 증감 -->
+	<update id="deleteGoodCnt">
+		update myplace set curious = curious -1
+		where mno = #{mno}
+	</update>
+	
+	<!-- 좋아요 정보 삽입 -->
+	<insert id="insert">
+		insert into myPlaceGood (mno,userid)
+		values (#{mno},#{userid})
+	</insert>
+	
+	<!-- 좋아요 취소 시 좋아요 테이블에서 내역 삭제 -->
+	<delete id="deleteGoodInfo">
+		delete from myplaceGood where mno=#{mno} and userid=#{userid}
+	</delete>
+	
+	<!-- 좋아요 정보 가져오기 -->
+	<select id="getGoodInfo" resultType="java.lang.String">
+		select userid from MYPLACEGOOD where mno=#{mno} and userid=#{userid}	
+	</select>
+
+</mapper>
+
+

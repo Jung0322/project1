@@ -83,6 +83,7 @@
 	<script>
 	let userid = '${loginMember.userid}';
 	let masterid = '${masterDto.userid}'; 
+	console.log('${masterDto.userid}');
 
 	// 총 읽지 않은 갯수
 	let countAll = 0;

@@ -2,11 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.mapper.ProductAttachMapper">
 
+<!-- 상품사진 삽입 -->
 <insert id="insert">
 		insert into productimg(puuid,puploadPath,pimgname,pno) 
 		values(#{puuid},#{puploadPath},#{pimgname},#{pno})
 </insert>
 
+<!-- 해당 상품 사진 정보 추출 -->
 <select id="getRowImg" resultType="com.company.domain.AttachProductDTO">
 		select pno, puuid, puploadpath, pimgname
 		from PRODUCTIMG  where pno = #{pno}

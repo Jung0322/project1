@@ -36,6 +36,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.company.domain.MemberAttachDTO;
 import com.company.domain.MemberDTO;
 import com.company.service.MemberService;
+import com.company.service.ProductService;
 
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -47,6 +48,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private ProductService productservice;
 	
 	// 회원가입 & 회원정보 수정
 	// 회원가입 화면
@@ -408,7 +412,7 @@ public class MemberController {
 		
 		//File file = new File("C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member\\", fileName);
 		// 시연용 파일폴더 경로
-		File file = new File("c:\\ccoli\\member\\", fileName);
+		File file = new File("C:\\ccoli\\member\\", fileName);
 		
 		ResponseEntity<byte[]> result = null;
 		
@@ -531,7 +535,13 @@ public class MemberController {
 	public void profilePage(String userid, Model model) {
 		MemberDTO memberInfo = memberService.readMemberInfo(userid);
 		
+		//해당 유저 판매상품 개수
+		int sellproductN = productservice.SellgetTotalCount("전체", userid, 0);
+		
 		model.addAttribute("dto", memberInfo);
+		
+		//해당 유저 판매상품 개수 저장
+		model.addAttribute("sellpdcount", sellproductN);
 		
 		// 프로필 이미지 불러오기
 		//프로필 이미지 - userid

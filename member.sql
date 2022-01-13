@@ -11,6 +11,9 @@ create table member (
     regdate DATE default sysdate, -- 가입일
     CONSTRAINT pk_member PRIMARY KEY (userid) -- pk
 );
+select * from member;
+delete from member where userid = 'hong3';
+drop table member;
 ALTER TABLE member MODIFY  password varchar2(100);
 ALTER TABLE member  ADD  enabled char(1) default '1';
 -- 가입날짜 컬럼 추가(기존 테이블이 있는 경우에 사용)

@@ -46,4 +46,6 @@ public interface ProductMapper {
 	//판매완료 수정
 	public int solupdate(@Param("num") int num, @Param("pno") int pno);
 
+	//닉네임 불러오기
+	public String nicknameGet(String userid);
 }

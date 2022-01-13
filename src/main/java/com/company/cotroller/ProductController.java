@@ -117,7 +117,24 @@ public class ProductController {
 		
 		ProductDTO row = service.getRow(pno);
 		
+		row.setContent(row.getContent().replaceAll("\r\n","<br>"));
+		
+		String nickname = service.nicknameGet(row.getUserid());
+		
+		List<ProductDTO> list = service.SellgetList(cri,row.getUserid(),0);
+		
+		
+		
+		for(ProductDTO dto:list) {
+			for(AttachProductDTO attach:dto.getAttachList()) {
+				
+				attach.setPuploadPath(attach.getPuploadPath().replace("\\", "\\\\"));
+			}
+		}
+		
 		model.addAttribute("row",row);
+		model.addAttribute("nickname",nickname);
+		model.addAttribute("list", list);
   	
 		
 		return "/product/single-project";
@@ -155,13 +172,13 @@ public class ProductController {
 	
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/product/sellproduct", method = RequestMethod.GET)
-	public String sellProduct(Model model, ProductCriteria cri,Principal principal) {
+	public String sellProduct(Model model, ProductCriteria cri,String userid) {
 	log.info("로그인 한 회원 전체 보여주기");
 	
+	System.out.println("사용자 명: "+userid);
 
 	System.out.println("가나다라"+cri);
 	
-	String userid= principal.getName();
 	
 	List<ProductDTO> list = service.SellgetList(cri,userid,0);
 	
@@ -191,6 +208,8 @@ public class ProductController {
 	return"/product/mysell-product";
 	
 }
+	
+	
 	
 	//판매완료 상품 목록
 	@PreAuthorize("isAuthenticated()")

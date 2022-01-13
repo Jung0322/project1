@@ -158,6 +158,12 @@ public class ProductServiceImpl implements ProductService {
 		return mapper.solupdate(num, pno)>0?true:false;
 	}
 
+	@Override
+	public String nicknameGet(String userid) {
+		// TODO Auto-generated method stub
+		return mapper.nicknameGet(userid);
+	}
+
 	
 
 }

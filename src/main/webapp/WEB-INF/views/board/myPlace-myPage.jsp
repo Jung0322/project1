@@ -27,7 +27,7 @@
 						<div class="blog-post-format">
 							<span>
 								<a href="/member/profile-page?userid=${dto.userid}">
-									<img src="/resources/images/temp-profile.png" class="img-responsive img-circle profile"> ${dto.nickname}
+									<img src="/resources/images/temp-profile.png" class="img-responsive img-circle"> ${dto.nickname}
 								</a>
 							</span> 
 							<span>${dto.mytown}</span> 
@@ -46,13 +46,29 @@
 	<!-- pagination -->
 	<nav class="woocommerce-pagination">
 		<ul class="page-numbers">
-			<li><span class="page-numbers current">1</span></li>
-			<li><a class="page-numbers" href="#">2</a></li>
-			<li><a class="next page-numbers" href="#">→</a></li>
+			<c:if test="${pageDto.prev}">
+				<li class="paginate_button">
+					<a class="next page-numbers" href="${pageDto.startPage-1}">←</a>
+				</li>
+			</c:if>
+			<c:forEach var="idx" begin="${pageDto.startPage}" end="${pageDto.endPage}">
+				<li class="paginate_button">
+					<span class="page-numbers current">
+						<a href="${idx}">${idx}</a>
+					</span>
+				</li>
+			</c:forEach>
+			<c:if test="${pageDto.next}">
+				<li class="paginate_button">
+					<a class="next page-numbers" href="${pageDto.endPage+1}">→</a>
+				</li>
+			</c:if>
 		</ul>
 	</nav>
 	
 <form action="" method="get" id="actionForm">
+	<input type="hidden" name="pageNum" value="${pageDto.cri.pageNum}" />
+	<input type="hidden" name="amount" value="${pageDto.cri.amount}" />
 	<input type="hidden" name="mno" value=""/>
 </form>
 

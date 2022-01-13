@@ -3,6 +3,34 @@
  */
 var cc = 0;
 $(function(){
+	
+	//css 화면 비율 때문에 class명 수정
+	$( 'ul li:nth-child(1)' ).addClass('first product');
+
+	$( 'ul li:nth-child(4)' ).addClass('last product');
+
+	$( 'ul li:nth-child(5)' ).addClass('first product');
+
+	$( 'ul li:nth-child(8)' ).addClass('last product');
+	
+		$(".move").click(function(e){
+	//a태그 속성 중지
+	e.preventDefault();
+	//actionForm에 bno값을 추가한다
+	
+	let actionForm = $("#actionForm");
+						
+	let pno = $(this).attr('href');
+	actionForm.find("input[name='pno']").val(pno);		
+	
+	//actionForm action 설정 /board/read
+	actionForm.attr("action","/single-product");
+	
+	actionForm.submit();
+	
+	})		
+	
+	
 	console.log("zz"+ cc);
 	if(userid!=null){
 			$.ajax({

@@ -4,14 +4,11 @@ create table chatroom(
 	roomid varchar2(10) not null,
 	userid varchar2(50) not null, -- 로그인 아이디(pk)
     usernickname varchar2(20) not null, -- 로그인 유저 닉네임
-    userprofile varchar2(50), -- user 프로필 
-    
-    unReadCount number(2) default 1,
-    
     masterid varchar2(50) not null,
-    masternickname varchar2(20) not null,
-    masterprofile varchar2(50)
+    masternickname varchar2(20) not null
+    
 );
+drop table chatroom;
 select * from chatroom;
 -- 채팅방 테이블 방번 시퀀스
 CREATE SEQUENCE SEQ_CHATROOM_ID;

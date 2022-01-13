@@ -93,18 +93,16 @@ public class ChatController {
     public String createChat(ChatRoom room, String userid, int  pno, Model model){
         
     	// 상품번호로 등록한 판매자의 아이디/닉네임 가져오기 
+    	System.out.println("상품번호 :::"+pno);
         ProductDTO p = pService.getRow(pno);
         MemberDTO m =  mService.readMemberInfo(p.getUserid());
-        MemberAttachDTO mp = mService.readProfileInfo(m.getUserid());
         System.out.println("로그인한 아이디 :::::"+userid+"상품 판매하는 아이디:::"+m.getUserid());
         
         // 채팅방DTO에 값 저장 
         room.setUserid(userid);
         room.setUsernickname(mService.readMemberInfo(userid).getNickname());
-        room.setUserpic(mService.readProfileInfo(userid).getProfileImgName());
         room.setMasterid(m.getUserid());
         room.setMasternickname(m.getNickname());
-        room.setMasterpic(mp.getProfileImgName());
  
         ChatRoom exist  = cService.searchChatRoom(room);
         
