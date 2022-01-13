@@ -16,12 +16,12 @@
 				<div class="col-md-offset-1 col-md-10 col-sm-12">
 				<!--  <form action="" method="get" id="categoryForm">			
 				 	<div class="cBtn">
-						<button class="categoryBtn" value="Q">동네질문</button>
-						<button class="categoryBtn" value="W">동네맛집</button>
-						<button class="categoryBtn" value="N">동네소식</button>
-						<button class="categoryBtn" value="S">동네사건사고</button>
-						<button class="categoryBtn" value="D">일상</button>
-						<button class="categoryBtn" value="E">기타</button>
+						<button class="categoryBtn" name="mcategory" value="동네질문">동네질문</button>
+						<button class="categoryBtn" name="mcategory" value="동네맛집">동네맛집</button>
+						<button class="categoryBtn" name="mcategory" value="동네소식">동네소식</button>
+						<button class="categoryBtn" name="mcategory" value="동네사건사고">동네사건사고</button>
+						<button class="categoryBtn" name="mcategory" value="일상">일상</button>
+						<button class="categoryBtn" name="mcategory" value="기타">기타</button>
 					</div>
 				</form>-->
 				

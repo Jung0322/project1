@@ -31,7 +31,7 @@ public class MyPlaceImageController {
 		System.out.println("image 업로드 " + Arrays.toString(uploadFile));
 
 		// 서버 폴더에 첨부 파일 저장
-		String uploadFolder = "c:\\ccoli\\myPlace";
+		String uploadFolder = "e:\\ccoli\\myPlace";
 		String uploadFileName = "";
 
 		// 첨부파일 목록 리스트 생성
@@ -77,18 +77,6 @@ public class MyPlaceImageController {
 
 		}
 		return new ResponseEntity<List<MyPlaceAttachDTO>>(attachList, HttpStatus.OK);
-	}
-
-	// 서버 폴더에 파일을 삭제
-	public ResponseEntity<String> deleteFile(String mimgName) {
-		try {
-			File file = new File("c:\\ccoli\\myPlace\\" + URLDecoder.decode(mimgName, "utf-8"));
-			file.delete();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 
 	// 이미지 파일 여부 확인

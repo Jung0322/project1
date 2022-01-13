@@ -14,12 +14,13 @@ public class MyPlaceCriteria {
 	private String mcategory;
 	
 	public MyPlaceCriteria() {
-		this(1,10);
+		this(1,10,"전체");
 	}
 	
-	public MyPlaceCriteria(int pageNum, int amount) {
+	public MyPlaceCriteria(int pageNum, int amount,String mcategory) {
 		this.pageNum = pageNum;
 		this.amount = amount;
+		this.mcategory = mcategory;
 	}
 	
 	public String[] getMcategoryArr() {
