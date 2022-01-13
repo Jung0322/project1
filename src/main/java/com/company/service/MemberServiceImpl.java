@@ -1,5 +1,8 @@
 package com.company.service;
 
+import java.util.HashMap;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -9,6 +12,9 @@ import com.company.domain.MemberAttachDTO;
 import com.company.domain.MemberDTO;
 import com.company.mapper.MemberAttachMapper;
 import com.company.mapper.MemberMapper;
+
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -180,5 +186,51 @@ public class MemberServiceImpl implements MemberService {
 			}
 		}
 		return checkOrgPwd;
+	}
+
+	
+	@Override
+	// 전화번호 인증
+	public void certifiedPhoneNumber(String phone, int randomNumber) {
+		String api_key = "NCS2LSGHCCKSFUM9";
+		String api_secret = "4IA0GKPORG5ROBBRY91MNBKLYU2N5GZK";
+		Message coolsms = new Message(api_key, api_secret);
+		
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("to", phone); // 수신전화번호
+		params.put("from", "010-8972-9462"); // 발신전화번호
+		params.put("type", "SMS"); 
+		params.put("text", "[브로콜리마켓] 인증번호는" +"["+randomNumber+"]" + "입니다."); // 문자 내용 입력
+		params.put("app_version", "test app 1.2"); // application name and version 
+		
+		try {
+			JSONObject obj = (JSONObject) coolsms.send(params);
+			System.out.println(obj.toString());
+		} catch (CoolsmsException e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getCode());
+		}
+
+	}
+
+	@Override
+	// 아이디 찾기
+	public String findUserid(String email, String phone) {
+		return memberMapper.findUserid(email, phone);
+	}
+
+	@Override
+	// 비밀번호 찾기
+	public MemberDTO findPwd(MemberDTO MemberDto) {
+		return memberMapper.findPwd(MemberDto);
+	}
+
+	@Override
+	// 비밀번호 재설정
+	public boolean replacePwd(String userid, String new_password) {
+		// 비밀번호 저장 전 암호화
+		new_password = passwordEncoder.encode(new_password);
+		
+		return memberMapper.modifyPwd(new_password, userid) > 0 ? true : false;
 	}
 }

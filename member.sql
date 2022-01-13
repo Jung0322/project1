@@ -11,6 +11,9 @@ create table member (
     regdate DATE default sysdate, -- 가입일
     CONSTRAINT pk_member PRIMARY KEY (userid) -- pk
 );
+select * from member;
+delete from member where userid = 'hong3';
+drop table member;
 ALTER TABLE member MODIFY  password varchar2(100);
 ALTER TABLE member  ADD  enabled char(1) default '1';
 -- 가입날짜 컬럼 추가(기존 테이블이 있는 경우에 사용)
@@ -24,7 +27,7 @@ create table profileimg (
  	profileimgname varchar2(200) not null, -- 프로필 이미지 이름
 	CONSTRAINT pk_profileImg PRIMARY KEY (pfuuid) -- pk
 );
-
+drop table profileimg;
 -- 3. 유저 권한 테이블
 create table sp_member_authority(
 	userid varchar2(50) not null,

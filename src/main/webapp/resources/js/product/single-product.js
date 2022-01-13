@@ -58,7 +58,7 @@ $(function(){
 				error:function(xhr,status,error){
 					alert(xhr.responseText);
 				}
-			
+				
 			})
 			/*setTimeout(function(){
 				if(cc==1){
@@ -254,15 +254,22 @@ $(function(){
 	//-----------------------채팅하기 눌렀을 시 채팅 방있는지 여부 확인 ---------------------------------
 	$(".alt").click(function(e){
 		e.preventDefault();
+		console.log(pno);
 		$.ajax({
-			url:'chatcreateChat.do',
+			url:'createChat.do',
 			type:'post',
 			data :{
-				pno:pno,
-				userid:userid
+				userid:userid,
+				pno:pno
 			},
 			success:function(data){
-
+				if(data=='createRoom' || data=='exist'){
+					alert("채팅방이동");
+					location.href = '/view_chat';
+				}
+				else{
+					alert("방생성 실패");
+				}
 			},
 			error:function(xhr,status,error){
 				alert(xhr.responseText);

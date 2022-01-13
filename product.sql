@@ -35,7 +35,7 @@ create table productimg (
          REFERENCES product(pno) ON DELETE CASCADE,
 	CONSTRAINT pk_productImg PRIMARY KEY (puuid) -- pk
 );
-
+drop table productimg;
 -- 9. 장바구니 (찜목록)
 create table basket (
 	userid varchar2(50) not null, -- 아이디
@@ -46,3 +46,5 @@ create table basket (
          REFERENCES product(pno) ON DELETE CASCADE,
 	CONSTRAINT pk_basket PRIMARY KEY (pno,userid) -- pk
 );
+
+drop table basket;

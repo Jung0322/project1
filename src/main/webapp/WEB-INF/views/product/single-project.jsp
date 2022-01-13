@@ -118,7 +118,7 @@
 	<!-- .container -->
 </div>
 
-					<form action="" method="get" id="actionForm">
+<form action="" method="get" id="actionForm">
 	<input type="hidden" name="pageNum" value='1'/>
 	<input type="hidden" name="amount" value='8'/>
 	<input type="hidden" name="type" value=""/>

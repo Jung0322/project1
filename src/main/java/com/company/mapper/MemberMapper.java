@@ -49,4 +49,12 @@ public interface MemberMapper {
 	public int deleteMember(String userid);
 	// 권한정보 삭제
 	public int deleteMemberROLE(String userid);
+	
+	
+	
+	// 아이디, 비밀번호 찾기
+	// 아이디 찾기
+	public String findUserid(@Param("email") String email, @Param("phone") String phone);
+	// 비밀번호 찾기
+	public MemberDTO findPwd(MemberDTO memberDto);
 }

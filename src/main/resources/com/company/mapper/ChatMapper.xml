@@ -6,10 +6,8 @@
 		<id property="roomid" column="roomid" />
 		<result property="userid" column="userid" />
 		<result property="usernickname" column="usernickname" />
-		<result property="userpic" column="userpic" />
 		<result property="masternickname" column="masternickname" />
 		<result property="masterid" column="masterid" />
-		<result property="masterpic" column="masterpic" />
 	</resultMap>
 
 	<resultMap type="com.company.domain.ChatMessage" id="chatMessageResultSet">
@@ -25,8 +23,7 @@
  	<insert id="createChat" >
 		insert into CHATROOM
 		values(SEQ_CHATROOM_ID.NEXTVAL, #{userid},
-		#{usernickname}, DEFAULT,
-		#{masterid}, #{masternickname}, #{masterpic})
+		#{usernickname}, #{masterid}, #{masternickname})
 	</insert>
 
 	<select id="selectChatRoom" resultMap="chatRoomResultset">
@@ -52,10 +49,10 @@
 		WHERE roomid = #{roomid}
 	</select>
 
-	<select id="searchChatRoom" resultMap="chatRoomResultset">
+	<select id="searchChatRoom" resultType="com.company.domain.ChatRoom">
 		SELECT * FROM CHATROOM
-		WHERE usernickname= #{usernickname} AND
-		masternickname = #{masternickname}
+		WHERE userid= #{userid} AND
+		masterid = #{masterid}
 	</select>
 
 	<select id="chatRoomList" resultMap="chatRoomResultset">

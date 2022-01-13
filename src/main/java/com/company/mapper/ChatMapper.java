@@ -13,7 +13,7 @@ public interface ChatMapper {
 	
 	public int insertMessage(ChatMessage chatMessage); // 상호간 메세지 데이터 값 넣기
 	
-	public ChatMessage searchChatRoom(ChatRoom searchRoom); // 채팅방의 메세지 정보 가져오기
+	public ChatRoom searchChatRoom(ChatRoom searchRoom); // 채팅방의 메세지 정보 가져오기
 	
 	public List<ChatRoom> chatRoomList(String userId);  // 로그인한 유저의 채팅방 가져오기
 	

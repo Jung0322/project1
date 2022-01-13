@@ -47,7 +47,7 @@ public class AuctionUploadController {
 		
 		
 		//서버 폴더에 첨부 파일 저장
-		String uploadFoler= "e:\\ccoli\\auction";
+		String uploadFoler= "c:\\ccoli\\auction";
 		
 		String uploadFileName = "";
 		
@@ -117,7 +117,7 @@ public class AuctionUploadController {
 	public ResponseEntity<byte[]> getFile(String fileName) {
 		log.info("썸네일 요청"+fileName);
 		
-		File file = new File("e:\\ccoli\\auction",fileName);
+		File file = new File("c:\\ccoli\\auction",fileName);
 		
 		ResponseEntity<byte[]> result = null;
 		
@@ -141,7 +141,7 @@ public class AuctionUploadController {
 		
 		try {
 			//일반 파일인 경우 - 원본 파일만 삭제
-			File file = new File("e:\\ccoli\\auction"+URLDecoder.decode(fileName,"utf-8"));
+			File file = new File("c:\\ccoli\\auction"+URLDecoder.decode(fileName,"utf-8"));
 			file.delete();
 			
 			//이미지 파일인 경우 - 원본 이미지와 썸네일 이미지를 삭제

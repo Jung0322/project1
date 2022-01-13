@@ -79,6 +79,18 @@ public class MyPlaceImageController {
 		return new ResponseEntity<List<MyPlaceAttachDTO>>(attachList, HttpStatus.OK);
 	}
 
+	// 서버 폴더에 파일을 삭제
+	public ResponseEntity<String> deleteFile(String mimgName) {
+		try {
+			File file = new File("c:\\ccoli\\myPlace\\" + URLDecoder.decode(mimgName, "utf-8"));
+			file.delete();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<String>("success", HttpStatus.OK);
+	}
+
 	// 이미지 파일 여부 확인
 	private boolean checkImageType(File file) {
 		String contentType;

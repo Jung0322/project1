@@ -39,7 +39,7 @@
                     <div class="change-signUp">
 	                        <a href="/member/signUp">회원가입</a>
 	                        &nbsp;|&nbsp;
-	                        <a href="">아이디/비밀번호 찾기</a>
+	                        <a href="/member/find-userinfo">아이디/비밀번호 찾기</a>
 	                </div>
 	                <div class="error-message">
 	                	<ul>

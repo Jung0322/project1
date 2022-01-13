@@ -120,4 +120,16 @@
 	<delete id="deleteMemberROLE">
 		DELETE FROM sp_member_authority WHERE userid=#{userid}
 	</delete>
+	
+	
+	
+	<!-- 아이디, 비밀번호 찾기 -->
+	<!-- 아이디 찾기 -->
+	<select id="findUserid" resultType="String">
+		SELECT userid FROM member WHERE email=#{email} AND phone=#{phone}
+	</select>
+	<!-- 비밀번호 찾기 -->
+	<select id="findPwd" resultType="com.company.domain.MemberDTO">
+		SELECT * FROM member WHERE userid=#{userid} AND email=#{email} AND phone=#{phone}
+	</select>
 </mapper>

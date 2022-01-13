@@ -20,11 +20,9 @@ public class ChatRoom {
     
     private String userid;    // 사용자 아이디
     private String usernickname;    // 사용자 닉네임
-    private String userpic;        // 사용자 사진
     
     private String masterid;    // 상대방 아이디
     private String masternickname; // 상대방 닉네임
-    private String masterpic;    // 상대방 사진
     
     private int unReadCount;    // 안 읽은 메세지 수
 

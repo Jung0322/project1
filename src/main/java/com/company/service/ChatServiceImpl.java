@@ -37,7 +37,7 @@ public class ChatServiceImpl implements ChatService{
 
 	@Override
 	public ChatRoom searchChatRoom(ChatRoom room) {
-		return null;
+		return mapper.searchChatRoom(room);
 	}
 
 	@Override

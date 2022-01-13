@@ -15,6 +15,7 @@
 .chatMiddle .format { display:none; } 
 .format  ul li { list-style: none; } 
 .chat_wrap .header { font-size: 14px; padding: 15px 0; background: #9BB460; color: white; text-align: center;  }
+.chat_wrap .chatMiddle {height: 500px; }
 .chat_wrap .chatMiddle ul li { width: 100%; }
 .chat_wrap .chatMiddle ul li.left { text-align: left; }
 .chat_wrap .chatMiddle ul li.right { text-align: right; }
@@ -44,7 +45,7 @@
 		<div class="channer right1">
 			<!-- 채팅 창 -->
 			<div class="chat_wrap">
-			<div class="header">CHAT</div>
+			<div class="header">CHAT <button type="button" id="chatout" style="color:red; float:right; display:none;">채팅나가기</button></div>
 				<!-- 	<div class="floatLeft" id="loginOn">
 						<img class="profile_img" id="setPic">
 						src 사진 경로 동적 생성
@@ -82,6 +83,7 @@
 	<script>
 	let userid = '${loginMember.userid}';
 	let masterid = '${masterDto.userid}'; 
+	console.log('${masterDto.userid}');
 
 	// 총 읽지 않은 갯수
 	let countAll = 0;
@@ -133,47 +135,76 @@
 							for ( var i in data) {
 								// 자신이 구매자 입장일 때
 								if (data[i].userid == "${loginMember.userid}") {
-									if (loginList.indexOf(data[i].masterid) != -1) {
 										$div = $(
 												"<div class='chatList_box enterRoomList' onclick='enterRoom(this);'>")
 												.attr("id", data[i].roomid)
 												.attr("masterId",
 														data[i].masterid);
-									}
+										 $.ajax({
+											url: "/member/chatgetProfileImg",
+											type:"get",
+											data: {
+												masterid: data[i].masterid
+											},
+											success: function(result){
+												console.log(result);
+												if(result != null) {
+													$(result).each(function(idx, obj) {
+														var fileCallPath = encodeURIComponent(obj.profileUploadPath+"\\"+obj.pfuuid+"_"+obj.profileImgName);
+														var str = "/member/profileDisplay?fileName="+fileCallPath;
+														console.log("경로 !!:::"+str);
+														$img = $("<img class='profile_img'>")
+														.attr("src", str);
+														$div.append($img);
+					 									$divs = $("<div class='userNameId'>").text(data[i].masterid);
+															 $div.append($divs);
+													})
+												}
+											}
+											
+										}) 
 									// 현재 판매자가 로그아웃 상태 일 때
-									else {
-										$div = $(
-												"<div class='chatList_box2 enterRoomList' onclick='enterRoom(this);'>")
-												.attr("id", data[i].roomid)
-													.attr("masterId", data[i].masterid);
-										}
-									$img = $("<img class='profile_img'>")
-											.attr("src", "/resources/images/default.png"/* + data[i].masterPic*/);
-									$divs = $("<div class='userNameId'>").text(data[i].masterid);
+									/*$img = $("<img class='profile_img'>")
+											.attr("src", "/resources/images/default.png"/* + data[i].masterPic );*/ 
+										
+/* 									$divs = $("<div class='userNameId'>").text(data[i].masterid);
+										 $div.append($divs);*/
 								} //자신이 구매자일떄 end
 								// 자신이 판매자 입장일 때
 								else {
 									// 현재 구매자가 로그인 상태 일 때
-									if (loginList.indexOf(data[i].userid) != -1) {
 										$div = $(
 												"<div class='chatList_box enterRoomList' onclick='enterRoom(this);'>")
 												.attr("id", data[i].roomid)
 												.attr("userId",
 														data[i].userid);
-									}
-									// 현재 구매자가 로그아웃 상태 일 때
-									else {
-										$div = $(
-												"<div class='chatList_box2 enterRoomList' onclick='enterRoom(this);'>")
-												.attr("id", data[i].roomid)
-												.attr("userId",
-														data[i].userid);
-									}
-									$img = $("<img class='profile_img'>")
+										 $.ajax({
+												url: "/member/chatgetProfileImg",
+												type:"get",
+												data: {
+													userid: data[i].userid
+												},
+												success: function(result){
+													console.log(result);
+													if(result != null) {
+														$(result).each(function(idx, obj) {
+															var fileCallPath = encodeURIComponent(obj.profileUploadPath+"\\"+obj.pfuuid+"_"+obj.profileImgName);
+															var str = "/member/profileDisplay?fileName="+fileCallPath;
+															console.log("경로 !!:::"+str);
+															$img = $("<img class='profile_img'>")
+															.attr("src", str);
+															$div.append($img);
+															$divs = $("<div class='userNameId'>")
+																	.text(data[i].userid);
+															$div.append($divs);
+														})
+													}
+												}
+												
+											})
+									/* $img = $("<img class='profile_img'>")
 											.attr('src',
-													'/resources/images/default.png' /*+ data[i].userpic*/);
-									$divs = $("<div class='userNameId'>")
-											.text(data[i].userid);
+													'/resources/images/default.png' + data[i].userpic); */
 								} // 구매자가 아닌 판매자일떄  else End
 
 								// 읽지 않은 메세지가 0이 아닐 때
@@ -183,22 +214,22 @@
 								} else {
 									$span = $("<span>");
 								}
-
-								$div.append($img);
-								$div.append($divs);
+								console.log($img);
+								//$div.append($img);
+								//$div.append($divs);
 								$div.append($span);
 
 								$chatWrap.append($div);
 
 								// String을 int로 바꿔주고 더해준다.
 								countAll += parseInt(data[i].unReadCount);
-								console.log("메세지 읽은 숫자  ::"+countAll);
-							}// 태그 동적 추가 END
+								console.log("메세지 안 읽은 숫자  ::"+countAll);
+							}// for 태그 동적 추가 END
 						} // IF 절 END
 					} // success(data) 구문 END 
 				});
 	}// getroomlist END
-
+	
 	// 채팅방 관련
 	let roomid;
 	// 메세지 입력 시 
@@ -225,13 +256,21 @@
 		enterRoom(obj);
 	} */
 	
+	// 소켓 닫기
+	$("#chatout").click(function(){
+		$("#chatout").toggle();
+		websocket.close();
+	})
 	
 	// 채팅 방 클릭 시 방번호 배정 후 웹소켓 연결
 	function enterRoom(obj) {
+		// 채팅방 나가기 클릭버튼 display:none 해제 
+		$("#chatout").toggle();
 		// 현재 html에 추가되었던 동적 태그 전부 지우기
 		$('div.chatMiddle:not(.format) ul').html("");
 		// obj(this)로 들어온 태그에서 id에 담긴 방번호 추출
 		roomid = obj.getAttribute("id");
+		
 		// 해당 채팅 방의 메세지 목록 불러오기
 		$.ajax({
 			url : roomid + ".do",
@@ -248,6 +287,7 @@
 			}
 		});
 		// 웹소켓 연결
+		
 		connect();
 		console.log("enterRoom");
 	}// 채팅방 클릭 시 방번호 배정후 웹소켓 연결
@@ -264,7 +304,7 @@
 				$('div.chatMiddle').prop('scrollHeight'));
 	
 		});
-		
+	
 	// 웹소켓
 	let websocket;
 
@@ -305,26 +345,27 @@
 			"sentid" : "${ loginMember.userid }",
 			"nickname" : "${ loginMember.nickname }",
 			"message" : message,
-			/* "unReadCount" : 0 */
+			"lr" : "left"
 		};
 		CheckLR(data);
 
 		let jsonData = JSON.stringify(data);
 		websocket.send(jsonData); // 메세지 보내는 곳 
 	}
-
+	
 	// * 2 메세지 수신
 	function onMessage(evt) {
 		let receive = evt.data.split(",");
 		console.log("recieve :::: "+receive);
 
 		const data = {
-			"userid" : receive[0],
+			"sentid" : receive[0],
 			"nickname" : receive[1],
-			"message" : receive[2]
+			"message" : receive[2],
+			"lr" : "left"
 		};
-		console.log("수신자 :::"+data.userid);
-		if (data.userid != "${ loginMember.userid }") {
+		console.log("수신자 :::"+data.sentid);
+		if (data.sentid != "${ loginMember.userid }") {
 			CheckLR(data);
 		}
 	}

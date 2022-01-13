@@ -74,8 +74,8 @@
 					</c:if>
 					</div>
 					<div class="profile-form">
-						<a>
-							<b>동네생활(n)</b>
+						<a href="/board/myPlace-myPage?userid=${dto.userid}">
+							<b>동네생활</b>
 						</a>
 					</div>
 					<div class="profile-form">
