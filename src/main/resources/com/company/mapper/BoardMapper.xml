@@ -81,8 +81,4 @@
 		select nickname, userid, mytown from member where userid=#{userid}
 	</select>
 	
-
-	
-	
-	
 </mapper>
