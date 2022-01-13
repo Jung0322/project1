@@ -505,6 +505,17 @@ public class MemberController {
 		}
 		return null;
 	}
+	// 프로필 이미지 정보 가져오기
+	@GetMapping("/chatgetProfileImg")
+	public ResponseEntity<MemberAttachDTO> chatgetProfileImg(String userid, String masterid) {
+		
+		if(userid != null) {
+			return new ResponseEntity<MemberAttachDTO>(memberService.readProfileInfo(userid), HttpStatus.OK);
+		} else if(masterid != null) {
+			return new ResponseEntity<MemberAttachDTO>(memberService.readProfileInfo(masterid), HttpStatus.OK);
+		}
+		return null;
+	}
 	
 	// 업로드된 프로필 사진 삭제
 	@ResponseBody
