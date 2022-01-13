@@ -17,17 +17,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.company.domain.AttachProductDTO;
-import com.company.domain.BasketDTO;
 import com.company.domain.MemberDTO;
 import com.company.domain.ProductCriteria;
 import com.company.domain.ProductDTO;
@@ -46,7 +41,7 @@ public class ProductController {
 
 	
 	@RequestMapping(value = "/product/index", method = RequestMethod.GET)
-		public void index(Model model, ProductCriteria cri) {
+		public void index(Principal principal,Model model, ProductCriteria cri) {
 		log.info("index");
 		
 
@@ -122,7 +117,24 @@ public class ProductController {
 		
 		ProductDTO row = service.getRow(pno);
 		
+		row.setContent(row.getContent().replaceAll("\r\n","<br>"));
+		
+		String nickname = service.nicknameGet(row.getUserid());
+		
+		List<ProductDTO> list = service.SellgetList(cri,row.getUserid(),0);
+		
+		
+		
+		for(ProductDTO dto:list) {
+			for(AttachProductDTO attach:dto.getAttachList()) {
+				
+				attach.setPuploadPath(attach.getPuploadPath().replace("\\", "\\\\"));
+			}
+		}
+		
 		model.addAttribute("row",row);
+		model.addAttribute("nickname",nickname);
+		model.addAttribute("list", list);
   	
 		
 		return "/product/single-project";
@@ -160,13 +172,13 @@ public class ProductController {
 	
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/product/sellproduct", method = RequestMethod.GET)
-	public String sellProduct(Model model, ProductCriteria cri,Principal principal) {
+	public String sellProduct(Model model, ProductCriteria cri,String userid) {
 	log.info("로그인 한 회원 전체 보여주기");
 	
+	System.out.println("사용자 명: "+userid);
 
 	System.out.println("가나다라"+cri);
 	
-	String userid= principal.getName();
 	
 	List<ProductDTO> list = service.SellgetList(cri,userid,0);
 	
@@ -196,6 +208,8 @@ public class ProductController {
 	return"/product/mysell-product";
 	
 }
+	
+	
 	
 	//판매완료 상품 목록
 	@PreAuthorize("isAuthenticated()")
@@ -284,14 +298,14 @@ public class ProductController {
 	      log.info("파일 삭제중....");
 	      
 	      attachListDto.forEach(attach -> {
-	         Path file = Paths.get("e:\\ccoli\\product"+attach.getPuploadPath()+"\\"+attach.getPuuid()+"_"+attach.getPimgname());
+	         Path file = Paths.get("c:\\ccoli\\product"+attach.getPuploadPath()+"\\"+attach.getPuuid()+"_"+attach.getPimgname());
 	      
 	         try {
 	        	//일반파일, 이미지 원본 파일만 삭제
 	            Files.deleteIfExists(file);
 	            
 	            if(Files.probeContentType(file).startsWith("image")) {
-	               Path thumbnail = Paths.get("e:\\ccoli\\product"+attach.getPuploadPath()+"\\s_"+attach.getPuuid()+"_"+attach.getPimgname());
+	               Path thumbnail = Paths.get("c:\\ccoli\\product"+attach.getPuploadPath()+"\\s_"+attach.getPuuid()+"_"+attach.getPimgname());
 	               
 	               //이미지 썸네일 삭제
 	               Files.delete(thumbnail);

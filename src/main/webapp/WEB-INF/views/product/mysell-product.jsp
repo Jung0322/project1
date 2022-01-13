@@ -55,7 +55,8 @@
 					<!-- <img src='/display?fileName=javascript:' alt=""> -->
 					<h3>${dto.title}</h3>
 					<span class="price"><span class="amount">${dto.price}원</span></span>
-					</a><span>❤ : ${dto.good}</span>
+					</a><span>❤ : ${dto.good}</span>				
+					<c:if test="${dto.userid eq info.username}">
 					<div class="modify" style="margin-top: 5px;"> 
 					<a class="mbutton" href="${dto.pno}" style="margin-right: 5px;">수정</a> 
 					<a class="rbutton" href="${dto.pno}" style="margin-right: 5px;">판매완료</a> 
@@ -68,6 +69,8 @@
 						</c:when>
 					</c:choose>
 					</div>
+					</c:if>
+					
 					</li>
 				</c:forEach>
 					
@@ -105,6 +108,7 @@
 	
 <script>
 console.log(pathArr);	
+
 
 let pimg = $(".pimg");
 

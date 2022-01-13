@@ -15,7 +15,8 @@ ALTER TABLE member MODIFY  password varchar2(100);
 ALTER TABLE member  ADD  enabled char(1) default '1';
 -- 가입날짜 컬럼 추가(기존 테이블이 있는 경우에 사용)
 ALTER TABLE member  ADD  regdate DATE default sysdate;
-
+insert into member values('hong1','qwer12!','honghong','adf@gmail.com','010-1234-5678','경기도 부천시 중동',default,default);
+select * from member;
 -- 2. 프로필 이미지 테이블
 create table profileimg (
 	pfuuid varchar2(50) not null, -- uuid(pk)
@@ -85,14 +86,10 @@ create table myPlaceImg (
 );
 
 
-		select pno, puuid, puploadpath, pimgname
-		from PRODUCTIMG  where pno = 3
-		
-		select pno
-		from PRODUCt;
 
 -- 상품
 -- 7. 상품 테이블
+drop table product;
 create table product (
 	pno number(10) not null, -- 글번호(pk)
 	category varchar2(20) not null, -- 카테고리
@@ -115,11 +112,8 @@ create table product (
 );
 
 
-
 -- 상품 테이블 글번호 시퀀스
 CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1;
-
-select * from basket;
 
 -- 8. 상품 이미지 테이블
 create table productimg (
@@ -143,9 +137,6 @@ create table basket (
 	CONSTRAINT pk_basket PRIMARY KEY (pno,userid) -- pk
 );
 
-update MEMBER set userid = 'dnrwls' where userid='ㅋㅋ';
-select  *  from basket;
-drop table basket;
 
 -- 장바구니 테이블 글번호 시퀀스
 CREATE SEQUENCE basket_seq INCREMENT BY 1 START WITH 1;
@@ -181,11 +172,14 @@ ALTER TABLE auction  ADD content varchar2(2000) not null;
 -- 경매 테이블 제목 칼럼 추가
 ALTER TABLE auction  ADD title varchar2(100) not null;
 
+<<<<<<< HEAD
+=======
 
 
 
 
 
+>>>>>>> branch 'master' of https://github.com/Jung0322/project1.git
 -- 경매 테이블 글번호 시퀀스
 CREATE SEQUENCE auction_seq INCREMENT BY 1 START WITH 1;
 
@@ -218,7 +212,35 @@ create table auctionimg (
          REFERENCES auction(ano) ON DELETE CASCADE,
 	CONSTRAINT pk_AuctionImg PRIMARY KEY (auuid) -- pk
 );
+-- 13. 채팅 방 테이블
+create table chatroom(
+	roomid varchar2(10) not null,
+	userid varchar2(50) not null, -- 로그인 아이디(pk)
+    usernickname varchar2(20) not null, -- 로그인 유저 닉네임
+    userprofile varchar2(50), -- user 프로필 
+    
+    unReadCount number(2) default 1,
+    
+    masterid varchar2(50) not null,
+    masternickname varchar2(20) not null,
+    masterprofile varchar2(50)
+);
+-- 채팅방 테이블 방번 시퀀스
+CREATE SEQUENCE SEQ_CHATROOM_ID;
 
+-- 14. 채팅 메세지 
+CREATE TABLE chatmessage(
+	roomid varchar2(10) not null,  		-- 채팅 방번호
+	messageid varchar2(10) not null , 	-- 메세지 번호 pk
+	message varchar2(1000) not null,	-- 메세지 내용
+	sentid varchar2(50) not null,		-- 보낸이 id
+	sentnickname varchar2(50) not null,	-- 보낸이 닉네임
+	
+	unreadcount number(3) default 1,	-- 안 읽은 메세지 수
+	sessioncount number(3) default 0,   	-- 현재 세션 수
+	CONSTRAINT pk_messageid PRIMARY KEY (messageid) -- pk
+);
+CREATE SEQUENCE SEQ_CHATMESSAGE_ID;
 
 
 -- 회원 더미 데이터 삽입 -> 시큐리티 적용 후에는 회원가입을 하셔야합니다
@@ -251,13 +273,15 @@ values (myPlace_seq.nextval, 'ccoli1', '콜리', '서울시 종로구 관철동'
 
 select * from myPlace;
 
+
+
+
 -- 참고 primary key /foreign key 작성 
 --alter table spring_attach add constraint pk_attach primary key(uuid);
 --alter table spring_attach add constraint fk_board_attach foreign key(bno)
 --references spring_board(bno);
 
 select * from PRODUCT;
-
 
 select to_char(sysdate) from dual;
 

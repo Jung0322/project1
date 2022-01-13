@@ -42,6 +42,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public MemberDTO readMember(String userid) {
+		return memberMapper.readMember(userid);
+	}
+
 	// 중복 아이디 검사
 	public MemberDTO checkUserid(String userid) {
 		return memberMapper.checkByUserid(userid);

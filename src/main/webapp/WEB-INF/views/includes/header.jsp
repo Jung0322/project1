@@ -115,7 +115,7 @@
 										<a href="/my-basket">찜목록</a>
 									</div>
 									<div class="dropdown-item dropdown-item-area">
-										<a href="/product/sellproduct">판매목록</a>
+										<a href="/product/sellproduct?userid=${info.username}">판매목록</a>
 									</div>
 									<div class="dropdown-item dropdown-item-area">
 										<a href="/product/soldproduct">판매완료상품</a>

@@ -60,11 +60,36 @@ function uploadSummernoteImageFile(files, el) {
 			});
 		}
 	});
+	
+	
 
 }
 
 
 $(function() {
+	
+		//게시물 삭제시 폴더에 있는 이미지 삭제하기
+		/*$("#Button").click(function(){
+			
+			let fileName = $('.note-editable').find('img').attr('src');
+			
+			console.log("파일이름 : "+fileName);
+	
+			$.ajax({
+				url:'/deleteImage',
+				type:'POST',
+				data:fileName,
+				beforeSend:function(xhr){
+					xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+			},
+			success:function(data){
+				alert("삭제성공");
+			}			
+			})
+			
+			
+		})*/	
+	
 
 	//입력 요소 찾아오기
 	let writeForm = $("#writeForm")
@@ -85,9 +110,26 @@ $(function() {
 		writeForm.attr("action", "/board/write");
 		writeForm.submit();
 
-	})
+	}) //글 작성 버튼 end
+	
+		console.log("카테고리 : "+mcategory);
+		
+		//작성할 때 선택한 카테고리 수정 페이지에서 보여주기
+		if(mcategory == '동네질문'){
+			$("#mcategory").val('동네질문').prop("selected",true);
+		}else if (mcategory == '동네맛집'){
+			$("#mcategory").val('동네맛집').prop("selected",true);	
+		}else if (mcategory == '동네소식'){
+			$("#mcategory").val('동네소식').prop("selected",true);	
+		}else if (mcategory == '동네사건사고'){
+			$("#mcategory").val('동네사건사고').prop("selected",true);	
+		}else if (mcategory == '일상'){
+			$("#mcategory").val('일상').prop("selected",true);	
+		}else if(mcategory == '기타'){
+			$("#mcategory").val('기타').prop("selected",true);	
+		}
+		
 })
-
 
 
 

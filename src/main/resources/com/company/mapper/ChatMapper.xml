@@ -1,50 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.mapper.ChatMapper">
- <!-- 신규 채팅방일 때 채팅 방 생성 -->
-  <!--    <insert id="createChat" parameterType="ChatRoom">
-        insert into CHATROOM values(SEQ_CHATROOM_ID.NEXTVAL, #{userEmail}, #{userName}, DEFAULT, #{masterNicname}, #{masterName}, #{masterPic})
-    </insert>
- 
-    <select id="selectChatRoom" parameterType="string" resultMap="chatRoomResultSet">
-        SELECT * FROM CHATROOM 
-        WHERE ROOM_ID = #{roomId} 
-    </select>
-    
-    <insert id="insertMessage" parameterType="ChatMessage">
-        <if test="sessionCount == 1">
-        INSERT INTO CHATMESSAGE VALUES(#{roomId}, SEQ_CHATMESSAGE_ID.NEXTVAL, #{message}, #{name}, #{email}, DEFAULT)
-        </if>
-        <if test="sessionCount == 2">
-        INSERT INTO CHATMESSAGE VALUES(#{roomId}, SEQ_CHATMESSAGE_ID.NEXTVAL, #{message}, #{name}, #{email}, 0)
-        </if>
-    </insert>
-    
-    <select id="messageList" parameterType="string" resultMap="chatMessageResultSet">
-        SELECT * FROM CHATMESSAGE
-        WHERE ROOM_ID = #{rooomId}
-    </select>
-    
-    <select id="searchChatRoom" parameterType="ChatRoom" resultMap="chatRoomResultSet">
-        SELECT * FROM CHATROOM
-        WHERE USER_EMAIL = #{userEmail} AND MASTER_EMAIL = #{masterEmail}
-    </select>
-    
-    <select id="chatRoomList" parameterType="string" resultMap="chatRoomResultSet">
-        SELECT * FROM CHATROOM
-        WHERE USER_EMAIL = #{userEmail} OR MASTER_EMAIL = #{userEmail}
-    </select>
-    
-    <select id="selectUnReadCount" parameterType="ChatMessage" resultType="_int">
-        SELECT COUNT(*) FROM CHATMESSAGE
-        WHERE ROOM_ID = #{roomId} AND USER_EMAIL != #{email} AND UNREAD_COUNT = 1
-    </select>
-    
-    <update id="updateCount" parameterType="ChatMessage">
-        UPDATE CHATMESSAGE
-        SET UNREAD_COUNT = 0
-        WHERE ROOM_ID = #{roomId} AND USER_EMAIL != #{email} AND UNREAD_COUNT = 1
-    </update>
+
+	<resultMap type="com.company.domain.ChatRoom" id="chatRoomResultset">
+		<id property="roomid" column="roomid" />
+		<result property="userid" column="userid" />
+		<result property="usernickname" column="usernickname" />
+		<result property="userpic" column="userpic" />
+		<result property="masternickname" column="masternickname" />
+		<result property="masterid" column="masterid" />
+		<result property="masterpic" column="masterpic" />
+	</resultMap>
+
+	<resultMap type="com.company.domain.ChatMessage" id="chatMessageResultSet">
+		<id property="messageid" column="mssageid" />
+		<result property="roomid" column="roomid" />
+		<result property="message" column="message" />
+		<result property="sentid" column="sentid" />
+		<result property="nickname" column="nickname" />
+		<result property="unReadCount" column="unReadCount" />
+	</resultMap>
+
+	<!-- 신규 채팅방일 때 채팅 방 생성 -->
+ 	<insert id="createChat" >
+		insert into CHATROOM
+		values(SEQ_CHATROOM_ID.NEXTVAL, #{userid},
+		#{usernickname}, DEFAULT,
+		#{masterid}, #{masternickname}, #{masterpic})
+	</insert>
+
+	<select id="selectChatRoom" resultMap="chatRoomResultset">
+		SELECT * FROM CHATROOM
+		WHERE roomid = #{roomid}
+	</select>
 	
--->
+	<insert id="insertMessage" >
+		<if test="sessionCount == 1">
+			INSERT INTO CHATMESSAGE VALUES(#{roomid},
+			SEQ_CHATMESSAGE_ID.NEXTVAL,
+			#{message}, #{sentid}, #{nickname}, DEFAULT)
+		</if>
+		<if test="sessionCount == 2">
+			INSERT INTO CHATMESSAGE VALUES(#{roomid},
+			SEQ_CHATMESSAGE_ID.NEXTVAL,
+			#{message}, #{sentid}, #{nickname}, 0)
+		</if>
+	</insert>
+
+	<select id="messageList"  resultMap="chatMessageResultSet">
+		SELECT * FROM CHATMESSAGE
+		WHERE roomid = #{roomid}
+	</select>
+
+	<select id="searchChatRoom" resultMap="chatRoomResultset">
+		SELECT * FROM CHATROOM
+		WHERE usernickname= #{usernickname} AND
+		masternickname = #{masternickname}
+	</select>
+
+	<select id="chatRoomList" resultMap="chatRoomResultset">
+		SELECT * FROM CHATROOM
+		WHERE userid = #{userid} OR masterid = #{userid}
+	</select>
+
+	<select id="selectUnReadCount" resultType="_int">
+		SELECT COUNT(*) FROM CHATMESSAGE
+		WHERE roomid = #{roomid}
+		AND sentid != #{sentid} AND unReadCount = 1
+	</select>
+
+	<update id="updateCount">
+		UPDATE CHATMESSAGE
+		SET
+		unReadCount = 0
+		WHERE roomid = #{roomid} AND sentid != #{sentid}
+		AND unReadCount = 1
+	</update>
+ 
 </mapper>

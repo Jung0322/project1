@@ -14,12 +14,24 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-offset-1 col-md-10 col-sm-12">
+				<!--  <form action="" method="get" id="categoryForm">			
+				 	<div class="cBtn">
+						<button class="categoryBtn" value="Q">동네질문</button>
+						<button class="categoryBtn" value="W">동네맛집</button>
+						<button class="categoryBtn" value="N">동네소식</button>
+						<button class="categoryBtn" value="S">동네사건사고</button>
+						<button class="categoryBtn" value="D">일상</button>
+						<button class="categoryBtn" value="E">기타</button>
+					</div>
+				</form>-->
+				
 				<!-- 로그인 후 보여질 버튼 -->
 				<sec:authorize access="isAuthenticated()">
 					<div class="writeButton">
 						<input type="submit" class="form-control" id="writeButton" value="글 작성" onclick="location.href='/board/write'">
 					</div>
 				</sec:authorize>
+				
 					<c:forEach var="dto" items="${list}">
 					<div class="blog-post">
 						<div class="blog-post-title">
@@ -32,7 +44,7 @@
 						<div class="blog-post-format">
 							<span>
 								<a href="/member/profile-page?userid=${dto.userid}">
-									<img src="/resources/images/temp-profile.png" class="img-responsive img-circle profile"> ${dto.nickname}
+									<img src="/resources/images/temp-profile.png" class="img-responsive img-circle"> ${dto.nickname}
 								</a>
 							</span> 
 							<span>${dto.mytown}</span> 
@@ -74,6 +86,7 @@
 <form action="" method="get" id="actionForm">
 	<input type="hidden" name="pageNum" value="${pageDto.cri.pageNum}" />
 	<input type="hidden" name="amount" value="${pageDto.cri.amount}" />
+	<input type="hidden" name="mcategory" value="${pageDto.cri.mcategory}" />	
 	<input type="hidden" name="mno" value=""/>
 </form>
 

@@ -31,6 +31,7 @@
 							authentication-failure-handler-ref="customLoginFailHandler" /> 
 							
 		<!-- 로그아웃 -->
+			
 		<security:logout logout-url="/member/logout" invalidate-session="true" delete-cookies="JSSESION" 
 						success-handler-ref="customLogoutSuccessHandler" />
 	
@@ -45,6 +46,7 @@
 			참조 사이트 : https://okky.kr/article/433168 -->
 		<security:csrf request-matcher-ref="csrfMatcher"/>
 	</security:http>
+		<bean id="logoutSuccessHandler" class="com.company.handler.CustomLogoutSuccessHandler"></bean>
 	
 	<!-- csrf 예외처리 -->
 	<bean id="csrfMatcher" class="org.springframework.security.web.util.matcher.OrRequestMatcher" >

@@ -14,24 +14,24 @@ import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.domain.MyPlaceAttachDTO;
 
-
-@Controller
+@RestController
 public class MyPlaceImageController {
 
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/uploadImage")
 	public ResponseEntity<List<MyPlaceAttachDTO>> uploadImage(MultipartFile[] uploadFile) {
-			
-		
-		System.out.println("image 업로드 "+Arrays.toString(uploadFile));
+
+		System.out.println("image 업로드 " + Arrays.toString(uploadFile));
 
 		// 서버 폴더에 첨부 파일 저장
-		String uploadFolder = "e:\\ccoli\\myPlace";
+		String uploadFolder = "c:\\ccoli\\myPlace";
 		String uploadFileName = "";
 
 		// 첨부파일 목록 리스트 생성
@@ -79,18 +79,6 @@ public class MyPlaceImageController {
 		return new ResponseEntity<List<MyPlaceAttachDTO>>(attachList, HttpStatus.OK);
 	}
 
-	// 서버 폴더에 파일을 삭제
-	public ResponseEntity<String> deleteFile(String mimgName) {
-		try {
-			File file = new File("e:\\ccoli\\myPlace\\" + URLDecoder.decode(mimgName, "utf-8"));
-			file.delete();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<String>("success", HttpStatus.OK);
-	}
-
 	// 이미지 파일 여부 확인
 	private boolean checkImageType(File file) {
 		String contentType;
@@ -104,16 +92,36 @@ public class MyPlaceImageController {
 		return false;
 
 	}
-	
-	//폴더명 생성
+
+	// 폴더명 생성
 	private String getFolder() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		Date date = new Date();
-		
+
 		String str = sdf.format(date);
-		
+
 		return str.replace("-", File.separator);
 	}
+	
+	// 서버 폴더에 파일을 삭제
+//		@PreAuthorize("isAuthenticated()")
+//		@PostMapping("/deleteImage")
+//		public ResponseEntity<String> deleteFile(String fileName) {
+//
+//			try {
+//				File file = new File("e:\\ccoli\\myPlace" + URLDecoder.decode(fileName, "utf-8"));
+//				file.delete(); // 이미지삭제
+//
+//					String largeName = file.getAbsolutePath().replace("s_", "");
+//					new File(largeName).delete();
+//	
+//			} catch (UnsupportedEncodingException e) {
+//				e.printStackTrace();
+//				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//
+//			}
+//			return new ResponseEntity<String>("success", HttpStatus.OK);
+//		}
 
 }

@@ -52,6 +52,9 @@ public class MemberController {
 	@Autowired
 	private ProductService productService; 
 	
+	@Autowired
+	private ProductService productservice;
+	
 	// 회원가입 & 회원정보 수정
 	// 회원가입 화면
 	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
@@ -590,13 +593,18 @@ public class MemberController {
 	public void profilePage(String userid, Model model) {
 		// 유저 정보
 		MemberDTO memberInfo = memberService.readMemberInfo(userid);
-		//해당 유저 판매상품 개수
-		int sellproductN = productService.SellgetTotalCount("전체", userid, 0);
 
+		
+		//해당 유저 판매상품 개수
+		int sellproductN = productservice.SellgetTotalCount("전체", userid, 0);
+		
 		model.addAttribute("dto", memberInfo);
 		//해당 유저 판매상품 개수 저장
 		model.addAttribute("sellpdcount", sellproductN);
 
+		
+		//해당 유저 판매상품 개수 저장
+		model.addAttribute("sellpdcount", sellproductN);
 		
 		// 프로필 이미지 불러오기
 		//프로필 이미지 - userid

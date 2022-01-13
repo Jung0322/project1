@@ -3,6 +3,34 @@
  */
 var cc = 0;
 $(function(){
+	
+	//css 화면 비율 때문에 class명 수정
+	$( 'ul li:nth-child(1)' ).addClass('first product');
+
+	$( 'ul li:nth-child(4)' ).addClass('last product');
+
+	$( 'ul li:nth-child(5)' ).addClass('first product');
+
+	$( 'ul li:nth-child(8)' ).addClass('last product');
+	
+		$(".move").click(function(e){
+	//a태그 속성 중지
+	e.preventDefault();
+	//actionForm에 bno값을 추가한다
+	
+	let actionForm = $("#actionForm");
+						
+	let pno = $(this).attr('href');
+	actionForm.find("input[name='pno']").val(pno);		
+	
+	//actionForm action 설정 /board/read
+	actionForm.attr("action","/single-product");
+	
+	actionForm.submit();
+	
+	})		
+	
+	
 	console.log("zz"+ cc);
 	if(userid!=null){
 			$.ajax({
@@ -222,7 +250,26 @@ $(function(){
 		 imgslide.html(imgStr);
 		}
 	})// 전체 첨부물 가져오기 종료		
-				
+	
+	//-----------------------채팅하기 눌렀을 시 채팅 방있는지 여부 확인 ---------------------------------
+	$(".alt").click(function(e){
+		e.preventDefault();
+		$.ajax({
+			url:'chatcreateChat.do',
+			type:'post',
+			data :{
+				pno:pno,
+				userid:userid
+			},
+			success:function(data){
+
+			},
+			error:function(xhr,status,error){
+				alert(xhr.responseText);
+			}
+		})
+		
+	})				
 
 })
 function heartPlus(i){
@@ -250,4 +297,4 @@ function heartPlus(i){
 							}
 			
 						})
-}
+} 

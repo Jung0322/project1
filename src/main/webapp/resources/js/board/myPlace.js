@@ -3,6 +3,7 @@
  */
 
 $(function() {
+
 	console.log(replyer);
 
 	// 댓글 전체 가져오기
@@ -27,26 +28,6 @@ $(function() {
 		}
 
 	})
-	
-	//좋아요 갯수 증가
-	$("#ques").click(function(e){
-		$(this).css("color","#9BB460");
-		
-			/*$.ajax({
-				url: '/replies/new',
-				type: 'post',
-				contentType: 'application/json',
-				data: JSON.stringify(reply),
-				success: function(result) {
-					if (callback) {
-						callback(result);
-					}
-				},
-				error: function(xhr, status, err) {
-					error(err);
-				}
-			})*/			
-		}) //ques end		
 
 	
 	//댓글 작업
@@ -89,6 +70,8 @@ $(function() {
 			mno: mno,
 			content: content.val()
 		};
+		
+		console.log("댓글 수 : "+replyCnt);
 
 		//댓글 삽입 
 		replyService.add(reply,
@@ -100,6 +83,10 @@ $(function() {
 				showList(-1);
 
 			}); //add end
+			
+				//댓글 갯수 업데이트 해서 보여주기
+				$("#replyCnt").html((replyCnt+=1)+" Comments");	
+			
 	}) //replyRegisterBtn end
 
 
@@ -117,6 +104,11 @@ $(function() {
 			let oriReplyer = modalUserid.html();
 			console.log("로그인 사용자"+replyer);
 			console.log("댓글 작성자"+oriReplyer)
+			if(!replyer){
+				alert("로그인 후 댓글 수정이 가능합니다.");
+				return;
+			}
+			
 			
 			if(replyer != oriReplyer){
 				alert("본인이 작성한 댓글만 수정가능합니다.");
@@ -167,6 +159,9 @@ $(function() {
 	replyDiv.on("click", "#replyDeleteBtn", function() {
 		let mrno = $(this).data("mrno");
 		console.log("mrno : " + mrno);
+		
+		//댓글 갯수 업데이트 해서 보여주기
+		$("#replyCnt").html((replyCnt-=1)+" Comments");	
 
 		replyService.get(mrno, function(data) {
 			console.log(data);
@@ -177,6 +172,11 @@ $(function() {
 			let oriReplyer = modalUserid.html();
 			console.log("로그인 사용자"+replyer);
 			console.log("댓글 작성자"+oriReplyer)
+			
+			if(!replyer){
+				alert("로그인 후 댓글 삭제가 가능합니다.");
+				return;
+			}
 			
 			if(replyer != oriReplyer){
 				alert("본인이 작성한 댓글만 삭제가능합니다.");
@@ -201,7 +201,7 @@ $(function() {
 	}) //replyDiv delete end
 	
 	//대댓글 작성하기
-	replyDiv.on("click", "#re-reply", function() {
+	/*replyDiv.on("click", "#re-reply", function() {
 		let modalRe = $("#re-replyModal");
 		
 		//userid를 이용해 로그인 한 사용자 정보 가져오기
@@ -212,7 +212,7 @@ $(function() {
 		
 			modalRe.modal("show");
 		
-	})//re-replyModal end
+	})*///re-replyModal end
 
 
 
@@ -239,14 +239,14 @@ $(function() {
 				str += "<button class='dropdown-item list' id='replyDeleteBtn' type='button' data-mrno='" + data[i].mrno + "'>삭제하기</button></div></div>";
 				str += "</div>";
 				str += "<div class='media-object pull-left'>";
-				str += "<img src='/resources/images/temp-profile.png' class='img-responsive img-circle profile' alt='Blog Image'>";
+				str += "<img src='/resources/images/temp-profile.png' class='img-responsive img-circle pro' alt='Blog Image'>";
 				str += "</div>";
 				str += "<div class='media-body'>";
 				str += "<span name='nickname'>" + data[i].nickname + "</span>";
 				str += "<span name='mytown'>" + data[i].mytown + "</span>";
 				str += "<span name='regdate'>" + replyService.displayTime(data[i].updatedate) + "</span>";
 				str += "<p style='margin-bottom: 10px; margin-top: 10px;' name='content'>" + data[i].content + "</p>";
-				str += "<div><button type='button' id='re-reply'>답글</button></div>";
+				//str += "<div><button type='button' id='re-reply'>답글</button></div>";
 				str += "</div></div>";
 			}
 			replyDiv.html(str);
@@ -255,5 +255,6 @@ $(function() {
 		}); //getList end
 
 	}//showlist end
+	
 
 }) // function end

@@ -7,6 +7,9 @@ public interface MemberService {
 	// 회원가입
 	// 회원가입 처리
 	public boolean insertMember(MemberDTO insertDto);
+	
+	// 로그인
+	public MemberDTO readMember(String userid);
 	// 중복 아이디 검사
 	public MemberDTO checkUserid(String userid);
 	// 중복 닉네임 검사(전체)

@@ -22,7 +22,7 @@ public class MyPlaceCriteria {
 		this.amount = amount;
 	}
 	
-	public String[] getTypeArr() {
+	public String[] getMcategoryArr() {
 		return mcategory==null?new String[] {}:mcategory.split("");
 	}
 }
