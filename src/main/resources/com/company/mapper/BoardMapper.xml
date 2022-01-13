@@ -2,6 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.mapper.BoardMapper">
 
+<!-- 	<sql id="getCateList">
+		<trim prefix="and">
+			<foreach collection="mcategoryArr" item="mcategory">
+				<choose>
+					<when test="mcategory=='Q'.tostring()">
+						mcategory={'동네질문'}
+					</when>		
+					<when test="mcategory=='W'.tostring()">
+						mcategory={'동네맛집'}
+					</when>	
+					<when test="mcategory=='N'.tostring()">
+						mcategory={'동네소식'}
+					</when>				
+					<when test="mcategory=='S'.tostring()">
+						mcategory={'동네사건사고'}
+					</when>
+					<when test="mcategory=='D'.tostring()">
+						mcategory={'일상'}
+					</when>
+					<when test="mcategory=='E'.tostring()">
+						mcategory={'기타'}
+					</when>			
+				</choose>
+			</foreach>		
+		</trim>	
+	</sql> -->
+
 	<!-- 전체 게시물 보여주기 -->
 	<select id="listAll" resultType="com.company.domain.BoardDTO">
 	<![CDATA[
@@ -16,9 +43,9 @@
 	<select id="listMyTown" resultType="com.company.domain.BoardDTO">
 		<![CDATA[
 		select *
-		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,nickname,mytown,title,content,regdate,updatedate,curious,mcategory
-				from myplace where rownum <=(#{cri.pageNum} * #{cri.amount}) and mytown=#{mytown})
-		where rn> (#{cri.pageNum}-1) * #{cri.amount}
+		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,nickname,mytown,title,content,regdate,updatedate,curious,mcategory,replycnt
+				from myplace where rownum <=(#{cri.pageNum} * #{cri.amount}))
+		where rn> (#{cri.pageNum}-1) * #{cri.amount} and mytown=#{mytown}
 		]]>
 	</select>
 		
@@ -26,12 +53,11 @@
 	<select id="listMyPage" resultType="com.company.domain.BoardDTO">
 		<![CDATA[
 		select *
-		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,nickname,mytown,title,content,regdate,updatedate,curious,mcategory
+		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,nickname,mytown,title,content,regdate,updatedate,curious,mcategory,replycnt
 				from myplace where rownum <=(#{cri.pageNum} * #{cri.amount}))
 		where rn> (#{cri.pageNum}-1) * #{cri.amount} and userid = #{userid}
 		]]>
 	</select>
-	
 	
 	<!-- 전체 게시물 수 -->
 	<select id="totalCnt" resultType="int">
@@ -47,7 +73,6 @@
 	<select id="totalCntMypage" resultType="int">
 		select count(*) from myplace where userid=#{userid}
 	</select>
-	
 	
 	<insert id="insert">
 		insert into myPlace(mno, userid, nickname, mcategory, title, content, mytown)
@@ -79,4 +104,9 @@
 	<select id="readMemberInfo" resultType="com.company.domain.BoardDTO">
 		select nickname, userid, mytown from member where userid=#{userid}
 	</select>
+	
+
+	
+	
+	
 </mapper>

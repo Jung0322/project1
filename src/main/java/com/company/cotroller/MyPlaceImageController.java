@@ -15,16 +15,13 @@ import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.domain.MyPlaceAttachDTO;
 
-import lombok.extern.log4j.Log4j2;
-
-@Controller
-@Log4j2
+@RestController
 public class MyPlaceImageController {
 
 	@PreAuthorize("isAuthenticated()")
@@ -108,24 +105,23 @@ public class MyPlaceImageController {
 	}
 	
 	// 서버 폴더에 파일을 삭제
-		@PreAuthorize("isAuthenticated()")
-		@PostMapping("/deleteImage")
-		public ResponseEntity<String> deleteFile(String fileName) {
-			log.info("삭제 파일이름 : " + fileName);
-
-			try {
-				File file = new File("c:\\ccoli\\myPlace" + URLDecoder.decode(fileName, "utf-8"));
-				file.delete(); // 이미지삭제
-
-					String largeName = file.getAbsolutePath();
-					new File(largeName).delete();
-	
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
-			}
-			return new ResponseEntity<String>("success", HttpStatus.OK);
-		}
+//		@PreAuthorize("isAuthenticated()")
+//		@PostMapping("/deleteImage")
+//		public ResponseEntity<String> deleteFile(String fileName) {
+//
+//			try {
+//				File file = new File("e:\\ccoli\\myPlace" + URLDecoder.decode(fileName, "utf-8"));
+//				file.delete(); // 이미지삭제
+//
+//					String largeName = file.getAbsolutePath().replace("s_", "");
+//					new File(largeName).delete();
+//	
+//			} catch (UnsupportedEncodingException e) {
+//				e.printStackTrace();
+//				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//
+//			}
+//			return new ResponseEntity<String>("success", HttpStatus.OK);
+//		}
 
 }

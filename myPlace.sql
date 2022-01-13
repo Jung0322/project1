@@ -51,8 +51,8 @@ CREATE SEQUENCE myPlaceReply_seq INCREMENT BY 1 START WITH 1;
 
 --동네 게시글 좋아요 테이블
 create table myPlaceGood(
-	mno number(10) CONSTRAINT myPlaceGood_mno_FK REFERENCES myPlace(mno),
-	userid varchar2(50) CONSTRAINT myPlaceGood_userid_FK REFERENCES member(userid)
+	mno number(10) CONSTRAINT myPlaceGood_mno_FK REFERENCES myPlace(mno) ON DELETE CASCADE,
+	userid varchar2(50) CONSTRAINT myPlaceGood_userid_FK REFERENCES member(userid) ON DELETE CASCADE
 );
 
 
@@ -62,7 +62,7 @@ create table myPlaceGood(
 
 select *
 from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,nickname,mytown,title,content,regdate,updatedate
-		from myplace where rownum <=(1 * 10) and mytown='서울시 종로구 관철동')
+		from myplace where rownum <=(1 * 10) and mcategory = '동네질문')
 where rn> (0) * 10;
 
 select count(*) from myplace where mytown='서울시 종로구 관철동';

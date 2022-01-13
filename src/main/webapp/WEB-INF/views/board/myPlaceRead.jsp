@@ -45,6 +45,12 @@
 							<c:when test="${dto.mcategory == '동네질문'}">
 								<span><i class="far fa-grin"></i> 궁금해요</span>
 							</c:when>
+							<c:when test="${dto.mcategory == '동네소식'}">
+								<span><i class="far fa-grin"></i> 궁금해요</span>
+							</c:when>
+							<c:when test="${dto.mcategory == '동네맛집'}">
+								<span><i class="far fa-grin"></i> 궁금해요</span>
+							</c:when>
 							<c:when test="${dto.mcategory == '동네사건사고'}">
 								<span><i class="far fa-grin"></i> 공감해요</span>
 							</c:when>
@@ -58,7 +64,7 @@
 						<span id="quesCnt">${dto.curious}</span>						
 					</div>
 				<div class="blog-reply">
-					<!--  <h3>${dto.replycnt} Comments</h3>-->
+					 <h3 id="replyCnt">${dto.replycnt} Comments</h3>
 					<!-- 댓글 보여주는 영역 -->
 					  <div class="media" id="showReply">
 						<!--<div class='dropdown' id='dropdown1'>
@@ -169,6 +175,7 @@
 	//현재 글번호 가져오기
 	let mno = ${dto.mno};
 	let writer = "${dto.userid}";
+	let replyCnt = ${dto.replycnt};
 	
 	
 	let replyer = null;

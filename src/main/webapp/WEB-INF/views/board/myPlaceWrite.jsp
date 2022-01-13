@@ -20,6 +20,8 @@
                          <div class="col-md-6 col-sm-6">
                               <select class="form-control" name="mcategory">
                                    <option>동네질문</option>
+                                   <option>동네맛집</option>
+                                   <option>동네소식</option>
                                    <option>동네사건사고</option>
                                    <option>일상</option>
                                    <option>기타</option>
