@@ -36,9 +36,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.company.domain.MemberAttachDTO;
 import com.company.domain.MemberDTO;
 import com.company.service.MemberService;
+import com.company.service.ProductService;
 
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnailator;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Log4j2
 @Controller
@@ -47,6 +49,8 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private ProductService productService; 
 	
 	// 회원가입 & 회원정보 수정
 	// 회원가입 화면
@@ -127,6 +131,72 @@ public class MemberController {
 	public void logoutPost() {
 		log.info("로그아웃 요청");
 	}
+	
+	
+	// 아이디, 비밀번호 찾기
+	@GetMapping("/find-userinfo")
+	public void findUserInfo() {
+	}
+	
+	// 전화번호 인증
+	@ResponseBody
+	@GetMapping("/phoneCheck")
+	public String sendSMS(String phone) {
+		int randomNumber = (int) ((Math.random() * (9999 - 1000 + 1)) + 1000);// 난수 생성
+		memberService.certifiedPhoneNumber(phone, randomNumber);
+		return Integer.toString(randomNumber);
+	}
+	
+	// 아이디 찾기
+	@ResponseBody
+	@PostMapping("/find-userid")
+	public String findUserid(String email, String phone, boolean doubleChk) {
+		log.info("아이디 찾기 "+email+" "+phone);
+		
+		if(email.equals("") || phone.equals("")) {
+			return null;
+		}
+		
+		String findUserid = "";
+		if(doubleChk) {
+			findUserid = memberService.findUserid(email, phone);
+		} else {
+			return null;
+		}
+		return findUserid;
+	}
+	
+	// 비밀번호 찾기(회원정보)
+	@ResponseBody
+	@PostMapping("/find-pwd")
+	public MemberDTO findPwd(MemberDTO memberDto , boolean doubleChk) {
+		log.info("비밀번호 찾기 "+memberDto);
+		System.out.println("비밀번호 찾기 "+memberDto);
+		
+		if(memberDto == null) {
+			return null;
+		}
+		
+		MemberDTO result;
+		if(doubleChk) {
+			result = memberService.findPwd(memberDto);
+		} else {
+			return null;
+		}
+		return result;
+	}
+	
+	// 비밀번호 재설정
+	@PostMapping("/find-userinfo")
+	public String findUserInfoPost(String userid, String new_password) {
+		System.out.println("비밀번호 재설정 "+userid+", "+new_password);
+		
+		if(memberService.replacePwd(userid, new_password)) {
+			return "redirect:/member/signIn";
+		}
+		return null;
+	}
+	
 	
 	// 회원정보 수정
 	// 회원정보 수정 화면
@@ -267,8 +337,8 @@ public class MemberController {
 		System.out.println("파일 업로드");
 		
 		// 서버 폴더에 첨부 파일 저장
-		String uploadFolder = "C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member";
-//		String uploadFolder = "E:\\ccoli\\member"; // 시연할 때 사용
+//		String uploadFolder = "C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member";
+		String uploadFolder = "C:\\ccoli\\member"; // 시연할 때 사용
 		String uploadFileName = "";
 		
 		// 업로드 폴더 결정
@@ -406,9 +476,9 @@ public class MemberController {
 		log.info("프로필 이미지 "+fileName);
 		System.out.println("프로필 이미지 "+fileName);
 		
-		File file = new File("C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member\\", fileName);
+//		File file = new File("C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member\\", fileName);
 		// 시연용 파일폴더 경로
-//		File file = new File("e:\\ccoli\\member\\", fileName);
+		File file = new File("C:\\ccoli\\member", fileName);
 		
 		ResponseEntity<byte[]> result = null;
 		
@@ -462,11 +532,11 @@ public class MemberController {
 		log.info("프로필 이미지 삭제 중");
 		System.out.println("프로필 이미지 삭제 중");
 		
-		Path file = Paths.get("C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member\\"+
-								attachDto.getProfileUploadPath()+"\\"+attachDto.getPfuuid()+"_"+attachDto.getProfileImgName());
+//		Path file = Paths.get("C:\\Users\\MinYoung\\Desktop\\temp-workspace\\ccoli\\member\\"+
+//								attachDto.getProfileUploadPath()+"\\"+attachDto.getPfuuid()+"_"+attachDto.getProfileImgName());
 		// 시연용 경로
-//		Path file = Paths.get("e:\\ccoli\\member\\"+
-//				attachDto.getProfileUploadPath()+"\\"+attachDto.getPfuuid()+"_"+attachDto.getProfileImgName());
+		Path file = Paths.get("C:\\ccoli\\member"+
+				attachDto.getProfileUploadPath()+"\\"+attachDto.getPfuuid()+"_"+attachDto.getProfileImgName());
 		
 		try {
 			Files.deleteIfExists(file);
@@ -518,9 +588,15 @@ public class MemberController {
 	// 프로필 화면
 	@GetMapping("/profile-page")
 	public void profilePage(String userid, Model model) {
+		// 유저 정보
 		MemberDTO memberInfo = memberService.readMemberInfo(userid);
-		
+		//해당 유저 판매상품 개수
+		int sellproductN = productService.SellgetTotalCount("전체", userid, 0);
+
 		model.addAttribute("dto", memberInfo);
+		//해당 유저 판매상품 개수 저장
+		model.addAttribute("sellpdcount", sellproductN);
+
 		
 		// 프로필 이미지 불러오기
 		//프로필 이미지 - userid
