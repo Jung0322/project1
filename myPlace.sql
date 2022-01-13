@@ -10,7 +10,8 @@ drop table myplacereply;
 drop sequence myplacereply_seq;
 drop table myPlaceGood;
 
-
+select * from chatroom;
+select * from chatmessage;
 -- 동네생활 테이블
 create table myPlace (
 	mno number(10) not null, -- 글번호(pk)

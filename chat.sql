@@ -6,9 +6,8 @@ create table chatroom(
     usernickname varchar2(20) not null, -- 로그인 유저 닉네임
     masterid varchar2(50) not null,
     masternickname varchar2(20) not null
-    
 );
-drop table chatroom;
+drop table chatmessage;
 select * from chatroom;
 -- 채팅방 테이블 방번 시퀀스
 CREATE SEQUENCE SEQ_CHATROOM_ID;
@@ -23,7 +22,7 @@ CREATE TABLE chatmessage(
 	sentnickname varchar2(50) not null,	-- 보낸이 닉네임
 	
 	unreadcount number(3) default 1,	-- 안 읽은 메세지 수
-	sessioncount number(3) default 0,   	-- 현재 세션 수
+	-- sessioncount number(3) default 0,   	-- 현재 세션 수
 	CONSTRAINT pk_messageid PRIMARY KEY (messageid) -- pk
 );
 alter table chatmessage drop  column sessioncount;

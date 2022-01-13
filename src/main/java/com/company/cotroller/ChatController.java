@@ -47,6 +47,8 @@ public class ChatController {
     @RequestMapping(value = "/view_chat", method = RequestMethod.GET)
     public String viewChat(Principal principal, Model model) {
     	
+    	System.out.println("!!!!!");
+    	
     	System.out.println(principal.getName());
     	
     	if(principal.getName()!= null) {
@@ -112,8 +114,8 @@ public class ChatController {
             int result = cService.createChat(room);
             if(result == 1) {
                 System.out.println("방 만들었다!!");
-                model.addAttribute("masterDto",m);
-                return "createRoom";
+                String room_id =cService.searchChatRoom(room).getRoomid(); 
+                return room_id;
             }else {
                 return "failRoom";
             }
@@ -121,8 +123,8 @@ public class ChatController {
         // DB에 방이 있을 때
         else{
             System.out.println("방이 있다!!");
-            model.addAttribute("masterDto",m);
-            return "exist";
+            String room_id =cService.searchChatRoom(room).getRoomid(); 
+            return room_id;
         }
     }
     

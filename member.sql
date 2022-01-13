@@ -11,6 +11,7 @@ create table member (
     regdate DATE default sysdate, -- 가입일
     CONSTRAINT pk_member PRIMARY KEY (userid) -- pk
 );
+select * from chatroom;
 select * from member;
 delete from member where userid = 'hong3';
 drop table member;

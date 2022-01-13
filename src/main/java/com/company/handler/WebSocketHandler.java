@@ -43,7 +43,7 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 		i++; // 접속 인원 추가 
 		System.out.println(session.getId() + " 연결 성공 => 총 접속 인원 : " + i + "명");
 	}
-	// 메세지 송수신 
+	// 메세지 송수신 send/ 
 		@Override
 		protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 			// 들어왔는지 
@@ -94,7 +94,7 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 				// sessionList에 추가
 				sessionList.put(session, chatRoom.getRoomid());
 				// 확인용
-				System.out.println("생성된 채팅방으로 입장");
+				System.out.println("생성된 채팅방으로 입장:::"+chatRoom.getRoomid());
 			}
 
 			// 채팅 메세지 입력 시
@@ -134,7 +134,7 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 		}
 
 	/**
-	 * websocket 연결 종료 시
+	 * websocket 연결 종료 시 close()
 	 */
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {

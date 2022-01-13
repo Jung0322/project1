@@ -263,9 +263,9 @@ $(function(){
 				pno:pno
 			},
 			success:function(data){
-				if(data=='createRoom' || data=='exist'){
+				if(data != null){
 					alert("채팅방이동");
-					location.href = '/view_chat';
+					location.href = '/view_chat?room_id='+data;
 				}
 				else{
 					alert("방생성 실패");

@@ -42,8 +42,8 @@
 		<websocket:mapping handler="webSocketHandler" path="/websocket/echo.do" />
 			<!-- <websocket:handshake-interceptors>
 				<beans:bean	class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
-			</websocket:handshake-interceptors>
-		<websocket:sockjs websocket-enabled="true" /> -->
+			</websocket:handshake-interceptors>-->
+		<!-- <websocket:sockjs websocket-enabled="true" /> --> 
 	</websocket:handlers>
 	<beans:bean id="webSocketHandler" class="com.company.handler.WebSocketHandler" />
 
