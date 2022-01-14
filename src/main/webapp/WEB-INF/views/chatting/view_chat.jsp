@@ -144,7 +144,8 @@
 														data[i].userid);
 										$img = $("<img class='profile_img' src='/resources/images/temp-profile.png'>");
 										$divs = $("<div class='userNameId'>");
-										 $.ajax({
+										// 프로필 가져오기
+										$.ajax({
 											url: "/member/chatgetProfileImg",
 											type:"get",
 											data: {
@@ -173,7 +174,8 @@
 												.attr("masterId",
 														data[i].masterid);
 										$img = $("<img class='profile_img'>").attr("src", "/resources/images/temp-profile.png");
-										 $.ajax({
+										
+										$.ajax({
 												url: "/member/chatgetProfileImg",
 												type:"get",
 												data: {
