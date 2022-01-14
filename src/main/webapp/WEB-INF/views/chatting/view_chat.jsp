@@ -141,7 +141,8 @@
 												"<div class='chatList_box enterRoomList' onclick='enterRoom(this);'>")
 												.attr("id", data[i].roomid)
 												.attr("userId",
-														data[i].userid);
+														data[i].userid)
+												.attr("clickable","true");
 										$img = $("<img class='profile_img' src='/resources/images/temp-profile.png'>");
 										$divs = $("<div class='userNameId'>");
 										// 프로필 가져오기
@@ -158,7 +159,6 @@
 														var fileCallPath = encodeURIComponent(obj.profileUploadPath+"\\"+obj.pfuuid+"_"+obj.profileImgName);
 														var str = "/member/profileDisplay?fileName="+fileCallPath;
 														$img = $img.attr("src", str);
-														$div.append($img);
 													})
 												}
 											}
@@ -172,7 +172,8 @@
 												"<div class='chatList_box enterRoomList' onclick='enterRoom(this);'>")
 												.attr("id", data[i].roomid)
 												.attr("masterId",
-														data[i].masterid);
+														data[i].masterid)
+												.attr("clickable","true");
 										$img = $("<img class='profile_img'>").attr("src", "/resources/images/temp-profile.png");
 										
 										$.ajax({
@@ -190,7 +191,6 @@
 															console.log("경로 !!:::"+str);
 															
 					                                        $img = $img.attr("src", str);
-															$div.append($img);
 														})
 													}
 												}
@@ -258,33 +258,45 @@
 		$("#chatout").toggle();
 		websocket.close();
 	})
+	
+	
 	// 채팅 방 클릭 시 방번호 배정 후 웹소켓 연결
 	function enterRoom(obj) {
-		// 채팅방 나가기 클릭버튼 display:none 해제 
-		$("#chatout").toggle();
-		// 현재 html에 추가되었던 동적 태그 전부 지우기
-		$('div.chatMiddle:not(.format) ul').html("");
-		// obj(this)로 들어온 태그에서 id에 담긴 방번호 추출
-		roomid = obj.getAttribute("id");
-		console.log("채팅 방 아이디 ::::"+roomid);
-		// 해당 채팅 방의 메세지 목록 불러오기
-		$.ajax({
-			url : roomid + ".do",
-			data : {
-				userid : "${loginMember.userid}"
-			},
-			async : false,
-			dataType : "json",
-			success : function(data) {
-				for (var i = 0; i < data.length; i++) {
-					// 채팅 목록 동적 추가
-					CheckLR(data[i]);
+		
+		
+		if($(obj).attr("clickable") == "true"){
+		
+			// 채팅방 나가기 클릭버튼 display:none 해제 
+			$("#chatout").toggle();
+			// 현재 html에 추가되었던 동적 태그 전부 지우기
+			$('div.chatMiddle:not(.format) ul').html("");
+			// obj(this)로 들어온 태그에서 id에 담긴 방번호 추출
+			
+			roomid = obj.getAttribute("id");
+			console.log("채팅 방 아이디 ::::"+roomid);
+			
+			
+			
+			// 해당 채팅 방의 메세지 목록 불러오기
+			$.ajax({
+				url : roomid + ".do",
+				data : {
+					userid : "${loginMember.userid}"
+				},
+				async : false,
+				dataType : "json",
+				success : function(data) {
+					for (var i = 0; i < data.length; i++) {
+						// 채팅 목록 동적 추가
+						CheckLR(data[i]);
+					}
 				}
-			}
-		});
-		// 웹소켓 연결
-		connect();
-		console.log("enterRoom");
+			});
+			// 웹소켓 연결
+			connect();
+			console.log("enterRoom");
+			$(obj).attr("clickable","false");
+		}
 	}// 채팅방 클릭 시 방번호 배정후 웹소켓 연결
 	// 채팅 방 클릭 시 방번호 배정 후 웹소켓 연결
 	// 채팅하기로 넘어왔을 시 작동 
@@ -296,30 +308,33 @@
 	}
 	
 	function chattingRoom(obj) {
-		// 채팅방 나가기 클릭버튼 display:none 해제 
-		$("#chatout").toggle();
-		// 현재 html에 추가되었던 동적 태그 전부 지우기
-		$('div.chatMiddle:not(.format) ul').html("");
-		// obj(this)로 들어온 태그에서 id에 담긴 방번호 추출
-		roomid = obj;
-		// 해당 채팅 방의 메세지 목록 불러오기
-		$.ajax({
-			url : roomid + ".do",
-			data : {
-				userid : "${loginMember.userid}"
-			},
-			async : false,
-			dataType : "json",
-			success : function(data) {
-				for (var i = 0; i < data.length; i++) {
-					// 채팅 목록 동적 추가
-					CheckLR(data[i]);
+		if($(obj).attr("clickable") == "true"){
+			// 채팅방 나가기 클릭버튼 display:none 해제 
+			$("#chatout").toggle();
+			// 현재 html에 추가되었던 동적 태그 전부 지우기
+			$('div.chatMiddle:not(.format) ul').html("");
+			// obj(this)로 들어온 태그에서 id에 담긴 방번호 추출
+			roomid = obj;
+			// 해당 채팅 방의 메세지 목록 불러오기
+			$.ajax({
+				url : roomid + ".do",
+				data : {
+					userid : "${loginMember.userid}"
+				},
+				async : false,
+				dataType : "json",
+				success : function(data) {
+					for (var i = 0; i < data.length; i++) {
+						// 채팅 목록 동적 추가
+						CheckLR(data[i]);
+					}
 				}
-			}
-		});
-		// 웹소켓 연결
-		connect();
-		console.log("enterRoom");
+			});
+			// 웹소켓 연결
+			connect();
+			console.log("enterRoom");
+			$(obj).attr("clickable","false");
+		}
 	}// 채팅방 클릭 시 방번호 배정후 웹소켓 연결
 
 	// 채팅 방 열어주기

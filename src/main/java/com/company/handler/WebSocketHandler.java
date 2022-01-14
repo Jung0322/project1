@@ -1,6 +1,7 @@
 package com.company.handler;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -24,7 +25,8 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 
 	@Autowired
 	ChatService cService;
-
+	@Autowired
+	ChatSession cSession;
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
 	// 채팅방 목록 <방 번호
@@ -34,7 +36,6 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 	private Map<WebSocketSession, String> sessionList = new ConcurrentHashMap<WebSocketSession, String>();
 
 	private static int i;
-
 	/**
 	 * websocket 연결 성공 시
 	 */
@@ -42,6 +43,7 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		i++; // 접속 인원 추가 
 		System.out.println(session.getId() + " 연결 성공 => 총 접속 인원 : " + i + "명");
+		
 	}
 	// 메세지 송수신 send/ 
 		@Override
@@ -147,9 +149,10 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 			sessionList.remove(session);
 		}
 	}
+	
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	
