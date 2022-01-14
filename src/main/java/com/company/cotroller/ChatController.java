@@ -99,6 +99,12 @@ public class ChatController {
         ProductDTO p = pService.getRow(pno);
         MemberDTO m =  mService.readMemberInfo(p.getUserid());
         System.out.println("로그인한 아이디 :::::"+userid+"상품 판매하는 아이디:::"+m.getUserid());
+        // 자신과 대화하려고 할때 
+        System.out.println(userid.equals(m.getUserid()));
+       
+        if(userid.equals(m.getUserid())) {
+        	return "nochat";
+        }
         
         // 채팅방DTO에 값 저장 
         room.setUserid(userid);

@@ -130,7 +130,7 @@
 						if (data.length > 0) {
 							// 읽지 않은 메세지 초기화
 							countAll = 0;
-
+						
 							// 태그 동적 추가
 							for ( var i in data) {
 								var $span; // 2단계
