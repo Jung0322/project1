@@ -275,8 +275,6 @@
 			roomid = obj.getAttribute("id");
 			console.log("채팅 방 아이디 ::::"+roomid);
 			
-			
-			
 			// 해당 채팅 방의 메세지 목록 불러오기
 			$.ajax({
 				url : roomid + ".do",

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,7 +71,7 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 
 			// 받은 메세지에 담긴 roomId로 해당 채팅방을 찾아온다.
 			ChatRoom chatRoom = cService.selectChatRoom(chatMessage.getRoomid());
-
+			
 			// 채팅 세션 목록에 채팅방이 존재하지 않고, 처음 들어왔고, DB에서의 채팅방이 있을 때
 			// 채팅방 생성
 			if (RoomList.get(chatRoom.getRoomid()) == null && chatMessage.getMessage().equals("ENTER-CHAT")
