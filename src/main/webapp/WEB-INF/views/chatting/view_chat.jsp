@@ -201,9 +201,9 @@
 
 								// 읽지 않은 메세지가 0이 아닐 때
 								if (data[i].unReadCount != 0) {
-									$span = $("<span class='notRead'>").text(data[i].unReadCount);
+									$span = $("<span class='notRead'style='float:right'>").text(data[i].unReadCount);
 								} else {
-									$span = $("<span>");
+									$span = $("<span style='float:right'>");
 								}
 								if (data[i].userid == "${loginMember.userid}"){
 									$divs = $("<span class='userNameId'>").text(data[i].masterid);
