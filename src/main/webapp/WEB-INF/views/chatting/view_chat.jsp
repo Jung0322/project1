@@ -205,7 +205,11 @@
 								} else {
 									$span = $("<span>");
 								}
-								$divs = $("<span class='userNameId'>").text(data[i].masterid);
+								if (data[i].userid == "${loginMember.userid}"){
+									$divs = $("<span class='userNameId'>").text(data[i].masterid);
+								}else{
+									$divs = $("<span class='userNameId'>").text(data[i].userid);
+								}
 								$div.append($img);
 								$div.append($divs);
 								$div.append($span);
