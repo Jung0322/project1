@@ -16,14 +16,14 @@
 	</select>
 	
 	<!-- 같은 동네 게시물 보여주기 -->
-	<select id="listMyTown" resultType="com.company.domain.BoardDTO">
-		<![CDATA[
-		select *
-		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,nickname,mytown,title,content,regdate,updatedate,curious,mcategory,replycnt
-				from myplace where rownum <=(#{cri.pageNum} * #{cri.amount}))
-		where rn> (#{cri.pageNum}-1) * #{cri.amount} and mytown=#{mytown}
-		]]>
-	</select>
+   <select id="listMyTown" resultType="com.company.domain.BoardDTO">
+      <![CDATA[
+      select *
+      from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,nickname,mytown,title,content,regdate,updatedate,curious,mcategory,replycnt
+            from myplace where rownum <=(#{cri.pageNum} * #{cri.amount}) and mytown=#{mytown})
+      where rn> (#{cri.pageNum}-1) * #{cri.amount} 
+      ]]>   
+   </select>
 		
 	<!-- 로그인 후 본인이 작성한 글 보여주기 -->
 	<select id="listMyPage" resultType="com.company.domain.BoardDTO">

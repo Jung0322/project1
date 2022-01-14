@@ -157,7 +157,6 @@
 														var fileCallPath = encodeURIComponent(obj.profileUploadPath+"\\"+obj.pfuuid+"_"+obj.profileImgName);
 														var str = "/member/profileDisplay?fileName="+fileCallPath;
 														$img = $img.attr("src", str);
-														$div.append($img);
 													})
 												}
 											}
@@ -188,7 +187,6 @@
 															console.log("경로 !!:::"+str);
 															
 					                                        $img = $img.attr("src", str);
-															$div.append($img);
 														})
 													}
 												}
