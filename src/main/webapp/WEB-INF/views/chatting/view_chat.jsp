@@ -357,6 +357,9 @@
 		console.log("커넥트 웹소켓 주소 ::"+wsUri);
 		// 소켓 객체 생성
 		websocket = new WebSocket(wsUri);
+		
+		
+		
 		//웹 소켓에 이벤트가 발생했을 때 호출될 함수 등록
 		websocket.onopen = onOpen;
 		websocket.onmessage = onMessage;
