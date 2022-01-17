@@ -45,7 +45,7 @@
 	let filePath = encodeURIComponent('${profileImg.profileUploadPath}'+"\\"+'${profileImg.pfuuid}'+"_"+'${profileImg.profileImgName}');
 	console.log(filePath.length);
 	if(filePath.length > 4) {
-		$(".profile-img").attr("src","profileDisplay?fileName="+filePath);
+		$(".profile-img").attr("src","/member/profileDisplay?fileName="+filePath);
 	}
 
 

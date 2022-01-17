@@ -29,5 +29,5 @@ public class BoardDTO {
 	private String mytown;
 	
 
-
+	
 }
