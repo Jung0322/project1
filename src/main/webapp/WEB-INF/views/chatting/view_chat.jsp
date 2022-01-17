@@ -306,7 +306,6 @@
 	}
 	
 	function chattingRoom(obj) {
-		if($(obj).attr("clickable") == "true"){
 			// 채팅방 나가기 클릭버튼 display:none 해제 
 			$("#chatout").toggle();
 			// 현재 html에 추가되었던 동적 태그 전부 지우기
@@ -332,7 +331,6 @@
 			connect();
 			console.log("enterRoom");
 			$(obj).attr("clickable","false");
-		}
 	}// 채팅방 클릭 시 방번호 배정후 웹소켓 연결
 
 	// 채팅 방 열어주기

@@ -24,7 +24,7 @@
 							</div>
 							<span>
 								<a href="/member/profile-page?userid=${row.userid}" style="font-size: 25px; " >
-									<img src="/resources/images/temp-profile.png" class="img-responsive img-circle profile" style="display: inline-block; width: 32px; margin-right: 4px;"> 
+									<img src="/resources/images/temp-profile.png" class="img-responsive img-circle profile-img" style="display: inline-block; width: 32px; margin-right: 4px;"> 
 									${nickname} 님의 상품
 								</a>
 							</span> 
@@ -151,6 +151,13 @@ let userid = null;
 
 console.log(userid);
 
+
+let filePath = encodeURIComponent('${profileImg.profileUploadPath}'+"\\"+'${profileImg.pfuuid}'+"_"+'${profileImg.profileImgName}');
+console.log(filePath.length);
+if(filePath.length > 4) {
+	$(".profile-img").attr("src","/member/profileDisplay?fileName="+filePath);
+}
+
 </script>
 
 <!-- #page -->
@@ -160,4 +167,4 @@ console.log(userid);
 <script src='/resources/js/plugins.js'></script>
 <script src='/resources/js/scripts.js'></script>
 <script src='/resources/js/masonry.pkgd.min.js'></script>
-  <%@ include file="../includes/footer.jsp" %>
+<%@ include file="../includes/footer.jsp" %>

@@ -88,7 +88,6 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a class="pdt" href="/product/index">상품</a></li>
 					<li><a href="/board/myPlace">내동네</a></li>
-					<li><a href="/auction/auction">경매</a></li>
 					
 					<!-- 로그인 안된 상태 -->					
 					<sec:authorize access="isAnonymous()">
