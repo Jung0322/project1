@@ -268,7 +268,7 @@ public class ProductController {
 	}
 	
 	@PostMapping("/product/delete")
-	public String delete(int pno,ProductCriteria cri, RedirectAttributes rttr) {
+	public String delete(int pno,ProductCriteria cri, RedirectAttributes rttr, Principal principal) {
 		//첨부파일 목록 얻어오기
 	 	List<AttachProductDTO> attachList = service.getRowImg(pno);
 	 	
@@ -287,6 +287,7 @@ public class ProductController {
 	 		//페이지 나누기 값 보내기(주소줄에 보임)
 	 		rttr.addAttribute("pageNum", cri.getPageNum());
 	 		rttr.addAttribute("amount", cri.getAmount());
+	 		rttr.addAttribute("userid",principal.getName());
 	 		
 	 			
 	 	}
@@ -301,14 +302,14 @@ public class ProductController {
 	      log.info("파일 삭제중....");
 	      
 	      attachListDto.forEach(attach -> {
-	         Path file = Paths.get("c:\\ccoli\\product"+attach.getPuploadPath()+"\\"+attach.getPuuid()+"_"+attach.getPimgname());
+	         Path file = Paths.get("c:\\ccoli\\product\\"+attach.getPuploadPath()+"\\"+attach.getPuuid()+"_"+attach.getPimgname());
 	      
 	         try {
 	        	//일반파일, 이미지 원본 파일만 삭제
 	            Files.deleteIfExists(file);
 	            
 	            if(Files.probeContentType(file).startsWith("image")) {
-	               Path thumbnail = Paths.get("c:\\ccoli\\product"+attach.getPuploadPath()+"\\s_"+attach.getPuuid()+"_"+attach.getPimgname());
+	               Path thumbnail = Paths.get("c:\\ccoli\\product\\"+attach.getPuploadPath()+"\\s_"+attach.getPuuid()+"_"+attach.getPimgname());
 	               
 	               //이미지 썸네일 삭제
 	               Files.delete(thumbnail);
