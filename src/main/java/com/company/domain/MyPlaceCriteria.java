@@ -17,13 +17,9 @@ public class MyPlaceCriteria {
 		this(1,10,"전체");
 	}
 	
-	public MyPlaceCriteria(int pageNum, int amount,String mcategory) {
+	public MyPlaceCriteria(int pageNum, int amount, String mcategory) {
 		this.pageNum = pageNum;
 		this.amount = amount;
 		this.mcategory = mcategory;
-	}
-	
-	public String[] getMcategoryArr() {
-		return mcategory==null?new String[] {}:mcategory.split("");
 	}
 }

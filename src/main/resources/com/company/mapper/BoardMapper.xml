@@ -10,9 +10,9 @@
 				from myplace where rownum <=(#{pageNum} * #{amount}))
 		where rn> (#{pageNum}-1) * #{amount}	
 			]]>
-		<!--  <if test="!mcategory.equals('전체')">
-			and mcategory=#{mcategory}
-		</if>-->			
+		<if test="!mcategory.equals('전체')">
+			and mcategory = #{mcategory}
+		</if>			
 	</select>
 	
 	<!-- 같은 동네 게시물 보여주기 -->
@@ -20,9 +20,12 @@
 		<![CDATA[
 		select *
 		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,nickname,mytown,title,content,regdate,updatedate,curious,mcategory,replycnt
-				from myplace where rownum <=(#{cri.pageNum} * #{cri.amount}))
-		where rn> (#{cri.pageNum}-1) * #{cri.amount} and mytown=#{mytown}
-		]]>
+				from myplace where rownum <=(#{cri.pageNum} * #{cri.amount}) and mytown=#{mytown})
+		where rn> ((#{cri.pageNum}-1) * #{cri.amount}) 
+		]]>	
+		<if test="!cri.mcategory.equals('전체')">
+			and mcategory = #{cri.mcategory}
+		</if>	
 	</select>
 		
 	<!-- 로그인 후 본인이 작성한 글 보여주기 -->
@@ -30,19 +33,25 @@
 		<![CDATA[
 		select *
 		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,nickname,mytown,title,content,regdate,updatedate,curious,mcategory,replycnt
-				from myplace where rownum <=(#{cri.pageNum} * #{cri.amount}))
-		where rn> (#{cri.pageNum}-1) * #{cri.amount} and userid = #{userid}
+				from myplace where rownum <=((#{cri.pageNum} * #{cri.amount}) and userid = #{userid})
+		where rn> (#{cri.pageNum}-1) * #{cri.amount} 
 		]]>
 	</select>
 	
 	<!-- 전체 게시물 수 -->
 	<select id="totalCnt" resultType="int">
 		select count(*) from myplace where mno > 0
+		<if test="!mcategory.equals('전체')">
+			and mcategory = #{mcategory}
+		</if>
 	</select>
 	
 	<!-- 같은 동네 전체 게시물 수 -->
 	<select id="totalCntMytown" resultType="int">
 		select count(*) from myplace where mytown=#{mytown}
+		<if test="!cri.mcategory.equals('전체')">
+			and mcategory = #{cri.mcategory}
+		</if>
 	</select>
 	
 	<!-- 로그인 한 사용자가 작성한 전체 게시물 수 -->
@@ -80,9 +89,5 @@
 	<select id="readMemberInfo" resultType="com.company.domain.BoardDTO">
 		select nickname, userid, mytown from member where userid=#{userid}
 	</select>
-	
-
-	
-	
 	
 </mapper>

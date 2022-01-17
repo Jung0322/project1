@@ -19,7 +19,7 @@
 						<div class="blog-post-format">
 							<span> <a href="/member/profile-page?userid=${dto.userid}"><img src="/resources/images/temp-profile.png" class="img-responsive img-circle profile"> ${dto.nickname}</a></span> 
 							<span>${dto.mytown}</span> 
-							<span><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}" /></span> 
+							<span><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.updatedate}" /></span> 
 							<span style="display: none;">${dto.userid}</span> 							
 							<span id="contextOptionButton">
 								<div class="dropdown" id="dropdownContent">
