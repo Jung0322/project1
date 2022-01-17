@@ -23,10 +23,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.company.domain.AttachProductDTO;
+import com.company.domain.MemberAttachDTO;
 import com.company.domain.MemberDTO;
 import com.company.domain.ProductCriteria;
 import com.company.domain.ProductDTO;
 import com.company.domain.ProductPageDTO;
+import com.company.service.MemberService;
 import com.company.service.ProductService;
 
 import lombok.extern.log4j.Log4j2;
@@ -37,7 +39,8 @@ public class ProductController {
 
 	@Autowired
 	private ProductService service;
-	
+	@Autowired
+	private MemberService memberService;
 
 	
 	@RequestMapping(value = "/product/index", method = RequestMethod.GET)
@@ -138,7 +141,13 @@ public class ProductController {
 		model.addAttribute("row",row);
 		model.addAttribute("nickname",nickname);
 		model.addAttribute("list", list);
-  	
+		
+		// ==== 상품 페이지에서 프로필 이미지 불러오기
+		MemberAttachDTO profileImg = memberService.readProfileInfo(row.getUserid());
+		if(profileImg != null) {
+			profileImg.setProfileUploadPath(profileImg.getProfileUploadPath().replace("\\", "\\\\"));
+			model.addAttribute("profileImg", profileImg);
+		}
 		
 		return "/product/single-project";
 	}

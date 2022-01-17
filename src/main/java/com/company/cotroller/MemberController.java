@@ -607,10 +607,6 @@ public class MemberController {
 		model.addAttribute("dto", memberInfo);
 		//해당 유저 판매상품 개수 저장
 		model.addAttribute("sellpdcount", sellproductN);
-
-		
-		//해당 유저 판매상품 개수 저장
-		model.addAttribute("sellpdcount", sellproductN);
 		
 		// 프로필 이미지 불러오기
 		//프로필 이미지 - userid
