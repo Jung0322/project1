@@ -263,12 +263,12 @@ $(function(){
 				pno:pno
 			},
 			success:function(data){
-				if(data=='createRoom' || data=='exist'){
+				if(data=="nochat"){
+					alert("자신이 올린 상품입니다");
+					locaton.href = '/product/index'; 
+				}else{
 					alert("채팅방이동");
-					location.href = '/view_chat';
-				}
-				else{
-					alert("방생성 실패");
+					location.href = '/view_chat?room_id='+data;
 				}
 			},
 			error:function(xhr,status,error){

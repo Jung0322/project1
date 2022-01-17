@@ -26,8 +26,6 @@ public class ProductDTO {
 	private int soldout;	//	soldout number(2) default 0,
 	private int good; // 좋아요
 	private String mytown;
-	
-	
 	private String userid;	//	userid varchar2(50) not null,
 	
 	//첨부파일 정보 받기

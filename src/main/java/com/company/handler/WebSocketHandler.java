@@ -1,8 +1,11 @@
 package com.company.handler;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +27,8 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 
 	@Autowired
 	ChatService cService;
-
+	@Autowired
+	ChatSession cSession;
 	private final ObjectMapper objectMapper = new ObjectMapper();
 
 	// 채팅방 목록 <방 번호
@@ -34,7 +38,6 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 	private Map<WebSocketSession, String> sessionList = new ConcurrentHashMap<WebSocketSession, String>();
 
 	private static int i;
-
 	/**
 	 * websocket 연결 성공 시
 	 */
@@ -42,8 +45,9 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		i++; // 접속 인원 추가 
 		System.out.println(session.getId() + " 연결 성공 => 총 접속 인원 : " + i + "명");
+		
 	}
-	// 메세지 송수신 
+	// 메세지 송수신 send/ 
 		@Override
 		protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 			// 들어왔는지 
@@ -67,7 +71,7 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 
 			// 받은 메세지에 담긴 roomId로 해당 채팅방을 찾아온다.
 			ChatRoom chatRoom = cService.selectChatRoom(chatMessage.getRoomid());
-
+			
 			// 채팅 세션 목록에 채팅방이 존재하지 않고, 처음 들어왔고, DB에서의 채팅방이 있을 때
 			// 채팅방 생성
 			if (RoomList.get(chatRoom.getRoomid()) == null && chatMessage.getMessage().equals("ENTER-CHAT")
@@ -94,7 +98,7 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 				// sessionList에 추가
 				sessionList.put(session, chatRoom.getRoomid());
 				// 확인용
-				System.out.println("생성된 채팅방으로 입장");
+				System.out.println("생성된 채팅방으로 입장:::"+chatRoom.getRoomid());
 			}
 
 			// 채팅 메세지 입력 시
@@ -134,7 +138,7 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 		}
 
 	/**
-	 * websocket 연결 종료 시
+	 * websocket 연결 종료 시 close()
 	 */
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
@@ -147,9 +151,10 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 			sessionList.remove(session);
 		}
 	}
+	
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	

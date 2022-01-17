@@ -81,10 +81,11 @@
 				</ul>
 			</div>
 	<script>
-	let userid = '${loginMember.userid}';
-	let masterid = '${masterDto.userid}'; 
-	console.log('${masterDto.userid}');
-
+	
+	
+	// 웹소켓
+	let websocket;
+	
 	// 총 읽지 않은 갯수
 	let countAll = 0;
 
@@ -123,52 +124,46 @@
 						$chatWrap.html("");
 
 						var $div; // 1단계
-						var $img; // 2단계
-						var $divs; // 2단계
-						var $span; // 2단계
-
+						var $img;
+						var divs;
+						
 						if (data.length > 0) {
 							// 읽지 않은 메세지 초기화
 							countAll = 0;
-
+						
 							// 태그 동적 추가
 							for ( var i in data) {
+								var $span; // 2단계
 								// 자신이 구매자 입장일 때
 								if (data[i].userid == "${loginMember.userid}") {
+									console.log("구매자 아이디 :::"+data[i].userid+"판매자 아이디 :::"+data[i].masterid);
 										$div = $(
 												"<div class='chatList_box enterRoomList' onclick='enterRoom(this);'>")
 												.attr("id", data[i].roomid)
-												.attr("masterId",
-														data[i].masterid);
-										 $.ajax({
+												.attr("userId",
+														data[i].userid)
+												.attr("clickable","true");
+										$img = $("<img class='profile_img' src='/resources/images/temp-profile.png'>");
+										$divs = $("<div class='userNameId'>");
+										// 프로필 가져오기
+										$.ajax({
 											url: "/member/chatgetProfileImg",
 											type:"get",
 											data: {
-												masterid: data[i].masterid
+												userid: data[i].masterid
 											},
 											success: function(result){
-												console.log(result);
+												console.log("결과:::::"+result);
 												if(result != null) {
 													$(result).each(function(idx, obj) {
 														var fileCallPath = encodeURIComponent(obj.profileUploadPath+"\\"+obj.pfuuid+"_"+obj.profileImgName);
 														var str = "/member/profileDisplay?fileName="+fileCallPath;
-														console.log("경로 !!:::"+str);
-														$img = $("<img class='profile_img'>")
-														.attr("src", str);
-														$div.append($img);
-					 									$divs = $("<div class='userNameId'>").text(data[i].masterid);
-															 $div.append($divs);
+														$img = $img.attr("src", str);
 													})
 												}
 											}
 											
 										}) 
-									// 현재 판매자가 로그아웃 상태 일 때
-									/*$img = $("<img class='profile_img'>")
-											.attr("src", "/resources/images/default.png"/* + data[i].masterPic );*/ 
-										
-/* 									$divs = $("<div class='userNameId'>").text(data[i].masterid);
-										 $div.append($divs);*/
 								} //자신이 구매자일떄 end
 								// 자신이 판매자 입장일 때
 								else {
@@ -176,9 +171,12 @@
 										$div = $(
 												"<div class='chatList_box enterRoomList' onclick='enterRoom(this);'>")
 												.attr("id", data[i].roomid)
-												.attr("userId",
-														data[i].userid);
-										 $.ajax({
+												.attr("masterId",
+														data[i].masterid)
+												.attr("clickable","true");
+										$img = $("<img class='profile_img'>").attr("src", "/resources/images/temp-profile.png");
+										
+										$.ajax({
 												url: "/member/chatgetProfileImg",
 												type:"get",
 												data: {
@@ -191,12 +189,8 @@
 															var fileCallPath = encodeURIComponent(obj.profileUploadPath+"\\"+obj.pfuuid+"_"+obj.profileImgName);
 															var str = "/member/profileDisplay?fileName="+fileCallPath;
 															console.log("경로 !!:::"+str);
-															$img = $("<img class='profile_img'>")
-															.attr("src", str);
-															$div.append($img);
-															$divs = $("<div class='userNameId'>")
-																	.text(data[i].userid);
-															$div.append($divs);
+															
+					                                        $img = $img.attr("src", str);
 														})
 													}
 												}
@@ -209,16 +203,19 @@
 
 								// 읽지 않은 메세지가 0이 아닐 때
 								if (data[i].unReadCount != 0) {
-									$span = $("<span class='notRead'>")
-											.text(data[i].unReadCount);
+									$span = $("<span class='notRead'style='float:right'>").text(data[i].unReadCount);
 								} else {
-									$span = $("<span>");
+									$span = $("<span style='float:right'>");
 								}
-								console.log($img);
-								//$div.append($img);
-								//$div.append($divs);
+								if (data[i].userid == "${loginMember.userid}"){
+									$divs = $("<span class='userNameId'>").text(data[i].masterid);
+								}else{
+									$divs = $("<span class='userNameId'>").text(data[i].userid);
+								}
+								$div.append($img);
+								$div.append($divs);
 								$div.append($span);
-
+								
 								$chatWrap.append($div);
 
 								// String을 int로 바꿔주고 더해준다.
@@ -262,57 +259,102 @@
 		websocket.close();
 	})
 	
+	
 	// 채팅 방 클릭 시 방번호 배정 후 웹소켓 연결
 	function enterRoom(obj) {
-		// 채팅방 나가기 클릭버튼 display:none 해제 
-		$("#chatout").toggle();
-		// 현재 html에 추가되었던 동적 태그 전부 지우기
-		$('div.chatMiddle:not(.format) ul').html("");
-		// obj(this)로 들어온 태그에서 id에 담긴 방번호 추출
-		roomid = obj.getAttribute("id");
 		
-		// 해당 채팅 방의 메세지 목록 불러오기
-		$.ajax({
-			url : roomid + ".do",
-			data : {
-				userid : "${loginMember.userid}"
-			},
-			async : false,
-			dataType : "json",
-			success : function(data) {
-				for (var i = 0; i < data.length; i++) {
-					// 채팅 목록 동적 추가
-					CheckLR(data[i]);
+		
+		if($(obj).attr("clickable") == "true"){
+		
+			// 채팅방 나가기 클릭버튼 display:none 해제 
+			$("#chatout").toggle();
+			// 현재 html에 추가되었던 동적 태그 전부 지우기
+			$('div.chatMiddle:not(.format) ul').html("");
+			// obj(this)로 들어온 태그에서 id에 담긴 방번호 추출
+			
+			roomid = obj.getAttribute("id");
+			console.log("채팅 방 아이디 ::::"+roomid);
+			
+			// 해당 채팅 방의 메세지 목록 불러오기
+			$.ajax({
+				url : roomid + ".do",
+				data : {
+					userid : "${loginMember.userid}"
+				},
+				async : false,
+				dataType : "json",
+				success : function(data) {
+					for (var i = 0; i < data.length; i++) {
+						// 채팅 목록 동적 추가
+						CheckLR(data[i]);
+					}
 				}
-			}
-		});
-		// 웹소켓 연결
-		
-		connect();
-		console.log("enterRoom");
+			});
+			// 웹소켓 연결
+			connect();
+			console.log("enterRoom");
+			$(obj).attr("clickable","false");
+		}
+	}// 채팅방 클릭 시 방번호 배정후 웹소켓 연결
+	// 채팅 방 클릭 시 방번호 배정 후 웹소켓 연결
+	// 채팅하기로 넘어왔을 시 작동 
+
+	let room_id = <%= request.getParameter("room_id")%>;
+	console.log("룸아이디 가져오기 :::"+room_id);
+	if(room_id!=null){
+		chattingRoom(room_id);
+	}
+	
+	function chattingRoom(obj) {
+		if($(obj).attr("clickable") == "true"){
+			// 채팅방 나가기 클릭버튼 display:none 해제 
+			$("#chatout").toggle();
+			// 현재 html에 추가되었던 동적 태그 전부 지우기
+			$('div.chatMiddle:not(.format) ul').html("");
+			// obj(this)로 들어온 태그에서 id에 담긴 방번호 추출
+			roomid = obj;
+			// 해당 채팅 방의 메세지 목록 불러오기
+			$.ajax({
+				url : roomid + ".do",
+				data : {
+					userid : "${loginMember.userid}"
+				},
+				async : false,
+				dataType : "json",
+				success : function(data) {
+					for (var i = 0; i < data.length; i++) {
+						// 채팅 목록 동적 추가
+						CheckLR(data[i]);
+					}
+				}
+			});
+			// 웹소켓 연결
+			connect();
+			console.log("enterRoom");
+			$(obj).attr("clickable","false");
+		}
 	}// 채팅방 클릭 시 방번호 배정후 웹소켓 연결
 
 	// 채팅 방 열어주기
-	$(".enterRoomList").click(function(){
+/* 	$(".enterRoomList").click(function(){
 		// 이름 추가
-		/* $("#setName").html($(this).children('div').html()); */
+		 $("#setName").html($(this).children('div').html()); 
 		// 사진 추가
-		/* $("#setPic").attr("src",
-				$(this).children('img').attr('src')); */
+		 $("#setPic").attr("src",
+				$(this).children('img').attr('src')); 
 		// 스크롤바 아래 고정
 		$('div.chatMiddle').scrollTop(    											// 스크롤 고정 css 건들기 
 				$('div.chatMiddle').prop('scrollHeight'));
 	
 		});
+	 */
 	
-	// 웹소켓
-	let websocket;
-
+	
 	//입장 버튼을 눌렀을 때 호출되는 함수
 	function connect() {
 		// 웹소켓 주소
 		var wsUri = "ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/websocket/echo.do";
-		console.log("웹소켓 주소 ::"+wsUri);
+		console.log("커넥트 웹소켓 주소 ::"+wsUri);
 		// 소켓 객체 생성
 		websocket = new WebSocket(wsUri);
 		//웹 소켓에 이벤트가 발생했을 때 호출될 함수 등록
@@ -321,7 +363,8 @@
 	}
 
 	//웹 소켓에 연결되었을 때 호출될 함수
-		function onOpen() {
+	function onOpen() {
+		console.log("onOpen 실행 :::"+roomid);
 		// ENTER-CHAT 이라는 메세지를 보내어, Java Map에 session 추가
 		const data = {
 			"roomid" : roomid,
@@ -338,7 +381,7 @@
 
 	// * 1 메시지 전송
 	function sendMessage(message) {
-
+		console.log("SendMessage 메세지 전송 !!::: "+message);
 		const data = {
 			"roomid" : roomid,
 			"messageid" : "",
@@ -355,6 +398,7 @@
 	
 	// * 2 메세지 수신
 	function onMessage(evt) {
+		console.log("onMessage :::: ");
 		let receive = evt.data.split(",");
 		console.log("recieve :::: "+receive);
 

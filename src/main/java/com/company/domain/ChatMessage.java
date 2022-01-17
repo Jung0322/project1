@@ -26,6 +26,7 @@ public class ChatMessage {
     private String sentid;            // 보낸이 아이디
     private int unReadCount;        // 안 읽은 메세지 수
     private int sessionCount;        // 현재 세션 수
+    
     private String lr;
     // sessionCount가 2 이면 unReadCount는 0으로 db에 집어넣을 수 있겠다.
     // => 2 명이 들어와있으니 읽지 않은 메세지는 없다.]
