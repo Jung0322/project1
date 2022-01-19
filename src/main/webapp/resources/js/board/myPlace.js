@@ -221,7 +221,21 @@ $(function() {
 				str += "<button class='dropdown-item list' id='replyDeleteBtn' type='button' data-mrno='" + data[i].mrno + "'>삭제하기</button>";
 				str += "</div></div>";
 				str += "<div class='media-object pull-left'>";
-				str += "<img src='/resources/images/temp-profile.png' class='img-responsive img-circle pro' alt='Blog Image'>";
+				
+				// 프로필 이미지가 없는 경우
+				if(data[i].profileList[0].pfuuid == null) {
+					str += "<img src='/resources/images/temp-profile.png' class='img-responsive img-circle pro'>";
+				} else { 	// 프로필 이미지가 있는 경우
+					uploadPath = data[i].profileList[0].profileUploadPath;
+					fileName = data[i].profileList[0].profileImgName;
+					uuid = data[i].profileList[0].pfuuid;
+					
+					orgPath = uploadPath + "\\" + uuid + "_" + fileName;
+
+					str += "<img src='/member/profileDisplay?fileName="+encodeURIComponent(orgPath)+"' class='img-responsive img-circle pro'>";
+				}
+				
+				
 				str += "</div>";
 				str += "<div class='media-body'>";
 				str += "<span name='nickname' class='replyElement'>" + data[i].nickname + "</span>";

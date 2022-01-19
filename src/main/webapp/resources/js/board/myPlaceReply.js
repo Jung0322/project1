@@ -31,6 +31,7 @@ let replyService = (function() {
 		$.getJSON({
 			url: '/replies/pages/' + mno + '/' + page,
 			success: function(data) {
+				console.log(data);
 				callback(data);
 			}
 		})

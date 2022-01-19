@@ -8,6 +8,10 @@
 <link rel='stylesheet' href='/resources/css/woocommerce.css'
 	type='text/css' media='all' />
 
+<script>
+	var pathArr = [];
+</script>
+
 <!-- Blog Section -->
 <body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page">
 	<section id="blog">
@@ -44,7 +48,15 @@
 						<div class="blog-post-format">
 							<span>
 								<a href="/member/profile-page?userid=${dto.userid}">
-									<img src="/resources/images/temp-profile.png" class="img-responsive img-circle"> ${dto.nickname}
+									<img src="/resources/images/temp-profile.png" class="img-responsive img-circle pimg"> ${dto.nickname}
+									<script>
+										uploadPath = "${dto.profileList[0].profileUploadPath}";
+										fileName = "${dto.profileList[0].profileImgName}";
+										uuid = "${dto.profileList[0].pfuuid}";
+										
+										orgPath = uploadPath+"\\"+uuid+"_"+fileName;	
+										pathArr.push(orgPath);
+									</script>
 								</a>
 							</span> 
 							<span>${dto.mytown}</span> 
@@ -89,6 +101,17 @@
 	<input type="hidden" name="mcategory" value="${pageDto.cri.mcategory}" />	
 	<input type="hidden" name="mno" value=""/>
 </form>
+
+
+<script>
+	let pimg = $(".pimg");
+	
+	$(pimg).each(function(i, item) {
+		if(pathArr[i].length > 2) {
+			$(this).attr("src", "/member/profileDisplay?fileName="+encodeURIComponent(pathArr[i]));
+		}
+	})
+</script>
 
 <script src="/resources/js/board/list.js"></script>
 <%@ include file="../includes/footer.jsp"%>

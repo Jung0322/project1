@@ -60,16 +60,11 @@ public class BoardController {
 			model.addAttribute("list", list);
 
 			// 프로필 이미지 불러오기
-			// 프로필 이미지 - userid
-			for (BoardDTO memberArr : list) {
-				MemberAttachDTO profileImg = memberService.readProfileInfo(memberArr.getUserid());
-
-				if (profileImg != null) {
-					// 2022\01\02 => 2022\\01\\02
-					profileImg.setProfileUploadPath(profileImg.getProfileUploadPath().replace("\\", "\\\\"));
-
-					// System.out.println("profileImg "+profileImg);
-					model.addAttribute("profileImg", profileImg);
+			for (BoardDTO boardArr : list) {
+				for (MemberAttachDTO memberArr : boardArr.getProfileList()) {
+					if (memberArr.getProfileUploadPath() != null) {
+						memberArr.setProfileUploadPath(memberArr.getProfileUploadPath().replace("\\", "\\\\"));
+					}
 				}
 			}
 
@@ -85,6 +80,15 @@ public class BoardController {
 			model.addAttribute("pageDto", new MyPlacePageDTO(cri, totalCnt));
 			model.addAttribute("list", list);
 
+			// 프로필 이미지 불러오기
+			for (BoardDTO boardArr : list) {
+				for (MemberAttachDTO memberArr : boardArr.getProfileList()) {
+					if(memberArr.getProfileUploadPath() != null) {
+						memberArr.setProfileUploadPath(memberArr.getProfileUploadPath().replace("\\", "\\\\"));
+					}
+				}
+			}
+
 		}
 
 	}
@@ -99,6 +103,16 @@ public class BoardController {
 
 		model.addAttribute("pageDto", new MyPlacePageDTO(cri, totalCnt));
 		model.addAttribute("list", list);
+		
+		
+		// 프로필 이미지 불러오기
+		for (BoardDTO boardArr : list) {
+			for (MemberAttachDTO memberArr : boardArr.getProfileList()) {
+				if(memberArr.getProfileUploadPath() != null) {
+					memberArr.setProfileUploadPath(memberArr.getProfileUploadPath().replace("\\", "\\\\"));
+				}
+			}
+		}
 
 		return "/board/myPlace-myPage";
 	}
@@ -128,6 +142,14 @@ public class BoardController {
 		BoardDTO dto = service.getRow(mno);
 		System.out.println(dto);
 		model.addAttribute("dto", dto);
+		
+		// 프로필 이미지 불러오기
+		MemberAttachDTO profileImg = memberService.readProfileInfo(dto.getUserid());
+		if (profileImg != null) {
+			profileImg.setProfileUploadPath(profileImg.getProfileUploadPath().replace("\\", "\\\\"));
+			model.addAttribute("profileImg", profileImg);
+		}
+		
 		return "/board/myPlaceRead";
 	}
 

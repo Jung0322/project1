@@ -599,8 +599,6 @@ public class MemberController {
 	public void profilePage(String userid, Model model) {
 		// 유저 정보
 		MemberDTO memberInfo = memberService.readMemberInfo(userid);
-
-		
 		//해당 유저 판매상품 개수
 		int sellproductN = productService.SellgetTotalCount("전체", userid, 0);
 		
@@ -621,12 +619,7 @@ public class MemberController {
 		
 	}
 
-	
-	// 가계부
-	@GetMapping("/cashbook-page")
-	public void cashbookPage() {
 
-	}
 	
 	
 	

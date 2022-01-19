@@ -28,5 +28,6 @@ public class BoardDTO {
 	private String mytown;
 	
 
-	
+	// 프로필 이미지 정보 받기
+	private List<MemberAttachDTO> profileList;
 }
