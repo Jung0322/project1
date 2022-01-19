@@ -67,7 +67,7 @@
 					 <h3 id="replyCnt">${dto.replycnt} Comments</h3>
 					<!-- 댓글 보여주는 영역 -->
 					  <div class="media" id="showReply">
-						<!--<div class='dropdown' id='dropdown1'>
+						<!-- <div class='dropdown' id='dropdown1'>
 							<i class='fas fa-ellipsis-v' data-toggle='dropdown' aria-expanded='false'></i>
 							<div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>
 							<div style='display:block;'>
@@ -86,8 +86,8 @@
 							<span name="mytown">서울시 은평구 신사동</span> 
 							<span name="regdate">7 months ago</span>
 							<p style="margin-bottom: 20px; margin-top: 10px;" name="content">댓글내용</p>
+						</div> -->
 						</div>
-						</div>-->
 					</div>
 				</div>
 				
@@ -170,7 +170,8 @@
 			    </div>
 			  </div>
 			</div>
-		</div>		
+		</div>	
+			
 <script>
 	//현재 글번호 가져오기
 	let mno = ${dto.mno};
