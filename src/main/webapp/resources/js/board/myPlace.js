@@ -245,6 +245,7 @@ $(function() {
 				str += "</div></div></div>";
 				
 				str += "<div class ='replyAreaHidden"+data[i].mrno+"' id='replyAreaHidden' style='display:none;'>";
+				str += "<div clearfix>";
 				str += "<div class='media-object pull-left' id='profile'>";
 				
 				// 프로필 이미지가 없는 경우
@@ -262,7 +263,7 @@ $(function() {
 				
 				
 				str += "</div>";
-				str += "<div class='media-body clearfix'>";
+				str += "<div class='media-body'>";
 				str += "<span name='nickname' id='nicknameHidden' style='margin-bottom: 17px;'>" + data[i].nickname + "</span>";
 				str += "<span name='mytown' id='mytownHidden'>" + data[i].mytown + "</span></div>";
 				str += "<div><textarea name='content' id='modifyContent'></textarea></div>";
