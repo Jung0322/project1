@@ -53,13 +53,22 @@ create table myPlaceGood(
 );
 
 
+select * from myplaceReply r left outer join profileimg p on r.userid=p.userid;
 
+select * from 
+	(select 
+    	/*+INDEX_DESC(myplace pk_myplace)*/ rownum rn, mno, userid, nickname, mytown, title, content, regdate, updatedate, curious, mcategory, replycnt
+    from myplace
+    where 
+		rownum <= (1 * 10) and userid = 'haha')
+where rn > (1-1) * 10
 
 
 
 select *
-from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,nickname,mytown,title,content,regdate,updatedate
-		from myplace where rownum <=(1 * 10) and mcategory = '동네질문')
+from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,nickname,mytown,title,content,regdate,updatedate, m.userid, pfuuid, profileUploadPath, profileImgName
+		from myplace m left outer join PROFILEIMG p on m.userid = p.userid
+		where rownum <=(1 * 10) and mcategory = '동네질문')
 where rn> (0) * 10;
 
 select count(*) from myplace where mytown='서울시 종로구 관철동';

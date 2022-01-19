@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.company.domain.MemberAttachDTO;
 import com.company.domain.MyPlaceReplyDTO;
 import com.company.service.MyPlaceReplyService;
 
@@ -34,7 +35,20 @@ public class MyPlaceReplyController {
 	public ResponseEntity<List<MyPlaceReplyDTO>> readAll(@PathVariable int mno){
 		log.info("댓글 전체 가져오기"+mno);
 		
-		return new ResponseEntity<List<MyPlaceReplyDTO>>(service.getList(mno),HttpStatus.OK);
+//		return new ResponseEntity<List<MyPlaceReplyDTO>>(service.getList(mno),HttpStatus.OK);
+		
+		List<MyPlaceReplyDTO> list = service.getList(mno);
+		
+		// 프로필 이미지
+		for(MyPlaceReplyDTO replyArr : list) {
+			for(MemberAttachDTO memberArr : replyArr.getProfileList()) {
+				if(memberArr.getProfileUploadPath() != null) {
+					memberArr.setProfileUploadPath(memberArr.getProfileUploadPath().replace("\\", "\\\\"));
+				}
+			}
+		}
+		
+		return new ResponseEntity<List<MyPlaceReplyDTO>>(list, HttpStatus.OK);
 	}
 	
 	//댓글 하나 가져오기
