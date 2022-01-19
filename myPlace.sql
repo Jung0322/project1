@@ -73,7 +73,7 @@ select * from myplace where mytown ='서울시 종로구 관철동' order by mno
 
 select * from member;
 
-select * from myPlace;
+select * from myplacereply;
 
 insert into myPlaceGood(mno,userid) values (87,'ccoli1');
 insert into myPlaceGood(mno,userid) values (87,'riri');
