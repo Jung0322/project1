@@ -86,11 +86,7 @@ $(function() {
 		
 		//댓글 수정 시 댓글 정보 출력할 영역 가져오기
 		let modifyContent = $(".replyAreaHidden"+mrno).find("#modifyContent");
-							
-		// 원래 댓글 영역 숨기고, 수정 필드 보여주기
-		$("#replyModifyBtn"+mrno).closest(".replyArea").hide();
-		$(".replyAreaHidden"+mrno).show();
-		
+									
 		//버튼 영역 가져오기
 		let hiddenModifyBtn = $(".replyAreaHidden"+mrno).find("#hiddenModifyBtn");
 		let hiddenCancelBtn = $(".replyAreaHidden"+mrno).find("#hiddenCancelBtn");
@@ -113,7 +109,10 @@ $(function() {
 				return;
 			}
 		
-					
+			// 원래 댓글 영역 숨기고, 수정 필드 보여주기
+			$("#replyModifyBtn"+mrno).closest(".replyArea").hide();
+			$(".replyAreaHidden"+mrno).show();
+							
 			//도착한 댓글 내용을 보여주기
 			let modifyContent = $(".replyAreaHidden"+mrno).find("#modifyContent");
 			modifyContent.val(data.content);					
@@ -244,8 +243,9 @@ $(function() {
 				str += "<p name='content' id='showReplyContent'>" + data[i].content + "</p>";
 				str += "</div></div></div>";
 				
+				
 				str += "<div class ='replyAreaHidden"+data[i].mrno+"' id='replyAreaHidden' style='display:none;'>";
-				str += "<div class = 'clearfix'>";
+				//str += "<div class = 'clearfix'>";
 				str += "<div class='media-object pull-left' id='profile'>";
 				
 				// 프로필 이미지가 없는 경우
@@ -263,13 +263,13 @@ $(function() {
 				
 				
 				str += "</div>";
-				str += "<div class='media-body'>";
+				str += "<div class='media-body clearfix'>";
 				str += "<span name='nickname' id='nicknameHidden'>" + data[i].nickname + "</span>";
 				str += "<span name='mytown' id='mytownHidden'>" + data[i].mytown + "</span></div>";
 				str += "<div><textarea name='content' id='modifyContent'></textarea></div>";
 				str += "<div><button type='button' id='hiddenCancelBtn'>취소</button>";
 				str += "<button type='button' id='hiddenModifyBtn'>수정</button></div>";
-				str += "</div></div></div>";
+				str += "</div>";
 			}
 			replyDiv.html(str);
 
