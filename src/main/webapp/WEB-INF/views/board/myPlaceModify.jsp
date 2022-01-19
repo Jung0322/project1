@@ -35,8 +35,6 @@
                          <div class="col-md-12 col-sm-6">
                               <input type="text" class="form-control" name="title"  value="${dto.title}" placeholder="글 제목" >
                          </div>
-                   <div>
-                   </div>
                     <div class="col-md-12 col-sm-6" id="textArea"> 
                     	<textarea id="summernote" name="content">${dto.content}</textarea>
                          </div>
