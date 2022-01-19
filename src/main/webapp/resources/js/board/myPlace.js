@@ -246,7 +246,21 @@ $(function() {
 				
 				str += "<div class ='replyAreaHidden"+data[i].mrno+"' id='replyAreaHidden' style='display:none;'>";
 				str += "<div class='media-object pull-left' id='profile'>";
-				str += "<img src='/resources/images/temp-profile.png' class='img-responsive img-circle pro hiddenImg' alt='Blog Image'>";
+				
+				// 프로필 이미지가 없는 경우
+				if(data[i].profileList[0].pfuuid == null) {
+					str += "<img src='/resources/images/temp-profile.png' class='img-responsive img-circle pro hiddenImg' alt='Blog Image'>";
+				} else { // 프로필 이미지가 있는 경우
+					uploadPath = data[i].profileList[0].profileUploadPath;
+					fileName = data[i].profileList[0].profileImgName;
+					uuid = data[i].profileList[0].pfuuid;
+					
+					orgPath = uploadPath + "\\" + uuid + "_" + fileName;
+
+					str += "<img src='/member/profileDisplay?fileName="+encodeURIComponent(orgPath)+"' class='img-responsive img-circle pro'>";
+				}
+				
+				
 				str += "</div>";
 				str += "<div class='media-body clearfix'>";
 				str += "<span name='nickname' id='nicknameHidden' style='margin-bottom: 17px;'>" + data[i].nickname + "</span>";
