@@ -108,7 +108,6 @@ $(function() {
 		
 			
 	// 이미지 삭제(수정중)
-	//let deleteBtn = $("#textArea > div > div.note-popover.popover.in.note-image-popover.bottom > div.popover-content.note-children-container > div.note-btn-group.btn-group.note-remove > button");
 	let deleteBtn = $(" div.note-btn-group.btn-group.note-remove > button");
 	
 	$(deleteBtn).click(function() {
@@ -124,7 +123,7 @@ $(function() {
 			},
 			data: { fileName: fileName },
 			success: function() {
-				alert(111);
+				//alert(111);
 			}
 		})
 	})

@@ -36,8 +36,6 @@ public class MyPlaceReplyController {
 		log.info("댓글 전체 가져오기"+mno);
 		System.out.println("댓글 전체 가져오기");
 		
-//		return new ResponseEntity<List<MyPlaceReplyDTO>>(service.getList(mno),HttpStatus.OK);
-		
 		List<MyPlaceReplyDTO> list = service.getList(mno);
 		
 		// 프로필 이미지

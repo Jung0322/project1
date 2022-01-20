@@ -210,6 +210,7 @@ $(function() {
 			}
 
 			// 댓글이 있는 경우
+			// 원래 출력하는 댓글 영역
 			let str = "";
 			for (var i = 0, len = data.length || 0; i < len; i++) {
 				str += "<div class ='replyArea'>";
@@ -233,8 +234,7 @@ $(function() {
 
 					str += "<img src='/member/profileDisplay?fileName="+encodeURIComponent(orgPath)+"' class='img-responsive img-circle pro'>";
 				}
-				
-				
+							
 				str += "</div>";
 				str += "<div class='media-body'>";
 				str += "<span name='nickname' class='replyElement'>" + data[i].nickname + "</span>";
@@ -244,8 +244,8 @@ $(function() {
 				str += "</div></div></div>";
 				
 				
+				// 댓글 수정시 나타나는 댓글 영역
 				str += "<div class ='replyAreaHidden"+data[i].mrno+"' id='replyAreaHidden' style='display:none;'>";
-				//str += "<div class = 'clearfix'>";
 				str += "<div class='media-object pull-left' id='profile'>";
 				
 				// 프로필 이미지가 없는 경우
@@ -260,8 +260,7 @@ $(function() {
 
 					str += "<img src='/member/profileDisplay?fileName="+encodeURIComponent(orgPath)+"' class='img-responsive img-circle pro'>";
 				}
-				
-				
+							
 				str += "</div>";
 				str += "<div class='media-body clearfix'>";
 				str += "<span name='nickname' id='nicknameHidden'>" + data[i].nickname + "</span>";
@@ -278,5 +277,4 @@ $(function() {
 
 	}//showlist end
 	
-
 }) // function end

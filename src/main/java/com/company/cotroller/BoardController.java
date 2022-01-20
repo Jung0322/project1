@@ -92,7 +92,8 @@ public class BoardController {
 		}
 
 	}
-
+	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/myPlace-myPage")
 	public String myPage(MyPlaceCriteria cri, String userid, Model model) {
 		log.info("내 동내 마이페이지 요청");
@@ -179,16 +180,16 @@ public class BoardController {
 	public String write(Principal principal, Model model) {
 		log.info("글 작성 페이지 요청");
 		System.out.println(principal.getName());
-
-		// 세션에 담긴 아이디 가져오기
-		String userid = principal.getName();
-		BoardDTO dto = service.readMemberInfo(userid);
-
-		model.addAttribute("dto", dto);
-
-		return "/board/myPlaceWrite";
-	}
-
+			
+			// 세션에 담긴 아이디 가져오기
+			String userid = principal.getName();
+			BoardDTO dto = service.readMemberInfo(userid);
+			
+			model.addAttribute("dto", dto);
+			
+			return "/board/myPlaceWrite";
+		}
+		
 	@PostMapping("/write")
 	public String writePost(BoardDTO insertDTO) {
 		log.info("글 작성하기" + insertDTO);

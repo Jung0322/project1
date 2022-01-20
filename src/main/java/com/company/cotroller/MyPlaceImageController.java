@@ -117,9 +117,7 @@ public class MyPlaceImageController {
 		try {
 			System.out.println(URLDecoder.decode(fileName, "UTF-8"));
 			File file = new File("C:\\ccoli\\myPlace\\"+URLDecoder.decode(fileName, "UTF-8"));
-//			File file = new File(URLDecoder.decode(fileName, "UTF-8"));
-		
-		
+				
 			file.delete();
 		} catch (Exception e) {
 			e.printStackTrace();

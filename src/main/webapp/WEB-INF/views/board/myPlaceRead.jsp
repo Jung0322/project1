@@ -105,72 +105,13 @@
 							<input type="button" class="form-control" id="replyButton" value="댓글입력">
 						</div>
 						    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
-                         	<input type="hidden" name="mno" value="${dto.mno}"/>
-                         	                  	  						 						
+                         	<input type="hidden" name="mno" value="${dto.mno}"/>                         	                  	  						 						
 					</form>
 				</div>
 				</sec:authorize>
 			</div>
-		</div>
 		</div>	
 </section>
-            <!-- 댓글작성 폼 -->
-            <div class="modal" tabindex="-1" id="replyModal">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			        <h5 class="modal-title">댓글 수정하기</h5>
-			      </div>
-			      <div class="modal-body">
-			        <div class="modal-user">
-				        <div class="media-object pull-left" style="margin-right: 10px;">
-							<img src="/resources/images/temp-profile.png" class="img-responsive img-circle pro" alt="Blog Image" >
-						</div>						
-			        	<span name="userid">Omar Larus</span> 
-			        	<span name="nickname" style="margin-right: 7px;">Omar Larus</span> 
-						<span name="mytown" style="margin-right: 7px;">서울시 은평구 신사동</span> 
-						<span name="regdate" style="margin-right: 7px;">7 months ago</span>
-						<textarea rows="3" cols="" style="width: 100%; margin-top: 10px" name="content">댓글 내용</textarea>       
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="" id="modalModifyBtn">수정</button>
-			        <button type="button" class="" id="modalCloseBtn" data-dismiss="modal">종료</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-		</div>
-		<!-- 대댓글작성 폼 -->
-            <div class="modal" tabindex="-1" id="re-replyModal">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			        <h5 class="modal-title">댓글 수정하기</h5>
-			      </div>
-			      <div class="modal-body">
-			        <div class="modal-user">
-				        <div class="media-object pull-left" style="margin-right: 10px;">
-							<img src="/resources/images/temp-profile.png" class="img-responsive img-circle pro" alt="Blog Image" >
-						</div>
-			        	<span name="nicknameM" style="margin-right: 7px;">Omar Larus</span> 
-						<span name="mytownM" style="margin-right: 7px;">서울시 은평구 신사동</span> 
-						<span name="regdateM" style="margin-right: 7px;">7 months ago</span>
-						<textarea rows="3" cols="" style="width: 100%; margin-top: 10px" name="contentM">댓글 내용</textarea>       
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="" id="modalModifyBtnRe">작성완료</button>
-			        <button type="button" class="" id="modalCloseBtnRe" data-dismiss="modal">종료</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-		</div>	
 			
 <script>
 	//현재 글번호 가져오기

@@ -34,22 +34,5 @@ $(function() {
 		actionForm.find("input[name='mno']").remove();
 		actionForm.submit();
 	})
-	
-	/*$(".categoryBtn").click(function(e){
 		
-		e.preventDefault();
-		console.log("카테고리값 :" + $(this).attr('value'));
-		
-		$("#categoryForm").find("input[name='pageNum']").val("1");
-		$("#categoryForm").attr("action","/board/myPlace").val("1");
-		
-		$("#categoryForm").submit();
-				
-		
-		
-		
-		
-	})*/
-	
-	
 })

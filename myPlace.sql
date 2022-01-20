@@ -6,7 +6,7 @@ drop table myplacereply;
 drop sequence myplacereply_seq;
 drop table myPlaceGood;
 
-select * from chatroom;
+select * from myPlace;
 select * from chatmessage;
 -- 동네생활 테이블
 create table myPlace (
@@ -101,3 +101,18 @@ update myplace set curious=0;
 
 -- 이미 들어간 댓글 수 삽입하기
 update myplace set replycnt = (select count(mno) from MYPLACEREPLY where MYPLACE.mno=myplacereply.mno);
+
+
+
+		select
+			*
+		from 
+			(select 
+				/*+INDEX_DESC(myplace pk_myplace)*/ rownum rn, mno, m.userid, mcategory, nickname, mytown, title, content, regdate, updatedate, replycnt, curious,
+				pfuuid, profileUploadPath, profileImgName
+			from 
+				myplace m LEFT OUTER JOIN profileImg p ON m.userid=p.userid 
+			where rownum <=(2 * 10)
+			order by regdate desc)
+		where 
+			rn> (1) * 10;	
