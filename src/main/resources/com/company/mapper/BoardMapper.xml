@@ -27,15 +27,6 @@
 	</resultMap>
 
 	<!-- 전체 게시물 보여주기 -->
-<!-- <<<<<<< HEAD
-	<select id="listAll" resultType="com.company.domain.BoardDTO">
-	<![CDATA[
-		select *
-		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,mcategory,nickname,mytown,title,content,regdate,updatedate,replycnt,curious
-				from myplace where rownum <=(#{pageNum} * #{amount}))
-		where rn> (#{pageNum}-1) * #{amount}	
-			]]>			
-======= -->
 	<select id="listAll" resultMap="boardMap">
 		<![CDATA[
 		select
@@ -57,18 +48,7 @@
 	</select>
 	
 	<!-- 같은 동네 게시물 보여주기 -->
-<!-- <<<<<<< HEAD
-   <select id="listMyTown" resultType="com.company.domain.BoardDTO">
-      <![CDATA[
-      select *
-      from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,nickname,mytown,title,content,regdate,updatedate,curious,mcategory,replycnt
-            from myplace where rownum <=(#{cri.pageNum} * #{cri.amount}) and mytown=#{mytown})
-      where rn> (#{cri.pageNum}-1) * #{cri.amount} 
-      ]]>   
-   </select>
- 	
-=======
- -->	<select id="listMyTown" resultMap="boardMap">
+	<select id="listMyTown" resultMap="boardMap">
 		<![CDATA[
 		select 
 			*
