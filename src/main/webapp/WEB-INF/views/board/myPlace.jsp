@@ -8,13 +8,17 @@
 <link rel='stylesheet' href='/resources/css/woocommerce.css'
 	type='text/css' media='all' />
 
+<script>
+	var pathArr = [];
+</script>
+
 <!-- Blog Section -->
 <body class="archive post-type-archive post-type-archive-product woocommerce woocommerce-page">
 	<section id="blog">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-offset-1 col-md-10 col-sm-12">
-				<!--  <form action="" method="get" id="categoryForm">			
+				<form action="" method="get" id="categoryForm">			
 				 	<div class="cBtn">
 						<button class="categoryBtn" name="mcategory" value="동네질문">동네질문</button>
 						<button class="categoryBtn" name="mcategory" value="동네맛집">동네맛집</button>
@@ -23,7 +27,7 @@
 						<button class="categoryBtn" name="mcategory" value="일상">일상</button>
 						<button class="categoryBtn" name="mcategory" value="기타">기타</button>
 					</div>
-				</form>-->
+				</form>
 				
 				<!-- 로그인 후 보여질 버튼 -->
 				<sec:authorize access="isAuthenticated()">
@@ -44,7 +48,15 @@
 						<div class="blog-post-format">
 							<span>
 								<a href="/member/profile-page?userid=${dto.userid}">
-									<img src="/resources/images/temp-profile.png" class="img-responsive img-circle"> ${dto.nickname}
+									<img src="/resources/images/temp-profile.png" class="img-responsive img-circle pimg"> ${dto.nickname}
+									<script>
+										uploadPath = "${dto.profileList[0].profileUploadPath}";
+										fileName = "${dto.profileList[0].profileImgName}";
+										uuid = "${dto.profileList[0].pfuuid}";
+										
+										orgPath = uploadPath+"\\"+uuid+"_"+fileName;	
+										pathArr.push(orgPath);
+									</script>
 								</a>
 							</span> 
 							<span>${dto.mytown}</span> 
@@ -69,7 +81,7 @@
 				</li>
 			</c:if>
 			<c:forEach var="idx" begin="${pageDto.startPage}" end="${pageDto.endPage}">
-				<li class="paginate_button">
+				<li class="paginate_button ${pageDto.cri.pageNum==idx?'active':''}">
 					<span class="page-numbers current">
 						<a href="${idx}">${idx}</a>
 					</span>
@@ -89,6 +101,17 @@
 	<input type="hidden" name="mcategory" value="${pageDto.cri.mcategory}" />	
 	<input type="hidden" name="mno" value=""/>
 </form>
+
+
+<script>
+	let pimg = $(".pimg");
+	
+	$(pimg).each(function(i, item) {
+		if(pathArr[i].length > 2) {
+			$(this).attr("src", "/member/profileDisplay?fileName="+encodeURIComponent(pathArr[i]));
+		}
+	})
+</script>
 
 <script src="/resources/js/board/list.js"></script>
 <%@ include file="../includes/footer.jsp"%>

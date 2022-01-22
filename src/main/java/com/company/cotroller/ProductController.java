@@ -23,10 +23,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.company.domain.AttachProductDTO;
+import com.company.domain.MemberAttachDTO;
 import com.company.domain.MemberDTO;
 import com.company.domain.ProductCriteria;
 import com.company.domain.ProductDTO;
 import com.company.domain.ProductPageDTO;
+import com.company.service.MemberService;
 import com.company.service.ProductService;
 
 import lombok.extern.log4j.Log4j2;
@@ -37,7 +39,8 @@ public class ProductController {
 
 	@Autowired
 	private ProductService service;
-	
+	@Autowired
+	private MemberService memberService;
 
 	
 	@RequestMapping(value = "/product/index", method = RequestMethod.GET)
@@ -138,7 +141,13 @@ public class ProductController {
 		model.addAttribute("row",row);
 		model.addAttribute("nickname",nickname);
 		model.addAttribute("list", list);
-  	
+		
+		// ==== 상품 페이지에서 프로필 이미지 불러오기
+		MemberAttachDTO profileImg = memberService.readProfileInfo(row.getUserid());
+		if(profileImg != null) {
+			profileImg.setProfileUploadPath(profileImg.getProfileUploadPath().replace("\\", "\\\\"));
+			model.addAttribute("profileImg", profileImg);
+		}
 		
 		return "/product/single-project";
 	}
@@ -268,7 +277,7 @@ public class ProductController {
 	}
 	
 	@PostMapping("/product/delete")
-	public String delete(int pno,ProductCriteria cri, RedirectAttributes rttr) {
+	public String delete(int pno,ProductCriteria cri, RedirectAttributes rttr, Principal principal) {
 		//첨부파일 목록 얻어오기
 	 	List<AttachProductDTO> attachList = service.getRowImg(pno);
 	 	
@@ -287,6 +296,7 @@ public class ProductController {
 	 		//페이지 나누기 값 보내기(주소줄에 보임)
 	 		rttr.addAttribute("pageNum", cri.getPageNum());
 	 		rttr.addAttribute("amount", cri.getAmount());
+	 		rttr.addAttribute("userid",principal.getName());
 	 		
 	 			
 	 	}
@@ -301,14 +311,14 @@ public class ProductController {
 	      log.info("파일 삭제중....");
 	      
 	      attachListDto.forEach(attach -> {
-	         Path file = Paths.get("c:\\ccoli\\product"+attach.getPuploadPath()+"\\"+attach.getPuuid()+"_"+attach.getPimgname());
+	         Path file = Paths.get("c:\\ccoli\\product\\"+attach.getPuploadPath()+"\\"+attach.getPuuid()+"_"+attach.getPimgname());
 	      
 	         try {
 	        	//일반파일, 이미지 원본 파일만 삭제
 	            Files.deleteIfExists(file);
 	            
 	            if(Files.probeContentType(file).startsWith("image")) {
-	               Path thumbnail = Paths.get("c:\\ccoli\\product"+attach.getPuploadPath()+"\\s_"+attach.getPuuid()+"_"+attach.getPimgname());
+	               Path thumbnail = Paths.get("c:\\ccoli\\product\\"+attach.getPuploadPath()+"\\s_"+attach.getPuuid()+"_"+attach.getPimgname());
 	               
 	               //이미지 썸네일 삭제
 	               Files.delete(thumbnail);

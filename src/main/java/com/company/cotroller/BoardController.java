@@ -60,16 +60,11 @@ public class BoardController {
 			model.addAttribute("list", list);
 
 			// 프로필 이미지 불러오기
-			// 프로필 이미지 - userid
-			for (BoardDTO memberArr : list) {
-				MemberAttachDTO profileImg = memberService.readProfileInfo(memberArr.getUserid());
-
-				if (profileImg != null) {
-					// 2022\01\02 => 2022\\01\\02
-					profileImg.setProfileUploadPath(profileImg.getProfileUploadPath().replace("\\", "\\\\"));
-
-					// System.out.println("profileImg "+profileImg);
-					model.addAttribute("profileImg", profileImg);
+			for (BoardDTO boardArr : list) {
+				for (MemberAttachDTO memberArr : boardArr.getProfileList()) {
+					if (memberArr.getProfileUploadPath() != null) {
+						memberArr.setProfileUploadPath(memberArr.getProfileUploadPath().replace("\\", "\\\\"));
+					}
 				}
 			}
 
@@ -85,10 +80,20 @@ public class BoardController {
 			model.addAttribute("pageDto", new MyPlacePageDTO(cri, totalCnt));
 			model.addAttribute("list", list);
 
+			// 프로필 이미지 불러오기
+			for (BoardDTO boardArr : list) {
+				for (MemberAttachDTO memberArr : boardArr.getProfileList()) {
+					if(memberArr.getProfileUploadPath() != null) {
+						memberArr.setProfileUploadPath(memberArr.getProfileUploadPath().replace("\\", "\\\\"));
+					}
+				}
+			}
+
 		}
 
 	}
-
+	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/myPlace-myPage")
 	public String myPage(MyPlaceCriteria cri, String userid, Model model) {
 		log.info("내 동내 마이페이지 요청");
@@ -99,6 +104,16 @@ public class BoardController {
 
 		model.addAttribute("pageDto", new MyPlacePageDTO(cri, totalCnt));
 		model.addAttribute("list", list);
+		
+		
+		// 프로필 이미지 불러오기
+		for (BoardDTO boardArr : list) {
+			for (MemberAttachDTO memberArr : boardArr.getProfileList()) {
+				if(memberArr.getProfileUploadPath() != null) {
+					memberArr.setProfileUploadPath(memberArr.getProfileUploadPath().replace("\\", "\\\\"));
+				}
+			}
+		}
 
 		return "/board/myPlace-myPage";
 	}
@@ -128,6 +143,14 @@ public class BoardController {
 		BoardDTO dto = service.getRow(mno);
 		System.out.println(dto);
 		model.addAttribute("dto", dto);
+		
+		// 프로필 이미지 불러오기
+		MemberAttachDTO profileImg = memberService.readProfileInfo(dto.getUserid());
+		if (profileImg != null) {
+			profileImg.setProfileUploadPath(profileImg.getProfileUploadPath().replace("\\", "\\\\"));
+			model.addAttribute("profileImg", profileImg);
+		}
+		
 		return "/board/myPlaceRead";
 	}
 
@@ -157,16 +180,16 @@ public class BoardController {
 	public String write(Principal principal, Model model) {
 		log.info("글 작성 페이지 요청");
 		System.out.println(principal.getName());
-
-		// 세션에 담긴 아이디 가져오기
-		String userid = principal.getName();
-		BoardDTO dto = service.readMemberInfo(userid);
-
-		model.addAttribute("dto", dto);
-
-		return "/board/myPlaceWrite";
-	}
-
+			
+			// 세션에 담긴 아이디 가져오기
+			String userid = principal.getName();
+			BoardDTO dto = service.readMemberInfo(userid);
+			
+			model.addAttribute("dto", dto);
+			
+			return "/board/myPlaceWrite";
+		}
+		
 	@PostMapping("/write")
 	public String writePost(BoardDTO insertDTO) {
 		log.info("글 작성하기" + insertDTO);

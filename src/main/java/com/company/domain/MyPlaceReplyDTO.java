@@ -1,6 +1,7 @@
 package com.company.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,4 +23,7 @@ public class MyPlaceReplyDTO {
 	private String userid;
 	private String nickname;
 	private String mytown;
+	
+	// 프로필 이미지 정보 받기
+	private List<MemberAttachDTO> profileList;
 }

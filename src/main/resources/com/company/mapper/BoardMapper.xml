@@ -2,7 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.mapper.BoardMapper">
 
+	<resultMap type="com.company.domain.BoardDTO" id="boardMap">
+		<id property="mno" column="mno" />
+		<result property="mcategory" column="mcategory" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="regdate" column="regdate" />
+		<result property="updatedate" column="updatedate" />
+		<result property="replycnt" column="replycnt" />
+		<result property="curious" column="curious" />
+		
+		<result property="userid" column="userid" />
+		<result property="nickname" column="nickname" />
+		<result property="mytown" column="mytown" />
+		
+		<collection property="profileList" resultMap="profileMap"></collection>
+	</resultMap>
+	
+	<resultMap type="com.company.domain.MemberAttachDTO" id="profileMap">
+		<result property="pfuuid" column="pfuuid" />
+		<result property="userid" column="userid" />
+		<result property="profileUploadPath" column="profileUploadPath"/>
+		<result property="profileImgName" column="profileImgName"/>
+	</resultMap>
+
 	<!-- 전체 게시물 보여주기 -->
+<!-- <<<<<<< HEAD
 	<select id="listAll" resultType="com.company.domain.BoardDTO">
 	<![CDATA[
 		select *
@@ -10,9 +35,29 @@
 				from myplace where rownum <=(#{pageNum} * #{amount}))
 		where rn> (#{pageNum}-1) * #{amount}	
 			]]>			
+======= -->
+	<select id="listAll" resultMap="boardMap">
+		<![CDATA[
+		select
+			*
+		from 
+			(select 
+				/*+INDEX_DESC(myplace pk_myplace)*/ rownum rn, mno, m.userid, mcategory, nickname, mytown, title, content, regdate, updatedate, replycnt, curious,
+				pfuuid, profileUploadPath, profileImgName
+			from 
+				myplace m LEFT OUTER JOIN profileImg p ON m.userid=p.userid 
+			where rownum <=(#{pageNum} * #{amount})
+			order by regdate desc)
+		where 
+			rn> (#{pageNum}-1) * #{amount}	
+		]]>
+		<if test="!mcategory.equals('전체')">
+			and mcategory = #{mcategory}
+		</if>			
 	</select>
 	
 	<!-- 같은 동네 게시물 보여주기 -->
+<!-- <<<<<<< HEAD
    <select id="listMyTown" resultType="com.company.domain.BoardDTO">
       <![CDATA[
       select *
@@ -22,24 +67,60 @@
       ]]>   
    </select>
  	
-	<!-- 로그인 후 본인이 작성한 글 보여주기 -->
-	<select id="listMyPage" resultType="com.company.domain.BoardDTO">
+=======
+ -->	<select id="listMyTown" resultMap="boardMap">
 		<![CDATA[
-		select *
-		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,nickname,mytown,title,content,regdate,updatedate,curious,mcategory,replycnt
-				from myplace where rownum <=(#{cri.pageNum} * #{cri.amount}))
-		where rn> (#{cri.pageNum}-1) * #{cri.amount} and userid = #{userid}
-		]]>
+		select 
+			*
+		from 
+			(select
+				/*+INDEX_DESC(myplace pk_myplace)*/ rownum rn, mno, m.userid, nickname, mytown, title, content, regdate, updatedate, curious, mcategory, replycnt, 
+				pfuuid, profileUploadPath, profileImgName
+			from 
+				myplace m LEFT OUTER JOIN profileImg p ON m.userid=p.userid
+			where 
+				rownum <=(#{cri.pageNum} * #{cri.amount}) and mytown=#{mytown}
+			order by regdate desc)
+		where 
+			rn> ((#{cri.pageNum}-1) * #{cri.amount}) 
+		]]>	
+		<if test="!cri.mcategory.equals('전체')">
+			and mcategory = #{cri.mcategory}
+		</if>	
 	</select>
+		
+	<!-- 로그인 후 본인이 작성한 글 보여주기 -->
+	<select id="listMyPage" resultMap="boardMap">
+    	<![CDATA[
+    		select
+    			*
+    		from 
+    			(select 
+    				/*+INDEX_DESC(myplace pk_myplace)*/ rownum rn, mno, m.userid, nickname, mytown, title, content, regdate, updatedate, curious, mcategory, replycnt,
+    				pfuuid, profileUploadPath, profileImgName
+            	from 
+            		myplace m LEFT OUTER JOIN profileImg p ON m.userid=p.userid
+            	where 
+            		rownum <= (#{cri.pageNum} * #{cri.amount}) and m.userid = #{userid}
+            	order by regdate desc)
+    		where rn > (#{cri.pageNum}-1) * #{cri.amount} 
+      	]]>
+   </select>
 	
 	<!-- 전체 게시물 수 -->
 	<select id="totalCnt" resultType="int">
 		select count(*) from myplace where mno > 0
+		<if test="!mcategory.equals('전체')">
+			and mcategory = #{mcategory}
+		</if>
 	</select>
 	
 	<!-- 같은 동네 전체 게시물 수 -->
 	<select id="totalCntMytown" resultType="int">
 		select count(*) from myplace where mytown=#{mytown}
+		<if test="!cri.mcategory.equals('전체')">
+			and mcategory = #{cri.mcategory}
+		</if>
 	</select>
 	
 	<!-- 로그인 한 사용자가 작성한 전체 게시물 수 -->
@@ -76,7 +157,5 @@
 	<select id="readMemberInfo" resultType="com.company.domain.BoardDTO">
 		select nickname, userid, mytown from member where userid=#{userid}
 	</select>
-	
-	
 	
 </mapper>

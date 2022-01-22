@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,9 +14,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,7 +35,8 @@ public class MyPlaceImageController {
 		System.out.println("image 업로드 " + Arrays.toString(uploadFile));
 
 		// 서버 폴더에 첨부 파일 저장
-		String uploadFolder = "e:\\ccoli\\myPlace";
+//		String uploadFolder = "e:\\ccoli\\myPlace";
+		String uploadFolder = "C:\\ccoli\\myPlace";
 		String uploadFileName = "";
 
 		// 첨부파일 목록 리스트 생성
@@ -104,24 +109,22 @@ public class MyPlaceImageController {
 		return str.replace("-", File.separator);
 	}
 	
-	// 서버 폴더에 파일을 삭제
-//		@PreAuthorize("isAuthenticated()")
-//		@PostMapping("/deleteImage")
-//		public ResponseEntity<String> deleteFile(String fileName) {
-//
-//			try {
-//				File file = new File("e:\\ccoli\\myPlace" + URLDecoder.decode(fileName, "utf-8"));
-//				file.delete(); // 이미지삭제
-//
-//					String largeName = file.getAbsolutePath().replace("s_", "");
-//					new File(largeName).delete();
-//	
-//			} catch (UnsupportedEncodingException e) {
-//				e.printStackTrace();
-//				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//
-//			}
-//			return new ResponseEntity<String>("success", HttpStatus.OK);
-//		}
+	// 수정 중
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/deleteImage")
+	private ResponseEntity<String> deleteFiles(String fileName) {
+		System.out.println("동네생활 파일 삭제 중 : fileName "+fileName);
+		try {
+			System.out.println(URLDecoder.decode(fileName, "UTF-8"));
+			File file = new File("C:\\ccoli\\myPlace\\"+URLDecoder.decode(fileName, "UTF-8"));
+				
+			file.delete();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<String>("success", HttpStatus.OK);
+	}
 
 }

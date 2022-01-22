@@ -20,7 +20,6 @@ public class BoardDTO {
 	private String content; //글내용
 	private Date regdate; // 작성날짜
 	private Date updatedate; // 수정날짜
-	private int mcount; // 조회수
 	private int replycnt; // 댓글수
 	private int curious; // 궁금해요/공감해요 갯수
 	
@@ -29,5 +28,6 @@ public class BoardDTO {
 	private String mytown;
 	
 
-
+	// 프로필 이미지 정보 받기
+	private List<MemberAttachDTO> profileList;
 }

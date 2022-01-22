@@ -21,14 +21,16 @@ $('#summernote').summernote({
 	],
 	callbacks: {
 		onImageUpload: function(files) {
-			//for(var i = files.length - 1; i >=0; i--){
 			uploadSummernoteImageFile(files, this);
-			//}
 		}
 	}
 });
 
 formData = new FormData();
+
+
+var imageUploadPath = "";
+var imageFileName = "";
 
 function uploadSummernoteImageFile(files, el) {
 
@@ -55,42 +57,17 @@ function uploadSummernoteImageFile(files, el) {
 
 				data.url = "/ccoli/" + obj.muploadPath + "/" + obj.muuid + "_" + obj.mimgName;
 				console.log(data.url);
-
+				imageUploadPath = obj.muploadPath;
+				imageFileName = obj.muuid + "_" + obj.mimgName;
 				$(el).summernote('editor.insertImage', data.url);
 			});
 		}
 	});
-	
-	
-
 }
 
 
 $(function() {
 	
-		//게시물 삭제시 폴더에 있는 이미지 삭제하기
-		/*$("#Button").click(function(){
-			
-			let fileName = $('.note-editable').find('img').attr('src');
-			
-			console.log("파일이름 : "+fileName);
-	
-			$.ajax({
-				url:'/deleteImage',
-				type:'POST',
-				data:fileName,
-				beforeSend:function(xhr){
-					xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
-			},
-			success:function(data){
-				alert("삭제성공");
-			}			
-			})
-			
-			
-		})*/	
-	
-
 	//입력 요소 찾아오기
 	let writeForm = $("#writeForm")
 	let title = writeForm.find("input[name='title']");
@@ -128,6 +105,28 @@ $(function() {
 		}else if(mcategory == '기타'){
 			$("#mcategory").val('기타').prop("selected",true);	
 		}
+		
+			
+	// 이미지 삭제(수정중)
+	let deleteBtn = $(" div.note-btn-group.btn-group.note-remove > button");
+	
+	$(deleteBtn).click(function() {
+		let fileName = imageUploadPath + "\\" + imageFileName;
+		
+		console.log(fileName);
+		
+		$.ajax({
+			url: '/deleteImage',
+			type: 'POST',
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			},
+			data: { fileName: fileName },
+			success: function() {
+				//alert(111);
+			}
+		})
+	})
 		
 })
 

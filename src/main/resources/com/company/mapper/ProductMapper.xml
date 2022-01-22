@@ -85,7 +85,7 @@
 			    from product pd, (select * 
 			                      from PRODUCTIMG 
 			                      where Rowid in (select max(rowid) from PRODUCTIMG group by pno)) pdi
-				where pd.pno = pdi.pno and pd.mytown = (select mytown from member where userid = #{userid}) and pd.soldout = 0
+				where pd.pno = pdi.pno and pd.mytown = (select mytown from member where userid = #{userid}) and pd.soldout = 0 and pd.userid != #{userid}
 		]]>
 		
 		<if test='!cri.cate.equals("전체")'>
@@ -105,7 +105,7 @@
 		from
 		product
 		where		
-		 pno > 0 and mytown = (select mytown from member where userid = #{userid}) and soldout = 0
+		 pno > 0 and mytown = (select mytown from member where userid = #{userid}) and soldout = 0 and userid != #{userid}
 		 <if test='!cate.equals("전체")'>
 		 and category = #{cate} 
 		 </if>

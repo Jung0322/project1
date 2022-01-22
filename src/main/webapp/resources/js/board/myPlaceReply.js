@@ -31,6 +31,7 @@ let replyService = (function() {
 		$.getJSON({
 			url: '/replies/pages/' + mno + '/' + page,
 			success: function(data) {
+				console.log(data);
 				callback(data);
 			}
 		})
@@ -109,7 +110,7 @@ let replyService = (function() {
 			var mm = dateObj.getMonth() + 1;
 			var dd = dateObj.getDate();
 
-			return [yy, '/', (mm > 9 ? '' : '0') + mm, '/'(dd > 9 ? '' : '0') + dd].join('');
+			return [yy, '/', (mm > 9 ? '' : '0') + mm, '/', (dd > 9 ? '' : '0') + dd].join('');
 		}
 	} //displayTime end
 

@@ -6,7 +6,7 @@ drop table myplacereply;
 drop sequence myplacereply_seq;
 drop table myPlaceGood;
 
-select * from chatroom;
+select * from myPlace;
 select * from chatmessage;
 -- 동네생활 테이블
 create table myPlace (
@@ -53,13 +53,22 @@ create table myPlaceGood(
 );
 drop table myPlacegood;
 
+select * from myplaceReply r left outer join profileimg p on r.userid=p.userid;
 
+select * from 
+	(select 
+    	/*+INDEX_DESC(myplace pk_myplace)*/ rownum rn, mno, userid, nickname, mytown, title, content, regdate, updatedate, curious, mcategory, replycnt
+    from myplace
+    where 
+		rownum <= (1 * 10) and userid = 'haha')
+where rn > (1-1) * 10
 
 
 
 select *
-from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,nickname,mytown,title,content,regdate,updatedate
-		from myplace where rownum <=(1 * 10) and mcategory = '동네질문')
+from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,nickname,mytown,title,content,regdate,updatedate, m.userid, pfuuid, profileUploadPath, profileImgName
+		from myplace m left outer join PROFILEIMG p on m.userid = p.userid
+		where rownum <=(1 * 10) and mcategory = '동네질문')
 where rn> (0) * 10;
 
 select count(*) from myplace where mytown='서울시 종로구 관철동';
@@ -73,7 +82,7 @@ select * from myplace where mytown ='서울시 종로구 관철동' order by mno
 
 select * from member;
 
-select * from myPlace;
+select * from myplacereply;
 
 insert into myPlaceGood(mno,userid) values (87,'ccoli1');
 insert into myPlaceGood(mno,userid) values (87,'riri');
@@ -92,3 +101,18 @@ update myplace set curious=0;
 
 -- 이미 들어간 댓글 수 삽입하기
 update myplace set replycnt = (select count(mno) from MYPLACEREPLY where MYPLACE.mno=myplacereply.mno);
+
+
+
+		select
+			*
+		from 
+			(select 
+				/*+INDEX_DESC(myplace pk_myplace)*/ rownum rn, mno, m.userid, mcategory, nickname, mytown, title, content, regdate, updatedate, replycnt, curious,
+				pfuuid, profileUploadPath, profileImgName
+			from 
+				myplace m LEFT OUTER JOIN profileImg p ON m.userid=p.userid 
+			where rownum <=(2 * 10)
+			order by regdate desc)
+		where 
+			rn> (1) * 10;	

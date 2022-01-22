@@ -19,7 +19,7 @@
 	                    <div class="member-info-id" style="left: 25%;">
 	                        <h3 style="margin: 23px 0 15px 0;">${dto.nickname}</h3>
 	                         
-	                        <c:if test="${info.username != dto.userid}">
+	                        <c:if test="${info.username != dto.userid}"> <!-- 
 								<div class="user-assessment">
 		                        	<button type="button" class="modify-profile-btn">매너평가</button>
 		                         	<button type="button" class="modify-profile-btn">모아보기</button>

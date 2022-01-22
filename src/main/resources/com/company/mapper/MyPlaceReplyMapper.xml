@@ -1,15 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.mapper.MyPlaceReplyMapper">
+	
+	<resultMap type="com.company.domain.MyPlaceReplyDTO" id="replyMap">
+		<id property="mrno" column="mrno" />
+		<result property="mno" column="mno" />
+		<result property="content" column="content" />
+		<result property="regdate" column="regdate" />
+		<result property="updatedate" column="updatedate" />
+		<result property="good" column="good" />
+		
+		<result property="userid" column="userid" />
+		<result property="nickname" column="nickname" />
+		<result property="mytown" column="mytown" />
+		
+		<collection property="profileList" resultMap="profileMap"></collection>
+	</resultMap>
+	
+	<resultMap type="com.company.domain.MemberAttachDTO" id="profileMap">
+		<result property="pfuuid" column="pfuuid" />
+		<result property="userid" column="userid" />
+		<result property="profileUploadPath" column="profileUploadPath"/>
+		<result property="profileImgName" column="profileImgName"/>
+	</resultMap>
 
 	<!-- mno가 일치하는 댓글 가져오기 -->
-	<select id="list" resultType="com.company.domain.MyPlaceReplyDTO">
-		select * from myPlaceReply where mno=#{mno} order by mrno asc
+	<select id="list" resultMap="replyMap">
+		select * from myPlaceReply r LEFT OUTER JOIN profileImg p ON r.userid=p.userid where mno=#{mno} order by mrno asc
 	</select>	
 	
 	<!-- 댓글 하나 가져오기 -->
-	<select id="get" resultType="com.company.domain.MyPlaceReplyDTO">
-		select * from myPlaceReply where mrno=#{mrno}
+	<select id="get" resultMap="replyMap">
+		select * from myPlaceReply r LEFT OUTER JOIN profileImg p ON r.userid=p.userid where mrno=#{mrno}
 	</select>	
 	
 	<insert id="insert">
