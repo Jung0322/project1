@@ -6,6 +6,11 @@ import com.company.domain.ChatMessage;
 import com.company.domain.ChatRoom;
 
 public interface ChatService {
+	/*
+	 * 채팅방 삭제 메소드 
+	 */
+	public int chatroomDelete(String roomid);
+	
 	 /**
      * 방 번호를 선택하는 메소드
      * @param roomId

@@ -1,11 +1,15 @@
-
+drop table chatroom;
+drop table chatmessage;
+drop sequence seq_chatroom_id;
+drop sequence SEQ_CHATMESSAGE_ID;
 -- 13. 채팅 방 테이블
 create table chatroom(
 	roomid varchar2(10) not null,
 	userid varchar2(50) not null, -- 로그인 아이디(pk)
     usernickname varchar2(20) not null, -- 로그인 유저 닉네임
     masterid varchar2(50) not null,
-    masternickname varchar2(20) not null
+    masternickname varchar2(20) not null,
+    CONSTRAINT pk_roomid primary key (roomid)
 );
 CREATE SEQUENCE SEQ_CHATROOM_ID;
 -- 14. 채팅 메세지 
@@ -19,10 +23,13 @@ CREATE TABLE chatmessage(
 	unreadcount number(3) default 1,	-- 안 읽은 메세지 수
 	CONSTRAINT pk_messageid PRIMARY KEY (messageid) -- pk
 );
+alter table chatmessage add constraint fk_chatmessage
+foreign key(roomid) references chatroom(roomid) ON DELETE CASCADE;
+
 CREATE SEQUENCE SEQ_CHATMESSAGE_ID;
 
 
-drop table chatroom;
+select * from chatmessage;
 select * from chatroom;
 -- 채팅방 테이블 방번 시퀀스
 delete chatroom where userid = 'hong3';

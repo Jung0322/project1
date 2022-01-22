@@ -21,7 +21,10 @@ public interface ChatMapper {
 
 	public int updateCount(ChatMessage message); // 읽지 않은 메세지 수
 	
+	public int chatroomDelete(String roomid);
+	
 	public List<ChatMessage> messageList(String roomid); //메세지 내용 리스트 출력
+	
 	
 	
 	

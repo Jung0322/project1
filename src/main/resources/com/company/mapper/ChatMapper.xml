@@ -43,7 +43,9 @@
 			#{message}, #{sentid}, #{nickname}, 0)
 		</if>
 	</insert>
-
+	<delete id="chatroomDelete">
+		delete from chatroom where roomid=#{roomid}
+	</delete>
 	<select id="messageList"  resultMap="chatMessageResultSet">
 		SELECT * FROM CHATMESSAGE
 		WHERE roomid = #{roomid}
@@ -60,7 +62,7 @@
 		WHERE userid = #{userid} OR masterid = #{userid}
 	</select>
 
-	<select id="selectUnReadCount" resultType="_int">
+	<select id="selectUnReadCount" resultType="int">
 		SELECT COUNT(*) FROM CHATMESSAGE
 		WHERE roomid = #{roomid}
 		AND sentid != #{sentid} AND unReadCount = 1

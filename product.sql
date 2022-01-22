@@ -1,5 +1,8 @@
 -- 7. 상품 테이블
 drop table product;
+drop table productimg;
+drop sequence product_seq;
+drop sequence
 create table product (
 	pno number(10) not null, -- 글번호(pk)
 	category varchar2(20) not null, -- 카테고리
@@ -20,7 +23,7 @@ create table product (
          REFERENCES member(userid) ON DELETE CASCADE,
 	CONSTRAINT pk_product PRIMARY KEY (pno) -- pk
 );
-
+drop table product;
 
 -- 상품 테이블 글번호 시퀀스
 CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1;

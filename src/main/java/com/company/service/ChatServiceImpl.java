@@ -55,4 +55,9 @@ public class ChatServiceImpl implements ChatService{
 		return mapper.updateCount(message);
 	}
 
+	@Override
+	public int chatroomDelete(String roomid) {
+		return mapper.chatroomDelete(roomid);
+	}
+
 }

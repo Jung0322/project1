@@ -9,22 +9,19 @@
 		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,mcategory,nickname,mytown,title,content,regdate,updatedate,replycnt,curious
 				from myplace where rownum <=(#{pageNum} * #{amount}))
 		where rn> (#{pageNum}-1) * #{amount}	
-			]]>
-		<!--  <if test="!mcategory.equals('전체')">
-			and mcategory=#{mcategory}
-		</if>-->			
+			]]>			
 	</select>
 	
 	<!-- 같은 동네 게시물 보여주기 -->
-	<select id="listMyTown" resultType="com.company.domain.BoardDTO">
-		<![CDATA[
-		select *
-		from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,nickname,mytown,title,content,regdate,updatedate,curious,mcategory,replycnt
-				from myplace where rownum <=(#{cri.pageNum} * #{cri.amount}))
-		where rn> (#{cri.pageNum}-1) * #{cri.amount} and mytown=#{mytown}
-		]]>
-	</select>
-		
+   <select id="listMyTown" resultType="com.company.domain.BoardDTO">
+      <![CDATA[
+      select *
+      from (select /*+INDEX_DESC(myplace pk_myplace)*/ rownum rn,mno,userid,nickname,mytown,title,content,regdate,updatedate,curious,mcategory,replycnt
+            from myplace where rownum <=(#{cri.pageNum} * #{cri.amount}) and mytown=#{mytown})
+      where rn> (#{cri.pageNum}-1) * #{cri.amount} 
+      ]]>   
+   </select>
+ 	
 	<!-- 로그인 후 본인이 작성한 글 보여주기 -->
 	<select id="listMyPage" resultType="com.company.domain.BoardDTO">
 		<![CDATA[
@@ -74,14 +71,11 @@
 		update myplace set replycnt = replycnt + #{amount}
 		where mno = #{mno}
 	</update>
-	
 		
 	<!-- 글 작성시 필요한 회원정보 -->
 	<select id="readMemberInfo" resultType="com.company.domain.BoardDTO">
 		select nickname, userid, mytown from member where userid=#{userid}
 	</select>
-	
-
 	
 	
 	

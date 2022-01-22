@@ -1,3 +1,6 @@
+drop table member;
+drop table profileimg;
+drop table sp_member_authority;
 -- 회원
 --1.  user 테이블
 create table member (
@@ -34,6 +37,7 @@ create table sp_member_authority(
 	userid varchar2(50) not null,
 	authority varchar2(50) not null
 );
+drop table sp_member_authority;
 -- 외래키 제약 조건 생성
 alter table sp_member_authority add constraint fk_sp_member_authority
 foreign key(userid) references member(userid) ON DELETE CASCADE;

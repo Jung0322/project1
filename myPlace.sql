@@ -51,7 +51,7 @@ create table myPlaceGood(
 	mno number(10) CONSTRAINT myPlaceGood_mno_FK REFERENCES myPlace(mno) ON DELETE CASCADE,
 	userid varchar2(50) CONSTRAINT myPlaceGood_userid_FK REFERENCES member(userid) ON DELETE CASCADE
 );
-
+drop table myPlacegood;
 
 
 

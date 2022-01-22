@@ -11,6 +11,8 @@ create table member (
     regdate DATE default sysdate, -- 가입일
     CONSTRAINT pk_member PRIMARY KEY (userid) -- pk
 );
+drop table member;
+select * from member;
 ALTER TABLE member MODIFY  password varchar2(100);
 ALTER TABLE member  ADD  enabled char(1) default '1';
 -- 가입날짜 컬럼 추가(기존 테이블이 있는 경우에 사용)
@@ -31,6 +33,7 @@ create table sp_member_authority(
 	userid varchar2(50) not null,
 	authority varchar2(50) not null
 );
+drop table sp_member_authority;
 -- 외래키 제약 조건 생성
 alter table sp_member_authority add constraint fk_sp_member_authority
 foreign key(userid) references member(userid) ON DELETE CASCADE;

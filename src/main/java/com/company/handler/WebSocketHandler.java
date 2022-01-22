@@ -36,6 +36,7 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 	private Map<String, ArrayList<WebSocketSession>> RoomList = new ConcurrentHashMap<String, ArrayList<WebSocketSession>>();
 	// session, 방 번호가 들어간다.
 	private Map<WebSocketSession, String> sessionList = new ConcurrentHashMap<WebSocketSession, String>();
+	private ArrayList<String> sentidlist = new ArrayList<String>();
 
 	private static int i;
 	/**
@@ -47,7 +48,7 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 		System.out.println(session.getId() + " 연결 성공 => 총 접속 인원 : " + i + "명");
 		
 	}
-	// 메세지 송수신 send/ 
+	// 메세지 송수신 send/ onMessage
 		@Override
 		protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 			// 들어왔는지 
@@ -68,7 +69,7 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 			// 출력값 : [roomId=123, messageId=null, message=asd, sentid={userid},
 			// nickname=nickname, unReadCount=0]
 			ChatMessage chatMessage = objectMapper.readValue(msg, ChatMessage.class);
-
+			
 			// 받은 메세지에 담긴 roomId로 해당 채팅방을 찾아온다.
 			ChatRoom chatRoom = cService.selectChatRoom(chatMessage.getRoomid());
 			
@@ -85,6 +86,20 @@ public class WebSocketHandler extends TextWebSocketHandler implements Initializi
 				sessionList.put(session, chatRoom.getRoomid());
 				// RoomList에 추가
 				RoomList.put(chatRoom.getRoomid(), sessionTwo);
+				
+				
+				System.out.println(chatMessage.getSentid()+"님이 입장하셨습니다.");
+				// 메세지에 이름, 이메일, 내용을 담는다.
+				TextMessage textMessage = new TextMessage(
+						chatMessage.getSentid() + "," + chatMessage.getNickname() + "," + chatMessage.getMessage()+",right"
+						);
+
+
+				// 해당 채팅방의 session에 뿌려준다.
+				for (WebSocketSession sess : RoomList.get(chatRoom.getRoomid())) {
+					sess.sendMessage(textMessage);
+					System.out.println("채팅방 session 뿌림");
+				}
 				// 확인용
 				System.out.println("채팅방 생성");
 			}

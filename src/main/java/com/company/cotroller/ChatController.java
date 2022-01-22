@@ -83,6 +83,20 @@ public class ChatController {
         gson.toJson(mList,response.getWriter());
     }
     
+    @ResponseBody
+    @RequestMapping(value="{chat_delete_roomid}_delete.do")
+    public String chatDelete(@PathVariable String chat_delete_roomid, HttpServletResponse response) throws /*JsonIOException,*/ IOException {
+    	System.out.println("가져온 방:::::::"+chat_delete_roomid);
+    	int chatDelete = cService.chatroomDelete(chat_delete_roomid);
+    	System.out.println(chatDelete==1 ? "채팅방이 삭제되었습니다." : "삭제 실패");
+    	String suc;
+    	if(chatDelete ==1) {
+    		 suc = "success";
+    	}else {
+    		suc = "fail";
+    	}
+    	return suc;
+    }
     /**
      * 채팅 방이 없을 때 생성
      * @param room
