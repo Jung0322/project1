@@ -17,6 +17,7 @@ $(".chat_exit").click(function(){
 				if(data=="success"){
 					alert("채팅방 삭제되었습니다.");
 					$(".modal").hide();
+					
 				}else{
 					alert("삭제가 되지 않았씁니다.");
 					$(".modal").hide();

@@ -51,10 +51,10 @@
 						<img class="profile_img" id="setPic">
 						src 사진 경로 동적 생성
 					</div> --> 
-					<div class="name_container font_noto" id="setName">
-						<!-- 이름 동적 생성 -->
+<!-- 					<div class="name_container font_noto" id="setName">
+						이름 동적 생성
 					</div>
-					
+ -->					
 
 					<div class="chatMiddle">
 						<ul>
@@ -81,6 +81,11 @@
 					</li>
 				</ul>
 			</div>
+			<div class="chatMiddle format">
+						<ul>
+							<!-- 동적 생성 -->
+						</ul>
+					</div>
 <div class="modal">
 		 <div class="modal_window">
             <div class="chat_delete_background"></div>
@@ -264,7 +269,7 @@
 						} // success(data) 구문 END 
 					});
 		}// getroomlist END
-		$(window).on('load', function(){
+		/* $(window).on('load', function(){
 		      
 		      // 2초에 한번씩 채팅 목록 불러오기(실시간 알림 전용)
 		      setInterval(function(){
@@ -272,7 +277,7 @@
 		          getRoomList();
 		     
 		},20000);
-		});
+		}); */
 		// 채팅방 관련
 		let roomid;
 		// 메세지 입력 시 
@@ -295,8 +300,8 @@
 
 		// 소켓 닫기
 		$("#chatout").click(function() {
-			$(".chatmiddle").toogle();
 			$("#chatout").toggle();
+			clearChatroom();
 
 			websocket.close();
 		})
@@ -339,8 +344,7 @@
 		// 채팅 방 클릭 시 방번호 배정 후 웹소켓 연결
 		// 채팅하기로 넘어왔을 시 작동 
 
-		let room_id =
-	<%= request.getParameter("room_id")%>;
+		let room_id = <%= request.getParameter("room_id")%>;
 	console.log("룸아이디 가져오기 :::"+room_id);
 	if(room_id!=null){
 		chattingRoom(room_id);
@@ -481,7 +485,10 @@
 		$('div.chatBottom textarea').val('');
 		return false;
 	};
-
+	function clearChatroom(){
+		$(".chatMiddle").empty();
+	}
+	
 	</script>
 </body>
 	
