@@ -269,15 +269,15 @@
 						} // success(data) 구문 END 
 					});
 		}// getroomlist END
-		/* $(window).on('load', function(){
+		$(window).on('load', function(){
 		      
 		      // 2초에 한번씩 채팅 목록 불러오기(실시간 알림 전용)
 		      setInterval(function(){
 		          // 방 목록 불러오기
 		          getRoomList();
 		     
-		},20000);
-		}); */
+		},2000);
+		}); 
 		// 채팅방 관련
 		let roomid;
 		// 메세지 입력 시 
@@ -309,7 +309,7 @@
 		// 채팅 방 클릭 시 방번호 배정 후 웹소켓 연결
 		function enterRoom(obj) {
 
-			if ($(obj).attr("clickable") == "true") {
+			//if ($(obj).attr("clickable") == "true") {
 
 				// 채팅방 나가기 클릭버튼 display:none 해제 
 				$("#chatout").toggle();
@@ -338,8 +338,8 @@
 				// 웹소켓 연결
 				connect();
 				console.log("enterRoom");
-				$(obj).attr("clickable", "false");
-			}
+				//$(obj).attr("clickable", "false");
+			//}
 		}// 채팅방 클릭 시 방번호 배정후 웹소켓 연결
 		// 채팅 방 클릭 시 방번호 배정 후 웹소켓 연결
 		// 채팅하기로 넘어왔을 시 작동 
@@ -375,7 +375,7 @@
 			// 웹소켓 연결
 			connect();
 			console.log("enterRoom");
-			$(obj).attr("clickable","false");
+		//	$(obj).attr("clickable","false");
 	}// 채팅방 클릭 시 방번호 배정후 웹소켓 연결
 	
 	
