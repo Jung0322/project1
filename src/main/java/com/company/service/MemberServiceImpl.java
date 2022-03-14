@@ -192,13 +192,14 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	// 전화번호 인증
 	public void certifiedPhoneNumber(String phone, int randomNumber) {
-		String api_key = "NCS2LSGHCCKSFUM9";
-		String api_secret = "4IA0GKPORG5ROBBRY91MNBKLYU2N5GZK";
+		String api_key = ""; // api_key
+		String api_secret = ""; // api_secret
 		Message coolsms = new Message(api_key, api_secret);
+		// api_key, api_secret -> coolsms 참조
 		
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("to", phone); // 수신전화번호
-		params.put("from", "010-8972-9462"); // 발신전화번호
+		params.put("from", ""); // 발신전화번호 // "" -> 여기에 발신 전화번호 입력
 		params.put("type", "SMS"); 
 		params.put("text", "[브로콜리마켓] 인증번호는" +"["+randomNumber+"]" + "입니다."); // 문자 내용 입력
 		params.put("app_version", "test app 1.2"); // application name and version 
